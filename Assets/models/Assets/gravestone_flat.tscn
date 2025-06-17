@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://be5ygg3eptw30"]
+
+[ext_resource type="ArrayMesh" uid="uid://bkdfm6umkd5ox" path="res://Assets/models/Assets/graveyard/gravestone-flat.obj" id="1_cx7sq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n1va3"]
+albedo_color = Color(0.3, 0.3, 0.3, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_a6x7a"]
+points = PackedVector3Array(0.236, 0.0639967, 0.566, 0.212945, 0.271995, 0.516802, 0, 0.37, 0.516802, -0.236, 0.0639967, 0.566, 0.236, 0, 0.566, 0.236, 0.0639967, -0.566, 0.212945, 0.271995, -0.516913, 0, 0.37, -0.516913, -0.212991, 0.271995, 0.516802, -0.236, 0, 0.566, -0.236, 0.0639967, -0.566, 0.236, 0, -0.566, -0.212991, 0.271995, -0.516913, -0.236, 0, -0.566)
+
+[node name="gravestone-flat" type="StaticBody3D"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="Gravestone-flat" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_n1va3")
+mesh = ExtResource("1_cx7sq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_a6x7a")

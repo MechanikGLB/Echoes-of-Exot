@@ -1,0 +1,185 @@
+[gd_scene load_steps=12 format=3 uid="uid://dx0fyowuu4onw"]
+
+[ext_resource type="ArrayMesh" uid="uid://dh6jl6at04i2r" path="res://Assets/models/Assets/graveyard/iron-fence-border.obj" id="1_5li7p"]
+[ext_resource type="ArrayMesh" uid="uid://b6uy7jvt2l5gi" path="res://Assets/models/Assets/graveyard/iron-fence-damaged.obj" id="2_ax50v"]
+[ext_resource type="ArrayMesh" uid="uid://b0q1h3k26urds" path="res://Assets/models/Assets/graveyard/iron-fence-border-column.obj" id="3_yjeo0"]
+[ext_resource type="ArrayMesh" uid="uid://cbritottoa4aa" path="res://Assets/models/Assets/graveyard/iron-fence-border-gate.obj" id="4_xk63u"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1nhme"]
+size = Vector3(0.292809, 2.49561, 3.59515)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_be5ta"]
+size = Vector3(2.44781, 0.100342, 3.0011)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oajg3"]
+size = Vector3(2.47095, 0.314941, 3.00635)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3eixx"]
+size = Vector3(17.9601, 2.53583, 0.298157)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_76rkv"]
+size = Vector3(0.301514, 2.49634, 6.51678)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tuo7i"]
+size = Vector3(0.338318, 2.46436, 9.70242)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hriou"]
+size = Vector3(0.303955, 2.4873, 6.49429)
+
+[node name="Fence" type="StaticBody3D"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.96637, 1.22827, 2.13547)
+shape = SubResource("BoxShape3D_1nhme")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.23087, 0.147705, 5.50495)
+shape = SubResource("BoxShape3D_be5ta")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, 0, 0, 0, 1, -7.96746, 1.23742, 8.48705)
+shape = SubResource("BoxShape3D_oajg3")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.90097, 1.20157, 9.83786)
+shape = SubResource("BoxShape3D_3eixx")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.90097, 1.20157, -7.83279)
+shape = SubResource("BoxShape3D_3eixx")
+
+[node name="meshes" type="Node3D" parent="."]
+
+[node name="Iron-fence-damaged3" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5.4, 0, -6.5)
+mesh = ExtResource("2_ax50v")
+skeleton = NodePath("../..")
+
+[node name="Iron-fence-damaged2" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3.6, 0, 11.2)
+mesh = ExtResource("2_ax50v")
+skeleton = NodePath("../..")
+
+[node name="Iron-fence-border-column7" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, 11.074, 4.76837e-07, -6.47851)
+mesh = ExtResource("3_yjeo0")
+skeleton = NodePath("../..")
+
+[node name="Iron-fence-border-gate2" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, 11.093, -4.76837e-07, 2.58332)
+mesh = ExtResource("4_xk63u")
+skeleton = NodePath("../..")
+
+[node name="Iron-fence-border8" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(3.93402e-07, 0, -3, 0, 3, 0, 3, 0, 3.93402e-07, 8.38202, 0, 5.56009)
+mesh = ExtResource("1_5li7p")
+skeleton = NodePath("../..")
+
+[node name="Iron-fence-border9" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(3.93402e-07, 0, -3, 0, 3, 0, 3, 0, 3.93402e-07, 8.38202, 0, -3.43991)
+mesh = ExtResource("1_5li7p")
+skeleton = NodePath("../..")
+
+[node name="Iron-fence-border10" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(3.93402e-07, 0, -3, 0, 3, 0, 3, 0, 3.93402e-07, 8.38202, 0, -0.439913)
+mesh = ExtResource("1_5li7p")
+skeleton = NodePath("../..")
+
+[node name="Iron-fence-border-column3" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(-3, 0, -4.52987e-07, 0, 3, 0, 4.52987e-07, 0, -3, -6.6, 0, 8.5)
+mesh = ExtResource("3_yjeo0")
+skeleton = NodePath("../..")
+
+[node name="Iron-fence-border-column4" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(-3, 0, -4.52987e-07, 0, 3, 0, 4.52987e-07, 0, -3, -6.6, 0, -9.2)
+mesh = ExtResource("3_yjeo0")
+skeleton = NodePath("../..")
+
+[node name="Iron-fence-border5" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -0.6, 0, 11.2)
+mesh = ExtResource("1_5li7p")
+skeleton = NodePath("../..")
+
+[node name="Iron-fence-border6" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 2.4, 0, 11.2)
+mesh = ExtResource("1_5li7p")
+skeleton = NodePath("../..")
+
+[node name="Iron-fence-border7" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5.4, 0, 11.2)
+mesh = ExtResource("1_5li7p")
+skeleton = NodePath("../..")
+
+[node name="Iron-fence-border-column5" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 8.4, 0, 11.2)
+mesh = ExtResource("3_yjeo0")
+skeleton = NodePath("../..")
+
+[node name="Iron-fence-border11" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3.6, 0, -6.5)
+mesh = ExtResource("1_5li7p")
+skeleton = NodePath("../..")
+
+[node name="Iron-fence-border12" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -0.6, 0, -6.5)
+mesh = ExtResource("1_5li7p")
+skeleton = NodePath("../..")
+
+[node name="Iron-fence-border13" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 2.4, 0, -6.5)
+mesh = ExtResource("1_5li7p")
+skeleton = NodePath("../..")
+
+[node name="Iron-fence-border-column8" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 8.4, 0, -6.5)
+mesh = ExtResource("3_yjeo0")
+skeleton = NodePath("../..")
+
+[node name="Iron-fence-damaged" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(5.73206e-15, -3, -1.31134e-07, -1.31134e-07, -1.31134e-07, 3, -3, 0, -1.31134e-07, -8, 1.5, 5.5)
+mesh = ExtResource("2_ax50v")
+skeleton = NodePath("../..")
+
+[node name="Iron-fence-border-column" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -6.61163, 4.76837e-07, -6.5193)
+mesh = ExtResource("3_yjeo0")
+skeleton = NodePath("../..")
+
+[node name="Iron-fence-border-column2" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, -9.31163, 4.76837e-07, 8.4807)
+mesh = ExtResource("3_yjeo0")
+skeleton = NodePath("../..")
+
+[node name="Iron-fence-border-gate" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, -9.33067, -4.76837e-07, -0.581139)
+mesh = ExtResource("4_xk63u")
+skeleton = NodePath("../..")
+
+[node name="Iron-fence-border" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -6.61969, 0, -3.5579)
+mesh = ExtResource("1_5li7p")
+skeleton = NodePath("../..")
+
+[node name="Iron-fence-border2" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -6.61969, 0, 2.4421)
+mesh = ExtResource("1_5li7p")
+skeleton = NodePath("../..")
+
+[node name="Iron-fence-border-column6" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(3.93402e-07, 0, -3, 0, 3, 0, 3, 0, 3.93402e-07, 8.37397, 4.76837e-07, 8.52149)
+mesh = ExtResource("3_yjeo0")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.96661, 1.26599, -4.75466)
+shape = SubResource("BoxShape3D_76rkv")
+
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.73363, 1.21704, -3.16191)
+shape = SubResource("BoxShape3D_tuo7i")
+
+[node name="CollisionShape3D8" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.73687, 1.21338, 6.74556)
+shape = SubResource("BoxShape3D_hriou")

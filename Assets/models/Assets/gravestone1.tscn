@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bt2oixifa5wvs"]
+
+[ext_resource type="ArrayMesh" uid="uid://lvhhq6yhu1wj" path="res://Assets/models/Assets/graveyard/gravestone-bevel.obj" id="1_4o1y2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yny0s"]
+size = Vector3(0.873962, 1.14417, 0.400513)
+
+[node name="Node3D" type="StaticBody3D"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="Gravestone-bevel" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = ExtResource("1_4o1y2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00234985, 0.569885, 0.00494385)
+shape = SubResource("BoxShape3D_yny0s")

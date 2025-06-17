@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b41klsotpguo3"]
+
+[sub_resource type="Shader" id="Shader_fa8k4"]
+code = "shader_type spatial;
+render_mode unshaded;
+
+uniform sampler2D refl_tx;
+
+void fragment(){
+	ALBEDO = texture(refl_tx,vec2(1.0 - SCREEN_UV.x, SCREEN_UV.y)).rgb;
+}
+"
+
+[resource]
+render_priority = 0
+shader = SubResource("Shader_fa8k4")

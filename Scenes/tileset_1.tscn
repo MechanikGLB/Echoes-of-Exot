@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8cl1cmqtcu2p"]
+
+[ext_resource type="PackedScene" uid="uid://cfulm0ex7gjnf" path="res://Assets/models/Assets/Dung_Tileset/Tileset1.glb" id="1_3y0si"]
+
+[node name="Tileset1" instance=ExtResource("1_3y0si")]

@@ -1,0 +1,153 @@
+[gd_scene load_steps=11 format=3 uid="uid://bxxedm4tjgvwg"]
+
+[ext_resource type="Script" uid="uid://qmqcomvxaayi" path="res://Scripts/player.gd" id="1_g73o5"]
+[ext_resource type="ArrayMesh" uid="uid://bx7ajr5hgwvyb" path="res://Assets/models/Characters/Hatter/Hat.obj" id="2_p3d5a"]
+[ext_resource type="PackedScene" uid="uid://bgd4yvtd12dxn" path="res://Scenes/plasma_gun_1.tscn" id="3_po0cv"]
+[ext_resource type="PackedScene" uid="uid://f04k1ry20ek7" path="res://Scenes/pp_gun_1.tscn" id="4_cjupl"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fttxr"]
+height = 1.95224
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_mk1qe"]
+radius = 0.25
+height = 1.85
+
+[sub_resource type="Animation" id="Animation_8btip"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PPGun1")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.328, -0.2, -0.516)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlasmaGun1")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.369182, -0.2196, -0.167194)
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlasmaGun1:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PPGun1:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_rlh2g"]
+resource_name = "plasma_lower"
+length = 0.3
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlasmaGun1")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0.0333333, 1, 0.369182, -0.2196, -0.167194, 0.3, 1, 0.369, -1, -0.167)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlasmaGun1:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333, 0.266667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_nogni"]
+resource_name = "pp_lower"
+length = 0.3
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PPGun1")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0.0333333, 1, 0.328, -0.2, -0.516, 0.3, 1, 0.328, -1, -0.516)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PPGun1:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333, 0.266667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rlh2g"]
+_data = {
+&"RESET": SubResource("Animation_8btip"),
+&"plasma_lower": SubResource("Animation_rlh2g"),
+&"pp_lower": SubResource("Animation_nogni")
+}
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_g73o5")
+
+[node name="BodyShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_fttxr")
+
+[node name="Hat" type="MeshInstance3D" parent="BodyShape"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.566882, 0)
+layers = 2
+mesh = ExtResource("2_p3d5a")
+skeleton = NodePath("../../..")
+
+[node name="BeanBody" type="MeshInstance3D" parent="BodyShape"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0316856, 0)
+mesh = SubResource("CapsuleMesh_mk1qe")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.802936, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.207387, -0.335068)
+cull_mask = 1048573
+fov = 90.0
+
+[node name="PlasmaGun1" parent="Head/Camera3D" instance=ExtResource("3_po0cv")]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0.369182, -0.2196, -0.167194)
+
+[node name="PPGun1" parent="Head/Camera3D" instance=ExtResource("4_cjupl")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.328, -0.2, -0.516)
+visible = false
+
+[node name="AimRay" type="RayCast3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.637985)
+target_position = Vector3(0, 0, -20)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="AimRayEnd" type="Node3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100)
+
+[node name="weaponSwitch" type="AnimationPlayer" parent="Head/Camera3D"]
+libraries = {
+&"": SubResource("AnimationLibrary_rlh2g")
+}

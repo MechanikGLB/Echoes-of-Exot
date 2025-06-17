@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://cbryl8yqf6ajk"]
+
+[ext_resource type="ArrayMesh" uid="uid://bx7ajr5hgwvyb" path="res://models/Hat.obj" id="1_a4r40"]
+[ext_resource type="ArrayMesh" uid="uid://c5ylcy6dp60sc" path="res://models/Мечик опиздюлькин.obj" id="2_3ebek"]
+[ext_resource type="Script" path="res://character_body_3d.gd" id="2_ng3u2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6fa6q"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_650ua"]
+sky_material = SubResource("ProceduralSkyMaterial_6fa6q")
+
+[sub_resource type="Environment" id="Environment_irh21"]
+background_mode = 2
+sky = SubResource("Sky_650ua")
+ambient_light_energy = 2.01
+tonemap_mode = 2
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_rgjht"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5un0"]
+albedo_color = Color(0.89, 0.89, 0.89, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1dird"]
+material = SubResource("StandardMaterial3D_o5un0")
+size = Vector2(20, 20)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_s7suv"]
+height = 0.62868
+radius = 0.379093
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.988756, -0.134968, 0.0643766, 0, 0.430511, 0.902585, -0.149535, 0.892437, -0.425671, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 90.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_irh21")
+
+[node name="floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
+transform = Transform3D(0.999997, 0.00199883, 0.00115818, -0.00199954, 0.999998, 0.000615825, -0.00115695, -0.000618141, 0.999999, 0, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_rgjht")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="floor"]
+mesh = SubResource("PlaneMesh_1dird")
+
+[node name="МечикОпиздюлькин" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0540788, 0, 0.998537, 0, 1, 0, -0.998537, 0, 0.0540788, -2.27669, 2.31091, 2.47984)
+mesh = ExtResource("2_3ebek")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(-0.955459, 0, -0.295125, 0, 1, 0, 0.295125, 0, -0.955459, 0, 3.49895, 0)
+script = ExtResource("2_ng3u2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_s7suv")
+
+[node name="Hat" type="MeshInstance3D" parent="CharacterBody3D/CollisionShape3D"]
+mesh = ExtResource("1_a4r40")
+skeleton = NodePath("../../..")
+
+[node name="Head" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(-1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, -1, 0, 0.655478, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Head"]
+transform = Transform3D(-0.955458, 0, 0.295125, 0, 1, 0, -0.295125, 0, -0.955458, 0, -0.0413516, 0)
+fov = 81.2066

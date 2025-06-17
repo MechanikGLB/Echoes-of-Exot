@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bkdfm6umkd5ox"
+path="res://.godot/imported/gravestone-flat.obj-9b153ee42470d48a36f65e8a8e6ce1be.mesh"
+
+[deps]
+
+files=["res://.godot/imported/gravestone-flat.obj-9b153ee42470d48a36f65e8a8e6ce1be.mesh"]
+
+source_file="res://Assets/models/Assets/graveyard/gravestone-flat.obj"
+dest_files=["res://.godot/imported/gravestone-flat.obj-9b153ee42470d48a36f65e8a8e6ce1be.mesh", "res://.godot/imported/gravestone-flat.obj-9b153ee42470d48a36f65e8a8e6ce1be.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

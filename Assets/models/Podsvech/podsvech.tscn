@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://dy11piuwcbr6j"]
+
+[ext_resource type="PackedScene" uid="uid://c278sobd0gty3" path="res://Assets/models/Podsvech/Podsvechnik.gltf" id="1_atml2"]
+
+[node name="Podsvech" instance=ExtResource("1_atml2")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08878, 0)
+light_color = Color(1, 1, 0.196078, 1)
+light_energy = 0.514
+light_indirect_energy = 2.131
+light_volumetric_fog_energy = 2.75
+light_specular = 2.286
+omni_range = 1.4713
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.86226, 0)
+light_color = Color(1, 1, 0.196078, 1)
+light_energy = 0.514
+light_indirect_energy = 2.131
+light_volumetric_fog_energy = 2.75
+light_specular = 2.286
+omni_range = 2.14225

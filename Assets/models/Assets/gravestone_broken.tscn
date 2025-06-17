@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://cnw8sb0fy4qsv"]
+
+[ext_resource type="ArrayMesh" uid="uid://6lcjnigy00k" path="res://Assets/models/Assets/graveyard/gravestone-broken.obj" id="1_j4uog"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sbece"]
+points = PackedVector3Array(0.256657, 0.0424635, 0.0757524, 0.241216, -0.00386032, 0.0680317, 0.241216, -0.00386032, 0.0757524, 0.241216, 0.0424635, 0.0680317, 0.256657, -0.00386032, 0.0680317, 0.256657, -0.00386032, 0.0757524, 0.241216, 0.0424635, 0.0757524, 0.256657, 0.0424635, 0.0680317)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ge2vn"]
+points = PackedVector3Array(0.1735, 0.308576, 0.0629589, -0.000633026, 0.00424633, -0.0748, -0.00336281, 0, 0.0739141, 0.195, 0.00798164, 0.0701133, 0.202613, 0.0810788, -0.0786603, 0.00081083, 0.223318, -0.0665, -0.00355126, 0.226225, 0.0665, 0.1735, 0.308576, -0.0658668, 0.195, 0.00798164, -0.0730213, 0.202613, 0.0810788, 0.0757524, 0.135993, 0.301942, -0.0630238, 0.135993, 0.301942, 0.0601159, 0.194879, 0.0965684, -0.0786603)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tsf1v"]
+points = PackedVector3Array(-0.194035, 0.0052114, -0.0748, -0.195, 0.00339709, 0.0726641, -0.00789781, 0, 0.0741097, -0.0984981, 0.335815, -0.0709367, -0.1735, 0.353575, 0.0659475, -0.0106698, 0.0052114, -0.0748, -0.00801593, 0.2266, 0.0664653, -0.171014, 0.347424, -0.0665, -0.0120067, 0.224526, -0.0665, -0.19886, 0.0888107, -0.0786603, -0.0984981, 0.335815, 0.0680287, -0.19886, 0.0888107, 0.0757524, -0.191114, 0.104262, 0.0757524)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_j54uq"]
+points = PackedVector3Array(0.233453, -0.00386032, 0.0757667, 0.0868417, -0.00386032, 0.10665, 0.125435, -0.00386032, 0.22243, 0.0613373, 0.04, 0.145666, 0.233453, 0.0424635, 0.0757667, 0.295236, -0.00386032, 0.129809, 0.125435, 0.0424635, 0.22243, 0.0482, -0.00386032, 0.168388, 0.295236, 0.0424635, 0.129809, 0.225739, -0.00386032, 0.183822, 0.264332, -0.00386032, 0.0757667, 0.0958691, 0.04, 0.111165, 0.225739, 0.0424635, 0.183822, 0.102269, -0.00386032, 0.22243, 0.0613373, 0.04, 0.166336, 0.0482, -0.00386032, 0.145258, 0.254482, 0.04, 0.0835663, 0.295236, -0.00386032, 0.114374, 0.109656, 0.04, 0.214631, 0.287498, -0.00386032, 0.137533, 0.279784, -0.00386032, 0.0912156, 0.287498, 0.0424635, 0.137533)
+
+[node name="gravestone-broken" type="StaticBody3D"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="Gravestone-broken" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = ExtResource("1_j4uog")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_sbece")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_ge2vn")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_tsf1v")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_j54uq")
