@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cyav6qcp618n2"]
+[gd_scene load_steps=5 format=3 uid="uid://cyav6qcp618n2"]
 
 [ext_resource type="PackedScene" uid="uid://bxxedm4tjgvwg" path="res://Scenes/fps_player.tscn" id="1_0vwec"]
-[ext_resource type="PackedScene" uid="uid://br8krfognc3t1" path="res://UI/ui.tscn" id="2_etf21"]
 [ext_resource type="MeshLibrary" uid="uid://rpv6js01igyw" path="res://Assets/tileset_1.tres" id="3_xvqmy"]
 [ext_resource type="PackedScene" uid="uid://dy11piuwcbr6j" path="res://Assets/models/Podsvech/podsvech.tscn" id="4_etf21"]
 
@@ -16,9 +15,6 @@ fog_aerial_perspective = 0.053
 fog_depth_curve = 0.517633
 
 [node name="Dungeon_Level" type="Node3D"]
-
-[node name="UI" parent="." instance=ExtResource("2_etf21")]
-unique_name_in_owner = true
 
 [node name="Player" parent="." instance=ExtResource("1_0vwec")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.48762, 0)
@@ -42,3 +38,8 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -2.45833, 0, -20.8854)
 
 [node name="Podsvech2" parent="." instance=ExtResource("4_etf21")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 2.46648, 0.0337429, -20.8854)
+
+[node name="RespawnPoints" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.448428, 0)
+
+[node name="PSpawn" type="Node3D" parent="RespawnPoints"]

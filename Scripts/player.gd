@@ -7,9 +7,16 @@ const JUMP_VELOCITY = 5.5
 const GRAVITY = 9.8
 const SENS = 0.002
 const HIT_STAGGER = 1.0
+const RESPAWN_DELAY = 5.0
 
 var health = 100
+var score = 0
 var is_alive = true
+
+#respawning
+var respawn_position = Vector3.ZERO
+var is_respawning = false
+var respawn_timer = 0.0
 
 #signal
 signal player_hit
@@ -50,14 +57,21 @@ var can_shoot = true
 
 #UI
 @onready var health_bar = $"%UI/Stats/HBoxContainer/Health"
+@onready var ingame_menu = $"%UI/CanvasLayer"
+@onready var timer_label = $"%UI/Dethscreen/RespawnTime"
+@onready var death_screen = $"%UI/Dethscreen"
+@onready var clock = $"%UI/sessionTimer/clock"
+@onready var score_label = $"%UI/Stats/HBoxContainer2/Score"
+@onready var death_bg = $"%UI/okak"
 
 func _ready() -> void:
+	respawn_position = global_position
 	health_bar.value = health
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	for child in $BodyShape.find_children("*","VisualInstance3D"):
 		child.set_layer_mask_value(1,false)
 		child.set_layer_mask_value(2,true)
-	
+	clock.start()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -67,17 +81,35 @@ func _unhandled_input(event: InputEvent) -> void:
 		$BodyShape.rotate_y(-event.relative.x * SENS)
 		
 
+
+func _process(delta: float):
+	if is_respawning:
+		respawn_timer -= delta
+		timer_label.text = "Возрождение через: %.1f" % respawn_timer
+		
+		if respawn_timer <= 0:
+			_respawn()
+			is_respawning = false
+			death_screen.visible = false
+			death_bg.visible = false
+
 func _physics_process(delta: float) -> void:
+	
+	if Input.is_action_just_pressed("ui_cancel"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		ingame_menu.visible = true
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= GRAVITY * delta
-
+	if !is_alive or is_respawning:
+		return
+		
+	if health <= 0 and is_alive:
+		_die()
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		
-	if Input.is_action_just_pressed("ui_cancel"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 	# Handle sprint
 	if Input.is_action_pressed("sprint"):
@@ -133,10 +165,44 @@ func _headbob(time) -> Vector3:
 	return pos
 
 func hit(dir, dmg = 10):
+	
 	emit_signal("player_hit")
 	velocity += dir * HIT_STAGGER
 	health -= dmg
 	health_bar.value = health
+
+func _die():
+	
+	is_alive = false
+	is_respawning = true
+	respawn_timer = RESPAWN_DELAY
+	
+	# Отключаем коллизии и видимость
+	$BodyShape.disabled = true
+	$BodyShape.visible = false
+	death_bg.visible = true
+	death_screen.visible = true
+	
+	
+
+	set_process_unhandled_input(false)
+
+func _respawn():
+	print("Respawning player...")
+	# Восстанавливаем здоровье
+	global_position = respawn_position
+	velocity = Vector3.ZERO
+	health = 100
+	health_bar.value = health
+	
+	# Включаем коллизии и видимость
+	$BodyShape.disabled = false
+	$BodyShape.visible = true
+	
+	# Включаем управление
+	set_process_unhandled_input(true)
+	
+	is_alive = true
 
 func _shoot_Gun():
 	if !gun_anim.is_playing():
@@ -185,3 +251,7 @@ func _raise_weapon(new_gun):
 			weapon_switching.play_backwards(&"pp_lower")
 	weapon = new_gun
 	can_shoot = true
+
+func _on_enemy_kill():
+	score += 1
+	score_label.text = "%d" % score

@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://bxxedm4tjgvwg"]
+[gd_scene load_steps=12 format=3 uid="uid://bxxedm4tjgvwg"]
 
 [ext_resource type="Script" uid="uid://qmqcomvxaayi" path="res://Scripts/player.gd" id="1_g73o5"]
+[ext_resource type="PackedScene" uid="uid://br8krfognc3t1" path="res://UI/ui.tscn" id="2_necg7"]
 [ext_resource type="ArrayMesh" uid="uid://bx7ajr5hgwvyb" path="res://Assets/models/Characters/Hatter/Hat.obj" id="2_p3d5a"]
 [ext_resource type="PackedScene" uid="uid://bgd4yvtd12dxn" path="res://Scenes/plasma_gun_1.tscn" id="3_po0cv"]
 [ext_resource type="PackedScene" uid="uid://f04k1ry20ek7" path="res://Scenes/pp_gun_1.tscn" id="4_cjupl"]
@@ -108,6 +109,9 @@ _data = {
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_g73o5")
+
+[node name="UI" parent="." instance=ExtResource("2_necg7")]
+unique_name_in_owner = true
 
 [node name="BodyShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0, 0)

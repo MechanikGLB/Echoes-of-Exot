@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cbryl8yqf6ajk"]
+[gd_scene load_steps=21 format=3 uid="uid://cbryl8yqf6ajk"]
 
 [ext_resource type="Script" uid="uid://batfytkk7javo" path="res://Scripts/main.gd" id="1_ce7po"]
 [ext_resource type="ArrayMesh" uid="uid://bn3v8bx2tpq8v" path="res://Assets/models/Assets/graveyard/debris.obj" id="2_grcic"]
@@ -15,7 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://cnw8sb0fy4qsv" path="res://Assets/models/Assets/gravestone_broken.tscn" id="13_kxmcp"]
 [ext_resource type="PackedScene" uid="uid://bt2oixifa5wvs" path="res://Assets/models/Assets/gravestone1.tscn" id="14_4l2i1"]
 [ext_resource type="PackedScene" uid="uid://bxxedm4tjgvwg" path="res://Scenes/fps_player.tscn" id="15_whpp2"]
-[ext_resource type="PackedScene" uid="uid://br8krfognc3t1" path="res://UI/ui.tscn" id="16_m1am2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6fa6q"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -51,9 +50,7 @@ uv1_triplanar = true
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_ce7po")
-
-[node name="UI" parent="." instance=ExtResource("16_m1am2")]
-unique_name_in_owner = true
+player_path = NodePath("Map/NavigationRegion3D/Player")
 
 [node name="Map" type="Node3D" parent="."]
 
@@ -322,6 +319,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0.1, -0.5)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -0.400002)
 
 [node name="Player" parent="Map/NavigationRegion3D" instance=ExtResource("15_whpp2")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23832, 0)
 
 [node name="EnemySpawns" type="Node3D" parent="Map"]
@@ -391,6 +389,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.867, 0, 7.337)
 
 [node name="Spawn22" type="Node3D" parent="Map/EnemySpawns"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.79, 0, 7.337)
+
+[node name="RespawnPoints" type="Node3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.854891, 0)
+
+[node name="PSpawn" type="Node3D" parent="Map/RespawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.268867, 0)
+
+[node name="PSpawn2" type="Node3D" parent="Map/RespawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.268867, 27.425)
+
+[node name="PSpawn3" type="Node3D" parent="Map/RespawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.2501, 0.268867, -23.0588)
 
 [node name="ZombieSpawnTimer" type="Timer" parent="."]
 wait_time = 2.0
