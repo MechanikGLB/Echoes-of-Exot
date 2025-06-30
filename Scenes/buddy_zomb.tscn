@@ -5,7 +5,7 @@
 [ext_resource type="ArrayMesh" uid="uid://bkfc413ngi33g" path="res://Assets/textures/IMGs/Zombie_Mesh.tres" id="2_vnpx3"]
 [ext_resource type="Texture2D" uid="uid://b2upyl0sl62" path="res://Assets/textures/lava2.jpg" id="3_240py"]
 [ext_resource type="Script" uid="uid://dhckurrw8y7r5" path="res://Scripts/Body_part.gd" id="5_a7cg5"]
-[ext_resource type="Animation" uid="uid://c02fshv30hq68" path="res://Assets/models/Testing/Death.res" id="6_jhm5s"]
+[ext_resource type="Animation" path="res://Assets/models/Characters/zombie/Death.res" id="6_jhm5s"]
 
 [sub_resource type="Skin" id="Skin_dni36"]
 resource_name = "Skin"

@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ct5gixmskju7k"
-path.s3tc="res://.godot/imported/colormap.png-a77b34c69557d0ddb27f83ba2b80f256.s3tc.ctex"
+uid="uid://cj8gt2qlhfi43"
+path.s3tc="res://.godot/imported/drake1_28.png-1836781b5d547eb962e28d91fcf6bc88.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "abf2addd4210ed96a9681be415b3560a"
+}
 
 [deps]
 
-source_file="res://Assets/models/Assets/graveyard/Textures/colormap.png"
-dest_files=["res://.godot/imported/colormap.png-a77b34c69557d0ddb27f83ba2b80f256.s3tc.ctex"]
+source_file="res://Scenes/Characters/Drake/drake1_28.png"
+dest_files=["res://.godot/imported/drake1_28.png-1836781b5d547eb962e28d91fcf6bc88.s3tc.ctex"]
 
 [params]
 

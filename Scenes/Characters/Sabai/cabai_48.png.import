@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ct5gixmskju7k"
-path.s3tc="res://.godot/imported/colormap.png-a77b34c69557d0ddb27f83ba2b80f256.s3tc.ctex"
+uid="uid://i2h1xqfftt3o"
+path.s3tc="res://.godot/imported/cabai_48.png-2974261c7b0328d458bf102f7f03c9cc.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "308bd316ad84b0957da3488727673419"
+}
 
 [deps]
 
-source_file="res://Assets/models/Assets/graveyard/Textures/colormap.png"
-dest_files=["res://.godot/imported/colormap.png-a77b34c69557d0ddb27f83ba2b80f256.s3tc.ctex"]
+source_file="res://Scenes/Characters/Sabai/cabai_48.png"
+dest_files=["res://.godot/imported/cabai_48.png-2974261c7b0328d458bf102f7f03c9cc.s3tc.ctex"]
 
 [params]
 
