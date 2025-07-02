@@ -1,8 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://dfgs8o4elq0di"]
+[gd_scene load_steps=3 format=3 uid="uid://dfgs8o4elq0di"]
 
+[ext_resource type="Script" uid="uid://daltsv7sng2ng" path="res://UI/ingame_menu.gd" id="1_fsl6t"]
 [ext_resource type="Theme" uid="uid://sg5jbmg5jpaq" path="res://Assets/styles/def_blue.tres" id="1_rku02"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_fsl6t")
+
+[node name="PanelContainer2" type="PanelContainer" parent="."]
+modulate = Color(1, 1, 1, 0.117647)
+self_modulate = Color(1, 1, 1, 0.152941)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 8
@@ -46,3 +59,6 @@ layout_mode = 2
 theme = ExtResource("1_rku02")
 theme_override_font_sizes/font_size = 40
 text = "Quit"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://br8krfognc3t1"]
+[gd_scene load_steps=9 format=3 uid="uid://br8krfognc3t1"]
 
 [ext_resource type="Texture2D" uid="uid://bkun1am2ww0fr" path="res://Assets/textures/IMGs/crosshairs/crosshair162.png" id="1_3sbvi"]
 [ext_resource type="Texture2D" uid="uid://jlkgsbf877jp" path="res://Assets/textures/IMGs/crosshairs/crosshair161.png" id="2_nm1m0"]
 [ext_resource type="Texture2D" uid="uid://defte4bki56go" path="res://Assets/textures/IMGs/Hearth.png" id="3_c7tqi"]
 [ext_resource type="Theme" uid="uid://sg5jbmg5jpaq" path="res://Assets/styles/def_blue.tres" id="4_cbfhl"]
-[ext_resource type="Texture2D" uid="uid://bkli31h67hn80" path="res://Assets/textures/IMGs/bullet2.png" id="5_4fiuh"]
+[ext_resource type="Script" uid="uid://ca4ax0vde3a6l" path="res://UI/clock.gd" id="6_c7tqi"]
+[ext_resource type="Texture2D" uid="uid://doe83vm1qnsli" path="res://Assets/textures/IMGs/okak2.jpg" id="6_cbfhl"]
+[ext_resource type="PackedScene" uid="uid://dfgs8o4elq0di" path="res://UI/IngameMenu.tscn" id="6_nm1m0"]
+[ext_resource type="AudioStream" uid="uid://dl0v0gsn4jjnw" path="res://sound/Звук смерти.mp3" id="7_cbfhl"]
 
 [node name="UI" type="CanvasLayer"]
 
@@ -91,17 +94,95 @@ value = 25.0
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 
-[node name="TextureRect2" type="TextureRect" parent="Stats/HBoxContainer2"]
-custom_minimum_size = Vector2(24, 24)
-layout_mode = 2
-texture = ExtResource("5_4fiuh")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Ammo" type="Label" parent="Stats/HBoxContainer2"]
+[node name="ScoreLabel" type="Label" parent="Stats/HBoxContainer2"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_cbfhl")
-text = "50"
+theme_override_font_sizes/font_size = 30
+text = "SCORE:"
+horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Score" type="Label" parent="Stats/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_cbfhl")
+theme_override_font_sizes/font_size = 50
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CanvasLayer" parent="." instance=ExtResource("6_nm1m0")]
+visible = false
+
+[node name="okak" type="TextureRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(300, 300)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("6_cbfhl")
+expand_mode = 1
+
+[node name="Dethscreen" type="VBoxContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.631
+offset_top = -151.0
+offset_bottom = 298.52
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label2" type="Label" parent="Dethscreen"]
+layout_mode = 2
+theme = ExtResource("4_cbfhl")
+theme_override_colors/font_color = Color(0.74, 0, 0.0246666, 1)
+theme_override_colors/font_shadow_color = Color(1, 0.58, 0.58, 1)
+theme_override_font_sizes/font_size = 100
+text = "You're dead"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RespawnTime" type="Label" parent="Dethscreen"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_cbfhl")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 70
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Dethscreen"]
+stream = ExtResource("7_cbfhl")
+
+[node name="sessionTimer" type="HBoxContainer" parent="."]
+offset_left = 1.0
+offset_right = 196.0
+offset_bottom = 62.0
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="sessionTimer"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("4_cbfhl")
+theme_override_font_sizes/font_size = 40
+text = "Time:"
+
+[node name="clock" type="Label" parent="sessionTimer"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("4_cbfhl")
+theme_override_font_sizes/font_size = 40
+text = "0"
+script = ExtResource("6_c7tqi")

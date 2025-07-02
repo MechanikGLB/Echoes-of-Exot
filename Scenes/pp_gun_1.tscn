@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=4 uid="uid://f04k1ry20ek7"]
+[gd_scene load_steps=21 format=4 uid="uid://f04k1ry20ek7"]
 
 [ext_resource type="Texture2D" uid="uid://ujbbd3upruv7" path="res://Assets/textures/brick-wall-background-texture.jpg" id="1_egotw"]
 [ext_resource type="Texture2D" uid="uid://cneyatfr85m25" path="res://Assets/textures/muzzle_flashs/m_11.png" id="2_off7p"]
+[ext_resource type="AudioStream" uid="uid://cr4s2u7lni2t3" path="res://sound/pistl.mp3" id="3_off7p"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ylmax"]
 
@@ -276,3 +277,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.09772)
 libraries = {
 &"": SubResource("AnimationLibrary_my8bt")
 }
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.32861)
+stream = ExtResource("3_off7p")

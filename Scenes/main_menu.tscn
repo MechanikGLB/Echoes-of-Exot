@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dbfixcfet8jdj"]
+[gd_scene load_steps=24 format=3 uid="uid://dbfixcfet8jdj"]
 
 [ext_resource type="Script" uid="uid://biv0ny6wm7a0b" path="res://Scripts/main_menu.gd" id="1_j7ex8"]
 [ext_resource type="ArrayMesh" uid="uid://bn3v8bx2tpq8v" path="res://Assets/models/Assets/graveyard/debris.obj" id="2_e5qqf"]
@@ -15,7 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://cnw8sb0fy4qsv" path="res://Assets/models/Assets/gravestone_broken.tscn" id="13_ai24q"]
 [ext_resource type="PackedScene" uid="uid://bt2oixifa5wvs" path="res://Assets/models/Assets/gravestone1.tscn" id="14_qby1g"]
 [ext_resource type="Texture2D" uid="uid://b0ppbgyvaujvm" path="res://Assets/textures/IMGs/MOV4Y0g2RuY.jpg" id="16_5pajh"]
-[ext_resource type="Script" uid="uid://dy0kkyva8v0bk" path="res://Scripts/menu_buttons.gd" id="16_j7ex8"]
+[ext_resource type="AudioStream" uid="uid://o8josl4w16hv" path="res://sound/manu.mp3" id="17_ujyyl"]
+[ext_resource type="PackedScene" uid="uid://c0ob1iixpmbc3" path="res://UI/settings.tscn" id="18_mkpwh"]
 [ext_resource type="Theme" uid="uid://sg5jbmg5jpaq" path="res://Assets/styles/def_blue.tres" id="19_ix6bv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6fa6q"]
@@ -329,7 +330,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MainMenu" type="VBoxContainer" parent="Menu"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -362,7 +362,6 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 0
 size_flags_stretch_ratio = 0.6
-script = ExtResource("16_j7ex8")
 
 [node name="Play" type="Button" parent="Menu/MainMenu/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(100, 80)
@@ -425,6 +424,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "тут будет лого :)"
 
 [node name="Mapselection" type="PanelContainer" parent="Menu"]
+visible = false
 self_modulate = Color(1, 0.333333, 0, 0.380392)
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 1
@@ -484,6 +484,23 @@ size_flags_vertical = 4
 theme_override_font_sizes/font_size = 37
 text = "RETURN"
 
-[connection signal="pressed" from="Menu/MainMenu/HBoxContainer/VBoxContainer/Play" to="Menu/MainMenu/HBoxContainer/VBoxContainer" method="_on_play_pressed"]
-[connection signal="pressed" from="Menu/MainMenu/HBoxContainer/VBoxContainer/Quit" to="Menu/MainMenu/HBoxContainer/VBoxContainer" method="_on_quit_pressed"]
-[connection signal="pressed" from="Menu/Mapselection/MapChoose/Return" to="Menu/MainMenu/HBoxContainer/VBoxContainer" method="_on_return_pressed"]
+[node name="Refresh" type="Button" parent="Menu/Mapselection"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Refresh"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Menu"]
+stream = ExtResource("17_ujyyl")
+autoplay = true
+
+[node name="Control" parent="Menu" instance=ExtResource("18_mkpwh")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="Menu/MainMenu/HBoxContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Menu/MainMenu/HBoxContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Menu/MainMenu/HBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Menu/Mapselection/MapChoose/Return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="Menu/Mapselection/Refresh" to="." method="_on_refresh_pressed"]

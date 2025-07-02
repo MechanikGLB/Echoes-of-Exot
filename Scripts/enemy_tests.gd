@@ -3,12 +3,14 @@ extends CharacterBody3D
 var player = null
 var state_machine
 var health = 100
+var alive = true
 
 const SPEED = 4.0
 const ATTACK_RANGE = 2
 const ZOMBIE_DMG = 5
 
 signal zombie_hit
+signal enemy_dead
 
 @export var player_path := "/root/World/Map/NavigationRegion3D/Player"
 
@@ -50,11 +52,16 @@ func _hit_finished():
 
 
 func _on_area_3d_body_part_hit(dmg: Variant) -> void:
+	if !alive:
+		return
 	health -= dmg
 	emit_signal("zombie_hit")
 	if health <= 0:
 		collision_layer = 0
 		collision_mask = 0
 		anim_tree.set("parameters/conditions/die", true)
+		emit_signal("enemy_dead")
+		alive = false
 		await get_tree().create_timer(5.0).timeout
 		queue_free()
+		

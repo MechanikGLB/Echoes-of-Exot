@@ -1,0 +1,422 @@
+[gd_scene load_steps=22 format=3 uid="uid://crx6ooeqmoxuh"]
+
+[ext_resource type="Script" uid="uid://biv0ny6wm7a0b" path="res://Scripts/main_menu.gd" id="1_0edse"]
+[ext_resource type="ArrayMesh" uid="uid://bn3v8bx2tpq8v" path="res://Assets/models/Assets/graveyard/debris.obj" id="2_q4iax"]
+[ext_resource type="ArrayMesh" uid="uid://cvs82eu5vcbfi" path="res://Assets/models/Assets/graveyard/debris-wood.obj" id="3_gul3i"]
+[ext_resource type="Material" uid="uid://bj7mml788rvjc" path="res://Assets/styles/OldBrick.tres" id="4_8151j"]
+[ext_resource type="Texture2D" uid="uid://cxjllrgkkn8ju" path="res://Assets/textures/696.jpg" id="5_sywwv"]
+[ext_resource type="ArrayMesh" uid="uid://b312qxvmgvu0l" path="res://Assets/models/Assets/graveyard/rocks.obj" id="6_f3kbt"]
+[ext_resource type="ArrayMesh" uid="uid://cjh3h2e0lr6mh" path="res://Assets/models/Assets/graveyard/shovel-dirt.obj" id="7_aitlt"]
+[ext_resource type="PackedScene" uid="uid://damdgexmnwelw" path="res://Assets/models/Assets/crypt_large.tscn" id="8_fabwb"]
+[ext_resource type="ArrayMesh" uid="uid://0f5fbxrk1p5m" path="res://Assets/models/Assets/graveyard/bench.obj" id="9_jgknd"]
+[ext_resource type="PackedScene" uid="uid://dx0fyowuu4onw" path="res://Assets/models/Assets/fence.tscn" id="10_isgug"]
+[ext_resource type="PackedScene" uid="uid://be5ygg3eptw30" path="res://Assets/models/Assets/gravestone_flat.tscn" id="11_v436k"]
+[ext_resource type="PackedScene" uid="uid://dqptmqg8ygokn" path="res://Assets/models/Assets/grave.tscn" id="12_bebpj"]
+[ext_resource type="PackedScene" uid="uid://cnw8sb0fy4qsv" path="res://Assets/models/Assets/gravestone_broken.tscn" id="13_3inrt"]
+[ext_resource type="PackedScene" uid="uid://bt2oixifa5wvs" path="res://Assets/models/Assets/gravestone1.tscn" id="14_gqfcn"]
+[ext_resource type="Theme" uid="uid://sg5jbmg5jpaq" path="res://Assets/styles/def_blue.tres" id="15_phcxt"]
+[ext_resource type="Texture2D" uid="uid://b0ppbgyvaujvm" path="res://Assets/textures/IMGs/MOV4Y0g2RuY.jpg" id="16_yg71e"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6fa6q"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_650ua"]
+sky_material = SubResource("ProceduralSkyMaterial_6fa6q")
+
+[sub_resource type="Environment" id="Environment_irh21"]
+background_mode = 2
+background_energy_multiplier = 1.94
+sky = SubResource("Sky_650ua")
+ambient_light_energy = 2.01
+tonemap_mode = 3
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.3528, 0.42, 0.40208, 1)
+fog_light_energy = 0.65
+fog_sun_scatter = 0.13
+fog_density = 1.0
+fog_height = 1.46
+fog_height_density = -8.0988
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4x8dc"]
+albedo_texture = ExtResource("5_sywwv")
+uv1_triplanar = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mae5d"]
+bg_color = Color(0.795894, 0.533803, 0.296347, 1)
+
+[node name="MenuWorld" type="Node3D"]
+script = ExtResource("1_0edse")
+
+[node name="Map" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
+transform = Transform3D(-0.988756, -0.134968, 0.0643766, 0, 0.430511, 0.902585, -0.149535, 0.892437, -0.425671, 0, 0, 0)
+light_color = Color(1, 0.65, 0.65, 1)
+light_energy = 0.677
+shadow_enabled = true
+directional_shadow_max_distance = 90.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Map"]
+environment = SubResource("Environment_irh21")
+
+[node name="Debris" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 15)
+mesh = ExtResource("2_q4iax")
+skeleton = NodePath("../..")
+
+[node name="Debris2" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 13)
+mesh = ExtResource("2_q4iax")
+skeleton = NodePath("../..")
+
+[node name="Debris3" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -21)
+mesh = ExtResource("2_q4iax")
+skeleton = NodePath("../..")
+
+[node name="Debris4" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -12)
+mesh = ExtResource("2_q4iax")
+skeleton = NodePath("../..")
+
+[node name="Debris-wood" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.1, -25)
+mesh = ExtResource("3_gul3i")
+skeleton = NodePath("../..")
+
+[node name="Debris-wood2" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -1, 0.1, -24)
+mesh = ExtResource("3_gul3i")
+skeleton = NodePath("../..")
+
+[node name="Debris5" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0.1, 38)
+mesh = ExtResource("2_q4iax")
+skeleton = NodePath("../..")
+
+[node name="Debris6" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, -12, 0.1, 31)
+mesh = ExtResource("2_q4iax")
+skeleton = NodePath("../..")
+
+[node name="NavigationRegion3D" type="Node3D" parent="Map"]
+
+[node name="mapbox" type="Node3D" parent="Map/NavigationRegion3D"]
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Map/NavigationRegion3D/mapbox"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.419, -50)
+material_override = ExtResource("4_8151j")
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(1, 4, 100)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Map/NavigationRegion3D/mapbox"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.419, 50)
+material_override = ExtResource("4_8151j")
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(1, 4, 100)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Map/NavigationRegion3D/mapbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 1.419, 0)
+material_override = ExtResource("4_8151j")
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(1, 4, 100)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Map/NavigationRegion3D/mapbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 1.419, 0)
+material_override = ExtResource("4_8151j")
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(1, 4, 100)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Map/NavigationRegion3D/mapbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.391034, 0)
+material_override = SubResource("StandardMaterial3D_4x8dc")
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(100, 1, 100)
+
+[node name="Rocks" type="MeshInstance3D" parent="Map/NavigationRegion3D/mapbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 20)
+mesh = ExtResource("6_f3kbt")
+
+[node name="Shovel-dirt" type="MeshInstance3D" parent="Map/NavigationRegion3D/mapbox"]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -35, 0, 29)
+mesh = ExtResource("7_aitlt")
+
+[node name="Shovel-dirt2" type="MeshInstance3D" parent="Map/NavigationRegion3D/mapbox"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 30, 0, -11)
+mesh = ExtResource("7_aitlt")
+
+[node name="Crypt_large" parent="Map/NavigationRegion3D/mapbox" instance=ExtResource("8_fabwb")]
+transform = Transform3D(2.49824, 0, 1.66096, 0, 3, 0, -1.66096, 0, 2.49824, -4.39735, 0.108966, -32.7573)
+
+[node name="Bench" type="MeshInstance3D" parent="Map/NavigationRegion3D/mapbox"]
+transform = Transform3D(1.41421, 0, -1.41421, 0, 2, 0, 1.41421, 0, 1.41421, -6.3, 0, -31.3)
+mesh = ExtResource("9_jgknd")
+skeleton = NodePath("../../../..")
+
+[node name="Rocks2" type="MeshInstance3D" parent="Map/NavigationRegion3D/mapbox"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -32)
+mesh = ExtResource("6_f3kbt")
+skeleton = NodePath("../../../..")
+
+[node name="grave" type="Node3D" parent="Map/NavigationRegion3D"]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -16, 0, 30)
+
+[node name="Fence" parent="Map/NavigationRegion3D/grave" instance=ExtResource("10_isgug")]
+transform = Transform3D(1, 0, -1.49012e-08, 0, 1, 0, 1.49012e-08, 0, 1, 0.0527954, 0, 5.69125)
+
+[node name="gravestone-flat" parent="Map/NavigationRegion3D/grave" instance=ExtResource("11_v436k")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.8, 0, 6.9)
+
+[node name="gravestone-flat2" parent="Map/NavigationRegion3D/grave" instance=ExtResource("11_v436k")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.3, 0, 7)
+
+[node name="grave3" parent="Map/NavigationRegion3D/grave" instance=ExtResource("12_bebpj")]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 4, 0, 11)
+
+[node name="grave4" parent="Map/NavigationRegion3D/grave" instance=ExtResource("12_bebpj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 11)
+
+[node name="grave5" parent="Map/NavigationRegion3D/grave" instance=ExtResource("12_bebpj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 11)
+
+[node name="grave6" parent="Map/NavigationRegion3D/grave" instance=ExtResource("12_bebpj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 11)
+
+[node name="grave7" parent="Map/NavigationRegion3D/grave" instance=ExtResource("12_bebpj")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3, 0, 3)
+
+[node name="grave8" parent="Map/NavigationRegion3D/grave" instance=ExtResource("12_bebpj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
+
+[node name="grave9" parent="Map/NavigationRegion3D/grave" instance=ExtResource("12_bebpj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
+
+[node name="grave2" parent="Map/NavigationRegion3D/grave" instance=ExtResource("12_bebpj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 11)
+
+[node name="grave10" parent="Map/NavigationRegion3D/grave" instance=ExtResource("12_bebpj")]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 3, 0, 4)
+
+[node name="grave11" parent="Map/NavigationRegion3D/grave" instance=ExtResource("12_bebpj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3)
+
+[node name="gravestone-broken" parent="Map/NavigationRegion3D/grave" instance=ExtResource("13_3inrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
+
+[node name="Node3D" parent="Map/NavigationRegion3D/grave" instance=ExtResource("14_gqfcn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+
+[node name="Node3D2" parent="Map/NavigationRegion3D/grave" instance=ExtResource("14_gqfcn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+
+[node name="Node3D3" parent="Map/NavigationRegion3D/grave" instance=ExtResource("14_gqfcn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 1)
+
+[node name="Node3D4" parent="Map/NavigationRegion3D/grave" instance=ExtResource("14_gqfcn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
+
+[node name="Node3D5" parent="Map/NavigationRegion3D/grave" instance=ExtResource("14_gqfcn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 13)
+
+[node name="Node3D6" parent="Map/NavigationRegion3D/grave" instance=ExtResource("14_gqfcn")]
+transform = Transform3D(0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, 0.939693, 3.5, 0, 12.6)
+
+[node name="gravestone-broken2" parent="Map/NavigationRegion3D/grave" instance=ExtResource("13_3inrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 13)
+
+[node name="gravestone-broken" parent="Map/NavigationRegion3D/grave/gravestone-broken2" instance=ExtResource("13_3inrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0.1, -0.5)
+
+[node name="Node3D" parent="Map/NavigationRegion3D/grave/gravestone-broken2" instance=ExtResource("14_gqfcn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -0.400002)
+
+[node name="grave2" type="Node3D" parent="Map/NavigationRegion3D"]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 34.2, 0, -25)
+
+[node name="Fence" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("10_isgug")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.669667, 0, 5.65911)
+
+[node name="gravestone-flat" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("11_v436k")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.8, 0, 6.9)
+
+[node name="gravestone-flat2" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("11_v436k")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.3, 0, 7)
+
+[node name="grave3" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("12_bebpj")]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 4, 0, 11)
+
+[node name="grave4" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("12_bebpj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 11)
+
+[node name="grave5" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("12_bebpj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 11)
+
+[node name="grave6" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("12_bebpj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 11)
+
+[node name="grave7" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("12_bebpj")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3, 0, 3)
+
+[node name="grave8" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("12_bebpj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
+
+[node name="grave9" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("12_bebpj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
+
+[node name="grave2" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("12_bebpj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 11)
+
+[node name="grave10" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("12_bebpj")]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 3, 0, 4)
+
+[node name="grave11" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("12_bebpj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3)
+
+[node name="gravestone-broken" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("13_3inrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
+
+[node name="Node3D" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("14_gqfcn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+
+[node name="Node3D2" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("14_gqfcn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+
+[node name="Node3D3" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("14_gqfcn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 1)
+
+[node name="Node3D4" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("14_gqfcn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
+
+[node name="Node3D5" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("14_gqfcn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 13)
+
+[node name="Node3D6" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("14_gqfcn")]
+transform = Transform3D(0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, 0.939693, 3.5, 0, 12.6)
+
+[node name="gravestone-broken2" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("13_3inrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 13)
+
+[node name="gravestone-broken" parent="Map/NavigationRegion3D/grave2/gravestone-broken2" instance=ExtResource("13_3inrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0.1, -0.5)
+
+[node name="Node3D" parent="Map/NavigationRegion3D/grave2/gravestone-broken2" instance=ExtResource("14_gqfcn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -0.400002)
+
+[node name="CameraPivot" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.754641, 0.656138, 0, -0.656138, 0.754641, 0.361055, 29.0595, 55.374)
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainMenu" type="VBoxContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 47.0
+offset_bottom = -309.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Menu/MainMenu"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_vertical = 2
+theme = ExtResource("15_phcxt")
+theme_override_font_sizes/normal_font_size = 80
+theme_override_styles/fill = SubResource("StyleBoxFlat_mae5d")
+text = "Echoes of Exot"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/MainMenu"]
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MainMenu/HBoxContainer"]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.6
+
+[node name="Play" type="Button" parent="Menu/MainMenu/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("15_phcxt")
+theme_override_font_sizes/font_size = 49
+text = "Play"
+
+[node name="Servers" type="Button" parent="Menu/MainMenu/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("15_phcxt")
+theme_override_font_sizes/font_size = 49
+text = "Servers
+"
+
+[node name="Settings" type="Button" parent="Menu/MainMenu/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("15_phcxt")
+theme_override_font_sizes/font_size = 49
+text = "Settings
+"
+
+[node name="Quit" type="Button" parent="Menu/MainMenu/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("15_phcxt")
+theme_override_font_sizes/font_size = 49
+text = "Quit
+"
+
+[node name="TextureRect" type="TextureRect" parent="Menu/MainMenu/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+texture = ExtResource("16_yg71e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Menu/MainMenu/HBoxContainer/TextureRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -73.0
+offset_top = -20.0
+offset_right = 73.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("15_phcxt")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "тут будет лого :)"
