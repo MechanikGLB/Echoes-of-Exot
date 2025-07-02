@@ -1,0 +1,68 @@
+[gd_scene load_steps=2 format=3 uid="uid://du8gvm5iya7l1"]
+
+[ext_resource type="PackedScene" uid="uid://0hpehl4y8uk8" path="res://Scenes/Characters/Drake/drake1.glb" id="1_eskb6"]
+
+[node name="Drake" instance=ExtResource("1_eskb6")]
+
+[node name="Bolvan" parent="Node" index="0"]
+transform = Transform3D(0.920505, 0, 0.390731, 0, 1, 0, -0.390731, 0, 0.920505, 0, 0, 0)
+
+[node name="legright" parent="Node/Bolvan/jopa" index="4"]
+transform = Transform3D(0.906308, -0.42101, 0.0368336, 0.10224, 0.133854, -0.985713, 0.410065, 0.897125, 0.164358, 0.0625, -0.034375, 0)
+
+[node name="goleni2" parent="Node/Bolvan/jopa/legright" index="3"]
+transform = Transform3D(1, 0, 0, 0, 0.292372, 0.956305, 0, -0.956305, 0.292372, 0.0375, -0.267188, -0.0390625)
+
+[node name="stupna2" parent="Node/Bolvan/jopa/legright/goleni2" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.961262, 0.275637, 0, -0.275637, 0.961262, -0.00625, -0.296875, -0.03125)
+
+[node name="grudverx" parent="Node/Bolvan" index="1"]
+transform = Transform3D(0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, 0.939693, 0, 0.9702, 0.0234375)
+
+[node name="leftarm" parent="Node/Bolvan/grudverx" index="7"]
+transform = Transform3D(0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, -0.135937, -0.034375, 0)
+
+[node name="nizu" parent="Node/Bolvan/grudverx/leftarm" index="3"]
+transform = Transform3D(0.117676, -0.97613, -0.182543, -0.139124, 0.165802, -0.976296, 0.983258, 0.140283, -0.116293, -0.04375, -0.2, 0)
+
+[node name="sword" parent="Node/Bolvan/grudverx/leftarm/nizu" index="1"]
+transform = Transform3D(-0.545205, -0.818919, -0.179231, -0.68495, 0.311903, 0.658452, -0.483316, 0.481756, -0.73097, 0.455862, -1.08642, -0.0769133)
+
+[node name="pechati3" parent="Node/Bolvan/grudverx/leftarm/nizu/sword" index="4"]
+transform = Transform3D(-0.999048, 0.0436193, 0, -0.0436193, -0.999048, 0, 0, 0, 1, -0.0604694, 0.956112, 0.161681)
+
+[node name="skull dragon1" parent="Node/Bolvan/grudverx/leftarm/nizu/sword" index="6"]
+transform = Transform3D(1, 0, 0, 0, -0.0436194, -0.999048, 0, 0.999048, -0.0436194, 0, 0.610937, 0.11875)
+
+[node name="cepka2" parent="Node/Bolvan/grudverx/leftarm/nizu/sword" index="7"]
+transform = Transform3D(1, 0, 0, 0, 0.956305, -0.292372, 0, 0.292372, 0.956305, 0, -0.134658, -0.00311625)
+
+[node name="effects" parent="Node/Bolvan/grudverx/leftarm/nizu/sword" index="9"]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.75, 0.4375)
+
+[node name="handown" parent="Node/Bolvan/grudverx/leftarm/nizu" index="2"]
+transform = Transform3D(0.375652, 0.906905, 0.190809, -0.06092, -0.181279, 0.981543, 0.924756, -0.380343, -0.0128491, -0.0125, -0.160764, -0.00158312)
+
+[node name="big" parent="Node/Bolvan/grudverx/leftarm/nizu/handown" index="1"]
+transform = Transform3D(0.994522, -0.104429, 0.00455947, 0.104528, 0.993575, -0.0433804, 4.65661e-10, 0.0436194, 0.999048, -0.028125, 0.00142812, -0.01875)
+
+[node name="rightarm" parent="Node/Bolvan/grudverx" index="8"]
+transform = Transform3D(0.630203, -0.598342, 0.494804, 0.280225, -0.419047, -0.86364, 0.724098, 0.682925, -0.0964143, 0.135937, -0.034375, 0)
+
+[node name="verx" parent="Node/Bolvan/grudverx/rightarm" index="3"]
+transform = Transform3D(0.951056, 0.309017, 6.49678e-08, 0.229644, -0.706773, -0.669131, -0.206773, 0.636381, -0.743145, 0.04375, -0.2, 0)
+
+[node name="handown2" parent="Node/Bolvan/grudverx/rightarm/verx" index="1"]
+transform = Transform3D(-4.37039e-08, -1, -1.14459e-09, -0.0130926, -5.72295e-10, 0.999914, -0.999914, 4.37151e-08, -0.0130926, 0.0125, -0.160764, -0.00158312)
+
+[node name="big2" parent="Node/Bolvan/grudverx/rightarm/verx/handown2" index="1"]
+transform = Transform3D(0.994522, 0.104429, -0.00455947, -0.104528, 0.993575, -0.0433804, -4.65661e-10, 0.0436194, 0.999048, 0.028125, 0.00142812, -0.01875)
+
+[node name="Golova2" parent="Node/Bolvan/grudverx" index="9"]
+transform = Transform3D(0.998848, 0.0045985, -0.0477572, 0, 0.995396, 0.0958458, 0.0479781, -0.0957354, 0.99425, 0, 0.065625, 0.00625)
+
+[node name="effect" parent="Node/Bolvan" index="2"]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, -0.00214375, 1.31873, -0.00842187)
+
+[node name="shiftef" parent="Node" index="1"]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.8375, 0.48125)

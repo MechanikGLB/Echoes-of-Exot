@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvt0t433tjvg8"]
+
+[ext_resource type="PackedScene" uid="uid://c0rqswnevmwqk" path="res://Scenes/Characters/Sabai/cabai.glb" id="1_6ohvh"]
+
+[node name="Sabai" instance=ExtResource("1_6ohvh")]
+
+[node name="Skeleton3D" parent="BOLVANSABAI" index="0"]
+bones/0/position = Vector3(1, 0.578429, 0.0987962)
+bones/0/rotation = Quaternion(0, 0.707107, 0, 0.707107)
+bones/2/rotation = Quaternion(0.0474709, -0.0118886, -0.259519, 0.964497)
+bones/4/rotation = Quaternion(0.534131, 0, 0, 0.845402)
+bones/5/rotation = Quaternion(-0.549169, 0, 0, 0.835712)
+bones/31/rotation = Quaternion(0.625924, 0, 0, 0.779885)
+bones/40/rotation = Quaternion(0.198559, -0.253057, 0.427714, 0.844747)
+bones/43/scale = Vector3(0, 0, 0)
+bones/47/rotation = Quaternion(0.915311, 0, 0, 0.402747)
+bones/51/rotation = Quaternion(0.294301, 0.279021, -0.454783, 0.79291)
+bones/54/scale = Vector3(0, 0, 0)
+bones/59/rotation = Quaternion(-0.124034, 0, 0, 0.992278)
+
+[node name="Skeleton3D" parent="portal" index="0"]
+bones/0/scale = Vector3(0, 0, 0)
