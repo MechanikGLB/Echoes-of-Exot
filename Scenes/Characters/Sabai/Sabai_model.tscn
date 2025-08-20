@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://y83nva3lgde5"]
+
+[ext_resource type="PackedScene" uid="uid://bf22g76dlxmkx" path="res://Scenes/Characters/Sabai/Sabai.glb" id="1_kechh"]
+
+[node name="Sabai" instance=ExtResource("1_kechh")]
+
+[node name="LeftLegDown" type="Marker3D" parent="Node/BOLVANSABAI/Nizjopa/Leftleg/leftlegmid2/leftlegniz" index="3"]
+
+[node name="LeftLegUp" type="Marker3D" parent="Node/BOLVANSABAI/Nizjopa/Leftleg" index="4"]
+
+[node name="RightLegDown" type="Marker3D" parent="Node/BOLVANSABAI/Nizjopa/Rightleg/rightlegmid2/rightlegniz" index="3"]
+
+[node name="RightLegUp" type="Marker3D" parent="Node/BOLVANSABAI/Nizjopa/Rightleg" index="4"]
+
+[node name="Tail" type="Marker3D" parent="Node/BOLVANSABAI/Nizjopa/hvost" index="3"]
+
+[node name="RightArmDown" type="Marker3D" parent="Node/BOLVANSABAI/Verxa1/Rightarm/rightarmmid2" index="3"]
+
+[node name="RightArmTop" type="Marker3D" parent="Node/BOLVANSABAI/Verxa1/Rightarm" index="6"]
+
+[node name="LeftArmDown" type="Marker3D" parent="Node/BOLVANSABAI/Verxa1/Leftarm/leftarmmid2" index="3"]
+
+[node name="LeftArmTop" type="Marker3D" parent="Node/BOLVANSABAI/Verxa1/Leftarm" index="6"]
+
+[node name="Head" type="Marker3D" parent="Node/BOLVANSABAI/Verxa1/golova" index="21"]
+
+[node name="Torso" type="Marker3D" parent="Node/BOLVANSABAI/Verxa1" index="19"]

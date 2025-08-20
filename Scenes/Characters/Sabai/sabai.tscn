@@ -1,22 +1,220 @@
-[gd_scene load_steps=2 format=3 uid="uid://cvt0t433tjvg8"]
+[gd_scene load_steps=14 format=3 uid="uid://cqj8dnj3d0ckt"]
 
-[ext_resource type="PackedScene" uid="uid://c0rqswnevmwqk" path="res://Scenes/Characters/Sabai/cabai.glb" id="1_6ohvh"]
+[ext_resource type="PackedScene" uid="uid://y83nva3lgde5" path="res://Scenes/Characters/Sabai/Sabai_model.tscn" id="1_6ohvh"]
 
-[node name="Sabai" instance=ExtResource("1_6ohvh")]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f5xxy"]
+radius = 0.0706006
+height = 0.385725
 
-[node name="Skeleton3D" parent="BOLVANSABAI" index="0"]
-bones/0/position = Vector3(1, 0.578429, 0.0987962)
-bones/0/rotation = Quaternion(0, 0.707107, 0, 0.707107)
-bones/2/rotation = Quaternion(0.0474709, -0.0118886, -0.259519, 0.964497)
-bones/4/rotation = Quaternion(0.534131, 0, 0, 0.845402)
-bones/5/rotation = Quaternion(-0.549169, 0, 0, 0.835712)
-bones/31/rotation = Quaternion(0.625924, 0, 0, 0.779885)
-bones/40/rotation = Quaternion(0.198559, -0.253057, 0.427714, 0.844747)
-bones/43/scale = Vector3(0, 0, 0)
-bones/47/rotation = Quaternion(0.915311, 0, 0, 0.402747)
-bones/51/rotation = Quaternion(0.294301, 0.279021, -0.454783, 0.79291)
-bones/54/scale = Vector3(0, 0, 0)
-bones/59/rotation = Quaternion(-0.124034, 0, 0, 0.992278)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oghoa"]
+radius = 0.0902743
+height = 0.447693
 
-[node name="Skeleton3D" parent="portal" index="0"]
-bones/0/scale = Vector3(0, 0, 0)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2afvx"]
+radius = 0.0718191
+height = 0.415843
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kpnt3"]
+radius = 0.0908136
+height = 0.414112
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6ohvh"]
+size = Vector3(0.270782, 0.300598, 0.0523224)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6ohvh"]
+radius = 0.0840754
+height = 0.454477
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5ownw"]
+radius = 0.100872
+height = 0.432002
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v0ldv"]
+radius = 0.0912538
+height = 0.48042
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v1mio"]
+radius = 0.104138
+height = 0.437546
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t8uym"]
+radius = 0.122801
+height = 0.339241
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t77eu"]
+radius = 0.253805
+height = 0.642057
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ir4xo"]
+radius = 0.406639
+height = 1.18163
+
+[node name="Sabai" type="CharacterBody3D"]
+
+[node name="Sabai" parent="." instance=ExtResource("1_6ohvh")]
+
+[node name="BOLVANSABAI" parent="Sabai/Node" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.565929, 0.0987962)
+
+[node name="Leftleg" parent="Sabai/Node/BOLVANSABAI/Nizjopa" index="4"]
+transform = Transform3D(1, 0, 0, 0, 0.71934, 0.694658, 0, -0.694658, 0.71934, -0.0921875, -0.084375, 0)
+
+[node name="leftlegmid2" parent="Sabai/Node/BOLVANSABAI/Nizjopa/Leftleg" index="3"]
+transform = Transform3D(1, 0, 0, 0, 0.601815, -0.798635, 0, 0.798635, 0.601815, -0.114063, -0.228125, -0.075)
+
+[node name="leftlegniz" parent="Sabai/Node/BOLVANSABAI/Nizjopa/Leftleg/leftlegmid2" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.743145, 0.669131, 0, -0.669131, 0.743145, 0.0015625, 0.021875, 0.2)
+
+[node name="kogot4" parent="Sabai/Node/BOLVANSABAI/Nizjopa/Leftleg/leftlegmid2/leftlegniz" index="1"]
+transform = Transform3D(0.965926, -0.0885213, -0.24321, -3.72529e-09, 0.939693, -0.34202, 0.258819, 0.330366, 0.907673, 0.025, -0.259373, -0.0187525)
+
+[node name="kogot3" parent="Sabai/Node/BOLVANSABAI/Nizjopa/Leftleg/leftlegmid2/leftlegniz" index="2"]
+transform = Transform3D(0.945519, 0.111351, 0.305934, 3.72529e-09, 0.939693, -0.34202, -0.325568, 0.323386, 0.888497, -0.0296875, -0.254685, -0.0250025)
+
+[node name="Area3D" type="Area3D" parent="Sabai/Node/BOLVANSABAI/Nizjopa/Leftleg/leftlegmid2/leftlegniz/LeftLegDown" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sabai/Node/BOLVANSABAI/Nizjopa/Leftleg/leftlegmid2/leftlegniz/LeftLegDown/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 0.969166, -0.246407, 0, 0.246407, 0.969166, 0.00352418, -0.113249, 0.00671208)
+shape = SubResource("CapsuleShape3D_f5xxy")
+
+[node name="Area3D" type="Area3D" parent="Sabai/Node/BOLVANSABAI/Nizjopa/Leftleg/LeftLegUp" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sabai/Node/BOLVANSABAI/Nizjopa/Leftleg/LeftLegUp/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 0.870982, -0.491314, 0, 0.491314, 0.870982, -0.0877875, -0.0933298, -0.0332201)
+shape = SubResource("CapsuleShape3D_oghoa")
+
+[node name="Rightleg" parent="Sabai/Node/BOLVANSABAI/Nizjopa" index="5"]
+transform = Transform3D(1, 0, 0, 0, 0.990268, -0.139173, 0, 0.139173, 0.990268, 0.0921875, -0.0843725, 0)
+
+[node name="rightlegniz" parent="Sabai/Node/BOLVANSABAI/Nizjopa/Rightleg/rightlegmid2" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.997564, 0.0697565, 0, -0.0697565, 0.997564, -0.0015625, 0.021875, 0.2)
+
+[node name="kogot2" parent="Sabai/Node/BOLVANSABAI/Nizjopa/Rightleg/rightlegmid2/rightlegniz" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.999848, -0.0174524, 0, 0.0174524, 0.999848, -0.025, -0.259378, -0.0187475)
+
+[node name="Area3D" type="Area3D" parent="Sabai/Node/BOLVANSABAI/Nizjopa/Rightleg/rightlegmid2/rightlegniz/RightLegDown" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sabai/Node/BOLVANSABAI/Nizjopa/Rightleg/rightlegmid2/rightlegniz/RightLegDown/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 0.985322, -0.170708, 0, 0.170708, 0.985322, -0.000412464, -0.10503, 0.000673056)
+shape = SubResource("CapsuleShape3D_2afvx")
+
+[node name="Area3D" type="Area3D" parent="Sabai/Node/BOLVANSABAI/Nizjopa/Rightleg/RightLegUp" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sabai/Node/BOLVANSABAI/Nizjopa/Rightleg/RightLegUp/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 0.854939, -0.518728, 0, 0.518728, 0.854939, 0.105642, -0.0991561, -0.0379256)
+shape = SubResource("CapsuleShape3D_kpnt3")
+
+[node name="hvost" parent="Sabai/Node/BOLVANSABAI/Nizjopa" index="6"]
+transform = Transform3D(0.981627, 0, 0.190809, -0.0331336, 0.984808, 0.170458, -0.18791, -0.173648, 0.966714, 0, -0.151562, 0.134375)
+
+[node name="Area3D" type="Area3D" parent="Sabai/Node/BOLVANSABAI/Nizjopa/hvost/Tail" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sabai/Node/BOLVANSABAI/Nizjopa/hvost/Tail/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 0.847066, 0.531487, 0, -0.531487, 0.847066, 0.00458214, -0.111141, 0.0643525)
+shape = SubResource("BoxShape3D_6ohvh")
+
+[node name="toporlox1" parent="Sabai/Node/BOLVANSABAI/Verxa1/obmantopor" index="0"]
+transform = Transform3D(-0.978952, 0.168087, -0.115757, -0.159203, -0.274034, 0.948451, 0.127701, 0.946917, 0.295026, -0.198902, 0.517932, -0.423091)
+
+[node name="toporobman21" parent="Sabai/Node/BOLVANSABAI/Verxa1/obmantopor" index="1"]
+transform = Transform3D(-0.991443, -0.128729, 0.0216788, 0.0535968, -0.249982, 0.966766, -0.119031, 0.959655, 0.254742, 0.128696, 0.478387, -0.431969)
+
+[node name="leftarms" parent="Sabai/Node/BOLVANSABAI/Verxa1" index="14"]
+transform = Transform3D(1, 0, 0, 0, -0.45399, -0.891007, 0, 0.891007, -0.45399, -0.117188, 0.0203125, -0.203125)
+
+[node name="palchileft" parent="Sabai/Node/BOLVANSABAI/Verxa1/leftarms/leftarmsmid/Leftarmsladon" index="2"]
+transform = Transform3D(0.92388, 0.382683, 0, -0.382683, 0.92388, 0, 0, 0, 1, -0.015625, -0.026565, -0.0312475)
+
+[node name="palchileft0" parent="Sabai/Node/BOLVANSABAI/Verxa1/leftarms/leftarmsmid/Leftarmsladon" index="3"]
+transform = Transform3D(0.707107, 0.653282, 0.270598, -0.707107, 0.653282, 0.270598, -1.49012e-08, -0.382683, 0.92388, -0.0125, -0.04219, -0.0124975)
+
+[node name="rightarms" parent="Sabai/Node/BOLVANSABAI/Verxa1" index="15"]
+transform = Transform3D(1, 0, 0, 0, -0.173648, -0.984808, 0, 0.984808, -0.173648, 0.117188, 0.020315, -0.203128)
+
+[node name="palchiright1" parent="Sabai/Node/BOLVANSABAI/Verxa1/rightarms/rightarsmid/rightarmsladon" index="2"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0.0125, -0.042185, -0.01419)
+
+[node name="palchiright0" parent="Sabai/Node/BOLVANSABAI/Verxa1/rightarms/rightarsmid/rightarmsladon" index="3"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0.015625, -0.02656, -0.0312525)
+
+[node name="Rightarm" parent="Sabai/Node/BOLVANSABAI/Verxa1" index="16"]
+transform = Transform3D(0.951056, 0.298488, -0.0799796, 0.246792, -0.889428, -0.384723, -0.185971, 0.346155, -0.91956, 0.243725, 0.177278, -0.214465)
+
+[node name="rightpalez3" parent="Sabai/Node/BOLVANSABAI/Verxa1/Rightarm/rightarmmid2/rightarmladon" index="1"]
+transform = Transform3D(0.688355, 0.725374, 0, -0.725374, 0.688355, 0, 0, 0, 1, -0.0118456, -0.0452675, 0.0272569)
+
+[node name="rightpalez2" parent="Sabai/Node/BOLVANSABAI/Verxa1/Rightarm/rightarmmid2/rightarmladon" index="2"]
+transform = Transform3D(0.838671, -0.544639, 0, 0.544639, 0.838671, 0, 0, 0, 1, 0.0330056, -0.0412356, 0.0216769)
+
+[node name="rightpalez1" parent="Sabai/Node/BOLVANSABAI/Verxa1/Rightarm/rightarmmid2/rightarmladon" index="3"]
+transform = Transform3D(0.782608, -0.622515, 0, 0.622515, 0.782608, 0, 0, 0, 1, 0.0310944, -0.0400125, -0.0208212)
+
+[node name="topor1" parent="Sabai/Node/BOLVANSABAI/Verxa1/Rightarm/rightarmmid2" index="2"]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, -0.0476357, 0.0182669, -0.210364)
+
+[node name="Area3D" type="Area3D" parent="Sabai/Node/BOLVANSABAI/Verxa1/Rightarm/rightarmmid2/RightArmDown" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sabai/Node/BOLVANSABAI/Verxa1/Rightarm/rightarmmid2/RightArmDown/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 0.93688, -0.349651, 0, 0.349651, 0.93688, 0.00996178, -0.189984, -0.0535056)
+shape = SubResource("CapsuleShape3D_6ohvh")
+
+[node name="Area3D" type="Area3D" parent="Sabai/Node/BOLVANSABAI/Verxa1/Rightarm/RightArmTop" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sabai/Node/BOLVANSABAI/Verxa1/Rightarm/RightArmTop/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0610664, -0.0816481, -0.0207061)
+shape = SubResource("CapsuleShape3D_5ownw")
+
+[node name="Leftarm" parent="Sabai/Node/BOLVANSABAI/Verxa1" index="17"]
+transform = Transform3D(1, 0, 0, 0, -0.990268, -0.139173, 0, 0.139173, -0.990268, -0.243726, 0.177276, -0.214466)
+
+[node name="leftpalez3" parent="Sabai/Node/BOLVANSABAI/Verxa1/Leftarm/leftarmmid2/leftarmladon" index="1"]
+transform = Transform3D(0.727266, -0.66542, 0.168225, 0.636313, 0.745548, 0.198152, -0.257274, -0.0370654, 0.965627, 0.0118425, -0.0452694, 0.0272588)
+
+[node name="leftpalez2" parent="Sabai/Node/BOLVANSABAI/Verxa1/Leftarm/leftarmmid2/leftarmladon" index="2"]
+transform = Transform3D(0.823954, 0.562886, 0.0652605, -0.566534, 0.815899, 0.115533, 0.0117859, -0.132166, 0.991158, -0.0330069, -0.0537388, 0.0216787)
+
+[node name="leftpalez1" parent="Sabai/Node/BOLVANSABAI/Verxa1/Leftarm/leftarmmid2/leftarmladon" index="3"]
+transform = Transform3D(0.75471, 0.656059, 0, -0.656059, 0.75471, 0, 0, 0, 1, -0.0248469, -0.0525106, -0.0208194)
+
+[node name="topor2" parent="Sabai/Node/BOLVANSABAI/Verxa1/Leftarm/leftarmmid2" index="2"]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0.170434, 0.0744062, -0.202874)
+
+[node name="verxa" parent="Sabai/Node/BOLVANSABAI/Verxa1/Leftarm/leftarmmid2/topor2" index="4"]
+transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0.0498681, 0.261342, -0.0181206)
+
+[node name="Area3D" type="Area3D" parent="Sabai/Node/BOLVANSABAI/Verxa1/Leftarm/leftarmmid2/LeftArmDown" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sabai/Node/BOLVANSABAI/Verxa1/Leftarm/leftarmmid2/LeftArmDown/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 0.950646, -0.310278, 0, 0.310278, 0.950646, -0.0284589, -0.207631, -0.0590236)
+shape = SubResource("CapsuleShape3D_v0ldv")
+
+[node name="Area3D" type="Area3D" parent="Sabai/Node/BOLVANSABAI/Verxa1/Leftarm/LeftArmTop" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sabai/Node/BOLVANSABAI/Verxa1/Leftarm/LeftArmTop/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0719158, -0.0704654, -0.0332484)
+shape = SubResource("CapsuleShape3D_v1mio")
+
+[node name="golova" parent="Sabai/Node/BOLVANSABAI/Verxa1" index="18"]
+transform = Transform3D(0.848048, 0.513614, 0.130441, -0.529919, 0.821954, 0.20875, -7.45058e-09, -0.246153, 0.969231, 0, 0.138571, -0.411624)
+
+[node name="Area3D" type="Area3D" parent="Sabai/Node/BOLVANSABAI/Verxa1/golova/Head" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sabai/Node/BOLVANSABAI/Verxa1/golova/Head/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.000954926, -0.0956351)
+shape = SubResource("CapsuleShape3D_t8uym")
+
+[node name="Area3D" type="Area3D" parent="Sabai/Node/BOLVANSABAI/Verxa1/Torso" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sabai/Node/BOLVANSABAI/Verxa1/Torso/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 0.949666, 0.313263, 0, -0.313263, 0.949666, 0, 0.0580524, -0.0923357)
+shape = SubResource("CapsuleShape3D_t77eu")
+
+[node name="portal" parent="Sabai/Node" index="1"]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.65625, 0.625)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.591663, 0.0355517)
+visible = false
+shape = SubResource("CapsuleShape3D_ir4xo")
+
+[editable path="Sabai"]

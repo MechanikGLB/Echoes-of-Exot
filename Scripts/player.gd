@@ -9,9 +9,11 @@ const SENS = 0.002
 const HIT_STAGGER = 1.0
 const RESPAWN_DELAY = 5.0
 
+#player prefs
 var health = 100
 var score = 0
 var is_alive = true
+var team = 0
 
 #respawning
 var respawn_position = Vector3.ZERO
@@ -37,7 +39,7 @@ var instance
 
 enum weapons {
 	PRIMARY,
-	SECONDARY
+	SECONDARY,
 }
 var weapon = weapons.PRIMARY
 var can_shoot = true
@@ -100,6 +102,10 @@ func _process(delta: float):
 func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("ui_cancel"):
+		if (Input.mouse_mode == Input.MOUSE_MODE_VISIBLE) or (ingame_menu.visible == true):
+			ingame_menu.visible = false
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			return
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		ingame_menu.visible = true
 	# Add the gravity.

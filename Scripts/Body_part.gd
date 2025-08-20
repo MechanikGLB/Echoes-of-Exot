@@ -1,6 +1,6 @@
 extends Area3D
 
-@export var damage := 1
+@export var damage_mult := 1
 
 signal body_part_hit(dmg)
 
@@ -14,4 +14,4 @@ func _process(delta: float) -> void:
 	pass
 
 func hit(dmg):
-	emit_signal("body_part_hit", damage * dmg)
+	emit_signal("body_part_hit", damage_mult * dmg)

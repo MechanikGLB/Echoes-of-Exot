@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://8weoaa4dq1hn"]
+
+[ext_resource type="PackedScene" uid="uid://i8voqwyhg3tk" path="res://Scenes/Characters/Drake/Drake.glb" id="1_17dl3"]
+
+[node name="Drake" instance=ExtResource("1_17dl3")]
+
+[node name="LeftLegDown" type="Marker3D" parent="Node/Bolvan/jopa/Legleft/goleni" index="2"]
+
+[node name="LeftLegTop" type="Marker3D" parent="Node/Bolvan/jopa/Legleft" index="4"]
+
+[node name="RightLegDown" type="Marker3D" parent="Node/Bolvan/jopa/legright/goleni2" index="2"]
+
+[node name="RightLegTop" type="Marker3D" parent="Node/Bolvan/jopa/legright" index="6"]
+
+[node name="LeftArmDown" type="Marker3D" parent="Node/Bolvan/grudverx/leftarm/nizu" index="3"]
+
+[node name="LeftArmTop" type="Marker3D" parent="Node/Bolvan/grudverx/leftarm" index="4"]
+
+[node name="RightArmDown" type="Marker3D" parent="Node/Bolvan/grudverx/rightarm/verx" index="2"]
+
+[node name="RightArmTop" type="Marker3D" parent="Node/Bolvan/grudverx/rightarm" index="4"]
+
+[node name="Head" type="Marker3D" parent="Node/Bolvan/grudverx/Golova2" index="6"]
+
+[node name="Torso" type="Marker3D" parent="Node/Bolvan/grudverx" index="10"]
