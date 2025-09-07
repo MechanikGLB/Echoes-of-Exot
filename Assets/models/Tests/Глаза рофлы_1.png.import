@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctt46wrydll1p"
-path.s3tc="res://.godot/imported/texture_09.png-ea39053268d22fa7355850c5239a9bcb.s3tc.ctex"
+uid="uid://ccgv54gv2a86y"
+path.s3tc="res://.godot/imported/Глаза рофлы_1.png-154387b10c216f33f423dc48027b6975.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "a06da485bed8cb7ee48ebb1dba7548ea"
+}
 
 [deps]
 
-source_file="res://Assets/textures/Grids/Dark/texture_09.png"
-dest_files=["res://.godot/imported/texture_09.png-ea39053268d22fa7355850c5239a9bcb.s3tc.ctex"]
+source_file="res://Assets/models/Tests/Глаза рофлы_1.png"
+dest_files=["res://.godot/imported/Глаза рофлы_1.png-154387b10c216f33f423dc48027b6975.s3tc.ctex"]
 
 [params]
 

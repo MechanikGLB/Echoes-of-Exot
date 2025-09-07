@@ -1,6 +1,6 @@
 extends Area3D
 
-@export var damage_mult := 1
+@export var damage_mult := 1.0
 
 signal body_part_hit(dmg)
 

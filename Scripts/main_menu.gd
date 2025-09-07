@@ -75,10 +75,6 @@ func _on_map_button_pressed(map_name: String):
 	if loaded_scene:
 		get_tree().change_scene_to_packed(loaded_scene)
 	
-	
-func character_scan():
-	pass
-
 
 func _on_play_pressed() -> void:
 	map_refresh()

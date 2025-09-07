@@ -1,11 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://1ho2nhyw7o35"]
+[gd_scene load_steps=9 format=3 uid="uid://1ho2nhyw7o35"]
 
-[ext_resource type="PackedScene" uid="uid://du8gvm5iya7l1" path="res://Scenes/Characters/Drake/drake.tscn" id="1_4iwmu"]
+[ext_resource type="Theme" uid="uid://sg5jbmg5jpaq" path="res://Assets/styles/def_blue.tres" id="1_3gqe6"]
+[ext_resource type="Script" uid="uid://bf2v4cl4drvbp" path="res://UI/character_selection.gd" id="1_is55k"]
+[ext_resource type="Texture2D" uid="uid://kjovufv2v1xs" path="res://Assets/textures/Grids/Dark/texture_04.png" id="3_hhfm1"]
+[ext_resource type="Texture2D" uid="uid://ujbbd3upruv7" path="res://Assets/textures/brick-wall-background-texture.jpg" id="3_is55k"]
+[ext_resource type="Texture2D" uid="uid://cwbr0tysurafd" path="res://Assets/textures/medieval_red_brick_disp_4k.png" id="4_4kxt3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4kxt3"]
+albedo_color = Color(1, 1, 1, 0.933333)
+albedo_texture = ExtResource("3_hhfm1")
+uv1_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6rr0r"]
-albedo_color = Color(0.32, 0.32, 0.32, 1)
+albedo_texture = ExtResource("3_is55k")
+metallic_specular = 0.38
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hhfm1"]
+albedo_color = Color(0.1925, 0.430833, 0.55, 1)
+albedo_texture = ExtResource("4_4kxt3")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 0.721374
 
 [node name="Character_Selection" type="Node3D"]
+script = ExtResource("1_is55k")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -15,29 +34,88 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 1138.0
-offset_top = 620.0
-offset_right = 1396.0
-offset_bottom = 682.0
-text = "Button
-"
+[node name="Panel" type="Panel" parent="Control"]
+self_modulate = Color(1, 1, 1, 0.639216)
+clip_contents = true
+custom_minimum_size = Vector2(700, 500)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.93
+anchor_top = 0.5
+anchor_right = 0.95
+anchor_bottom = 0.5
+grow_horizontal = 0
+grow_vertical = 2
 
-[node name="Button2" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 1138.0
-offset_top = 297.0
-offset_right = 1396.0
-offset_bottom = 359.0
-text = "Button
-"
+[node name="MarginContainer" type="MarginContainer" parent="Control/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_3gqe6")
+theme_override_font_sizes/font_size = 40
+text = "Character Select"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="Control/Panel/MarginContainer/VBoxContainer"]
+self_modulate = Color(0, 0, 0, 0.333333)
+custom_minimum_size = Vector2(550, 350)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="Control/Panel/MarginContainer/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="Button" type="Button" parent="Control/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 6
+theme = ExtResource("1_3gqe6")
+theme_override_font_sizes/font_size = 40
+text = "return"
+
+[node name="Button2" type="Button" parent="Control/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 6
+theme = ExtResource("1_3gqe6")
+theme_override_font_sizes/font_size = 40
+text = "CONFIRM"
 
 [node name="Scene" type="Node3D" parent="."]
 
 [node name="Floor" type="CSGBox3D" parent="Scene"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.0105896, -0.338379, -2)
 size = Vector3(27.0338, 0.323242, 13)
+material = SubResource("StandardMaterial3D_4kxt3")
 
 [node name="Plate" type="CSGCylinder3D" parent="Scene/Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.277248, 0.0983949, 0.714521)
@@ -48,15 +126,23 @@ material = SubResource("StandardMaterial3D_6rr0r")
 [node name="Show_plate" type="Node3D" parent="Scene/Floor/Plate"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.340707, 0)
 
-[node name="Drake" parent="Scene/Floor/Plate/Show_plate" instance=ExtResource("1_4iwmu")]
-
 [node name="BG" type="CSGBox3D" parent="Scene/Floor"]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.204323, 6.01098, 5.82575)
 size = Vector3(22.6991, 0.738281, 12)
+material = SubResource("StandardMaterial3D_hhfm1")
 
 [node name="Camera3D" type="Camera3D" parent="Scene"]
-transform = Transform3D(0.984128, 0.0677603, -0.164017, -0.0468993, 0.990681, 0.127877, 0.171153, -0.118155, 0.978134, -0.106856, 0.98705, -0.923387)
-fov = 58.6172
+transform = Transform3D(0.984128, 0.0677603, -0.164016, -0.0355807, 0.980806, 0.191711, 0.173859, -0.182833, 0.967649, -0.106856, 0.98705, -0.923387)
+fov = 55.7
+near = 0.005
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Scene"]
 transform = Transform3D(0.714131, 0, -0.700012, 0.369426, 0.849405, 0.376877, 0.594594, -0.527742, 0.606586, -6.63724, 7.6306, 4.15369)
+light_energy = 0.342
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Scene"]
+transform = Transform3D(0.977016, -0.0593001, 0.204752, -0.0258234, 0.920528, 0.389823, -0.211597, -0.386151, 0.897839, 0.700003, 3.51291, 2.90768)
+light_energy = 12.347
+light_indirect_energy = 3.338
+spot_range = 8.97496
+spot_angle = 13.619

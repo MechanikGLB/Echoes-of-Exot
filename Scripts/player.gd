@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-var speed = WALK_SPEED
+@export var speed = WALK_SPEED
 const WALK_SPEED = 5.0
 const SPRINT = 10.0
 const JUMP_VELOCITY = 5.5
@@ -10,10 +10,12 @@ const HIT_STAGGER = 1.0
 const RESPAWN_DELAY = 5.0
 
 #player prefs
-var health = 100
+@export var health = 100
 var score = 0
 var is_alive = true
+
 var team = 0
+var friendly_fire = 0
 
 #respawning
 var respawn_position = Vector3.ZERO
@@ -216,6 +218,21 @@ func _respawn():
 	set_process_unhandled_input(true)
 	
 	is_alive = true
+
+func _main_attack(): #ЛКМ, атака
+	pass
+
+func _secondary_attack(): #ПКМ, способность
+	pass
+
+func _abil_ultimate(): # E? ульта
+	pass
+
+func _abil_movement(): # Shift, перемещение, особое
+	pass
+
+func _abil_secondary(): # Q, кьюшка, дополнительная способность
+	pass
 
 func _shoot_Gun():
 	if !gun_anim.is_playing():

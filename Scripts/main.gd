@@ -5,6 +5,9 @@ extends Node3D
 
 @export var player_path: NodePath = "^Player"
 
+@onready var eye = $Map/NavigationRegion3D/mapbox/GLAZ/AnimationPlayer
+@onready var eye2 = $Map/NavigationRegion3D/mapbox/GLAZ2/AnimationPlayer
+
 # Отложенная инициализация
 var hit_rect: ColorRect
 var hitmarker: Control
@@ -14,6 +17,8 @@ var instance
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	eye.play(&"eyeanimantion1")
+	eye2.play(&"eyeanimantion1")
 	 # Инициализация узлов с проверкой
 	player = get_node_or_null(player_path)
 	if player:
