@@ -165,6 +165,11 @@ func _physics_process(delta: float) -> void:
 				_shoot_Gun()
 			weapons.SECONDARY:
 				_shoot_auto()
+	if Input.is_action_pressed(&"cursor"):
+		_unlock_cursor(true)
+		
+	if Input.is_action_just_released(&"cursor"):
+		_unlock_cursor(false)
 	
 	if Input.is_action_just_pressed(&"primary") and weapon != weapons.PRIMARY:
 		_raise_weapon(weapons.PRIMARY)
@@ -233,6 +238,13 @@ func _abil_movement(): # Shift, перемещение, особое
 
 func _abil_secondary(): # Q, кьюшка, дополнительная способность
 	pass
+
+func _unlock_cursor(is_locked):
+	if is_locked:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
 
 func _shoot_Gun():
 	if !gun_anim.is_playing():

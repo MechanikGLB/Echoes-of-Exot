@@ -57,9 +57,6 @@ height = 1.18163
 [node name="BOLVANSABAI" parent="Sabai/Node" index="0"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1, 0.578429, 0.0987962)
 
-[node name="Nizjopa" parent="Sabai/Node/BOLVANSABAI" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.028125, 0.125)
-
 [node name="Leftleg" parent="Sabai/Node/BOLVANSABAI/Nizjopa" index="4"]
 transform = Transform3D(0.865017, 0.499482, -0.0475723, -0.50174, 0.860793, -0.0854004, -0.00170609, 0.0977417, 0.99521, -0.0921875, -0.084375, 0)
 
@@ -119,9 +116,6 @@ script = ExtResource("2_5ownw")
 transform = Transform3D(1, 0, 0, 0, 0.847066, 0.531487, 0, -0.531487, 0.847066, 0.00458214, -0.111141, 0.0643525)
 shape = SubResource("BoxShape3D_6ohvh")
 
-[node name="Verxa1" parent="Sabai/Node/BOLVANSABAI" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0984375, 0.140625)
-
 [node name="toporlox1" parent="Sabai/Node/BOLVANSABAI/Verxa1/obmantopor" index="0"]
 transform = Transform3D(-0.984808, 0.173648, 8.94075e-08, -0.0241672, -0.13706, 0.990268, 0.171958, 0.975224, 0.139174, -0.179527, 0.468557, -0.423091)
 
@@ -131,20 +125,8 @@ transform = Transform3D(-0.991445, -0.130527, 4.47034e-08, 0.0113761, -0.0864098
 [node name="leftarms" parent="Sabai/Node/BOLVANSABAI/Verxa1" index="14"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.117188, 0.0203125, -0.203125)
 
-[node name="leftarmsmid" parent="Sabai/Node/BOLVANSABAI/Verxa1/leftarms" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0296875, -0.153125, 0.04375)
-
-[node name="Leftarmsladon" parent="Sabai/Node/BOLVANSABAI/Verxa1/leftarms/leftarmsmid" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0171875, -0.18281, -0.0718775)
-
 [node name="rightarms" parent="Sabai/Node/BOLVANSABAI/Verxa1" index="15"]
 transform = Transform3D(1, 0, 0, 0, 0.21644, -0.976296, 0, 0.976296, 0.21644, 0.117188, 0.020315, -0.203128)
-
-[node name="rightarsmid" parent="Sabai/Node/BOLVANSABAI/Verxa1/rightarms" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0296875, -0.153125, 0.04375)
-
-[node name="rightarmsladon" parent="Sabai/Node/BOLVANSABAI/Verxa1/rightarms/rightarsmid" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0171875, -0.182815, -0.0718725)
 
 [node name="Rightarm" parent="Sabai/Node/BOLVANSABAI/Verxa1" index="16"]
 transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 1, 0.243725, 0.177278, -0.214465)
