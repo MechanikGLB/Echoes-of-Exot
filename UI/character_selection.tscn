@@ -94,7 +94,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 
-[node name="Button" type="Button" parent="Control/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="return" type="Button" parent="Control/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 6
@@ -102,7 +102,7 @@ theme = ExtResource("1_3gqe6")
 theme_override_font_sizes/font_size = 40
 text = "return"
 
-[node name="Button2" type="Button" parent="Control/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="confirm" type="Button" parent="Control/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 6
@@ -114,6 +114,7 @@ text = "CONFIRM"
 
 [node name="Floor" type="CSGBox3D" parent="Scene"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.0105896, -0.338379, -2)
+use_collision = true
 size = Vector3(27.0338, 0.323242, 13)
 material = SubResource("StandardMaterial3D_4kxt3")
 
@@ -146,3 +147,6 @@ light_energy = 12.347
 light_indirect_energy = 3.338
 spot_range = 8.97496
 spot_angle = 13.619
+
+[connection signal="pressed" from="Control/Panel/MarginContainer/VBoxContainer/HBoxContainer/return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="Control/Panel/MarginContainer/VBoxContainer/HBoxContainer/confirm" to="." method="_on_confirm_pressed"]

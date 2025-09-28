@@ -320,6 +320,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -0.400002)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 0.754641, 0.656138, 0, -0.656138, 0.754641, 0.361055, 29.0595, 55.374)
+far = 100.34
 
 [node name="Menu" type="Control" parent="."]
 layout_mode = 3

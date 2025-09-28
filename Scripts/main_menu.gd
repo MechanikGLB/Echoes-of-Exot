@@ -50,31 +50,60 @@ func map_refresh():
 		mapGrid.add_child(button)
 
 	
+# Упрощенный вариант (рекомендуется)
 func _on_map_button_pressed(map_name: String):
 	print("Выбрана карта: ", map_name)
-	var map_path = "res://Scenes/Maps/%s.tscn" % map_name
-	# Асинхронная загрузка с обработкой ошибок
-	ResourceLoader.load_threaded_request(map_path)
+	var map_path = map_folder + map_name + ".tscn"
 	
-	var progress = []
-	var loaded_scene
+	# Загружаем и сохраняем карту в глобальные переменные
+	GlobalThings.selected_map = map_name + ".tscn"
+	GlobalThings.packed_map = load(map_path)
 	
-	while true:
-		var status = ResourceLoader.load_threaded_get_status(map_path, progress)
-		match status:
-			ResourceLoader.THREAD_LOAD_IN_PROGRESS:
-				print("Загрузка: ", progress[0] * 100, "%")
-				await get_tree().create_timer(0.1).timeout
-			ResourceLoader.THREAD_LOAD_LOADED:
-				loaded_scene = ResourceLoader.load_threaded_get(map_path)
-				break
-			ResourceLoader.THREAD_LOAD_FAILED:
-				push_error("Ошибка загрузки карты!")
-				return
+	if GlobalThings.packed_map:
+		print("Карта '", map_name, "' загружена в GlobalThings")
+		
+		# Переключаемся на сцену выбора персонажа
+		_switch_to_character_selection()
+	else:
+		push_error("Ошибка загрузки карты: " + map_path)
+		_show_load_error(map_path)
+
+func _switch_to_character_selection():
+	var character_selection_path = "res://UI/character_selection.tscn"
+	var character_scene = load(character_selection_path)
 	
-	if loaded_scene:
-		get_tree().change_scene_to_packed(loaded_scene)
+	if character_scene:
+		get_tree().change_scene_to_packed(character_scene)
+	else:
+		# Fallback: попробуем альтернативный путь
+		character_selection_path = "res://Scenes/character_selection.tscn"
+		character_scene = load(character_selection_path)
+		
+		if character_scene:
+			get_tree().change_scene_to_packed(character_scene)
+		else:
+			push_error("Сцена выбора персонажа не найдена!")
+			# Можно показать сообщение об ошибке или вернуться в меню
+			show_menu()
 	
+func _show_load_error(map_path: String):
+	print("Не удалось загрузить карту: ", map_path)
+	
+func show_menu():
+	menu.visible = true
+	mselection.visible = false
+	settings.visible = false
+
+func show_map_selection():
+	menu.visible = false
+	mselection.visible = true
+	settings.visible = false
+
+func show_settings():
+	menu.visible = false
+	mselection.visible = false
+	settings.visible = true
+
 
 func _on_play_pressed() -> void:
 	map_refresh()

@@ -86,6 +86,20 @@ func char_refresh():
 func _on_character_button_pressed(character_file: String):
 	print("Выбран персонаж: ", character_file)
 	
+	var character_path = character_file
+	if not character_file.begins_with("res://Scenes/Characters/%s/" % character_file):
+		character_path = "res://Scenes/Characters/%s/" % character_file.trim_suffix(".tscn") + character_file
+	
+	var packed_scene = load(character_path) as PackedScene
+	
+	if packed_scene:
+		GlobalThings.selected_character = packed_scene
+		print("Персонаж успешно загружен: ", character_path)
+	else:
+		push_error("Не удалось загрузить сцену персонажа: " + character_path)
+		print("Не удалось загрузить сцену персонажа: " + character_path)
+		GlobalThings.selected_character = null
+	
 	if current_character_instance:
 		current_character_instance.queue_free()
 		current_character_instance = null
@@ -117,3 +131,17 @@ func _on_character_button_pressed(character_file: String):
 			print("AnimationPlayer не найден по пути: ", character_name + "/AnimationPlayer")
 	else:
 		print("Ошибка загрузки сцены")
+
+
+func _on_return_pressed() -> void:
+	var main_menu_path = "res://Scenes/main_menu.tscn"
+	var menu_scene = load(main_menu_path)
+	
+	if menu_scene:
+		get_tree().change_scene_to_packed(menu_scene)
+	else:
+		push_error("Сцена выбора персонажа не найдена!")
+
+
+func _on_confirm_pressed() -> void:
+	pass # Replace with function body.

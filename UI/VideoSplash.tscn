@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2yftybjwa5xl"]
+
+[ext_resource type="Script" uid="uid://c3l644c03t7u7" path="res://UI/video_splash.gd" id="1_mb1nc"]
+
+[sub_resource type="VideoStreamTheora" id="VideoStreamTheora_mb1nc"]
+file = "res://Assets/intros/output.ogv"
+
+[node name="VideoSplash" type="CanvasLayer"]
+script = ExtResource("1_mb1nc")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = SubResource("VideoStreamTheora_mb1nc")
+autoplay = true
+buffering_msec = 1000
+
+[connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://d2vg56toruvx"]
 
-[ext_resource type="PackedScene" uid="uid://bxxedm4tjgvwg" path="res://Scenes/fps_player.tscn" id="1_0vwec"]
+[ext_resource type="PackedScene" uid="uid://bxxedm4tjgvwg" path="res://Scenes/Characters/Hatter/Hatter.tscn" id="1_0vwec"]
 [ext_resource type="PackedScene" uid="uid://br8krfognc3t1" path="res://UI/ui.tscn" id="2_etf21"]
 [ext_resource type="MeshLibrary" uid="uid://rpv6js01igyw" path="res://Assets/tileset_1.tres" id="3_xvqmy"]
 [ext_resource type="PackedScene" uid="uid://dy11piuwcbr6j" path="res://Assets/models/Podsvech/podsvech.tscn" id="4_etf21"]

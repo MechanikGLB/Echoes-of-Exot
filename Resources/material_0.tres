@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b3pwv2c7psu43"]
+
+[ext_resource type="Texture2D" uid="uid://gdyon3psybal" path="res://Assets/models/Tests/Молодой некромант1_0.png" id="1_p6lc0"]
+
+[resource]
+resource_name = "material_0"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("1_p6lc0")
+texture_filter = 0
+texture_repeat = false

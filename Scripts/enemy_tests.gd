@@ -5,6 +5,7 @@ var state_machine
 var health = 100
 var alive = true
 
+const SEE_RANGE = 90.0
 const SPEED = 4.0
 const ATTACK_RANGE = 2
 const ZOMBIE_DMG = 5
@@ -26,11 +27,12 @@ func _process(delta: float) -> void:
 	
 	match state_machine.get_current_node():
 		"Run":
-			nav_agent.set_target_position(player.global_transform.origin)
-			var next_nav_point = nav_agent.get_next_path_position()
-			velocity = (next_nav_point - global_transform.origin).normalized() * SPEED
-			
-			rotation.y = lerp_angle(rotation.y, atan2(-velocity.x, -velocity.z), delta * 10.0)
+			if global_transform.origin.distance_to(player.global_transform.origin) <= SEE_RANGE:
+				nav_agent.set_target_position(player.global_transform.origin)
+				var next_nav_point = nav_agent.get_next_path_position()
+				velocity = (next_nav_point - global_transform.origin).normalized() * SPEED
+				
+				rotation.y = lerp_angle(rotation.y, atan2(-velocity.x, -velocity.z), delta * 10.0)
 		
 		"Attack":
 			look_at(Vector3(player.global_position.x, global_position.y, player.global_position.z),Vector3.UP)

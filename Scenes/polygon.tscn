@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://h18xxd2grsy1"]
+
+[ext_resource type="Texture2D" uid="uid://cqnlmpkefdhw5" path="res://Assets/textures/Grids/Light/texture_02.png" id="1_esc0f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ysxom"]
+albedo_texture = ExtResource("1_esc0f")
+uv1_triplanar = true
+
+[node name="polygon" type="Node3D"]
+
+[node name="Map" type="Node3D" parent="."]
+
+[node name="meshes" type="Node3D" parent="Map"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Map/meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.062, -2.896)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(50, 1, 50)
+material = SubResource("StandardMaterial3D_ysxom")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Map/meshes"]
+transform = Transform3D(1, 0, 0, 0, 0.83905053, -0.54405344, 0, 0.54405344, 0.83905053, 0, 12.359609, 30.236954)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(50, 1, 20.284668)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Map/meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.259, 32.709)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(50, 1, 50)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Map/meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 20, 16.189)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(1, 40, 100)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Map/meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 20, 16.189)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(1, 40, 100)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Map/meshes"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 20, -25.533527)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(1, 40, 50)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Map/meshes"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 20, 57.52744)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(1, 40, 50)

@@ -1,6 +1,7 @@
 [gd_resource type="ArrayMesh" load_steps=2 format=4 uid="uid://bkfc413ngi33g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l5xpk"]
+albedo_color = Color(0.099999905, 0, 1, 1)
 
 [resource]
 resource_name = "BuddyZomb_Character_Cube_025mesh"

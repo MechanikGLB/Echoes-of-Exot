@@ -1,0 +1,120 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhagaklftk4y6"]
+
+[ext_resource type="PackedScene" uid="uid://bi62to61fibt" path="res://Assets/models/Tests/Молодой некромант1.gltf" id="1_1522c"]
+
+[node name="blockbench_export" instance=ExtResource("1_1522c")]
+
+[node name="nekro" parent="Node" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.0375)
+
+[node name="shar" parent="Node/nekro/platie" index="1"]
+transform = Transform3D(0.9664979, 0.30800956, 0, -0.25667462, 1.1597975, 0, 0, 0, 1, 0, 0.09365, -0.0264)
+
+[node name="grud" parent="Node/nekro/platie" index="2"]
+transform = Transform3D(0.99984825, 0, 0.017419104, 0, 1, 0, -0.017419104, 0, 0.99984825, 0, 0.14910562, -0.048614375)
+
+[node name="rightarm" parent="Node/nekro/platie/grud/osarms" index="0"]
+transform = Transform3D(0.09631059, -0.54710686, -0.83150405, 0.123271994, 0.83551216, -0.5354661, 0.987688, -0.050930098, 0.14791171, 0.18127938, -0.0023958262, 0.03201125)
+
+[node name="middlearmright" parent="Node/nekro/platie/grud/osarms/rightarm" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.55919296, -0.82903796, 0, 0.82903796, 0.55919296, 9.25e-05, -0.49943814, -0.002429375)
+
+[node name="sphere7" parent="Node/nekro/platie/grud/osarms/rightarm/middlearmright" index="1"]
+transform = Transform3D(0.9999951, -0.0031223912, 0, 0.0031223912, 0.9999951, 0, 0, 0, 1, -0.00412, 0.003601875, -0.017385218)
+
+[node name="posoh" parent="Node/nekro/platie/grud/osarms/rightarm/middlearmright/handuis" index="2"]
+transform = Transform3D(-0.06975648, 2.9336668e-08, 0.9975641, -0.9974119, -0.01745242, -0.06974587, 0.017409898, -0.99984795, 0.0012174487, -0.02878375, -0.09979188, 0.034655623)
+
+[node name="eyesss" parent="Node/nekro/platie/grud/osarms/rightarm/middlearmright/handuis/posoh" index="2"]
+transform = Transform3D(0.7986355, -0.15576118, 0.58130866, -0.3365307, 0.68520254, 0.6459448, -0.49892727, -0.7115026, 0.4948086, -0.00107625, 0.8058175, -0.000238125)
+
+[node name="leftarm" parent="Node/nekro/platie/grud/osarms" index="1"]
+transform = Transform3D(0.16808543, 0.25591183, -0.95197505, -0.86421096, 0.5028283, -0.017418057, 0.4742225, 0.82563496, 0.30567986, -0.18489812, -0.002515625, 0.031786874)
+
+[node name="cuboid16" parent="Node/nekro/platie/grud/osarms/leftarm" index="0"]
+transparency = 0.01
+
+[node name="middleleftarm" parent="Node/nekro/platie/grud/osarms/leftarm" index="1"]
+transform = Transform3D(2.6147351, 0.39039832, 0.29741013, -0.6620478, 1.0480187, -0.8517164, -0.7515666, 0.4350243, 1.7849724, -9.375e-05, -0.4994375, -0.00220625)
+
+[node name="sphere22" parent="Node/nekro/platie/grud/osarms/leftarm/middleleftarm" index="1"]
+transform = Transform3D(0.9944456, 0, -0.105251744, 0, 1, 0, 0.105251744, 0, 0.9944456, 0.00411875, 0.003601875, 0.007609375)
+
+[node name="hand1" parent="Node/nekro/platie/grud/osarms/leftarm/middleleftarm" index="2"]
+transform = Transform3D(0.8363782, -0.45571983, 0.30461586, 0.23090401, 0.79691035, 0.5582268, -0.49714655, -0.39655173, 0.77174604, 0.0065615373, -0.47904256, -0.12143179)
+
+[node name="ukaz" parent="Node/nekro/platie/grud/osarms/leftarm/middleleftarm/hand1" index="1"]
+transform = Transform3D(0.95604247, -0.26131916, 0.15962733, 0.01703894, 0.5023913, 1.0373671, -0.29273272, -0.8242059, 0.581712, -0.036885627, 0.000635, -0.11288188)
+
+[node name="bone4" parent="Node/nekro/platie/grud/osarms/leftarm/middleleftarm/hand1/ukaz" index="1"]
+transform = Transform3D(1, 0, 0, 0, -0.13917324, -0.9902684, 0, 0.9902684, -0.13917324, 0.000676875, 0.00507812, -0.0773837)
+
+[node name="big" parent="Node/nekro/platie/grud/osarms/leftarm/middleleftarm/hand1" index="2"]
+transform = Transform3D(0.6427877, 0.7625177, 0.08810594, -5.960424e-08, 0.09584517, -1.1944755, -0.7660444, 0.63982844, 0.07392977, -0.035136875, -0.00350875, -0.039404374)
+
+[node name="bone3" parent="Node/nekro/platie/grud/osarms/leftarm/middleleftarm/hand1/big" index="1"]
+transform = Transform3D(0.48480964, 0, -0.8746201, 0.04577406, 0.9986299, 0.025372984, 0.8734211, -0.052335978, 0.4841454, -0.0250569, 0.0016925, -0.03937)
+
+[node name="fucj" parent="Node/nekro/platie/grud/osarms/leftarm/middleleftarm/hand1" index="3"]
+transform = Transform3D(0.9735812, -0.13727002, 0.21896815, -0.09537112, 0.48163196, 1.0454025, -0.20747042, -0.86555624, 0.54697955, -0.00744625, 0.00097375, -0.11056875)
+
+[node name="bone5" parent="Node/nekro/platie/grud/osarms/leftarm/middleleftarm/hand1/fucj" index="1"]
+transform = Transform3D(1, 0, 0, 0, -0.24192181, -0.970296, 0, 0.970296, -0.24192181, 0, 0.00473937, -0.0874644)
+
+[node name="noname" parent="Node/nekro/platie/grud/osarms/leftarm/middleleftarm/hand1" index="4"]
+transform = Transform3D(0.9465945, 0.25110763, 0.22247161, -0.30826423, 0.52096856, 0.87556475, 0.09450933, -0.81580436, 0.62760884, 0.017720625, 0.000804375, -0.117675625)
+
+[node name="bone6" parent="Node/nekro/platie/grud/osarms/leftarm/middleleftarm/hand1/noname" index="1"]
+transform = Transform3D(1, 0, 0, 0, -0.29237184, -1.2431961, 0, 0.9563047, -0.38008338, 0, 0.00457, -0.0750931)
+
+[node name="mizin" parent="Node/nekro/platie/grud/osarms/leftarm/middleleftarm/hand1" index="5"]
+transform = Transform3D(0.89879405, 0.40352273, 0.17128526, -0.35464966, 0.4396695, 0.82517534, 0.25766814, -0.802409, 0.53828156, 0.046229374, 0.0011425, -0.1105775)
+
+[node name="bone7" parent="Node/nekro/platie/grud/osarms/leftarm/middleleftarm/hand1/mizin" index="1"]
+transform = Transform3D(1, 0, 0, 0, -0.017452475, -0.99984795, 0, 0.99984795, -0.017452475, 0.00025375, 0.00423187, -0.0628038)
+
+[node name="head" parent="Node/nekro/platie/grud" index="10"]
+transform = Transform3D(0.99456215, 0.03563116, 0.097859174, -0.06777931, 0.93486893, 0.34846315, -0.07906931, -0.35320115, 0.9322004, 0, 0.32733312, -0.01559375)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Node/nekro/platie/grud/head/eyes/eye1/sphere11" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.129549, -0.136518)
+light_color = Color(0.3166, 0.36953, 1, 1)
+light_energy = 1.859
+light_indirect_energy = 3.577
+light_volumetric_fog_energy = 2.289
+
+[node name="svecha2" parent="Node/nekro/platie/grud/head/shapka" index="10"]
+transform = Transform3D(0.9945219, -0.10452845, 0, 0.10452845, 0.9945219, 0, 0, 0, 1, 0.056646876, 0.036385626, -0.06250625)
+
+[node name="svecha" parent="Node/nekro/platie/grud/head/shapka" index="11"]
+transform = Transform3D(0.9975641, -0.06975646, 0, 0.06975646, 0.9975641, 0, 0, 0, 1, -0.07552063, 0.048514374, -0.08334125)
+
+[node name="cheluga" parent="Node/nekro/platie/grud/head" index="5"]
+transform = Transform3D(1, 0, 0, 0, 0.98480767, -0.17364818, 0, 0.17364818, 0.98480767, 0, 0.02785125, -0.044595)
+
+[node name="book" parent="Node/nekro" index="2"]
+transform = Transform3D(0.9659258, -0.20395221, -0.1593449, 0.0778284, 0.816052, -0.5727145, 0.2468401, 0.5407982, 0.804119, 0.34852317, 0.3851838, -0.30939937)
+
+[node name="2st" parent="Node/nekro/book" index="1"]
+transform = Transform3D(0.9238795, -0.38268346, 0, 0.38268346, 0.9238795, 0, 0, 0, 1, 0.0253475, -0.005335625, 0)
+
+[node name="1st" parent="Node/nekro/book" index="2"]
+transform = Transform3D(0.95371693, 0.3007058, 0, -0.3007058, 0.95371693, 0, 0, 0, 1, 0.0128475, -0.00533875, 0)
+
+[node name="strani3" parent="Node/nekro/book/1st" index="2"]
+transform = Transform3D(-0.7372773, 0.6755902, 0, -0.6755902, -0.7372773, 0, 0, 0, 1, 0.00625, 0.02408875, 0)
+
+[node name="strani2" parent="Node/nekro/book/1st" index="3"]
+transform = Transform3D(-0.6755902, 0.7372773, 0, -0.7372773, -0.6755902, 0, 0, 0, 1, 0.00625, 0.02252625, 0)
+
+[node name="strani" parent="Node/nekro/book/1st" index="4"]
+transform = Transform3D(-0.54463905, 0.83867055, 0, -0.83867055, -0.54463905, 0, 0, 0, 1, 0.00625, 0.022265624, 0)
+
+[node name="luch" parent="Node/nekro" index="3"]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 1.125, 1.8558131, 1.4423444)
+
+[node name="bashik" parent="Node/nekro" index="4"]
+transform = Transform3D(0.8582567, -4.4703484e-08, 0.5132207, -0.15859388, 0.95105654, 0.26521593, -0.4881019, -0.309017, 0.8162506, -0.33385825, 0.4201801, -1.1110119)
+
+[node name="cuboid45" parent="Node/bone8" index="0"]
+visible = false

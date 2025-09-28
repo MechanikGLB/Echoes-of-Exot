@@ -11,17 +11,27 @@ config_version=5
 [application]
 
 config/name="Echoes_of_Exot"
-run/main_scene="uid://dbfixcfet8jdj"
-config/features=PackedStringArray("4.4", "GL Compatibility")
+run/main_scene="uid://d2yftybjwa5xl"
+config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
+config/windows_native_icon="res://crow.ico"
+
+[autoload]
+
+GlobalThings="*res://Scripts/global_things.gd"
+SignalLens="*res://addons/signal_lens/autoload/signal_lens_autoload.gd"
 
 [display]
 
 window/size/viewport_width=1440
 window/size/viewport_height=1080
 window/size/mode=2
-window/stretch/mode="viewport"
 window/stretch/aspect="expand"
+window/per_pixel_transparency/allowed=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/signal_lens/plugin.cfg")
 
 [filesystem]
 
@@ -103,5 +113,10 @@ cursor={
 
 [rendering]
 
-anti_aliasing/quality/msaa_2d=1
-anti_aliasing/quality/msaa_3d=2
+textures/canvas_textures/default_texture_filter=0
+
+[steam]
+
+initialization/app_id=0
+initialization/initialize_on_startup=false
+initialization/embed_callbacks=false
