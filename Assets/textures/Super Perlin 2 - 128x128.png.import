@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjj1qai87rwh6"
-path="res://.godot/imported/skill_base.png-017570b6ee2f72ee05909c8b66c83488.ctex"
+uid="uid://b444cpom1yee4"
+path="res://.godot/imported/Super Perlin 2 - 128x128.png-c8888c9ccd0b83d7cb0f2c9a752d4dbe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/textures/IMGs/skill_base.png"
-dest_files=["res://.godot/imported/skill_base.png-017570b6ee2f72ee05909c8b66c83488.ctex"]
+source_file="res://Assets/textures/Super Perlin 2 - 128x128.png"
+dest_files=["res://.godot/imported/Super Perlin 2 - 128x128.png-c8888c9ccd0b83d7cb0f2c9a752d4dbe.ctex"]
 
 [params]
 

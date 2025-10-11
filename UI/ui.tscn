@@ -1,16 +1,17 @@
-[gd_scene load_steps=12 format=3 uid="uid://br8krfognc3t1"]
+[gd_scene load_steps=13 format=3 uid="uid://br8krfognc3t1"]
 
 [ext_resource type="Texture2D" uid="uid://bkun1am2ww0fr" path="res://Assets/textures/IMGs/crosshairs/crosshair162.png" id="1_3sbvi"]
-[ext_resource type="Texture2D" uid="uid://ba6rqd56h8u0" path="res://Assets/textures/IMGs/Таймер2.png" id="1_4fiuh"]
+[ext_resource type="Texture2D" uid="uid://ba6rqd56h8u0" path="res://Assets/textures/UIs/Таймер2.png" id="1_4fiuh"]
 [ext_resource type="Texture2D" uid="uid://jlkgsbf877jp" path="res://Assets/textures/IMGs/crosshairs/crosshair161.png" id="2_nm1m0"]
-[ext_resource type="Texture2D" uid="uid://defte4bki56go" path="res://Assets/textures/IMGs/Hearth.png" id="3_c7tqi"]
 [ext_resource type="Theme" uid="uid://sg5jbmg5jpaq" path="res://Assets/styles/def_blue.tres" id="4_cbfhl"]
-[ext_resource type="Texture2D" uid="uid://biojhf5cvw0ek" path="res://Assets/textures/IMGs/health_base.png" id="4_h81ot"]
+[ext_resource type="Texture2D" uid="uid://biojhf5cvw0ek" path="res://Assets/textures/UIs/health_base.png" id="4_h81ot"]
+[ext_resource type="Texture2D" uid="uid://catij84ug37qm" path="res://Assets/textures/UIs/Health_Empty.png" id="5_0w6e5"]
 [ext_resource type="Script" uid="uid://ca4ax0vde3a6l" path="res://UI/clock.gd" id="6_c7tqi"]
 [ext_resource type="Texture2D" uid="uid://doe83vm1qnsli" path="res://Assets/textures/IMGs/okak2.jpg" id="6_cbfhl"]
 [ext_resource type="PackedScene" uid="uid://dfgs8o4elq0di" path="res://UI/IngameMenu.tscn" id="6_nm1m0"]
+[ext_resource type="Texture2D" uid="uid://5tmmv7acqop6" path="res://Assets/textures/UIs/Health_Full.png" id="6_o2jkc"]
 [ext_resource type="AudioStream" uid="uid://dl0v0gsn4jjnw" path="res://sound/Звук смерти.mp3" id="7_cbfhl"]
-[ext_resource type="Texture2D" uid="uid://bjj1qai87rwh6" path="res://Assets/textures/IMGs/skill_base.png" id="11_6rr40"]
+[ext_resource type="Texture2D" uid="uid://bjj1qai87rwh6" path="res://Assets/textures/UIs/skill_base.png" id="11_6rr40"]
 
 [node name="UI" type="CanvasLayer"]
 
@@ -28,7 +29,7 @@ size_flags_vertical = 4
 texture = ExtResource("1_4fiuh")
 stretch_mode = 3
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="DamageFlash" type="ColorRect" parent="."]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -76,7 +77,7 @@ pivot_offset = Vector2(64, 64)
 mouse_filter = 2
 texture = ExtResource("2_nm1m0")
 
-[node name="TextureRect2" type="TextureRect" parent="."]
+[node name="Stat_base" type="TextureRect" parent="."]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -90,26 +91,34 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 texture = ExtResource("4_h81ot")
 
-[node name="Stats" type="VBoxContainer" parent="."]
-custom_minimum_size = Vector2(200, 48)
-anchors_preset = -1
+[node name="Health" type="TextureProgressBar" parent="Stat_base"]
+layout_mode = 1
+anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -563.0
-offset_top = -90.0
-offset_right = -316.0
-offset_bottom = 9.0
+offset_left = -621.0
+offset_top = -191.0
+offset_right = -4.0
+offset_bottom = -138.0
 grow_horizontal = 0
 grow_vertical = 0
-size_flags_vertical = 8
+step = 0.01
+value = 25.0
+nine_patch_stretch = true
+texture_under = ExtResource("5_0w6e5")
+texture_progress = ExtResource("6_o2jkc")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Stats"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Stat_base"]
 custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
+layout_mode = 0
+offset_left = 104.0
+offset_top = 129.0
+offset_right = 327.0
+offset_bottom = 177.0
 
-[node name="ScoreLabel" type="Label" parent="Stats/HBoxContainer2"]
+[node name="ScoreLabel" type="Label" parent="Stat_base/HBoxContainer2"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -119,7 +128,7 @@ text = "SCORE:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Score" type="Label" parent="Stats/HBoxContainer2"]
+[node name="Score" type="Label" parent="Stat_base/HBoxContainer2"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -129,29 +138,45 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Stats"]
-visible = false
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Stats/HBoxContainer"]
-custom_minimum_size = Vector2(24, 24)
-layout_mode = 2
-size_flags_vertical = 4
-texture = ExtResource("3_c7tqi")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Health" type="ProgressBar" parent="Stats/HBoxContainer"]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-theme = ExtResource("4_cbfhl")
-value = 25.0
-
 [node name="CanvasLayer" parent="." instance=ExtResource("6_nm1m0")]
 visible = false
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+texture_filter = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -220.0
+offset_right = 650.0
+grow_vertical = 0
+texture = ExtResource("11_6rr40")
+expand_mode = 1
+
+[node name="sessionTimer" type="HBoxContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 301.0
+offset_top = -188.0
+offset_right = 442.0
+offset_bottom = -126.0
+grow_vertical = 0
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="sessionTimer"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("4_cbfhl")
+theme_override_font_sizes/font_size = 40
+text = "Time:"
+
+[node name="clock" type="Label" parent="sessionTimer"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("4_cbfhl")
+theme_override_font_sizes/font_size = 40
+text = "0"
+script = ExtResource("6_c7tqi")
 
 [node name="okak" type="TextureRect" parent="."]
 visible = false
@@ -201,40 +226,3 @@ vertical_alignment = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Dethscreen"]
 stream = ExtResource("7_cbfhl")
-
-[node name="TextureRect3" type="TextureRect" parent="."]
-texture_filter = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -220.0
-offset_right = 650.0
-grow_vertical = 0
-texture = ExtResource("11_6rr40")
-expand_mode = 1
-
-[node name="sessionTimer" type="HBoxContainer" parent="."]
-anchors_preset = -1
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 278.0
-offset_top = -189.0
-offset_right = 419.0
-offset_bottom = -127.0
-grow_vertical = 0
-size_flags_horizontal = 4
-
-[node name="Label" type="Label" parent="sessionTimer"]
-layout_mode = 2
-size_flags_horizontal = 6
-theme = ExtResource("4_cbfhl")
-theme_override_font_sizes/font_size = 40
-text = "Time:"
-
-[node name="clock" type="Label" parent="sessionTimer"]
-layout_mode = 2
-size_flags_horizontal = 6
-theme = ExtResource("4_cbfhl")
-theme_override_font_sizes/font_size = 40
-text = "0"
-script = ExtResource("6_c7tqi")

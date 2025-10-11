@@ -50,7 +50,7 @@ func _target_in_range():
 func _hit_finished():
 	if global_position.distance_to(player.global_position) < ATTACK_RANGE + 1.0:
 		var dir = global_position.direction_to(player.global_position)
-		player.hit(dir, ZOMBIE_DMG)
+		player.take_damage(ZOMBIE_DMG, dir, player.HIT_STAGGER)
 
 
 func _on_area_3d_body_part_hit(dmg: Variant) -> void:

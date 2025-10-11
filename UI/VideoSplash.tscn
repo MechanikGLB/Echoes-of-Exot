@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://c3l644c03t7u7" path="res://UI/video_splash.gd" id="1_mb1nc"]
 
 [sub_resource type="VideoStreamTheora" id="VideoStreamTheora_mb1nc"]
-file = "res://Assets/intros/output.ogv"
 
 [node name="VideoSplash" type="CanvasLayer"]
 script = ExtResource("1_mb1nc")

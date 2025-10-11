@@ -47,7 +47,7 @@ func _ready() -> void:
 	if player:
 		var ui = player.get_node_or_null("%UI")
 		if ui:
-			hit_rect = ui.get_node_or_null("ColorRect")
+			hit_rect = ui.get_node_or_null("DamageFlash")
 			hitmarker = ui.get_node_or_null("Hitmarker")
 	_validate_setup()
 	
