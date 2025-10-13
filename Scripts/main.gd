@@ -4,7 +4,7 @@ extends Node3D
 @onready var spawns = $Map/EnemySpawns
 @onready var navigation_reg = $Map/NavigationRegion3D
 
-@export var player_path: NodePath = "^Player"
+#@export var player_path: NodePath = "^Player"
 @export var player_spawn_points: NodePath = "$Map/PlayerSpawns"
 
 @onready var eye = $Map/NavigationRegion3D/mapbox/GLAZ/AnimationPlayer
@@ -35,31 +35,19 @@ func _ready() -> void:
 		if spawn_points_node:
 			if spawn_player(character, spawn_points_node):
 				print("Игрок успешно заспавнен")
+				_initialize_player_ui()
+				_validate_setup()
 			else:
 				push_error("Не удалось заспавнить игрока")
 		else:
 			push_error("Точки спавна игрока не найдены")
 	else:
 		push_error("Персонаж не выбран в GlobalThings.selected_character")
-		
-	 # Инициализация узлов с проверкой
-	player = get_node_or_null(player_path)
-	if player:
-		var ui = player.get_node_or_null("%UI")
-		if ui:
-			hit_rect = ui.get_node_or_null("DamageFlash")
-			hitmarker = ui.get_node_or_null("Hitmarker")
-	_validate_setup()
+
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
-
-func _on_player_player_hit() -> void:
-	hit_rect.visible = true
-	await get_tree().create_timer(0.2).timeout
-	hit_rect.visible = false
 
 func  _get_random_child(parent_node):
 	var random_id = randi() % parent_node.get_child_count()
@@ -102,16 +90,23 @@ func _on_enemy_hit() -> void:
 func _on_enemy_dead():
 	enemiescount -= 1
 
+func _initialize_player_ui():
+	if player:
+		var ui = player.get_node_or_null("%UI")
+		if ui:
+			hit_rect = ui.get_node_or_null("DamageFlash")
+			hitmarker = ui.get_node_or_null("Hitmarker")
+			print("UI инициализирован - HitRect: ", hit_rect != null, " Hitmarker: ", hitmarker != null)
+
 func _validate_setup():
 	var errors = []
 	if not player: errors.append("Player node not found")
-	if not hit_rect: errors.append("HitRect not found")
 	if not spawns: errors.append("EnemySpawns not found")
 	if not navigation_reg: errors.append("NavigationRegion not found")
 	
 	if errors.size() > 0:
 		push_error("Setup failed: " + ", ".join(errors))
-		set_process(false)
+		#set_process(false)
 
 # Функция спавна игрока
 func spawn_player(player_scene: PackedScene, spawn_points_node: Node3D) -> bool:
@@ -138,4 +133,7 @@ func spawn_player(player_scene: PackedScene, spawn_points_node: Node3D) -> bool:
 	# Обновляем ссылку на игрока
 	player = player_instance
 	
-	return true
+	if player_instance:
+		player_instance.add_to_group("players") 
+		return true
+	return false

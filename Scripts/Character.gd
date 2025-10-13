@@ -1,9 +1,6 @@
 class_name CharacterBase3D
 extends CharacterBody3D
 
-#TODO: ПОПРАВИТЬ ЗАДЕРЖКУ ПОСЛЕ РЕСПАВНА
-#можно привязывать дрейка...наконец
-
 const SENS = 0.002
 
 # Head bobbing
@@ -32,7 +29,7 @@ var speed = walk_speed
 
 # Настройки респауна
 @export_category("Respawn Settings")
-@export var respawn_delay: float = 5.0
+@export var respawn_delay: float = 5.0 
 @export var invulnerability_time: float = 2.0
 
 # Настройки команд
@@ -183,7 +180,6 @@ func _physics_process(delta: float) -> void:
 func _update_timers(delta: float) -> void:
 	# Таймер респауна
 	if current_state == CharacterState.RESPAWNING:
-		print("RESPAWNING timer: ", respawn_timer)
 		respawn_timer -= delta
 		update_respawn_timer(respawn_timer)
 		
@@ -192,13 +188,8 @@ func _update_timers(delta: float) -> void:
 			respawn()
 	
 	# Таймер неуязвимости
-	if current_state == CharacterState.INVULNERABLE:
+	if invulnerability_timer > 0:
 		invulnerability_timer -= delta
-		
-		if invulnerability_timer <= 0:
-			current_state = CharacterState.ALIVE
-			if invulnerability_effect:
-				invulnerability_effect.emitting = false
 
 func _update_ability_cooldowns(delta: float) -> void:
 	# Обновление кулдаунов способностей
@@ -400,7 +391,7 @@ func take_damage(amount: int, direction: Vector3 = Vector3.ZERO, hit_stagger: fl
 	if not is_multiplayer_authority():
 		return
 		
-	if current_state != CharacterState.ALIVE or current_state == CharacterState.INVULNERABLE:
+	if current_state != CharacterState.ALIVE or invulnerability_timer > 0:
 		return
 	
 	var old_health = health
@@ -445,7 +436,7 @@ func respawn(respawn_position: Vector3 = Vector3.ZERO) -> void:
 		print("WARNING: Respawn called but state is not DEAD or RESP! State: ", current_state)
 
 	
-	current_state = CharacterState.INVULNERABLE
+	current_state = CharacterState.ALIVE
 	invulnerability_timer = invulnerability_time
 	
 	# Если позиция НЕ указана (Vector3.ZERO) - используем случайную точку
@@ -474,8 +465,9 @@ func respawn(respawn_position: Vector3 = Vector3.ZERO) -> void:
 	death_bg.visible = false
 	death_screen.visible = false
 	
-	# Отключаем ввод
 	set_process_unhandled_input(true)
+	set_physics_process(true)
+	set_process(true)
 	
 	print("RESPAWN COMPLETED - new state: ", current_state)
 
@@ -532,7 +524,18 @@ func _show_damage_effect() -> void:
 
 func _update_invulnerability_effect() -> void:
 	if invulnerability_effect:
-		invulnerability_effect.emitting = (current_state == CharacterState.INVULNERABLE)
+		invulnerability_effect.emitting = (invulnerability_timer > 0)
+
+# В CharacterBase3D.gd
+func show_hit_effect() -> void:
+	if damage_flash:  # У вас уже есть damage_flash в базовом классе!
+		damage_flash.visible = true
+		var tween = create_tween()
+		tween.tween_property(damage_flash, "color:a", 0.0, 0.3)
+		tween.tween_callback(func(): 
+			if damage_flash:
+				damage_flash.visible = false
+		)
 
 # ========== ВИРТУАЛЬНЫЕ МЕТОДЫ ==========
 
@@ -664,7 +667,7 @@ func is_character_alive() -> bool:
 	return current_state == CharacterState.ALIVE
 
 func can_take_damage() -> bool:
-	return current_state == CharacterState.ALIVE
+	return current_state == CharacterState.ALIVE and invulnerability_timer <= 0
 
 func get_health_percentage() -> float:
 	return float(health) / float(max_health)

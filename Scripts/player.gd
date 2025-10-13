@@ -186,7 +186,7 @@ func _lower_weapon():
 func _raise_weapon(new_weapon):
 	can_shoot = false
 	_lower_weapon()
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.4).timeout
 	match new_weapon:
 		Weapons.PRIMARY:
 			weapon_switching.play_backwards("plasma_lower")
@@ -211,7 +211,7 @@ func _unlock_cursor(is_locked: bool) -> void:
 
 
 func _on_enemy_kill():
-	score += 1
+	add_score(1)
 	score_changed.emit(score)
 
 # ========== МЕТОДЫ ДЛЯ СОВМЕСТИМОСТИ ==========

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rl6h4kyb7jmy"
-path="res://.godot/imported/Иконка аугментации.png-53f975e77f163c785b7a08d4349c8026.ctex"
+uid="uid://cv07cejf4lyqv"
+path="res://.godot/imported/reserve_ico.png-f34536c71670f297fdec0db6d1fa90cf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/textures/UIs/Иконка аугментации.png"
-dest_files=["res://.godot/imported/Иконка аугментации.png-53f975e77f163c785b7a08d4349c8026.ctex"]
+source_file="res://Assets/textures/UIs/reserve_ico.png"
+dest_files=["res://.godot/imported/reserve_ico.png-f34536c71670f297fdec0db6d1fa90cf.ctex"]
 
 [params]
 

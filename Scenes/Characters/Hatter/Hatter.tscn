@@ -110,6 +110,36 @@ _data = {
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_g73o5")
+abilities_config = {
+"ability_1": {
+"cooldown": 1.0,
+"input_action": "ability_1",
+"type": "mobility"
+},
+"ability_2": {
+"cooldown": 8.0,
+"input_action": "ability_2",
+"type": "utility"
+},
+"primary_fire": {
+"cooldown": 0.1,
+"holdable": true,
+"input_action": "primary_fire",
+"type": "instant"
+},
+"secondary_fire": {
+"cooldown": 0.5,
+"holdable": true,
+"input_action": "secondary_fire",
+"type": "instant"
+},
+"ultimate": {
+"charge_required": 100,
+"cooldown": 0.0,
+"input_action": "ultimate",
+"type": "ultimate"
+}
+}
 
 [node name="UI" parent="." instance=ExtResource("2_necg7")]
 unique_name_in_owner = true

@@ -5,5 +5,9 @@ extends Node3D
 @export var target:Node
 
 func _process(delta: float) -> void:
-	eye.look_at(target.global_position)
-	eye1.look_at(target.global_position)
+	if is_instance_valid(target):
+		eye.look_at(target.global_position)
+		eye1.look_at(target.global_position)
+
+func set_player_target(p_target: Node3D) -> void:
+	target = p_target

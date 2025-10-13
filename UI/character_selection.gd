@@ -1,15 +1,17 @@
 extends Node3D
 
-@onready var character_folder = "res://Scenes/Characters/"
+const character_folder = "res://Scenes/Characters/"
+const border_img = "res://Assets/textures/UIs/reserve_ico.png"
+
+
 @onready var button_container = $Control/Panel/MarginContainer/VBoxContainer/Panel/GridContainer
 @onready var show_plate = $Scene/Floor/Plate/Show_plate #стенд для модельки персонажа
-@onready var border_img = "res://Assets/textures/IMGs/Иконка аугментации.png"
-@onready var character_contents
 
 var current_character_instance
-var character_model
 
 func _ready() -> void:
+	if not FileAccess.file_exists(border_img):
+		push_error("Запасное изображение не найдено по пути: " + border_img)
 	char_refresh()
 
 
@@ -35,7 +37,11 @@ func get_available_chars() -> Array:
 func char_refresh():
 	# Очищаем старые кнопки
 	for child in button_container.get_children():
-		child.queue_free()
+		if is_instance_valid(child):
+			child.queue_free()
+	
+	# Небольшая задержка для гарантии очистки
+	await get_tree().process_frame
 	
 	# Получаем список доступных персонажей
 	var available_characters = get_available_chars()
@@ -53,15 +59,16 @@ func char_refresh():
 		texture_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		
 		# Загружаем изображение персонажа (предполагаем, что оно в той же папке)
-		var character_name = character_file.trim_suffix(".tscn")
-		var character_folder_path = character_folder.path_join(character_name)
-		var image_path = character_folder_path.path_join(character_name + ".png")
+		var character_name = character_file.get_basename()
+		var image_path = character_folder.path_join(character_name).path_join(character_name + ".png")
 		
 		if FileAccess.file_exists(image_path):
+			print("использовано основное изображение: ", image_path)
 			var image_texture = load(image_path)
 			texture_rect.texture = image_texture
 		else:
 			# Запасное изображение, если основное не найдено
+			print("использовано запасное изображение: ", border_img)
 			texture_rect.texture = load(border_img)
 		
 		
@@ -86,52 +93,55 @@ func char_refresh():
 func _on_character_button_pressed(character_file: String):
 	print("Выбран персонаж: ", character_file)
 	
-	var character_path = character_file
-	if not character_file.begins_with("res://Scenes/Characters/%s/" % character_file):
-		character_path = "res://Scenes/Characters/%s/" % character_file.trim_suffix(".tscn") + character_file
+	var character_name = character_file.get_basename()
+	var character_scene_path = character_folder.path_join(character_name).path_join(character_file)
 	
-	var packed_scene = load(character_path) as PackedScene
-	
+	# Загружаем для GlobalThings
+	var packed_scene = load(character_scene_path) as PackedScene
 	if packed_scene:
 		GlobalThings.selected_character = packed_scene
-		print("Персонаж успешно загружен: ", character_path)
+		print("Персонаж успешно загружен: ", character_scene_path)
 	else:
-		push_error("Не удалось загрузить сцену персонажа: " + character_path)
-		print("Не удалось загрузить сцену персонажа: " + character_path)
+		push_error("Не удалось загрузить сцену персонажа: " + character_scene_path)
 		GlobalThings.selected_character = null
 	
+	# Показываем модельку
+	_show_character_model(character_scene_path, character_name)
+
+# Вынести в отдельный метод для чистоты
+func _show_character_model(scene_path: String, character_name: String):
 	if current_character_instance:
 		current_character_instance.queue_free()
 		current_character_instance = null
 	
-	var character_name = character_file.trim_suffix(".tscn")
-	var character_scene_path = character_folder.path_join(character_name).path_join(character_file)
-	var character_scene = load(character_scene_path)
-	
+	var character_scene = load(scene_path)
 	if character_scene:
 		current_character_instance = character_scene.instantiate()
 		show_plate.add_child(current_character_instance)
 		current_character_instance.position = Vector3.ZERO
 		
-		# Прямой доступ - предполагаем, что структура: CharacterName/AnimationPlayer
-		var animation_player = current_character_instance.get_node(character_name + "/AnimationPlayer") as AnimationPlayer
-		
-		if animation_player:
-			print("Найден AnimationPlayer для ", character_name)
-			
-			if animation_player.has_animation("pose2"):
-				animation_player.play("pose2")
-				print("Запущена анимация pose2")
-			if animation_player.has_animation("Pose2"):
-				animation_player.play("Pose2")
-				print("Запущена анимация pose2")
-			else:
-				print("Анимация pose2 не найдена")
-		else:
-			print("AnimationPlayer не найден по пути: ", character_name + "/AnimationPlayer")
-	else:
-		print("Ошибка загрузки сцены")
+		_play_character_animation(current_character_instance, character_name)
 
+func _play_character_animation(character_instance: Node, character_name: String):
+	var animation_player = character_instance.get_node(character_name + "/AnimationPlayer") as AnimationPlayer
+	
+	if animation_player:
+		print("Найден AnimationPlayer для ", character_name)
+		
+		var pose_animations = ["pose2", "Pose2", "idle", "Idle"]
+		var played = false
+		
+		for anim_name in pose_animations:
+			if animation_player.has_animation(anim_name):
+				animation_player.play(anim_name)
+				print("Запущена анимация: ", anim_name)
+				played = true
+				break
+		
+		if not played:
+			print("Не найдено подходящих анимаций для показа")
+	else:
+		print("AnimationPlayer не найден по пути: ", character_name + "/AnimationPlayer")
 
 func _on_return_pressed() -> void:
 	var main_menu_path = "res://Scenes/main_menu.tscn"
@@ -144,4 +154,7 @@ func _on_return_pressed() -> void:
 
 
 func _on_confirm_pressed() -> void:
-	pass # Replace with function body.
+	if GlobalThings.packed_map:
+		get_tree().change_scene_to_packed(GlobalThings.packed_map)
+	else:
+		push_error("карта не выбрана") 
