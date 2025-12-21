@@ -9,6 +9,10 @@ extends Node3D
 
 @onready var eye = $Map/NavigationRegion3D/mapbox/GLAZ/AnimationPlayer
 @onready var eye2 = $Map/NavigationRegion3D/mapbox/GLAZ2/AnimationPlayer
+
+@onready var glaz = $Map/NavigationRegion3D/mapbox/GLAZ
+@onready var glaz2 = $Map/NavigationRegion3D/mapbox/GLAZ2
+
 @onready var skel = $blockbench_export/AnimationPlayer
 @onready var character = GlobalThings.selected_character
 
@@ -37,6 +41,8 @@ func _ready() -> void:
 				print("Игрок успешно заспавнен")
 				_initialize_player_ui()
 				_validate_setup()
+				glaz.set_player_target(player)
+				glaz2.set_player_target(player)
 			else:
 				push_error("Не удалось заспавнить игрока")
 		else:

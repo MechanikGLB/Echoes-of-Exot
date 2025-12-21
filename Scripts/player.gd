@@ -30,8 +30,7 @@ var can_shoot = true
 # Переменные для совместимости
 var respawn_position = Vector3.ZERO
 
-# Сигналы
-signal player_hit
+
 
 func _custom_ready() -> void:
 
@@ -202,12 +201,6 @@ func _headbob(time) -> Vector3:
 	pos.y = sin(time * BOB_FREQ) * BOB_AMP
 	pos.x = cos(time * BOB_FREQ / 2) * BOB_AMP
 	return pos
-
-func _unlock_cursor(is_locked: bool) -> void:
-	if is_locked:
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	else:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
 func _on_enemy_kill():

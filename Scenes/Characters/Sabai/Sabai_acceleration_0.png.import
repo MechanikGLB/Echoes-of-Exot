@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sjha2m8wf55s"
-path.s3tc="res://.godot/imported/Sabai_0.png-d8caa4a0e38e4ef3ab751adb50889ab7.s3tc.ctex"
+uid="uid://b4u36ym7bv4s6"
+path.s3tc="res://.godot/imported/Sabai_acceleration_0.png-dce29db97d4770115a18c5c02ad947e3.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "fb0de6ed58e26d528b6128de4696099c"
+"md5": "273a8b5a9d113e4285bc66189f75342f"
 }
 
 [deps]
 
-source_file="res://Scenes/Characters/Sabai/Sabai_0.png"
-dest_files=["res://.godot/imported/Sabai_0.png-d8caa4a0e38e4ef3ab751adb50889ab7.s3tc.ctex"]
+source_file="res://Scenes/Characters/Sabai/Sabai_acceleration_0.png"
+dest_files=["res://.godot/imported/Sabai_acceleration_0.png-dce29db97d4770115a18c5c02ad947e3.s3tc.ctex"]
 
 [params]
 

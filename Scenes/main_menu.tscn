@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dbfixcfet8jdj"]
+[gd_scene load_steps=26 format=3 uid="uid://dbfixcfet8jdj"]
 
 [ext_resource type="Script" uid="uid://biv0ny6wm7a0b" path="res://Scripts/main_menu.gd" id="1_j7ex8"]
 [ext_resource type="ArrayMesh" uid="uid://bn3v8bx2tpq8v" path="res://Assets/models/Assets/graveyard/debris.obj" id="2_e5qqf"]
@@ -18,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://o8josl4w16hv" path="res://sound/manu.mp3" id="17_ujyyl"]
 [ext_resource type="PackedScene" uid="uid://c0ob1iixpmbc3" path="res://UI/settings.tscn" id="18_mkpwh"]
 [ext_resource type="Theme" uid="uid://sg5jbmg5jpaq" path="res://Assets/styles/def_blue.tres" id="19_ix6bv"]
+[ext_resource type="Texture2D" uid="uid://c1b7dfycyfa8o" path="res://Assets/textures/UIs/Vkontakte_2007_mini.svg" id="19_mkpwh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6fa6q"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -47,6 +48,8 @@ uv1_triplanar = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mae5d"]
 bg_color = Color(0.795894, 0.533803, 0.296347, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_mkpwh"]
 
 [node name="MenuWorld" type="Node3D"]
 script = ExtResource("1_j7ex8")
@@ -514,6 +517,35 @@ theme_override_font_sizes/font_size = 31
 text = "© Bird&Box "
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Menu"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -95.984985
+offset_top = -76.859985
+offset_right = -45.931763
+offset_bottom = -28.155396
+grow_horizontal = 0
+grow_vertical = 0
+texture = SubResource("CanvasTexture_mkpwh")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="Menu/TextureRect"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_mkpwh")
+expand_mode = 1
 
 [connection signal="pressed" from="Menu/MainMenu/HBoxContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Menu/MainMenu/HBoxContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]

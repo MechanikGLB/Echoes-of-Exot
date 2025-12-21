@@ -60,7 +60,7 @@ func char_refresh():
 		
 		# Загружаем изображение персонажа (предполагаем, что оно в той же папке)
 		var character_name = character_file.get_basename()
-		var image_path = character_folder.path_join(character_name).path_join(character_name + ".png")
+		var image_path = character_folder.path_join(character_name).path_join(character_name + "_ico.png")
 		
 		if FileAccess.file_exists(image_path):
 			print("использовано основное изображение: ", image_path)
@@ -107,6 +107,7 @@ func _on_character_button_pressed(character_file: String):
 	
 	# Показываем модельку
 	_show_character_model(character_scene_path, character_name)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 # Вынести в отдельный метод для чистоты
 func _show_character_model(scene_path: String, character_name: String):
@@ -115,15 +116,20 @@ func _show_character_model(scene_path: String, character_name: String):
 		current_character_instance = null
 	
 	var character_scene = load(scene_path)
+	
 	if character_scene:
 		current_character_instance = character_scene.instantiate()
 		show_plate.add_child(current_character_instance)
 		current_character_instance.position = Vector3.ZERO
 		
+		if current_character_instance.has_method("menu_state"):
+			current_character_instance.menu_state()
+		
 		_play_character_animation(current_character_instance, character_name)
 
 func _play_character_animation(character_instance: Node, character_name: String):
 	var animation_player = character_instance.get_node(character_name + "/AnimationPlayer") as AnimationPlayer
+	
 	
 	if animation_player:
 		print("Найден AnimationPlayer для ", character_name)

@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sjha2m8wf55s"
-path.s3tc="res://.godot/imported/Sabai_0.png-d8caa4a0e38e4ef3ab751adb50889ab7.s3tc.ctex"
+uid="uid://dr3rl6a07nj8r"
+path.s3tc="res://.godot/imported/Ult_portal_0.png-3a7651892c32eb2ed43e05ea4a39c159.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "fb0de6ed58e26d528b6128de4696099c"
+"md5": "117e6f87deb95a7ad7107adbc92c912a"
 }
 
 [deps]
 
-source_file="res://Scenes/Characters/Sabai/Sabai_0.png"
-dest_files=["res://.godot/imported/Sabai_0.png-d8caa4a0e38e4ef3ab751adb50889ab7.s3tc.ctex"]
+source_file="res://Scenes/Characters/Sabai/Ult_portal_0.png"
+dest_files=["res://.godot/imported/Ult_portal_0.png-3a7651892c32eb2ed43e05ea4a39c159.s3tc.ctex"]
 
 [params]
 

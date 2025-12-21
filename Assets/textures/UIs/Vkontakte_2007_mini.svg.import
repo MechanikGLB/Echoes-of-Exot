@@ -2,24 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sjha2m8wf55s"
-path.s3tc="res://.godot/imported/Sabai_0.png-d8caa4a0e38e4ef3ab751adb50889ab7.s3tc.ctex"
+uid="uid://c1b7dfycyfa8o"
+path="res://.godot/imported/Vkontakte_2007_mini.svg-8c7ddbac9b1948e6b9c047684a41270e.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
-}
-generator_parameters={
-"md5": "fb0de6ed58e26d528b6128de4696099c"
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Characters/Sabai/Sabai_0.png"
-dest_files=["res://.godot/imported/Sabai_0.png-d8caa4a0e38e4ef3ab751adb50889ab7.s3tc.ctex"]
+source_file="res://Assets/textures/UIs/Vkontakte_2007_mini.svg"
+dest_files=["res://.godot/imported/Vkontakte_2007_mini.svg-8c7ddbac9b1948e6b9c047684a41270e.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -27,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -41,4 +37,7 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

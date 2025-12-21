@@ -220,13 +220,11 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 
 mesh = ExtResource("6_xd4pn")
 skeleton = NodePath("../../../..")
 
-[node name="GLAZ" parent="Map/NavigationRegion3D/mapbox" node_paths=PackedStringArray("target") instance=ExtResource("16_ce7po")]
+[node name="GLAZ" parent="Map/NavigationRegion3D/mapbox" instance=ExtResource("16_ce7po")]
 transform = Transform3D(-0.8885453, 0, 0.45878875, 0, 1, 0, -0.45878875, 0, -0.8885453, 28.620329, 6.0317364, -57.582207)
-target = NodePath("")
 
-[node name="GLAZ2" parent="Map/NavigationRegion3D/mapbox" node_paths=PackedStringArray("target") instance=ExtResource("16_ce7po")]
+[node name="GLAZ2" parent="Map/NavigationRegion3D/mapbox" instance=ExtResource("16_ce7po")]
 transform = Transform3D(0.33946583, 0, -7.9927945, 0, 8, 0, 7.9927945, 0, 0.33946583, -43.67641, 11.891052, 1.1846867)
-target = NodePath("")
 
 [node name="blockbench_export" parent="Map/NavigationRegion3D/mapbox" instance=ExtResource("11_rgijb")]
 transform = Transform3D(0.771225, 0, 0.636563, 0, 1, 0, -0.636563, 0, 0.771225, -22.3919, 0.108967, -34.66104)

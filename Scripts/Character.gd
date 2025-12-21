@@ -47,6 +47,7 @@ var speed = walk_speed
 }
 
 # UI
+@onready var UI = $"%UI"
 @onready var health_bar = $"%UI/Stat_base/Health"
 @onready var ingame_menu = $"%UI/CanvasLayer"
 @onready var timer_label = $"%UI/Dethscreen/RespawnTime"
@@ -114,6 +115,9 @@ signal position_synced(new_position: Vector3)
 signal ability_used(ability_name: String, target_position: Vector3)
 signal ultimate_changed(new_charge: float)
 signal team_changed(old_team: int, new_team: int)
+
+# Сигналы
+signal player_hit
 
 # Сетевые данные для репликации
 var network_data: Dictionary = {
@@ -537,6 +541,14 @@ func show_hit_effect() -> void:
 				damage_flash.visible = false
 		)
 
+func _unlock_cursor(is_locked: bool) -> void:
+	if is_locked:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		set_process_unhandled_input(false)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		set_process_unhandled_input(true)		
+
 # ========== ВИРТУАЛЬНЫЕ МЕТОДЫ ==========
 
 func _on_death() -> void:
@@ -653,7 +665,18 @@ func _set_state(new_state: CharacterState) -> void:
 	current_state = new_state
 	state_changed.emit(new_state)
 
+func _stop_all_sounds():
+	for child in get_children(true):
+		if child is AudioStreamPlayer or child is AudioStreamPlayer2D or child is AudioStreamPlayer3D:
+			child.stop()
+
 # ========== ПУБЛИЧНЫЕ МЕТОДЫ ==========
+
+func menu_state():
+	disable()
+	if UI:
+		UI.visible = false
+	_stop_all_sounds()
 
 func enable() -> void:
 	current_state = CharacterState.ALIVE
