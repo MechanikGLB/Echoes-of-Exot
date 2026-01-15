@@ -31,7 +31,7 @@ window/per_pixel_transparency/allowed=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/signal_lens/plugin.cfg")
+enabled=PackedStringArray("res://addons/hitbox_creator/plugin.cfg")
 
 [filesystem]
 

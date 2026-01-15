@@ -22,8 +22,14 @@ height = 0.36252213
 [node name="Bolvan" parent="." index="0"]
 transform = Transform3D(0.99904823, 0.043619383, 0, -0.043619383, 0.99904823, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="jopa" parent="Bolvan" index="0"]
-transform = Transform3D(0.922201, 0, 0.38671097, 0, 1, 0, -0.38671097, 0, 0.922201, 0, 0.6686375, 0.0234375)
+[node name="leftleg" parent="Bolvan/jopa" index="3"]
+transform = Transform3D(1, 0, 0, 0, 0.99254614, -0.12186935, 0, 0.12186935, 0.99254614, -0.0625, -0.034375, 0)
+
+[node name="leftleg2" parent="Bolvan/jopa/leftleg" index="3"]
+transform = Transform3D(1, 0, 0, 0, 0.9832549, 0.18223551, 0, -0.18223551, 0.9832549, -0.0375, -0.2734375, 0.0171875)
+
+[node name="stupna" parent="Bolvan/jopa/leftleg/leftleg2" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.9983917, -0.056692787, 0, 0.056692787, 0.9983917, 0.00625, -0.296875, -0.03125)
 
 [node name="LeftLegDown" type="Area3D" parent="Bolvan/jopa/leftleg/leftleg2" index="2"]
 collision_layer = 2
@@ -41,6 +47,15 @@ collision_mask = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.031188488, -0.10534191, 0.0108753145)
 shape = SubResource("CapsuleShape3D_17dl3")
 
+[node name="rightleg" parent="Bolvan/jopa" index="4"]
+transform = Transform3D(0.9750374, -0.15248594, -0.16140035, 0.17962988, 0.9689874, 0.16969533, 0.13051875, -0.19445163, 0.97219, 0.0625, -0.034375, 0)
+
+[node name="rightleg2" parent="Bolvan/jopa/rightleg" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0375, -0.2796875, 0.0171875)
+
+[node name="stupna2" parent="Bolvan/jopa/rightleg/rightleg2" index="1"]
+transform = Transform3D(0.8919274, 0.06825916, -0.4469969, -0.08621738, 0.996077, -0.019929152, 0.44388297, 0.05631426, 0.8943135, -0.00625, -0.309375, -0.03125)
+
 [node name="RightLegDown" type="Area3D" parent="Bolvan/jopa/rightleg/rightleg2" index="2"]
 collision_layer = 2
 collision_mask = 2
@@ -50,7 +65,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00044977665, -0.15725872, 
 shape = SubResource("CapsuleShape3D_17dl3")
 
 [node name="pizdulina" parent="Bolvan/jopa/rightleg" index="5"]
-transform = Transform3D(1, 0, 0, 0, 0.9832549, -0.18223551, 0, 0.18223551, 0.9832549, 0.05625, -0.05, 0.0875)
+transform = Transform3D(1, 0, 0, 0, 0.99965733, -0.026176948, 0, 0.026176948, 0.99965733, 0.05625, -0.05, 0.0875)
 
 [node name="RightLegUp" type="Area3D" parent="Bolvan/jopa/rightleg" index="6"]
 collision_layer = 2
@@ -61,16 +76,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.029732704, -0.10534191, 0.0
 shape = SubResource("CapsuleShape3D_17dl3")
 
 [node name="odol1" parent="Bolvan/jopa" index="5"]
-transform = Transform3D(0.99976206, -0.021731874, -0.0019012924, 0.021531213, 0.9970162, -0.07412896, 0.0035065806, 0.07407039, 0.99724686, 0, 0.0171875, -0.0765625)
+transform = Transform3D(0.9998477, -0.017452404, 0, 0.017452406, 0.99984765, 0, 0, 0, 1, 0, 0.0171875, -0.0765625)
 
 [node name="grudverx" parent="Bolvan" index="1"]
-transform = Transform3D(0.83597094, 0.0002801232, -0.5487736, 0.06183114, 0.9935841, 0.094697274, 0.54527926, -0.11309548, 0.8305901, 0, 0.9702, 0.0125)
+transform = Transform3D(0.9953962, 0, -0.09584577, 0, 1, 0, 0.09584577, 0, 0.9953962, 0, 0.9702, 0.0234375)
 
 [node name="glazch1" parent="Bolvan/grudverx/Cherepnie" index="1"]
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
 [node name="leftarm" parent="Bolvan/grudverx" index="7"]
-transform = Transform3D(0.90197986, -0.18645912, -0.3894423, -0.18187274, 0.65396297, -0.73433965, 0.39160514, 0.7331885, 0.5559496, -0.1359375, -0.034375, 0)
+transform = Transform3D(0.9200437, 0.025217474, -0.3910035, -0.28193596, 0.73559654, -0.61596256, 0.27208775, 0.6769504, 0.6838907, -0.1359375, -0.034375, 0)
 
 [node name="Glaz2l" parent="Bolvan/grudverx/leftarm" index="1"]
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -79,10 +94,10 @@ transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
 [node name="leftarm2" parent="Bolvan/grudverx/leftarm" index="3"]
-transform = Transform3D(0.96827024, -0.20996793, -0.13552186, 0.17123176, 0.9524086, -0.25218552, 0.18202306, 0.22097811, 0.9581421, -0.043402243, -0.20228542, 0.0021027378)
+transform = Transform3D(0.96827024, -0.20996793, -0.13552186, 0.17123176, 0.9524086, -0.25218552, 0.18202306, 0.22097811, 0.9581421, -0.04375, -0.2, 0)
 
 [node name="weapon51" parent="Bolvan/grudverx/leftarm/leftarm2" index="1"]
-transform = Transform3D(-0.20940916, 0.93528754, 0.2852805, 0.7591094, -0.02840379, 0.65034306, 0.6163608, 0.3527469, -0.70403755, 0.15671486, -0.22403058, 0.035390988)
+transform = Transform3D(0.0063520367, 0.9584229, 0.2852805, 0.73326397, -0.19843836, 0.65034306, 0.6799143, 0.20505492, -0.70403755, 0.15671486, -0.22403058, 0.035390988)
 
 [node name="pechati3" parent="Bolvan/grudverx/leftarm/leftarm2/weapon51" index="4"]
 transform = Transform3D(-0.99904835, 0.043619294, 0, -0.043619294, -0.99904835, 0, 0, 0, 1, -0.060469374, 0.95611185, 0.16168062)
@@ -97,7 +112,7 @@ transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0.0625, 0.03221625, -0.121834
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, -0.0609375, 0.02298625, -0.11830313)
 
 [node name="cepka2" parent="Bolvan/grudverx/leftarm/leftarm2/weapon51" index="7"]
-transform = Transform3D(0.8660254, -0.48861548, 0.106088825, 0.49999997, 0.846307, -0.18375124, 0, 0.21217765, 0.97723114, 0, -0.13465813, -0.00311625)
+transform = Transform3D(0.90699255, -0.34438992, -0.24240483, 0.41808665, 0.80555767, 0.4198575, 0.050676376, -0.4821538, 0.87461966, 0, -0.13465813, -0.00311625)
 
 [node name="effects" parent="Bolvan/grudverx/leftarm/leftarm2/weapon51" index="9"]
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.75, 0.4375)
@@ -106,19 +121,13 @@ transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.75, 0.4375)
 transform = Transform3D(-1.4901161e-07, 0.99756414, -0.06975647, -0.29654154, 0.066618785, 0.9526936, 0.95501995, 0.020685809, 0.2958192, -0.0125, -0.16076376, -0.001583125)
 
 [node name="big" parent="Bolvan/grudverx/leftarm/leftarm2/lefthand16" index="1"]
-transform = Transform3D(0.9660859, -0.0979089, -0.23893884, 0.004477773, 0.93154097, -0.36360872, 0.25818184, 0.35020736, 0.90038705, -0.028125, 0.001428125, -0.01875)
+transform = Transform3D(0.96608585, -0.09790889, -0.23893882, 0.0044777724, 0.9315409, -0.3636087, 0.2581818, 0.35020733, 0.900387, -0.028125, 0.001428125, -0.01875)
 
 [node name="ukazatel" parent="Bolvan/grudverx/leftarm/leftarm2/lefthand16" index="2"]
-transform = Transform3D(1, 0, 0, 0, 0.97437006, -0.22495106, 0, 0.22495106, 0.97437006, -0.0171875, 0, -0.0421875)
+transform = Transform3D(1, 0, 0, 0, 0.9563047, -0.29237172, 0, 0.29237172, 0.9563047, -0.0171875, 0, -0.0421875)
 
 [node name="5" parent="Bolvan/grudverx/leftarm/leftarm2/lefthand16/fucker1" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.9624552, -0.27144048, 0, 0.27144048, 0.9624552, 0.0009725, -0.00339375, -0.02657)
-
-[node name="smol" parent="Bolvan/grudverx/leftarm/leftarm2/lefthand16" index="5"]
-transform = Transform3D(1, 0, 0, 0, 0.89879405, 0.43837115, 0, -0.43837115, 0.89879405, 0.025, 0, -0.0359375)
-
-[node name="11" parent="Bolvan/grudverx/leftarm/leftarm2/lefthand16/smol" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.4962165, -0.8681988, 0, 0.8681988, 0.4962165, 0.0015625, -0.003125, -0.0140625)
+transform = Transform3D(1, 0, 0, 0, 0.96245515, -0.27144045, 0, 0.27144045, 0.96245515, 0.0009725, -0.00339375, -0.02657)
 
 [node name="LeftArmDown" type="Area3D" parent="Bolvan/grudverx/leftarm/leftarm2" index="3"]
 collision_layer = 2
@@ -137,7 +146,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.043749377, -0.043333948, 0
 shape = SubResource("CapsuleShape3D_21dsc")
 
 [node name="rightarm" parent="Bolvan/grudverx" index="8"]
-transform = Transform3D(0.77433133, -0.110963136, 0.6229752, 0.26163745, 0.95255125, -0.15553752, -0.5761569, 0.2834312, 0.7666224, 0.1359375, -0.034375, 0)
+transform = Transform3D(0.92243886, 0.0067852587, 0.38608357, 0.38286063, 0.11402167, -0.9167425, -0.0502422, 0.99345505, 0.10258022, 0.1359375, -0.034375, 0)
 
 [node name="Glaz1r" parent="Bolvan/grudverx/rightarm" index="1"]
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -146,34 +155,40 @@ transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
 [node name="rightarm2" parent="Bolvan/grudverx/rightarm" index="3"]
-transform = Transform3D(0.99995404, -0.008891042, 0.0035923368, 0.009457715, 0.85255307, -0.5225551, 0.001583402, 0.52256507, 0.85259795, 0.04440939, -0.196949, -0.00014920562)
+transform = Transform3D(0.6543071, 0.26139927, 0.7096144, 0.02129618, 0.931618, -0.36281464, -0.755929, 0.25250426, 0.60399747, 0.04375, -0.2125, 0)
 
 [node name="righthand16" parent="Bolvan/grudverx/rightarm/rightarm2" index="1"]
-transform = Transform3D(-0.11140032, -0.89965016, 0.42216086, 0.027155608, 0.42189068, 0.90624, -0.9934045, 0.11241947, -0.02256821, 0.006877187, -0.15812694, -0.00088050484)
+transform = Transform3D(-0.11140013, -0.75722903, -0.64357936, 0.02715552, -0.64968807, 0.7597158, -0.9934045, 0.0671557, 0.09293826, 0.006877187, -0.17062694, -0.00088050484)
 
 [node name="big2" parent="Bolvan/grudverx/rightarm/rightarm2/righthand16" index="1"]
 transform = Transform3D(0.50118595, -0.8599365, -0.09655021, 0.4859218, 0.37200084, -0.7908827, 0.71602565, 0.34946346, 0.6043034, 0.028125, 0.001428125, -0.01875)
 
 [node name="ukazatel2" parent="Bolvan/grudverx/rightarm/rightarm2/righthand16" index="2"]
-transform = Transform3D(1, 0, 0, 0, 0.9781476, -0.2079117, 0, 0.2079117, 0.9781476, 0.0171875, 0, -0.0421875)
+transform = Transform3D(0.98162717, 3.7252903e-09, -0.19080903, 0.052594088, 0.9612617, 0.2705731, 0.1834174, -0.27563736, 0.9436006, 0.0171875, 0, -0.0421875)
 
 [node name="4" parent="Bolvan/grudverx/rightarm/rightarm2/righthand16/ukazatel2" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.98768836, -0.15643449, 0, 0.15643449, 0.98768836, 0, 0, -0.021875)
+transform = Transform3D(1, 0, 0, 0, 0.95105654, -0.309017, 0, 0.309017, 0.95105654, 0, 0, -0.021875)
 
 [node name="7" parent="Bolvan/grudverx/rightarm/rightarm2/righthand16/ukazatel2/4" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.9135455, -0.40673658, 0, 0.40673658, 0.9135455, 0, 0, -0.015625)
+transform = Transform3D(1, 0, 0, 0, 0.9945219, -0.10452845, 0, 0.10452845, 0.9945219, 0, 0, -0.015625)
 
 [node name="fucker2" parent="Bolvan/grudverx/rightarm/rightarm2/righthand16" index="3"]
-transform = Transform3D(0.99953353, -3.7252903e-09, 0.03053851, 0.014101118, 0.8870108, -0.46153325, -0.027087986, 0.46174857, 0.8865971, 0.003125, 0.000874375, -0.041625626)
+transform = Transform3D(0.9995336, -0.017950084, 0.024706177, 0.014101114, 0.9888893, 0.14798364, -0.027087992, -0.14756623, 0.9886812, 0.003125, 0.000874375, -0.041625626)
 
 [node name="13" parent="Bolvan/grudverx/rightarm/rightarm2/righthand16/fucker2/10" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.42261824, -0.9063078, 0, 0.9063078, 0.42261824, -0.00059, 0.000956875, -0.017741876)
+transform = Transform3D(1, 0, 0, 0, 0.97437006, -0.22495106, 0, 0.22495106, 0.97437006, -0.00059, 0.000956875, -0.017741876)
 
 [node name="14" parent="Bolvan/grudverx/rightarm/rightarm2/righthand16/nonamed2" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.8314696, -0.55557024, 0, 0.55557024, 0.8314696, 0, -0.0015625, -0.0015625)
+transform = Transform3D(1, 0, 0, 0, 0.9692309, 0.2461533, 0, -0.2461533, 0.9692309, 0, -0.0015625, -0.0015625)
+
+[node name="15" parent="Bolvan/grudverx/rightarm/rightarm2/righthand16/nonamed2/14" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.95105654, -0.309017, 0, 0.309017, 0.95105654, -0.003125, 0.0046875, -0.0234375)
 
 [node name="smol2" parent="Bolvan/grudverx/rightarm/rightarm2/righthand16" index="5"]
-transform = Transform3D(0.9840407, 0.08626873, 0.15563293, 3.7252903e-09, 0.8746197, -0.4848096, -0.17794354, 0.4770724, 0.8606614, -0.025, 0, -0.0359375)
+transform = Transform3D(0.932013, 0.0031055426, 0.36241144, 0.0033300759, 0.9998477, -0.017131755, -0.36240944, 0.017173877, 0.93186074, -0.025, 0, -0.0359375)
+
+[node name="17" parent="Bolvan/grudverx/rightarm/rightarm2/righthand16/smol2/16" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.9702957, -0.24192189, 0, 0.24192189, 0.9702957, -0.0015625, 0, -0.0171875)
 
 [node name="Area3D" type="Area3D" parent="Bolvan/grudverx/rightarm/rightarm2" index="2"]
 collision_layer = 2
@@ -192,10 +207,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04043065, -0.048879087, 0.0
 shape = SubResource("CapsuleShape3D_21dsc")
 
 [node name="head2" parent="Bolvan/grudverx" index="9"]
-transform = Transform3D(0.8338858, 0, 0.551937, 0, 1, 0, -0.551937, 0, 0.8338858, 0, 0.0703125, 0.00625)
-
-[node name="bakenbards" parent="Bolvan/grudverx/head2" index="4"]
-transform = Transform3D(0.99965733, -0.026176948, 0, 0.026176948, 0.99965733, 0, 0, 0, 1, 0, 0.0125, -0.05625)
+transform = Transform3D(0.9914448, 0, 0.13052617, 0, 1, 0, -0.13052617, 0, 0.9914448, 0, 0.065625, 0.00625)
 
 [node name="Head" type="Area3D" parent="Bolvan/grudverx/head2" index="6"]
 collision_layer = 2
