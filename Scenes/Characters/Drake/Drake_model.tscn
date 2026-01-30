@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cfw5yx70ym6ef"]
+[gd_scene format=3 uid="uid://cfw5yx70ym6ef"]
 
 [ext_resource type="PackedScene" uid="uid://p3pf0rkyxhnj" path="res://Scenes/Characters/Drake/Drake.glb" id="1_17dl3"]
 
@@ -17,7 +17,7 @@ radius = 0.11177226
 radius = 0.1352539
 height = 0.36252213
 
-[node name="Drake" instance=ExtResource("1_17dl3")]
+[node name="Drake" unique_id=1631539709 instance=ExtResource("1_17dl3")]
 
 [node name="Bolvan" parent="." index="0"]
 transform = Transform3D(0.99904823, 0.043619383, 0, -0.043619383, 0.99904823, 0, 0, 0, 1, 0, 0, 0)
@@ -31,19 +31,19 @@ transform = Transform3D(1, 0, 0, 0, 0.9832549, 0.18223551, 0, -0.18223551, 0.983
 [node name="stupna" parent="Bolvan/jopa/leftleg/leftleg2" index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.9983917, -0.056692787, 0, 0.056692787, 0.9983917, 0.00625, -0.296875, -0.03125)
 
-[node name="LeftLegDown" type="Area3D" parent="Bolvan/jopa/leftleg/leftleg2" index="2"]
+[node name="LeftLegDown" type="Area3D" parent="Bolvan/jopa/leftleg/leftleg2" index="2" unique_id=874509075]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bolvan/jopa/leftleg/leftleg2/LeftLegDown" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bolvan/jopa/leftleg/leftleg2/LeftLegDown" index="0" unique_id=805382772]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0062595904, -0.1508083, 0.0108753145)
 shape = SubResource("CapsuleShape3D_17dl3")
 
-[node name="LeftLegUp" type="Area3D" parent="Bolvan/jopa/leftleg" index="4"]
+[node name="LeftLegUp" type="Area3D" parent="Bolvan/jopa/leftleg" index="4" unique_id=830550926]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bolvan/jopa/leftleg/LeftLegUp" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bolvan/jopa/leftleg/LeftLegUp" index="0" unique_id=927034434]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.031188488, -0.10534191, 0.0108753145)
 shape = SubResource("CapsuleShape3D_17dl3")
 
@@ -56,22 +56,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0375, -0.2796875, 0.0171875
 [node name="stupna2" parent="Bolvan/jopa/rightleg/rightleg2" index="1"]
 transform = Transform3D(0.8919274, 0.06825916, -0.4469969, -0.08621738, 0.996077, -0.019929152, 0.44388297, 0.05631426, 0.8943135, -0.00625, -0.309375, -0.03125)
 
-[node name="RightLegDown" type="Area3D" parent="Bolvan/jopa/rightleg/rightleg2" index="2"]
+[node name="RightLegDown" type="Area3D" parent="Bolvan/jopa/rightleg/rightleg2" index="2" unique_id=45185474]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bolvan/jopa/rightleg/rightleg2/RightLegDown" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bolvan/jopa/rightleg/rightleg2/RightLegDown" index="0" unique_id=317542115]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00044977665, -0.15725872, -0.028413415)
 shape = SubResource("CapsuleShape3D_17dl3")
 
 [node name="pizdulina" parent="Bolvan/jopa/rightleg" index="5"]
 transform = Transform3D(1, 0, 0, 0, 0.99965733, -0.026176948, 0, 0.026176948, 0.99965733, 0.05625, -0.05, 0.0875)
 
-[node name="RightLegUp" type="Area3D" parent="Bolvan/jopa/rightleg" index="6"]
+[node name="RightLegUp" type="Area3D" parent="Bolvan/jopa/rightleg" index="6" unique_id=193537988]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bolvan/jopa/rightleg/RightLegUp" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bolvan/jopa/rightleg/RightLegUp" index="0" unique_id=466008280]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.029732704, -0.10534191, 0.0108753145)
 shape = SubResource("CapsuleShape3D_17dl3")
 
@@ -129,19 +129,19 @@ transform = Transform3D(1, 0, 0, 0, 0.9563047, -0.29237172, 0, 0.29237172, 0.956
 [node name="5" parent="Bolvan/grudverx/leftarm/leftarm2/lefthand16/fucker1" index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.96245515, -0.27144045, 0, 0.27144045, 0.96245515, 0.0009725, -0.00339375, -0.02657)
 
-[node name="LeftArmDown" type="Area3D" parent="Bolvan/grudverx/leftarm/leftarm2" index="3"]
+[node name="LeftArmDown" type="Area3D" parent="Bolvan/grudverx/leftarm/leftarm2" index="3" unique_id=708839708]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bolvan/grudverx/leftarm/leftarm2/LeftArmDown" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bolvan/grudverx/leftarm/leftarm2/LeftArmDown" index="0" unique_id=1336623693]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0047284067, -0.12091875, 0)
 shape = SubResource("CapsuleShape3D_21dsc")
 
-[node name="LeftArmUp" type="Area3D" parent="Bolvan/grudverx/leftarm" index="4"]
+[node name="LeftArmUp" type="Area3D" parent="Bolvan/grudverx/leftarm" index="4" unique_id=1002965447]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bolvan/grudverx/leftarm/LeftArmUp" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bolvan/grudverx/leftarm/LeftArmUp" index="0" unique_id=456634923]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.043749377, -0.043333948, 0)
 shape = SubResource("CapsuleShape3D_21dsc")
 
@@ -190,38 +190,38 @@ transform = Transform3D(0.932013, 0.0031055426, 0.36241144, 0.0033300759, 0.9998
 [node name="17" parent="Bolvan/grudverx/rightarm/rightarm2/righthand16/smol2/16" index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.9702957, -0.24192189, 0, 0.24192189, 0.9702957, -0.0015625, 0, -0.0171875)
 
-[node name="Area3D" type="Area3D" parent="Bolvan/grudverx/rightarm/rightarm2" index="2"]
+[node name="Area3D" type="Area3D" parent="Bolvan/grudverx/rightarm/rightarm2" index="2" unique_id=874450186]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bolvan/grudverx/rightarm/rightarm2/Area3D" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bolvan/grudverx/rightarm/rightarm2/Area3D" index="0" unique_id=1867073319]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01895617, -0.12714827, 0.0014472827)
 shape = SubResource("CapsuleShape3D_21dsc")
 
-[node name="Area3D" type="Area3D" parent="Bolvan/grudverx/rightarm" index="4"]
+[node name="Area3D" type="Area3D" parent="Bolvan/grudverx/rightarm" index="4" unique_id=1744891149]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bolvan/grudverx/rightarm/Area3D" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bolvan/grudverx/rightarm/Area3D" index="0" unique_id=819185152]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04043065, -0.048879087, 0.0074276105)
 shape = SubResource("CapsuleShape3D_21dsc")
 
 [node name="head2" parent="Bolvan/grudverx" index="9"]
 transform = Transform3D(0.9914448, 0, 0.13052617, 0, 1, 0, -0.13052617, 0, 0.9914448, 0, 0.065625, 0.00625)
 
-[node name="Head" type="Area3D" parent="Bolvan/grudverx/head2" index="6"]
+[node name="Head" type="Area3D" parent="Bolvan/grudverx/head2" index="6" unique_id=1234481288]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bolvan/grudverx/head2/Head" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bolvan/grudverx/head2/Head" index="0" unique_id=862188365]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0490669, -0.010382652)
 shape = SubResource("SphereShape3D_h3tfu")
 
-[node name="Torso" type="Area3D" parent="Bolvan/grudverx" index="10"]
+[node name="Torso" type="Area3D" parent="Bolvan/grudverx" index="10" unique_id=1732609353]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bolvan/grudverx/Torso" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bolvan/grudverx/Torso" index="0" unique_id=782726991]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0058136284, -0.13572407, -0.00022664666)
 shape = SubResource("CapsuleShape3D_qcoc2")
 

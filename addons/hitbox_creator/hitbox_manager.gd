@@ -327,31 +327,42 @@ func _create_hitbox_between_nodes(hitbox_name: String, node1: Node3D, node2: Nod
 	
 	shape_node.shape = collision_shape
 	
-	# Позиционируем
+	# Позиционируем посередине между нодами
 	var center = (node1.global_position + node2.global_position) * 0.5
-	area.global_position = center
+	area.position = center - target_node.global_position  # Локальная позиция относительно родителя
 	
-	# Ориентируем
-	var direction = node2.global_position - node1.global_position
+	# Ориентируем по направлению
+	var direction = (node2.global_position - node1.global_position).normalized()
 	if direction.length() > 0.001:
-		area.look_at(node2.global_position, Vector3.UP)
+		# Используем безопасную ориентацию
+		area.basis = Basis.looking_at(direction, Vector3.UP)
 	
-	# Добавляем в иерархию
+	# Добавляем в иерархию - сначала добавляем в сцену, потом устанавливаем детей
 	area.add_child(shape_node)
-	
-	# Устанавливаем владельцев
-	if Engine.is_editor_hint():
-		area.owner = scene_root
-		shape_node.owner = scene_root
 	
 	# Добавляем к целевому узлу
 	target_node.add_child(area)
+	
+	# ТОЛЬКО ПОСЛЕ ДОБАВЛЕНИЯ В СЦЕНУ устанавливаем владельцев!
+	if Engine.is_editor_hint():
+		# Устанавливаем владельцев правильно
+		_set_node_owner_recursive(area, scene_root)
+	
 	print("[HitBox Manager] Added hitbox to scene: ", area.name)
 	
 	# Добавляем скрипт для отладки
 	_add_debug_script(area)
 	
 	return true
+
+func _set_node_owner_recursive(node: Node, owner: Node):
+	"""Рекурсивно устанавливает владельца для ноды и всех ее детей"""
+	if not node or not owner:
+		return
+	
+	node.owner = owner
+	for child in node.get_children():
+		_set_node_owner_recursive(child, owner)
 
 func _create_collision_shape_between_nodes(node1: Node3D, node2: Node3D) -> Shape3D:
 	var shape_type = shape_combo.get_item_text(shape_combo.selected)
@@ -415,7 +426,7 @@ func _ready():
 		_create_debug_mesh()
 
 func _create_debug_mesh():
-	var shape_node = get_node("CollisionShape")
+	var shape_node = get_node_or_null("CollisionShape")
 	if not shape_node or not shape_node.shape:
 		return
 	

@@ -1,4 +1,4 @@
-[gd_resource type="MeshLibrary" load_steps=23 format=4 uid="uid://rpv6js01igyw"]
+[gd_resource type="MeshLibrary" format=4 uid="uid://rpv6js01igyw"]
 
 [ext_resource type="Texture2D" uid="uid://dl8ceuu4ihkr2" path="res://Assets/models/Assets/Dung_Tileset/Tileset1_atlas.png" id="1_6qylp"]
 
