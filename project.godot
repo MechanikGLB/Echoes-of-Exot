@@ -23,7 +23,6 @@ config/windows_native_icon="res://crow.ico"
 [autoload]
 
 GlobalThings="*res://Scripts/global_things.gd"
-SignalLens="*res://addons/signal_lens/autoload/signal_lens_autoload.gd"
 
 [display]
 

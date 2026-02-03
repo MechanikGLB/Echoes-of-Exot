@@ -2,11 +2,18 @@
 class_name HitBoxManager
 extends Node
 
+#TODO: хитбоксы можно создать повторно и они дублируются(исправить)
+#TODO: видимость исправить
+
 # Ссылки на редактор
 var editor_plugin: EditorPlugin
 var editor_interface: EditorInterface
 
 # UI элементы
+const UI_SECTION_SEPARATION = 12
+const UI_CONTROL_SEPARATION = 8
+const UI_GRID_SEPARATION = 4
+
 var dock: Control
 var target_node: Node3D
 var create_button: Button
@@ -23,119 +30,282 @@ var shape_options = ["Auto Detect", "Capsule", "Box", "Sphere", "Cylinder", "Con
 var limb_names = ["body", "head", "arm", "leg", "hand", "foot", "chest", "back", 
 				  "shoulder", "hip", "thigh", "calf", "forearm", "bicep", "torso", "pelvis"]
 
+#======================================================
+# Методы для интерфейса
+
 func create_dock_panel() -> Control:
 	print("[HitBox Manager] Creating dock panel...")
 	
-	var vbox = VBoxContainer.new()
-	vbox.name = "HitBoxCreatorDock"
-	vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	vbox.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	vbox.add_theme_constant_override("separation", 8)
+	# Основной контейнер со скроллом
+	var scroll = ScrollContainer.new()
+	scroll.name = "HitBoxCreatorScroll"
+	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	
-	# Заголовок
-	var title = Label.new()
-	title.text = "Character HitBox Setup"
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.add_theme_font_size_override("font_size", 14)
-	vbox.add_child(title)
+	var main_vbox = VBoxContainer.new()
+	main_vbox.name = "HitBoxCreatorMain"
+	main_vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	main_vbox.add_theme_constant_override("separation", UI_SECTION_SEPARATION)
+	main_vbox.add_theme_constant_override("margin_left", 8)
+	main_vbox.add_theme_constant_override("margin_right", 8)
+	main_vbox.add_theme_constant_override("margin_top", 8)
+	main_vbox.add_theme_constant_override("margin_bottom", 8)
 	
-	vbox.add_child(HSeparator.new())
+	scroll.add_child(main_vbox)
 	
-	# Информация о формате имен
-	var format_info = Label.new()
-	format_info.text = "Node naming rules:\n• body_1, body_2... (hitbox between them)\n• arm_1_v, arm_2_v (visible to player)\n• head_v (visible, no hitbox)\n• weapon, camera (ignored)"
-	format_info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	format_info.add_theme_color_override("font_color", Color(0.8, 0.8, 0.8))
-	format_info.add_theme_font_size_override("font_size", 10)
-	vbox.add_child(format_info)
+	# Собираем UI из компонентов
+	main_vbox.add_child(_create_header_section())
+	main_vbox.add_child(_create_separator())
+	main_vbox.add_child(_create_info_section())
+	main_vbox.add_child(_create_separator())
+	main_vbox.add_child(_create_settings_section())
+	main_vbox.add_child(_create_separator())
+	main_vbox.add_child(_create_visibility_section())
+	main_vbox.add_child(_create_separator())
+	main_vbox.add_child(_create_advanced_section())
+	main_vbox.add_child(_create_separator())
+	main_vbox.add_child(_create_actions_section())
+	main_vbox.add_child(_create_separator())
+	main_vbox.add_child(_create_status_section())
 	
-	vbox.add_child(HSeparator.new())
+	dock = scroll
+	print("[HitBox Manager] Dock panel created successfully")
+	return scroll
+
+func _create_section_header(title: String, tooltip: String = "") -> Label:
+	var header = Label.new()
+	header.text = title
+	header.add_theme_font_size_override("font_size", 12)
+	if tooltip:
+		header.tooltip_text = tooltip
+	return header
+
+func _create_labeled_control(label_text: String, control: Control) -> HBoxContainer:
+	var hbox = HBoxContainer.new()
+	hbox.add_theme_constant_override("separation", UI_CONTROL_SEPARATION)
 	
-	# Выбор формы
-	var shape_label = Label.new()
-	shape_label.text = "Collision Shape:"
-	vbox.add_child(shape_label)
+	var label = Label.new()
+	label.text = label_text
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	
+	hbox.add_child(label)
+	hbox.add_child(control)
+	
+	return hbox
+
+func _create_shape_selector() -> OptionButton:
 	shape_combo = OptionButton.new()
 	for shape_name in shape_options:
 		shape_combo.add_item(shape_name)
 	shape_combo.selected = 0
-	shape_combo.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	vbox.add_child(shape_combo)
-	
-	# Размер
-	var size_label = Label.new()
-	size_label.text = "Extra Size:"
-	vbox.add_child(size_label)
+	shape_combo.custom_minimum_size.x = 150
+	return shape_combo
+
+func _create_size_selector() -> HBoxContainer:
+	var hbox = HBoxContainer.new()
+	hbox.add_theme_constant_override("separation", 4)
 	
 	size_spinbox = SpinBox.new()
 	size_spinbox.min_value = 0.0
 	size_spinbox.max_value = 5.0
 	size_spinbox.step = 0.05
 	size_spinbox.value = 0.15
-	size_spinbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	vbox.add_child(size_spinbox)
+	size_spinbox.custom_minimum_size.x = 80
 	
-	# Слои коллизии
-	var layers_label = Label.new()
-	layers_label.text = "Collision Layers:"
-	vbox.add_child(layers_label)
+	var unit_label = Label.new()
+	unit_label.text = "м"
 	
-	var layers_grid = GridContainer.new()
-	layers_grid.columns = 2
-	layers_grid.add_theme_constant_override("h_separation", 10)
-	layers_grid.add_theme_constant_override("v_separation", 5)
+	hbox.add_child(size_spinbox)
+	hbox.add_child(unit_label)
 	
-	for i in range(10):
-		var checkbox = CheckBox.new()
-		checkbox.text = "Layer %d" % (i + 1)
-		checkbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	return hbox
+
+func _create_layers_grid() -> GridContainer:
+	var grid = GridContainer.new()
+	grid.columns = 5
+	grid.add_theme_constant_override("h_separation", UI_GRID_SEPARATION)
+	grid.add_theme_constant_override("v_separation", UI_GRID_SEPARATION)
+	grid.custom_minimum_size = Vector2(10, 120)
+	
+	layer_checkboxes.clear()
+	for i in range(20): 
 		
-		if i == 2:  # Layer 3 по умолчанию
+		var checkbox = CheckBox.new()
+		checkbox.text = str(i + 1)
+		checkbox.custom_minimum_size.x = 32
+		checkbox.custom_minimum_size.y = 24
+		checkbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		checkbox.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		
+		if i == 2:  # Слой 3 по умолчанию
 			checkbox.button_pressed = true
 		
 		layer_checkboxes.append(checkbox)
-		layers_grid.add_child(checkbox)
+		grid.add_child(checkbox)
+		
+	return grid
+
+func _create_separator() -> HSeparator:
+	var separator = HSeparator.new()
+	separator.add_theme_constant_override("separation", UI_SECTION_SEPARATION)
+	return separator
+
+func _create_header_section() -> Control:
+	var hbox = HBoxContainer.new()
+	hbox.add_theme_constant_override("separation", UI_CONTROL_SEPARATION)
 	
-	vbox.add_child(layers_grid)
+	var icon = Label.new()
+	icon.add_theme_font_size_override("font_size", 16)
 	
-	# Настройка отладки
+	var title = Label.new()
+	title.text = "HITBOX CREATOR"
+	title.add_theme_font_size_override("font_size", 14)
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	
+	hbox.add_child(icon)
+	hbox.add_child(title)
+	
+	return hbox
+
+func _create_info_section() -> Control:
+	var vbox = VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", UI_CONTROL_SEPARATION)
+	
+	var header = _create_section_header(" Формат имен узлов", "Правила именования узлов для автоматического определения")
+	
+	var info_text = """• body_1, body_2... (хитбокс на основе меша)
+• limb_1, limb_2... (хитбокс между узлами)
+• *_v (видимые игроку узлы)
+• weapon, camera, light (игнорируются)"""
+	
+	var label = Label.new()
+	label.text = info_text
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD
+	label.add_theme_font_size_override("font_size", 11)
+	label.add_theme_color_override("font_color", Color(0.7, 0.7, 0.7))
+	
+	vbox.add_child(header)
+	vbox.add_child(label)
+	
+	return vbox
+
+func _create_settings_section() -> Control:
+	var vbox = VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", UI_CONTROL_SEPARATION)
+	
+	var header = _create_section_header("⚙️ Основные настройки", "Настройки создания коллизий")
+	vbox.add_child(header)
+	
+	# Форма коллизии
+	var shape_row = _create_labeled_control("Форма:", _create_shape_selector())
+	vbox.add_child(shape_row)
+	
+	# Дополнительный размер
+	var size_row = _create_labeled_control("Доп. размер:", _create_size_selector())
+	vbox.add_child(size_row)
+	
+	# Слои коллизии
+	var layers_label = Label.new()
+	layers_label.text = "Слои коллизии:"
+	vbox.add_child(layers_label)
+	
+	vbox.add_child(_create_layers_grid())
+	
+	return vbox
+
+func _create_visibility_section() -> Control:
+	var vbox = VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", UI_CONTROL_SEPARATION)
+	
+	var header = _create_section_header("👁️ Видимость", "Настройки видимости для игрока")
+	vbox.add_child(header)
+	
+	# TODO: Здесь будут настройки для _v узлов
+	var coming_soon = Label.new()
+	coming_soon.text = "Настройки видимости (скоро)"
+	coming_soon.add_theme_color_override("font_color", Color(1, 0.8, 0))
+	coming_soon.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	
+	vbox.add_child(coming_soon)
+	
+	return vbox
+
+func _create_advanced_section() -> Control:
+	var vbox = VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", UI_CONTROL_SEPARATION)
+	
+	var header = _create_section_header("🔧 Дополнительно", "Расширенные настройки")
+	vbox.add_child(header)
+	
 	show_debug_checkbox = CheckBox.new()
-	show_debug_checkbox.text = "Show Debug Mesh"
+	show_debug_checkbox.text = " Показать отладочные меши"
 	show_debug_checkbox.button_pressed = true
+	show_debug_checkbox.tooltip_text = "Показывать визуальные меши для коллизий"
+	
 	vbox.add_child(show_debug_checkbox)
 	
-	# Информация
-	info_label = Label.new()
-	info_label.text = "Select a character root node"
-	info_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	info_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	vbox.add_child(info_label)
+	return vbox
+
+func _create_actions_section() -> Control:
+	var vbox = VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", UI_CONTROL_SEPARATION)
 	
-	vbox.add_child(HSeparator.new())
+	var buttons_row = HBoxContainer.new()
+	buttons_row.add_theme_constant_override("separation", UI_GRID_SEPARATION)
 	
-	# Кнопки
 	create_button = Button.new()
-	create_button.text = "Create HitBoxes & Setup Visibility"
+	create_button.text = "Создать"
 	create_button.pressed.connect(_create_hitboxes_and_setup)
 	create_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	vbox.add_child(create_button)
+	create_button.custom_minimum_size.y = 32
 	
 	clear_button = Button.new()
-	clear_button.text = "Clear All HitBoxes"
+	clear_button.text = "Очистить"
 	clear_button.pressed.connect(_clear_hitboxes)
 	clear_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	vbox.add_child(clear_button)
+	clear_button.custom_minimum_size.y = 32
 	
 	visibility_button = Button.new()
-	visibility_button.text = "Toggle Preview Visibility"
+	visibility_button.text = "Видимость"
 	visibility_button.pressed.connect(_toggle_preview_visibility)
 	visibility_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	vbox.add_child(visibility_button)
+	visibility_button.custom_minimum_size.y = 32
 	
-	dock = vbox
-	print("[HitBox Manager] Dock panel created successfully")
+	buttons_row.add_child(create_button)
+	buttons_row.add_child(clear_button)
+	buttons_row.add_child(visibility_button)
+	
+	vbox.add_child(buttons_row)
+	
 	return vbox
+
+func _create_status_section() -> Control:
+	var hbox = HBoxContainer.new()
+	hbox.add_theme_constant_override("separation", UI_CONTROL_SEPARATION)
+	hbox.add_theme_stylebox_override("panel", StyleBoxFlat.new())
+	
+	var status_bg = StyleBoxFlat.new()
+	status_bg.bg_color = Color(0.1, 0.1, 0.1, 0.3)
+	hbox.add_theme_stylebox_override("panel", status_bg)
+	
+	var status_icon = Label.new()
+	status_icon.text = "ℹ️"
+	
+	info_label = Label.new()
+	info_label.text = "Выберите корневой узел персонажа"
+	info_label.autowrap_mode = TextServer.AUTOWRAP_WORD
+	info_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	info_label.add_theme_font_size_override("font_size", 11)
+	
+	hbox.add_child(status_icon)
+	hbox.add_child(info_label)
+	
+	return hbox
+
+#======================================================
+# Дальше пойдут методы для хитбоксов
 
 func _on_selection_changed():
 	print("[HitBox Manager] Selection changed")
@@ -244,6 +414,7 @@ func _setup_visibility(nodes: Array) -> int:
 func _create_limb_hitboxes(nodes: Array, collision_mask: int, scene_root: Node) -> int:
 	var created_count = 0
 	var limb_groups = {}
+	var body_meshes = []
 	
 	# Группируем ноды
 	for node in nodes:
@@ -258,18 +429,37 @@ func _create_limb_hitboxes(nodes: Array, collision_mask: int, scene_root: Node) 
 		if not limb_data.is_empty():
 			var limb_name = limb_data["limb_name"]
 			var limb_number = limb_data["limb_number"]
+			var is_body = limb_data.get("is_body", false)
 			
-			if not limb_groups.has(limb_name):
-				limb_groups[limb_name] = {}
+			if is_body and node is MeshInstance3D:
+				body_meshes.append({
+					"node": node,
+					"number": limb_number, 
+					"name": node.name
+				})
+				print("[HitBox Manager] Found body mesh: ", node.name)
+			else:
+				if not limb_groups.has(limb_name):
+					limb_groups[limb_name] = {}
 			
-			limb_groups[limb_name][limb_number] = node
-			print("[HitBox Manager] Found limb: ", limb_name, "_", limb_number, " (", node.name, ")")
+				limb_groups[limb_name][limb_number] = node
+				print("[HitBox Manager] Found limb: ", limb_name, "_", limb_number, " (", node.name, ")")
 	
 	print("[HitBox Manager] Limb groups found: ", limb_groups.size())
+	print("[HitBox Manager] Body meshes found: ", body_meshes.size())
 	
 	if limb_groups.is_empty():
 		info_label.text = "No limb nodes found"
 		return 0
+	print("___________________________________________________________")
+	
+	for body_data in body_meshes:
+		var body_node = body_data["node"]
+		
+		print("[HitBox Manager] Creating hitbox for body mesh: ", body_node.name)
+		
+		if _create_body_hitbox(body_node, collision_mask, scene_root):
+			created_count += 1
 	
 	# Создаем хитбоксы
 	for limb_name in limb_groups:
@@ -329,19 +519,23 @@ func _create_hitbox_between_nodes(hitbox_name: String, node1: Node3D, node2: Nod
 	
 	# Позиционируем посередине между нодами
 	var center = (node1.global_position + node2.global_position) * 0.5
-	area.position = center - target_node.global_position  # Локальная позиция относительно родителя
+	area.position = node1.to_local(center) # Локальная позиция относительно родителя
 	
 	# Ориентируем по направлению
-	var direction = (node2.global_position - node1.global_position).normalized()
-	if direction.length() > 0.001:
-		# Используем безопасную ориентацию
-		area.basis = Basis.looking_at(direction, Vector3.UP)
+	var local_direction = node1.to_local(node2.global_position) - node1.to_local(node1.global_position)
+	if local_direction.length() > 0.001:
+		area.basis = Basis.looking_at(local_direction.normalized(), Vector3.UP)
+		var shape_type = shape_combo.get_item_text(shape_combo.selected)
+		
+		if shape_type == "Capsule" or shape_type == "Auto Detect" or shape_type == "Cylinder":
+			var rotation_correction = Basis.from_euler(Vector3(PI/2, 0, 0))
+			area.basis = area.basis * rotation_correction
 	
 	# Добавляем в иерархию - сначала добавляем в сцену, потом устанавливаем детей
 	area.add_child(shape_node)
 	
 	# Добавляем к целевому узлу
-	target_node.add_child(area)
+	node1.add_child(area)
 	
 	# ТОЛЬКО ПОСЛЕ ДОБАВЛЕНИЯ В СЦЕНУ устанавливаем владельцев!
 	if Engine.is_editor_hint():
@@ -559,3 +753,85 @@ func _toggle_preview_visibility():
 	else:
 		info_label.text = "No _v nodes found"
 		print("[HitBox Manager] No _v nodes found")
+		
+func _create_body_hitbox(body_node: MeshInstance3D, collision_mask: int, scene_root: Node) -> bool:
+	"""Создает хитбокс для body MeshInstance3D"""
+	
+	if not body_node.mesh:
+		print("[HitBox Manager] Body mesh is empty: ", body_node.name)
+		return false
+	
+	print("[HitBox Manager] Creating hitbox for body: ", body_node.name)
+	
+	# Создаем Area3D
+	var area = Area3D.new()
+	area.name = body_node.name + "_HitBox"
+	area.collision_layer = collision_mask
+	area.collision_mask = 0
+	
+	# Создаем CollisionShape
+	var shape_node = CollisionShape3D.new()
+	shape_node.name = "CollisionShape"
+	
+	# Создаем форму из меша
+	var collision_shape = _create_collision_shape_from_mesh(body_node.mesh)
+	if not collision_shape:
+		print("[HitBox Manager] Failed to create collision shape from mesh")
+		area.queue_free()
+		return false
+	
+	shape_node.shape = collision_shape
+	area.add_child(shape_node)
+	
+	# Для body меша хитбокс должен быть в том же месте
+	# Но body_node уже может быть MeshInstance3D, поэтому:
+	if body_node.get_parent():
+		# Добавляем к родителю body_node
+		body_node.get_parent().add_child(area)
+		# Позиционируем так же как body_node
+		area.position = body_node.position
+		area.basis = body_node.basis
+	else:
+		# На всякий случай
+		body_node.add_child(area)
+		area.position = Vector3.ZERO
+		area.basis = Basis()
+	
+	# Устанавливаем владельца
+	if Engine.is_editor_hint():
+		_set_node_owner_recursive(area, scene_root)
+	
+	# Добавляем скрипт для отладки
+	_add_debug_script(area)
+	
+	print("[HitBox Manager] Created body hitbox: ", area.name)
+	return true
+
+func _create_collision_shape_from_mesh(mesh: Mesh) -> Shape3D:
+	"""Создает форму коллизии из меша для body узлов"""
+	
+	var extra_size = size_spinbox.value
+	
+	print("[HitBox Manager] Creating collision shape from mesh for body")
+	print("[HitBox Manager] Mesh vertices: ", mesh.get_faces().size() / 3 if mesh.get_faces() else 0)
+	
+	# Вариант 1: Выпуклая оболочка (convex hull)
+	var convex_shape = mesh.create_convex_shape()
+	if convex_shape:
+		print("[HitBox Manager] Created convex shape for body")
+		return convex_shape
+	
+	# Вариант 2: Триангулированная форма (trimesh)
+	var trimesh_shape = mesh.create_trimesh_shape()
+	if trimesh_shape:
+		print("[HitBox Manager] Created trimesh shape for body")
+		return trimesh_shape
+	
+	# Вариант 3: Запасной вариант - простой бокс по AABB
+	printerr("[HitBox Manager] Failed to create convex/trimesh shape, using fallback box")
+	var aabb = mesh.get_aabb()
+	var fallback_shape = BoxShape3D.new()
+	fallback_shape.size = aabb.size + Vector3.ONE * extra_size * 2
+	print("[HitBox Manager] Created fallback box: size=", fallback_shape.size)
+	
+	return fallback_shape
