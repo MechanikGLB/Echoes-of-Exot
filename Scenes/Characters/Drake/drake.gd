@@ -1,8 +1,8 @@
 extends CharacterBase3D
 
 func _custom_ready() -> void:
-	pass
+	super._custom_ready()
 
 func _custom_physics_process(_delta: float) -> void:
-	pass
+	super._custom_physics_process(_delta)
 	

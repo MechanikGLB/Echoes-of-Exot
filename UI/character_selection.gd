@@ -128,8 +128,14 @@ func _show_character_model(scene_path: String, character_name: String):
 		_play_character_animation(current_character_instance, character_name)
 
 func _play_character_animation(character_instance: Node, character_name: String):
-	var animation_player = character_instance.get_node(character_name + "/AnimationPlayer") as AnimationPlayer
 	
+	
+	#var animation_player = character_instance.get_node_or_null(character_name + "/AnimationPlayer") as AnimationPlayer
+	#
+	#if not animation_player:
+		#animation_player = character_instance.get_node_or_null("/blockbench_export/AnimationPlayer") as AnimationPlayer
+	
+	var animation_player = find_animation_player_in_hierarchy(character_instance)
 	
 	if animation_player:
 		print("Найден AnimationPlayer для ", character_name)
@@ -147,7 +153,7 @@ func _play_character_animation(character_instance: Node, character_name: String)
 		if not played:
 			print("Не найдено подходящих анимаций для показа")
 	else:
-		print("AnimationPlayer не найден по пути: ", character_name + "/AnimationPlayer")
+		print("AnimationPlayer не найден для: ", character_name)
 
 func _on_return_pressed() -> void:
 	var main_menu_path = "res://Scenes/main_menu.tscn"
@@ -158,9 +164,15 @@ func _on_return_pressed() -> void:
 	else:
 		push_error("Сцена выбора персонажа не найдена!")
 
-
 func _on_confirm_pressed() -> void:
 	if GlobalThings.packed_map:
 		get_tree().change_scene_to_packed(GlobalThings.packed_map)
 	else:
 		push_error("карта не выбрана") 
+
+func find_animation_player_in_hierarchy(root: Node) -> AnimationPlayer:
+	# Ищем любой AnimationPlayer в иерархии
+	var animation_players = root.find_children("*", "AnimationPlayer", true, false)
+	if animation_players.size() > 0:
+		return animation_players[0] as AnimationPlayer
+	return null
