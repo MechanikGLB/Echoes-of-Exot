@@ -23,12 +23,14 @@ var info_label: Label
 var shape_combo: OptionButton
 var size_spinbox: SpinBox
 var layer_checkboxes: Array[CheckBox] = []
+var render_layer_checkboxes: Array[CheckBox] = []
 var show_debug_checkbox: CheckBox
 
 # Конфигурация
 var shape_options = ["Auto Detect", "Capsule", "Box", "Sphere", "Cylinder", "Convex Polygon"]
 var limb_names = ["body", "head", "arm", "leg", "hand", "foot", "chest", "back", 
 				  "shoulder", "hip", "thigh", "calf", "forearm", "bicep", "torso", "pelvis"]
+
 
 #======================================================
 # Методы для интерфейса
@@ -215,23 +217,6 @@ func _create_settings_section() -> Control:
 	
 	return vbox
 
-func _create_visibility_section() -> Control:
-	var vbox = VBoxContainer.new()
-	vbox.add_theme_constant_override("separation", UI_CONTROL_SEPARATION)
-	
-	var header = _create_section_header("👁️ Видимость", "Настройки видимости для игрока")
-	vbox.add_child(header)
-	
-	# TODO: Здесь будут настройки для _v узлов
-	var coming_soon = Label.new()
-	coming_soon.text = "Настройки видимости (скоро)"
-	coming_soon.add_theme_color_override("font_color", Color(1, 0.8, 0))
-	coming_soon.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	
-	vbox.add_child(coming_soon)
-	
-	return vbox
-
 func _create_advanced_section() -> Control:
 	var vbox = VBoxContainer.new()
 	vbox.add_theme_constant_override("separation", UI_CONTROL_SEPARATION)
@@ -303,6 +288,55 @@ func _create_status_section() -> Control:
 	hbox.add_child(info_label)
 	
 	return hbox
+
+func _create_visibility_section() -> Control:
+	var vbox = VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", UI_CONTROL_SEPARATION)
+	
+	var header = _create_section_header("👁️ Видимость (Render Layers)", "Настройки видимости для игрока")
+	vbox.add_child(header)
+	
+	# Описание
+	var desc_label = Label.new()
+	desc_label.text = "Ноды с _v получат выбранные слои отрисовки"
+	desc_label.add_theme_font_size_override("font_size", 11)
+	desc_label.add_theme_color_override("font_color", Color(0.7, 0.7, 0.7))
+	vbox.add_child(desc_label)
+	
+	# Сетка слоёв отрисовки
+	var layers_label = Label.new()
+	layers_label.text = "Слои отрисовки для _v нод:"
+	vbox.add_child(layers_label)
+	
+	vbox.add_child(_create_render_layers_grid())
+	
+	return vbox
+
+func _create_render_layers_grid() -> GridContainer:
+	"""Создает сетку для выбора слоёв отрисовки (видимости)"""
+	var grid = GridContainer.new()
+	grid.columns = 5
+	grid.add_theme_constant_override("h_separation", UI_GRID_SEPARATION)
+	grid.add_theme_constant_override("v_separation", UI_GRID_SEPARATION)
+	grid.custom_minimum_size = Vector2(10, 120)
+	
+	render_layer_checkboxes.clear()
+	for i in range(20):  # Godot 4.x имеет 20 слоёв рендера
+		var checkbox = CheckBox.new()
+		checkbox.text = str(i + 1)
+		checkbox.custom_minimum_size.x = 32
+		checkbox.custom_minimum_size.y = 24
+		checkbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		checkbox.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		
+		# По умолчанию включаем первый слой для видимых нод
+		if i == 0:  # Слой 1 по умолчанию для видимых мешей
+			checkbox.button_pressed = true
+		
+		render_layer_checkboxes.append(checkbox)
+		grid.add_child(checkbox)
+		
+	return grid
 
 #======================================================
 # Дальше пойдут методы для хитбоксов
@@ -377,9 +411,9 @@ func _create_hitboxes_and_setup():
 	
 	print("[HitBox Manager] 3D nodes: ", nodes_3d.size())
 	
-	# Настраиваем видимость
-	var visibility_changes = _setup_visibility(nodes_3d)
-	print("[HitBox Manager] Visibility changes: ", visibility_changes)
+	# Настраиваем видимость через слои отрисовки
+	var visibility_changes = _setup_visibility_via_layers(nodes_3d)
+	print("[HitBox Manager] Visibility changes via layers: ", visibility_changes)
 	
 	# Создаем хитбоксы
 	var hitboxes_created = _create_limb_hitboxes(nodes_3d, collision_mask, scene_root)
@@ -395,21 +429,6 @@ func _create_hitboxes_and_setup():
 	editor_interface.save_scene()
 	
 	print("[HitBox Manager] Done!")
-
-func _setup_visibility(nodes: Array) -> int:
-	var changes = 0
-	
-	for node in nodes:
-		if not node is Node3D:
-			continue
-		
-		if "_v" in node.name:
-			if not node.visible:
-				node.visible = true
-				changes += 1
-				print("[HitBox Manager] Made visible: ", node.name)
-	
-	return changes
 
 func _create_limb_hitboxes(nodes: Array, collision_mask: int, scene_root: Node) -> int:
 	var created_count = 0
@@ -722,38 +741,6 @@ func _clear_hitboxes():
 	
 	print("[HitBox Manager] Hitboxes cleared")
 
-func _toggle_preview_visibility():
-	print("[HitBox Manager] Toggling preview visibility...")
-	
-	if not target_node:
-		printerr("[HitBox Manager] No target node selected!")
-		return
-	
-	var nodes_to_toggle = []
-	
-	for child in HitBoxUtils.get_all_children(target_node):
-		if child is Node3D and "_v" in child.name:
-			nodes_to_toggle.append(child)
-			print("[HitBox Manager] Found _v node: ", child.name)
-	
-	if nodes_to_toggle.size() > 0:
-		var first_node = nodes_to_toggle[0]
-		var make_visible = not first_node.visible
-		
-		print("[HitBox Manager] Setting visibility to: ", make_visible)
-		
-		for node in nodes_to_toggle:
-			if node is Node3D:
-				node.visible = make_visible
-		
-		info_label.text = "%s visibility for %d _v nodes" % [
-			"Shown" if make_visible else "Hidden",
-			nodes_to_toggle.size()
-		]
-	else:
-		info_label.text = "No _v nodes found"
-		print("[HitBox Manager] No _v nodes found")
-		
 func _create_body_hitbox(body_node: MeshInstance3D, collision_mask: int, scene_root: Node) -> bool:
 	"""Создает хитбокс для body MeshInstance3D"""
 	
@@ -835,3 +822,60 @@ func _create_collision_shape_from_mesh(mesh: Mesh) -> Shape3D:
 	print("[HitBox Manager] Created fallback box: size=", fallback_shape.size)
 	
 	return fallback_shape
+
+func _setup_visibility_via_layers(nodes: Array) -> int:
+	var changes = 0
+	var mask = _get_selected_render_layers()
+	
+	for node in nodes:
+		if node is MeshInstance3D:
+			if "_v" in node.name:
+				if node.layers != mask:
+					node.layers = mask
+					node.visible = true
+					changes += 1
+			elif node.layers != 0:
+				node.layers = 0
+				node.visible = true
+				changes += 1
+	
+	return changes
+
+func _get_selected_render_layers() -> int:
+	"""Возвращает битовую маску выбранных слоёв отрисовки"""
+	var mask = 0
+	for i in range(render_layer_checkboxes.size()):
+		if render_layer_checkboxes[i].button_pressed:
+			mask |= 1 << i
+	print("[HitBox Manager] Selected render layers mask: ", mask)
+	return mask
+
+func _toggle_preview_visibility():
+	if not target_node:
+		return
+	
+	var mask = _get_selected_render_layers()
+	var v_meshes = 0
+	
+	for child in HitBoxUtils.get_all_children(target_node):
+		if child is MeshInstance3D:
+			if "_v" in child.name:
+				child.layers = mask
+				child.visible = true
+				v_meshes += 1
+			else:
+				child.layers = 0
+				child.visible = true
+	
+	if v_meshes > 0:
+		info_label.text = "%d _v meshes set to layers %s" % [v_meshes, _render_layers_to_string(mask)]
+	else:
+		info_label.text = "No _v meshes found"
+
+func _render_layers_to_string(mask: int) -> String:
+	"""Конвертирует битовую маску слоёв в строку вида '1, 3, 4'"""
+	var layers = []
+	for i in range(20):
+		if mask & (1 << i):
+			layers.append(str(i + 1))
+	return ", ".join(layers) if layers.size() > 0 else "none"
