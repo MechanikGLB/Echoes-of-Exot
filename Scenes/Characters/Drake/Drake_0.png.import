@@ -2,14 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dijxrshgwx7ht"
+uid="uid://ck3vpjs4jvgvi"
 path.s3tc="res://.godot/imported/Drake_0.png-949e465a1dc658593f6a3f82d6697d15.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "84a2b83033386581b84173615bb711d8"
+"md5": "96fcf6e6a0e887f26c1a2f1a6434bd4c"
 }
 
 [deps]

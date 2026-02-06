@@ -1,15 +1,888 @@
 [gd_scene format=3 uid="uid://qk7ax3erblf2"]
 
-[ext_resource type="PackedScene" uid="uid://3m4lqsoccktn" path="res://Scenes/Characters/test/Тестовый болван1.glb" id="1_rs8x3"]
+[ext_resource type="PackedScene" uid="uid://stm08yiay5pi" path="res://Scenes/Characters/test/Тестовый болван1.glb" id="1_rs8x3"]
+[ext_resource type="Script" uid="uid://tscuniofk775" path="res://Scripts/Character.gd" id="1_yxyix"]
 
-[node name="blockbench_export" unique_id=1991234474 instance=ExtResource("1_rs8x3")]
-transform = Transform3D(0.9992789, 0.0018519011, -0.037923984, -0.0018492677, 0.9999983, 0.000104511695, 0.03792411, -3.430419e-05, 0.99928063, 0, 0, 0)
+[sub_resource type="GDScript" id="GDScript_yxyix"]
+script/source = "
+@tool
+extends Area3D
 
-[node name="leftlegz" parent="testbolvan/bodyz/legos" parent_id_path=PackedInt32Array(1819652995) index="0" unique_id=1229052288]
-transform = Transform3D(1, 0, 0, 0, 0.42261824, 0.9063078, 0, -0.9063078, 0.42261824, -0.1875, 0, 0)
+@export var debug_color: Color = Color(0, 1, 0, 0.3)
+@export var show_debug: bool = true
 
-[node name="rightlegz" parent="testbolvan/bodyz/legos" parent_id_path=PackedInt32Array(1819652995) index="1" unique_id=1871168484]
-transform = Transform3D(1, 0, 0, 0, 0.7071067, -0.7071067, 0, 0.7071067, 0.7071067, 0.1875, 0, 0)
+var debug_mesh: MeshInstance3D
 
-[node name="rightarmz" parent="testbolvan/bodyz/armos" parent_id_path=PackedInt32Array(1655602367) index="0" unique_id=1348968581]
-transform = Transform3D(1, 0, 0, 0, 0.7372773, 0.6755902, 0, -0.6755902, 0.7372773, 0.5625, 0, 0)
+func _ready():
+	if Engine.is_editor_hint():
+		_create_debug_mesh()
+
+func _create_debug_mesh():
+	var shape_node = get_node_or_null(\"CollisionShape\")
+	if not shape_node or not shape_node.shape:
+		return
+	
+	debug_mesh = MeshInstance3D.new()
+	debug_mesh.name = \"DebugMesh\"
+	
+	var material = StandardMaterial3D.new()
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.albedo_color = debug_color
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	
+	var shape = shape_node.shape
+	
+	if shape is CapsuleShape3D:
+		var capsule = CapsuleMesh.new()
+		capsule.radius = shape.radius
+		capsule.height = shape.height
+		capsule.material = material
+		debug_mesh.mesh = capsule
+	elif shape is BoxShape3D:
+		var box = BoxMesh.new()
+		box.size = shape.size
+		box.material = material
+		debug_mesh.mesh = box
+	elif shape is SphereShape3D:
+		var sphere = SphereMesh.new()
+		sphere.radius = shape.radius
+		sphere.height = shape.radius * 2
+		sphere.material = material
+		debug_mesh.mesh = sphere
+	elif shape is CylinderShape3D:
+		var cylinder = CylinderMesh.new()
+		cylinder.top_radius = shape.radius
+		cylinder.bottom_radius = shape.radius
+		cylinder.height = shape.height
+		cylinder.material = material
+		debug_mesh.mesh = cylinder
+	
+	add_child(debug_mesh)
+	
+	if get_tree().edited_scene_root:
+		debug_mesh.owner = get_tree().edited_scene_root
+	
+	debug_mesh.visible = show_debug
+
+func _process(_delta):
+	if Engine.is_editor_hint() and debug_mesh:
+		debug_mesh.visible = show_debug
+"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jspxw"]
+radius = 0.15
+height = 1.3625
+
+[sub_resource type="GDScript" id="GDScript_oyfhb"]
+script/source = "
+@tool
+extends Area3D
+
+@export var debug_color: Color = Color(0, 1, 0, 0.3)
+@export var show_debug: bool = true
+
+var debug_mesh: MeshInstance3D
+
+func _ready():
+	if Engine.is_editor_hint():
+		_create_debug_mesh()
+
+func _create_debug_mesh():
+	var shape_node = get_node_or_null(\"CollisionShape\")
+	if not shape_node or not shape_node.shape:
+		return
+	
+	debug_mesh = MeshInstance3D.new()
+	debug_mesh.name = \"DebugMesh\"
+	
+	var material = StandardMaterial3D.new()
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.albedo_color = debug_color
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	
+	var shape = shape_node.shape
+	
+	if shape is CapsuleShape3D:
+		var capsule = CapsuleMesh.new()
+		capsule.radius = shape.radius
+		capsule.height = shape.height
+		capsule.material = material
+		debug_mesh.mesh = capsule
+	elif shape is BoxShape3D:
+		var box = BoxMesh.new()
+		box.size = shape.size
+		box.material = material
+		debug_mesh.mesh = box
+	elif shape is SphereShape3D:
+		var sphere = SphereMesh.new()
+		sphere.radius = shape.radius
+		sphere.height = shape.radius * 2
+		sphere.material = material
+		debug_mesh.mesh = sphere
+	elif shape is CylinderShape3D:
+		var cylinder = CylinderMesh.new()
+		cylinder.top_radius = shape.radius
+		cylinder.bottom_radius = shape.radius
+		cylinder.height = shape.height
+		cylinder.material = material
+		debug_mesh.mesh = cylinder
+	
+	add_child(debug_mesh)
+	
+	if get_tree().edited_scene_root:
+		debug_mesh.owner = get_tree().edited_scene_root
+	
+	debug_mesh.visible = show_debug
+
+func _process(_delta):
+	if Engine.is_editor_hint() and debug_mesh:
+		debug_mesh.visible = show_debug
+"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ivpyy"]
+radius = 0.15
+height = 1.0499998
+
+[sub_resource type="GDScript" id="GDScript_q5mvi"]
+script/source = "
+@tool
+extends Area3D
+
+@export var debug_color: Color = Color(0, 1, 0, 0.3)
+@export var show_debug: bool = true
+
+var debug_mesh: MeshInstance3D
+
+func _ready():
+	if Engine.is_editor_hint():
+		_create_debug_mesh()
+
+func _create_debug_mesh():
+	var shape_node = get_node_or_null(\"CollisionShape\")
+	if not shape_node or not shape_node.shape:
+		return
+	
+	debug_mesh = MeshInstance3D.new()
+	debug_mesh.name = \"DebugMesh\"
+	
+	var material = StandardMaterial3D.new()
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.albedo_color = debug_color
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	
+	var shape = shape_node.shape
+	
+	if shape is CapsuleShape3D:
+		var capsule = CapsuleMesh.new()
+		capsule.radius = shape.radius
+		capsule.height = shape.height
+		capsule.material = material
+		debug_mesh.mesh = capsule
+	elif shape is BoxShape3D:
+		var box = BoxMesh.new()
+		box.size = shape.size
+		box.material = material
+		debug_mesh.mesh = box
+	elif shape is SphereShape3D:
+		var sphere = SphereMesh.new()
+		sphere.radius = shape.radius
+		sphere.height = shape.radius * 2
+		sphere.material = material
+		debug_mesh.mesh = sphere
+	elif shape is CylinderShape3D:
+		var cylinder = CylinderMesh.new()
+		cylinder.top_radius = shape.radius
+		cylinder.bottom_radius = shape.radius
+		cylinder.height = shape.height
+		cylinder.material = material
+		debug_mesh.mesh = cylinder
+	
+	add_child(debug_mesh)
+	
+	if get_tree().edited_scene_root:
+		debug_mesh.owner = get_tree().edited_scene_root
+	
+	debug_mesh.visible = show_debug
+
+func _process(_delta):
+	if Engine.is_editor_hint() and debug_mesh:
+		debug_mesh.visible = show_debug
+"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o7twy"]
+radius = 0.15
+height = 1.3625
+
+[sub_resource type="GDScript" id="GDScript_1clhs"]
+script/source = "
+@tool
+extends Area3D
+
+@export var debug_color: Color = Color(0, 1, 0, 0.3)
+@export var show_debug: bool = true
+
+var debug_mesh: MeshInstance3D
+
+func _ready():
+	if Engine.is_editor_hint():
+		_create_debug_mesh()
+
+func _create_debug_mesh():
+	var shape_node = get_node_or_null(\"CollisionShape\")
+	if not shape_node or not shape_node.shape:
+		return
+	
+	debug_mesh = MeshInstance3D.new()
+	debug_mesh.name = \"DebugMesh\"
+	
+	var material = StandardMaterial3D.new()
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.albedo_color = debug_color
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	
+	var shape = shape_node.shape
+	
+	if shape is CapsuleShape3D:
+		var capsule = CapsuleMesh.new()
+		capsule.radius = shape.radius
+		capsule.height = shape.height
+		capsule.material = material
+		debug_mesh.mesh = capsule
+	elif shape is BoxShape3D:
+		var box = BoxMesh.new()
+		box.size = shape.size
+		box.material = material
+		debug_mesh.mesh = box
+	elif shape is SphereShape3D:
+		var sphere = SphereMesh.new()
+		sphere.radius = shape.radius
+		sphere.height = shape.radius * 2
+		sphere.material = material
+		debug_mesh.mesh = sphere
+	elif shape is CylinderShape3D:
+		var cylinder = CylinderMesh.new()
+		cylinder.top_radius = shape.radius
+		cylinder.bottom_radius = shape.radius
+		cylinder.height = shape.height
+		cylinder.material = material
+		debug_mesh.mesh = cylinder
+	
+	add_child(debug_mesh)
+	
+	if get_tree().edited_scene_root:
+		debug_mesh.owner = get_tree().edited_scene_root
+	
+	debug_mesh.visible = show_debug
+
+func _process(_delta):
+	if Engine.is_editor_hint() and debug_mesh:
+		debug_mesh.visible = show_debug
+"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5dih6"]
+radius = 0.15
+height = 1.0499998
+
+[sub_resource type="GDScript" id="GDScript_cux0h"]
+script/source = "
+@tool
+extends Area3D
+
+@export var debug_color: Color = Color(0, 1, 0, 0.3)
+@export var show_debug: bool = true
+
+var debug_mesh: MeshInstance3D
+
+func _ready():
+	if Engine.is_editor_hint():
+		_create_debug_mesh()
+
+func _create_debug_mesh():
+	var shape_node = get_node_or_null(\"CollisionShape\")
+	if not shape_node or not shape_node.shape:
+		return
+	
+	debug_mesh = MeshInstance3D.new()
+	debug_mesh.name = \"DebugMesh\"
+	
+	var material = StandardMaterial3D.new()
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.albedo_color = debug_color
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	
+	var shape = shape_node.shape
+	
+	if shape is CapsuleShape3D:
+		var capsule = CapsuleMesh.new()
+		capsule.radius = shape.radius
+		capsule.height = shape.height
+		capsule.material = material
+		debug_mesh.mesh = capsule
+	elif shape is BoxShape3D:
+		var box = BoxMesh.new()
+		box.size = shape.size
+		box.material = material
+		debug_mesh.mesh = box
+	elif shape is SphereShape3D:
+		var sphere = SphereMesh.new()
+		sphere.radius = shape.radius
+		sphere.height = shape.radius * 2
+		sphere.material = material
+		debug_mesh.mesh = sphere
+	elif shape is CylinderShape3D:
+		var cylinder = CylinderMesh.new()
+		cylinder.top_radius = shape.radius
+		cylinder.bottom_radius = shape.radius
+		cylinder.height = shape.height
+		cylinder.material = material
+		debug_mesh.mesh = cylinder
+	
+	add_child(debug_mesh)
+	
+	if get_tree().edited_scene_root:
+		debug_mesh.owner = get_tree().edited_scene_root
+	
+	debug_mesh.visible = show_debug
+
+func _process(_delta):
+	if Engine.is_editor_hint() and debug_mesh:
+		debug_mesh.visible = show_debug
+"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pho6g"]
+radius = 0.15
+height = 1.2999998
+
+[sub_resource type="GDScript" id="GDScript_1gxbt"]
+script/source = "
+@tool
+extends Area3D
+
+@export var debug_color: Color = Color(0, 1, 0, 0.3)
+@export var show_debug: bool = true
+
+var debug_mesh: MeshInstance3D
+
+func _ready():
+	if Engine.is_editor_hint():
+		_create_debug_mesh()
+
+func _create_debug_mesh():
+	var shape_node = get_node_or_null(\"CollisionShape\")
+	if not shape_node or not shape_node.shape:
+		return
+	
+	debug_mesh = MeshInstance3D.new()
+	debug_mesh.name = \"DebugMesh\"
+	
+	var material = StandardMaterial3D.new()
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.albedo_color = debug_color
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	
+	var shape = shape_node.shape
+	
+	if shape is CapsuleShape3D:
+		var capsule = CapsuleMesh.new()
+		capsule.radius = shape.radius
+		capsule.height = shape.height
+		capsule.material = material
+		debug_mesh.mesh = capsule
+	elif shape is BoxShape3D:
+		var box = BoxMesh.new()
+		box.size = shape.size
+		box.material = material
+		debug_mesh.mesh = box
+	elif shape is SphereShape3D:
+		var sphere = SphereMesh.new()
+		sphere.radius = shape.radius
+		sphere.height = shape.radius * 2
+		sphere.material = material
+		debug_mesh.mesh = sphere
+	elif shape is CylinderShape3D:
+		var cylinder = CylinderMesh.new()
+		cylinder.top_radius = shape.radius
+		cylinder.bottom_radius = shape.radius
+		cylinder.height = shape.height
+		cylinder.material = material
+		debug_mesh.mesh = cylinder
+	
+	add_child(debug_mesh)
+	
+	if get_tree().edited_scene_root:
+		debug_mesh.owner = get_tree().edited_scene_root
+	
+	debug_mesh.visible = show_debug
+
+func _process(_delta):
+	if Engine.is_editor_hint() and debug_mesh:
+		debug_mesh.visible = show_debug
+"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_11ho2"]
+radius = 0.15
+height = 1.2250001
+
+[sub_resource type="GDScript" id="GDScript_jts2c"]
+script/source = "
+@tool
+extends Area3D
+
+@export var debug_color: Color = Color(0, 1, 0, 0.3)
+@export var show_debug: bool = true
+
+var debug_mesh: MeshInstance3D
+
+func _ready():
+	if Engine.is_editor_hint():
+		_create_debug_mesh()
+
+func _create_debug_mesh():
+	var shape_node = get_node_or_null(\"CollisionShape\")
+	if not shape_node or not shape_node.shape:
+		return
+	
+	debug_mesh = MeshInstance3D.new()
+	debug_mesh.name = \"DebugMesh\"
+	
+	var material = StandardMaterial3D.new()
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.albedo_color = debug_color
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	
+	var shape = shape_node.shape
+	
+	if shape is CapsuleShape3D:
+		var capsule = CapsuleMesh.new()
+		capsule.radius = shape.radius
+		capsule.height = shape.height
+		capsule.material = material
+		debug_mesh.mesh = capsule
+	elif shape is BoxShape3D:
+		var box = BoxMesh.new()
+		box.size = shape.size
+		box.material = material
+		debug_mesh.mesh = box
+	elif shape is SphereShape3D:
+		var sphere = SphereMesh.new()
+		sphere.radius = shape.radius
+		sphere.height = shape.radius * 2
+		sphere.material = material
+		debug_mesh.mesh = sphere
+	elif shape is CylinderShape3D:
+		var cylinder = CylinderMesh.new()
+		cylinder.top_radius = shape.radius
+		cylinder.bottom_radius = shape.radius
+		cylinder.height = shape.height
+		cylinder.material = material
+		debug_mesh.mesh = cylinder
+	
+	add_child(debug_mesh)
+	
+	if get_tree().edited_scene_root:
+		debug_mesh.owner = get_tree().edited_scene_root
+	
+	debug_mesh.visible = show_debug
+
+func _process(_delta):
+	if Engine.is_editor_hint() and debug_mesh:
+		debug_mesh.visible = show_debug
+"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xymxn"]
+radius = 0.15
+height = 1.2999998
+
+[sub_resource type="GDScript" id="GDScript_h60fv"]
+script/source = "
+@tool
+extends Area3D
+
+@export var debug_color: Color = Color(0, 1, 0, 0.3)
+@export var show_debug: bool = true
+
+var debug_mesh: MeshInstance3D
+
+func _ready():
+	if Engine.is_editor_hint():
+		_create_debug_mesh()
+
+func _create_debug_mesh():
+	var shape_node = get_node_or_null(\"CollisionShape\")
+	if not shape_node or not shape_node.shape:
+		return
+	
+	debug_mesh = MeshInstance3D.new()
+	debug_mesh.name = \"DebugMesh\"
+	
+	var material = StandardMaterial3D.new()
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.albedo_color = debug_color
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	
+	var shape = shape_node.shape
+	
+	if shape is CapsuleShape3D:
+		var capsule = CapsuleMesh.new()
+		capsule.radius = shape.radius
+		capsule.height = shape.height
+		capsule.material = material
+		debug_mesh.mesh = capsule
+	elif shape is BoxShape3D:
+		var box = BoxMesh.new()
+		box.size = shape.size
+		box.material = material
+		debug_mesh.mesh = box
+	elif shape is SphereShape3D:
+		var sphere = SphereMesh.new()
+		sphere.radius = shape.radius
+		sphere.height = shape.radius * 2
+		sphere.material = material
+		debug_mesh.mesh = sphere
+	elif shape is CylinderShape3D:
+		var cylinder = CylinderMesh.new()
+		cylinder.top_radius = shape.radius
+		cylinder.bottom_radius = shape.radius
+		cylinder.height = shape.height
+		cylinder.material = material
+		debug_mesh.mesh = cylinder
+	
+	add_child(debug_mesh)
+	
+	if get_tree().edited_scene_root:
+		debug_mesh.owner = get_tree().edited_scene_root
+	
+	debug_mesh.visible = show_debug
+
+func _process(_delta):
+	if Engine.is_editor_hint() and debug_mesh:
+		debug_mesh.visible = show_debug
+"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5dxdb"]
+radius = 0.15
+height = 1.2250001
+
+[sub_resource type="GDScript" id="GDScript_ramur"]
+script/source = "
+@tool
+extends Area3D
+
+@export var debug_color: Color = Color(0, 1, 0, 0.3)
+@export var show_debug: bool = true
+
+var debug_mesh: MeshInstance3D
+
+func _ready():
+	if Engine.is_editor_hint():
+		_create_debug_mesh()
+
+func _create_debug_mesh():
+	var shape_node = get_node_or_null(\"CollisionShape\")
+	if not shape_node or not shape_node.shape:
+		return
+	
+	debug_mesh = MeshInstance3D.new()
+	debug_mesh.name = \"DebugMesh\"
+	
+	var material = StandardMaterial3D.new()
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.albedo_color = debug_color
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	
+	var shape = shape_node.shape
+	
+	if shape is CapsuleShape3D:
+		var capsule = CapsuleMesh.new()
+		capsule.radius = shape.radius
+		capsule.height = shape.height
+		capsule.material = material
+		debug_mesh.mesh = capsule
+	elif shape is BoxShape3D:
+		var box = BoxMesh.new()
+		box.size = shape.size
+		box.material = material
+		debug_mesh.mesh = box
+	elif shape is SphereShape3D:
+		var sphere = SphereMesh.new()
+		sphere.radius = shape.radius
+		sphere.height = shape.radius * 2
+		sphere.material = material
+		debug_mesh.mesh = sphere
+	elif shape is CylinderShape3D:
+		var cylinder = CylinderMesh.new()
+		cylinder.top_radius = shape.radius
+		cylinder.bottom_radius = shape.radius
+		cylinder.height = shape.height
+		cylinder.material = material
+		debug_mesh.mesh = cylinder
+	
+	add_child(debug_mesh)
+	
+	if get_tree().edited_scene_root:
+		debug_mesh.owner = get_tree().edited_scene_root
+	
+	debug_mesh.visible = show_debug
+
+func _process(_delta):
+	if Engine.is_editor_hint() and debug_mesh:
+		debug_mesh.visible = show_debug
+"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7uphn"]
+radius = 0.15
+height = 0.7124999
+
+[sub_resource type="GDScript" id="GDScript_8am60"]
+script/source = "
+@tool
+extends Area3D
+
+@export var debug_color: Color = Color(0, 1, 0, 0.3)
+@export var show_debug: bool = true
+
+var debug_mesh: MeshInstance3D
+
+func _ready():
+	if Engine.is_editor_hint():
+		_create_debug_mesh()
+
+func _create_debug_mesh():
+	var shape_node = get_node_or_null(\"CollisionShape\")
+	if not shape_node or not shape_node.shape:
+		return
+	
+	debug_mesh = MeshInstance3D.new()
+	debug_mesh.name = \"DebugMesh\"
+	
+	var material = StandardMaterial3D.new()
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.albedo_color = debug_color
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	
+	var shape = shape_node.shape
+	
+	if shape is CapsuleShape3D:
+		var capsule = CapsuleMesh.new()
+		capsule.radius = shape.radius
+		capsule.height = shape.height
+		capsule.material = material
+		debug_mesh.mesh = capsule
+	elif shape is BoxShape3D:
+		var box = BoxMesh.new()
+		box.size = shape.size
+		box.material = material
+		debug_mesh.mesh = box
+	elif shape is SphereShape3D:
+		var sphere = SphereMesh.new()
+		sphere.radius = shape.radius
+		sphere.height = shape.radius * 2
+		sphere.material = material
+		debug_mesh.mesh = sphere
+	elif shape is CylinderShape3D:
+		var cylinder = CylinderMesh.new()
+		cylinder.top_radius = shape.radius
+		cylinder.bottom_radius = shape.radius
+		cylinder.height = shape.height
+		cylinder.material = material
+		debug_mesh.mesh = cylinder
+	
+	add_child(debug_mesh)
+	
+	if get_tree().edited_scene_root:
+		debug_mesh.owner = get_tree().edited_scene_root
+	
+	debug_mesh.visible = show_debug
+
+func _process(_delta):
+	if Engine.is_editor_hint() and debug_mesh:
+		debug_mesh.visible = show_debug
+"
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_etnlt"]
+points = PackedVector3Array(0.4375, 0.5, 0.125, 0.4375, 0.5, -0.125, -0.4375, 0.5, 0.125, 0.24992657, 0, 0.125, 0.24992657, 0, -0.125, -0.4375, 0.5, -0.125, -0.25001222, 0, 0.125, -0.25001222, 0, -0.125)
+
+[sub_resource type="GDScript" id="GDScript_yirci"]
+script/source = "
+@tool
+extends Area3D
+
+@export var debug_color: Color = Color(0, 1, 0, 0.3)
+@export var show_debug: bool = true
+
+var debug_mesh: MeshInstance3D
+
+func _ready():
+	if Engine.is_editor_hint():
+		_create_debug_mesh()
+
+func _create_debug_mesh():
+	var shape_node = get_node_or_null(\"CollisionShape\")
+	if not shape_node or not shape_node.shape:
+		return
+	
+	debug_mesh = MeshInstance3D.new()
+	debug_mesh.name = \"DebugMesh\"
+	
+	var material = StandardMaterial3D.new()
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.albedo_color = debug_color
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	
+	var shape = shape_node.shape
+	
+	if shape is CapsuleShape3D:
+		var capsule = CapsuleMesh.new()
+		capsule.radius = shape.radius
+		capsule.height = shape.height
+		capsule.material = material
+		debug_mesh.mesh = capsule
+	elif shape is BoxShape3D:
+		var box = BoxMesh.new()
+		box.size = shape.size
+		box.material = material
+		debug_mesh.mesh = box
+	elif shape is SphereShape3D:
+		var sphere = SphereMesh.new()
+		sphere.radius = shape.radius
+		sphere.height = shape.radius * 2
+		sphere.material = material
+		debug_mesh.mesh = sphere
+	elif shape is CylinderShape3D:
+		var cylinder = CylinderMesh.new()
+		cylinder.top_radius = shape.radius
+		cylinder.bottom_radius = shape.radius
+		cylinder.height = shape.height
+		cylinder.material = material
+		debug_mesh.mesh = cylinder
+	
+	add_child(debug_mesh)
+	
+	if get_tree().edited_scene_root:
+		debug_mesh.owner = get_tree().edited_scene_root
+	
+	debug_mesh.visible = show_debug
+
+func _process(_delta):
+	if Engine.is_editor_hint() and debug_mesh:
+		debug_mesh.visible = show_debug
+"
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_m1pwd"]
+points = PackedVector3Array(-0.25, -0.25, -0.125, -0.25, -0.25, 0.125, -0.18754894, 0.5, -0.125, 0.25, -0.25, -0.125, 0.25, -0.25, 0.125, -0.18754894, 0.5, 0.125, 0.18745106, 0.5, -0.125, 0.18745106, 0.5, 0.125)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jts2c"]
+height = 3.7819824
+
+[node name="test" type="CharacterBody3D" unique_id=6565202]
+script = ExtResource("1_yxyix")
+
+[node name="blockbench_export" parent="." unique_id=1310850551 instance=ExtResource("1_rs8x3")]
+
+[node name="legos" parent="blockbench_export/testbolvan/bodyz" parent_id_path=PackedInt32Array(1310850551, 960532487) index="0" unique_id=478118584]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, -0.74375, 0)
+
+[node name="leftleg_2_to_3_HitBox" type="Area3D" parent="blockbench_export/testbolvan/bodyz/legos/leftlegz/leftlegniz/leftleg_2" parent_id_path=PackedInt32Array(1310850551, 1751327972) index="0" unique_id=43783768]
+transform = Transform3D(0, 4.371139e-08, 1, 0, 1, -4.371139e-08, -1, 0, 0, 0, -0.53125, 0)
+collision_layer = 4
+collision_mask = 0
+script = SubResource("GDScript_yxyix")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="blockbench_export/testbolvan/bodyz/legos/leftlegz/leftlegniz/leftleg_2/leftleg_2_to_3_HitBox" unique_id=1760890337]
+shape = SubResource("CapsuleShape3D_jspxw")
+
+[node name="leftleg_1_to_2_HitBox" type="Area3D" parent="blockbench_export/testbolvan/bodyz/legos/leftlegz/leftleg_1" parent_id_path=PackedInt32Array(1310850551, 30096535) index="0" unique_id=829032343]
+transform = Transform3D(0, 4.371139e-08, 1, 0, 1, -4.371139e-08, -1, 0, 0, 0, -0.37499988, 0)
+collision_layer = 4
+collision_mask = 0
+script = SubResource("GDScript_oyfhb")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="blockbench_export/testbolvan/bodyz/legos/leftlegz/leftleg_1/leftleg_1_to_2_HitBox" unique_id=1800730880]
+shape = SubResource("CapsuleShape3D_ivpyy")
+
+[node name="rightleg_2_to_3_HitBox" type="Area3D" parent="blockbench_export/testbolvan/bodyz/legos/rightlegz/rightlegniz/rightleg_2" parent_id_path=PackedInt32Array(1310850551, 936890182) index="0" unique_id=954335010]
+transform = Transform3D(0, 4.371139e-08, 1, 0, 1, -4.371139e-08, -1, 0, 0, 0, -0.53125, 0)
+collision_layer = 4
+collision_mask = 0
+script = SubResource("GDScript_q5mvi")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="blockbench_export/testbolvan/bodyz/legos/rightlegz/rightlegniz/rightleg_2/rightleg_2_to_3_HitBox" unique_id=1067729572]
+shape = SubResource("CapsuleShape3D_o7twy")
+
+[node name="rightleg_1_to_2_HitBox" type="Area3D" parent="blockbench_export/testbolvan/bodyz/legos/rightlegz/rightleg_1" parent_id_path=PackedInt32Array(1310850551, 653695156) index="0" unique_id=1729481345]
+transform = Transform3D(0, 4.371139e-08, 1, 0, 1, -4.371139e-08, -1, 0, 0, 0, -0.37499988, 0)
+collision_layer = 4
+collision_mask = 0
+script = SubResource("GDScript_1clhs")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="blockbench_export/testbolvan/bodyz/legos/rightlegz/rightleg_1/rightleg_1_to_2_HitBox" unique_id=315031176]
+shape = SubResource("CapsuleShape3D_5dih6")
+
+[node name="rightarm_2_to_3_HitBox" type="Area3D" parent="blockbench_export/testbolvan/bodyz/armos/rightarmz/rightarmniz/rightarm_2" parent_id_path=PackedInt32Array(1310850551, 1635428112) index="0" unique_id=155324028]
+transform = Transform3D(0, 4.371139e-08, 1, 0, 1, -4.371139e-08, -1, 0, 0, 0, -0.5, 0)
+collision_layer = 4
+collision_mask = 0
+script = SubResource("GDScript_cux0h")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="blockbench_export/testbolvan/bodyz/armos/rightarmz/rightarmniz/rightarm_2/rightarm_2_to_3_HitBox" unique_id=325004365]
+shape = SubResource("CapsuleShape3D_pho6g")
+
+[node name="rightarm_1_to_2_HitBox" type="Area3D" parent="blockbench_export/testbolvan/bodyz/armos/rightarmz/rightarm_1" parent_id_path=PackedInt32Array(1310850551, 1210850255) index="0" unique_id=906042970]
+transform = Transform3D(0, 4.371139e-08, 1, 0, 1, -4.371139e-08, -1, 0, 0, 0, -0.4625001, 0)
+collision_layer = 4
+collision_mask = 0
+script = SubResource("GDScript_1gxbt")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="blockbench_export/testbolvan/bodyz/armos/rightarmz/rightarm_1/rightarm_1_to_2_HitBox" unique_id=1522890715]
+shape = SubResource("CapsuleShape3D_11ho2")
+
+[node name="leftarm_2_to_3_HitBox" type="Area3D" parent="blockbench_export/testbolvan/bodyz/armos/leftarmz/leftarmniz/leftarm_2" parent_id_path=PackedInt32Array(1310850551, 141909272) index="0" unique_id=1818996193]
+transform = Transform3D(0, 4.371139e-08, 1, 0, 1, -4.371139e-08, -1, 0, 0, 0, -0.5, 0)
+collision_layer = 4
+collision_mask = 0
+script = SubResource("GDScript_jts2c")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="blockbench_export/testbolvan/bodyz/armos/leftarmz/leftarmniz/leftarm_2/leftarm_2_to_3_HitBox" unique_id=1054425848]
+shape = SubResource("CapsuleShape3D_xymxn")
+
+[node name="leftarm_1_to_2_HitBox" type="Area3D" parent="blockbench_export/testbolvan/bodyz/armos/leftarmz/leftarm_1" parent_id_path=PackedInt32Array(1310850551, 777885543) index="0" unique_id=977917976]
+transform = Transform3D(0, 4.371139e-08, 1, 0, 1, -4.371139e-08, -1, 0, 0, 0, -0.4625001, 0)
+collision_layer = 4
+collision_mask = 0
+script = SubResource("GDScript_h60fv")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="blockbench_export/testbolvan/bodyz/armos/leftarmz/leftarm_1/leftarm_1_to_2_HitBox" unique_id=97525954]
+shape = SubResource("CapsuleShape3D_5dxdb")
+
+[node name="head_1_to_2_HitBox" type="Area3D" parent="blockbench_export/testbolvan/bodyz/headz/head_1" parent_id_path=PackedInt32Array(1310850551, 548027327) index="0" unique_id=1765957775]
+transform = Transform3D(0, -4.371139e-08, -1, 0, -1, 4.371139e-08, -1, 0, 0, 0, 0.20624995, 0)
+collision_layer = 4
+collision_mask = 0
+script = SubResource("GDScript_ramur")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="blockbench_export/testbolvan/bodyz/headz/head_1/head_1_to_2_HitBox" unique_id=88662450]
+shape = SubResource("CapsuleShape3D_7uphn")
+
+[node name="body_1_HitBox" type="Area3D" parent="blockbench_export/testbolvan/bodyz" parent_id_path=PackedInt32Array(1310850551, 960532487) index="5" unique_id=1366409018]
+collision_layer = 4
+collision_mask = 0
+script = SubResource("GDScript_8am60")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="blockbench_export/testbolvan/bodyz/body_1_HitBox" unique_id=949507653]
+shape = SubResource("ConvexPolygonShape3D_etnlt")
+
+[node name="body_2_HitBox" type="Area3D" parent="blockbench_export/testbolvan/bodyz" parent_id_path=PackedInt32Array(1310850551, 960532487) index="6" unique_id=673164499]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+collision_layer = 4
+collision_mask = 0
+script = SubResource("GDScript_yirci")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="blockbench_export/testbolvan/bodyz/body_2_HitBox" unique_id=976489182]
+shape = SubResource("ConvexPolygonShape3D_m1pwd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2093730907]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8871613, 0)
+visible = false
+shape = SubResource("CapsuleShape3D_jts2c")
+
+[editable path="blockbench_export"]
