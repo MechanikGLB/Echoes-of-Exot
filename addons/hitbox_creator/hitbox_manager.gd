@@ -24,7 +24,8 @@ var shape_combo: OptionButton
 var size_spinbox: SpinBox
 var layer_checkboxes: Array[CheckBox] = []
 var render_layer_checkboxes: Array[CheckBox] = []
-var show_debug_checkbox: CheckBox
+var default_layers_checkboxes: Array[CheckBox] = []
+var default_layers_label: Label
 
 # Конфигурация
 var shape_options = ["Auto Detect", "Capsule", "Box", "Sphere", "Cylinder", "Convex Polygon"]
@@ -38,7 +39,6 @@ var limb_names = ["body", "head", "arm", "leg", "hand", "foot", "chest", "back",
 func create_dock_panel() -> Control:
 	print("[HitBox Manager] Creating dock panel...")
 	
-	# Основной контейнер со скроллом
 	var scroll = ScrollContainer.new()
 	scroll.name = "HitBoxCreatorScroll"
 	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -63,8 +63,6 @@ func create_dock_panel() -> Control:
 	main_vbox.add_child(_create_settings_section())
 	main_vbox.add_child(_create_separator())
 	main_vbox.add_child(_create_visibility_section())
-	main_vbox.add_child(_create_separator())
-	main_vbox.add_child(_create_advanced_section())
 	main_vbox.add_child(_create_separator())
 	main_vbox.add_child(_create_actions_section())
 	main_vbox.add_child(_create_separator())
@@ -123,29 +121,26 @@ func _create_size_selector() -> HBoxContainer:
 	
 	return hbox
 
-func _create_layers_grid() -> GridContainer:
+func _create_layers_grid(default_layer: int = -1) -> GridContainer:
 	var grid = GridContainer.new()
 	grid.columns = 5
 	grid.add_theme_constant_override("h_separation", UI_GRID_SEPARATION)
 	grid.add_theme_constant_override("v_separation", UI_GRID_SEPARATION)
-	grid.custom_minimum_size = Vector2(10, 120)
+	grid.custom_minimum_size = Vector2(10, 120)  # Добавили минимальный размер
 	
-	layer_checkboxes.clear()
-	for i in range(20): 
-		
+	for i in range(20):
 		var checkbox = CheckBox.new()
 		checkbox.text = str(i + 1)
-		checkbox.custom_minimum_size.x = 32
-		checkbox.custom_minimum_size.y = 24
+		checkbox.custom_minimum_size = Vector2(32, 24)
 		checkbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		checkbox.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		
-		if i == 2:  # Слой 3 по умолчанию
+		# Если default_layer >= 0 и он соответствует текущему индексу
+		if default_layer >= 0 and i == default_layer:
 			checkbox.button_pressed = true
 		
-		layer_checkboxes.append(checkbox)
 		grid.add_child(checkbox)
-		
+	
 	return grid
 
 func _create_separator() -> HSeparator:
@@ -213,23 +208,14 @@ func _create_settings_section() -> Control:
 	layers_label.text = "Слои коллизии:"
 	vbox.add_child(layers_label)
 	
-	vbox.add_child(_create_layers_grid())
-	
-	return vbox
-
-func _create_advanced_section() -> Control:
-	var vbox = VBoxContainer.new()
-	vbox.add_theme_constant_override("separation", UI_CONTROL_SEPARATION)
-	
-	var header = _create_section_header("🔧 Дополнительно", "Расширенные настройки")
-	vbox.add_child(header)
-	
-	show_debug_checkbox = CheckBox.new()
-	show_debug_checkbox.text = " Показать отладочные меши"
-	show_debug_checkbox.button_pressed = true
-	show_debug_checkbox.tooltip_text = "Показывать визуальные меши для коллизий"
-	
-	vbox.add_child(show_debug_checkbox)
+	# Создаем сетку и сохраняем чекбоксы
+	var collision_grid = _create_layers_grid(2)  # Слой 3 по умолчанию
+	# Сохраняем чекбоксы в массив
+	layer_checkboxes.clear()
+	for child in collision_grid.get_children():
+		if child is CheckBox:
+			layer_checkboxes.append(child)
+	vbox.add_child(collision_grid)
 	
 	return vbox
 
@@ -303,40 +289,36 @@ func _create_visibility_section() -> Control:
 	desc_label.add_theme_color_override("font_color", Color(0.7, 0.7, 0.7))
 	vbox.add_child(desc_label)
 	
-	# Сетка слоёв отрисовки
-	var layers_label = Label.new()
-	layers_label.text = "Слои отрисовки для _v нод:"
-	vbox.add_child(layers_label)
+	# Слои отрисовки для _v нод
+	var v_layers_label = Label.new()
+	v_layers_label.text = "Слои для _v нод:"
+	vbox.add_child(v_layers_label)
 	
-	vbox.add_child(_create_render_layers_grid())
+	# Создаем сетку для _v нод и сохраняем чекбоксы
+	var v_layers_grid = _create_layers_grid(0)  # Слой 1 по умолчанию
+	render_layer_checkboxes.clear()
+	for child in v_layers_grid.get_children():
+		if child is CheckBox:
+			render_layer_checkboxes.append(child)
+	vbox.add_child(v_layers_grid)
+	
+	# Разделитель
+	vbox.add_child(_create_separator())
+	
+	# Слои отрисовки для остальных нод (без _v)
+	default_layers_label = Label.new()
+	default_layers_label.text = "Слои для остальных нод:"
+	vbox.add_child(default_layers_label)
+	
+	# Создаем сетку для остальных нод и сохраняем чекбоксы
+	var default_grid = _create_layers_grid(-1)  # Все выключены
+	default_layers_checkboxes.clear()
+	for child in default_grid.get_children():
+		if child is CheckBox:
+			default_layers_checkboxes.append(child)
+	vbox.add_child(default_grid)
 	
 	return vbox
-
-func _create_render_layers_grid() -> GridContainer:
-	"""Создает сетку для выбора слоёв отрисовки (видимости)"""
-	var grid = GridContainer.new()
-	grid.columns = 5
-	grid.add_theme_constant_override("h_separation", UI_GRID_SEPARATION)
-	grid.add_theme_constant_override("v_separation", UI_GRID_SEPARATION)
-	grid.custom_minimum_size = Vector2(10, 120)
-	
-	render_layer_checkboxes.clear()
-	for i in range(20):  # Godot 4.x имеет 20 слоёв рендера
-		var checkbox = CheckBox.new()
-		checkbox.text = str(i + 1)
-		checkbox.custom_minimum_size.x = 32
-		checkbox.custom_minimum_size.y = 24
-		checkbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		checkbox.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		
-		# По умолчанию включаем первый слой для видимых нод
-		if i == 0:  # Слой 1 по умолчанию для видимых мешей
-			checkbox.button_pressed = true
-		
-		render_layer_checkboxes.append(checkbox)
-		grid.add_child(checkbox)
-		
-	return grid
 
 #======================================================
 # Дальше пойдут методы для хитбоксов
@@ -379,12 +361,12 @@ func _update_info():
 		print("[HitBox Manager] No node selected")
 
 func _create_hitboxes_and_setup():
-	print("[HitBox Manager] Creating hitboxes...")
-	
 	if not target_node:
-		printerr("[HitBox Manager] No target node selected!")
-		info_label.text = "ERROR: Select a character root node first"
+		info_label.text = "Select a character root node first"
 		return
+	
+	# Сначала удаляем существующие хитбоксы
+	_clear_existing_hitboxes()
 	
 	var collision_mask = _get_selected_collision_layers()
 	if collision_mask == 0:
@@ -393,31 +375,21 @@ func _create_hitboxes_and_setup():
 	
 	var scene_root = editor_interface.get_edited_scene_root()
 	if not scene_root:
-		printerr("[HitBox Manager] No scene root!")
 		info_label.text = "ERROR: No scene opened"
 		return
 	
-	print("[HitBox Manager] Scene root: ", scene_root.name)
-	print("[HitBox Manager] Target node: ", target_node.name)
-	print("[HitBox Manager] Collision mask: ", collision_mask)
-	
 	var all_nodes = HitBoxUtils.get_all_children(target_node)
-	print("[HitBox Manager] Total children: ", all_nodes.size())
-	
 	var nodes_3d = []
+	
 	for node in all_nodes:
 		if node is Node3D:
 			nodes_3d.append(node)
 	
-	print("[HitBox Manager] 3D nodes: ", nodes_3d.size())
-	
-	# Настраиваем видимость через слои отрисовки
+	# Настраиваем видимость
 	var visibility_changes = _setup_visibility_via_layers(nodes_3d)
-	print("[HitBox Manager] Visibility changes via layers: ", visibility_changes)
 	
 	# Создаем хитбоксы
 	var hitboxes_created = _create_limb_hitboxes(nodes_3d, collision_mask, scene_root)
-	print("[HitBox Manager] Hitboxes created: ", hitboxes_created)
 	
 	info_label.text = "Setup complete: %d hitboxes created, %d visibility changes" % [
 		hitboxes_created,
@@ -427,8 +399,6 @@ func _create_hitboxes_and_setup():
 	# Обновляем сцену
 	editor_interface.get_resource_filesystem().scan()
 	editor_interface.save_scene()
-	
-	print("[HitBox Manager] Done!")
 
 func _create_limb_hitboxes(nodes: Array, collision_mask: int, scene_root: Node) -> int:
 	var created_count = 0
@@ -563,9 +533,6 @@ func _create_hitbox_between_nodes(hitbox_name: String, node1: Node3D, node2: Nod
 	
 	print("[HitBox Manager] Added hitbox to scene: ", area.name)
 	
-	# Добавляем скрипт для отладки
-	_add_debug_script(area)
-	
 	return true
 
 func _set_node_owner_recursive(node: Node, owner: Node):
@@ -618,128 +585,37 @@ func _create_collision_shape_between_nodes(node1: Node3D, node2: Node3D) -> Shap
 	printerr("[HitBox Manager] Unknown shape type: ", shape_type)
 	return null
 
-func _add_debug_script(area: Area3D):
-	if not show_debug_checkbox.button_pressed:
-		return
-	
-	print("[HitBox Manager] Adding debug script to ", area.name)
-	
-	var debug_script = GDScript.new()
-	debug_script.source_code = """
-@tool
-extends Area3D
-
-@export var debug_color: Color = Color(0, 1, 0, 0.3)
-@export var show_debug: bool = true
-
-var debug_mesh: MeshInstance3D
-
-func _ready():
-	if Engine.is_editor_hint():
-		_create_debug_mesh()
-
-func _create_debug_mesh():
-	var shape_node = get_node_or_null("CollisionShape")
-	if not shape_node or not shape_node.shape:
-		return
-	
-	debug_mesh = MeshInstance3D.new()
-	debug_mesh.name = "DebugMesh"
-	
-	var material = StandardMaterial3D.new()
-	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	material.albedo_color = debug_color
-	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	
-	var shape = shape_node.shape
-	
-	if shape is CapsuleShape3D:
-		var capsule = CapsuleMesh.new()
-		capsule.radius = shape.radius
-		capsule.height = shape.height
-		capsule.material = material
-		debug_mesh.mesh = capsule
-	elif shape is BoxShape3D:
-		var box = BoxMesh.new()
-		box.size = shape.size
-		box.material = material
-		debug_mesh.mesh = box
-	elif shape is SphereShape3D:
-		var sphere = SphereMesh.new()
-		sphere.radius = shape.radius
-		sphere.height = shape.radius * 2
-		sphere.material = material
-		debug_mesh.mesh = sphere
-	elif shape is CylinderShape3D:
-		var cylinder = CylinderMesh.new()
-		cylinder.top_radius = shape.radius
-		cylinder.bottom_radius = shape.radius
-		cylinder.height = shape.height
-		cylinder.material = material
-		debug_mesh.mesh = cylinder
-	
-	add_child(debug_mesh)
-	
-	if get_tree().edited_scene_root:
-		debug_mesh.owner = get_tree().edited_scene_root
-	
-	debug_mesh.visible = show_debug
-
-func _process(_delta):
-	if Engine.is_editor_hint() and debug_mesh:
-		debug_mesh.visible = show_debug
-"""
-	
-	var result = debug_script.reload()
-	if result == OK:
-		area.set_script(debug_script)
-		print("[HitBox Manager] Debug script added")
-	else:
-		printerr("[HitBox Manager] Failed to compile debug script")
-
-func _get_selected_collision_layers() -> int:
-	var mask = 0
-	for i in range(layer_checkboxes.size()):
-		if layer_checkboxes[i].button_pressed:
-			mask |= 1 << i
-	print("[HitBox Manager] Selected layers mask: ", mask)
-	return mask
-
 func _clear_hitboxes():
-	print("[HitBox Manager] Clearing hitboxes...")
-	
 	if not target_node:
-		printerr("[HitBox Manager] No target node selected!")
 		return
 	
-	var hitboxes_to_remove = []
+	var removed_count = 0
 	
-	# Находим все хитбоксы
 	for child in HitBoxUtils.get_all_children(target_node):
-		if child is Node3D and "HitBox" in child.name:
-			hitboxes_to_remove.append(child)
-			print("[HitBox Manager] Found hitbox to remove: ", child.name)
+		if child is Area3D and "HitBox" in child.name:
+			var parent = child.get_parent()
+			if parent:
+				parent.remove_child(child)
+				child.queue_free()
+				removed_count += 1
 	
-	if hitboxes_to_remove.is_empty():
+	if removed_count > 0:
+		info_label.text = "Removed %d hitbox(es)" % removed_count
+		editor_interface.get_resource_filesystem().scan()
+		editor_interface.save_scene()
+	else:
 		info_label.text = "No hitboxes found"
-		print("[HitBox Manager] No hitboxes found")
+
+func _clear_existing_hitboxes():
+	if not target_node:
 		return
 	
-	# Удаляем хитбоксы
-	for hitbox in hitboxes_to_remove:
-		var parent = hitbox.get_parent()
-		if parent:
-			parent.remove_child(hitbox)
-			hitbox.queue_free()
-			print("[HitBox Manager] Removed hitbox: ", hitbox.name)
-	
-	info_label.text = "Removed %d hitbox(es)" % hitboxes_to_remove.size()
-	
-	# Обновляем сцену
-	editor_interface.get_resource_filesystem().scan()
-	editor_interface.save_scene()
-	
-	print("[HitBox Manager] Hitboxes cleared")
+	for child in HitBoxUtils.get_all_children(target_node):
+		if child is Area3D and "HitBox" in child.name:
+			var parent = child.get_parent()
+			if parent:
+				parent.remove_child(child)
+				child.queue_free()
 
 func _create_body_hitbox(body_node: MeshInstance3D, collision_mask: int, scene_root: Node) -> bool:
 	"""Создает хитбокс для body MeshInstance3D"""
@@ -788,9 +664,6 @@ func _create_body_hitbox(body_node: MeshInstance3D, collision_mask: int, scene_r
 	if Engine.is_editor_hint():
 		_set_node_owner_recursive(area, scene_root)
 	
-	# Добавляем скрипт для отладки
-	_add_debug_script(area)
-	
 	print("[HitBox Manager] Created body hitbox: ", area.name)
 	return true
 
@@ -825,52 +698,38 @@ func _create_collision_shape_from_mesh(mesh: Mesh) -> Shape3D:
 
 func _setup_visibility_via_layers(nodes: Array) -> int:
 	var changes = 0
-	var mask = _get_selected_render_layers()
+	var v_mask = _get_selected_render_layers()
+	var default_mask = _get_selected_default_layers()
 	
 	for node in nodes:
 		if node is MeshInstance3D:
-			if "_v" in node.name:
-				if node.layers != mask:
-					node.layers = mask
-					node.visible = true
-					changes += 1
-			elif node.layers != 0:
-				node.layers = 0
+			var target_mask = v_mask if "_v" in node.name else default_mask
+			if node.layers != target_mask:
+				node.layers = target_mask
 				node.visible = true
 				changes += 1
 	
 	return changes
 
-func _get_selected_render_layers() -> int:
-	"""Возвращает битовую маску выбранных слоёв отрисовки"""
-	var mask = 0
-	for i in range(render_layer_checkboxes.size()):
-		if render_layer_checkboxes[i].button_pressed:
-			mask |= 1 << i
-	print("[HitBox Manager] Selected render layers mask: ", mask)
-	return mask
-
 func _toggle_preview_visibility():
 	if not target_node:
 		return
 	
-	var mask = _get_selected_render_layers()
+	var v_mask = _get_selected_render_layers()
+	var default_mask = _get_selected_default_layers()
 	var v_meshes = 0
 	
 	for child in HitBoxUtils.get_all_children(target_node):
 		if child is MeshInstance3D:
+			child.layers = v_mask if "_v" in child.name else default_mask
+			child.visible = true
 			if "_v" in child.name:
-				child.layers = mask
-				child.visible = true
 				v_meshes += 1
-			else:
-				child.layers = 0
-				child.visible = true
 	
-	if v_meshes > 0:
-		info_label.text = "%d _v meshes set to layers %s" % [v_meshes, _render_layers_to_string(mask)]
-	else:
-		info_label.text = "No _v meshes found"
+	info_label.text = "Layers: _v=%s, others=%s" % [
+		_render_layers_to_string(v_mask),
+		_render_layers_to_string(default_mask)
+	]
 
 func _render_layers_to_string(mask: int) -> String:
 	"""Конвертирует битовую маску слоёв в строку вида '1, 3, 4'"""
@@ -879,3 +738,19 @@ func _render_layers_to_string(mask: int) -> String:
 		if mask & (1 << i):
 			layers.append(str(i + 1))
 	return ", ".join(layers) if layers.size() > 0 else "none"
+
+func _get_mask_from_checkboxes(checkboxes: Array) -> int:
+	var mask = 0
+	for i in range(checkboxes.size()):
+		if checkboxes[i].button_pressed:
+			mask |= 1 << i
+	return mask
+
+func _get_selected_collision_layers() -> int:
+	return _get_mask_from_checkboxes(layer_checkboxes)
+
+func _get_selected_render_layers() -> int:
+	return _get_mask_from_checkboxes(render_layer_checkboxes)
+
+func _get_selected_default_layers() -> int:
+	return _get_mask_from_checkboxes(default_layers_checkboxes)
