@@ -445,7 +445,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6038738, 0)
 shape = SubResource("CapsuleShape3D_08hit")
 
 [node name="Head" type="Node3D" parent="." unique_id=2001885934]
-transform = Transform3D(0.9991182, 0.04107362, 0.008718282, -0.04179573, 0.9927361, 0.1128207, -0.0040209703, -0.11308562, 0.9935771, 0.054437175, 1.1121562, -0.028464248)
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1, 0.045262948, 1.1194202, -0.028464248)
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=585030944]
 cull_mask = 1048573

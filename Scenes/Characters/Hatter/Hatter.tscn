@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bxxedm4tjgvwg"]
+[gd_scene format=3 uid="uid://bxxedm4tjgvwg"]
 
 [ext_resource type="Script" uid="uid://qmqcomvxaayi" path="res://Scripts/player.gd" id="1_g73o5"]
 [ext_resource type="PackedScene" uid="uid://br8krfognc3t1" path="res://UI/ui.tscn" id="2_necg7"]
@@ -108,7 +108,7 @@ _data = {
 &"pp_lower": SubResource("Animation_nogni")
 }
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" unique_id=1012639352]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 script = ExtResource("1_g73o5")
 HIT_STAGGER = 20.0
@@ -143,54 +143,52 @@ abilities_config = {
 }
 }
 
-[node name="UI" parent="." instance=ExtResource("2_necg7")]
+[node name="UI" parent="." unique_id=1037297660 instance=ExtResource("2_necg7")]
 unique_name_in_owner = true
 
-[node name="BodyShape" type="CollisionShape3D" parent="."]
+[node name="BodyShape" type="CollisionShape3D" parent="." unique_id=1563619270]
 transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0.9877665, 0)
 shape = SubResource("CapsuleShape3D_fttxr")
 
-[node name="Hat" type="MeshInstance3D" parent="BodyShape"]
+[node name="Hat" type="MeshInstance3D" parent="BodyShape" unique_id=919719679]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.566882, 0)
 layers = 2
 mesh = ExtResource("2_p3d5a")
 skeleton = NodePath("../../..")
 
-[node name="BeanBody" type="MeshInstance3D" parent="BodyShape"]
+[node name="BeanBody" type="MeshInstance3D" parent="BodyShape" unique_id=350277771]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0316856, 0)
 mesh = SubResource("CapsuleMesh_mk1qe")
 
-[node name="Head" type="Node3D" parent="."]
+[node name="Head" type="Node3D" parent="." unique_id=1331521909]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7907026, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Head"]
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=153506673]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.207387, -0.335068)
 cull_mask = 1048573
 fov = 90.0
 far = 303.14
 
-[node name="PlasmaGun1" parent="Head/Camera3D" instance=ExtResource("3_po0cv")]
+[node name="PlasmaGun1" parent="Head/Camera3D" unique_id=1482607142 instance=ExtResource("3_po0cv")]
 transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0.369182, -0.2196, -0.167194)
 
-[node name="PPGun1" parent="Head/Camera3D" instance=ExtResource("4_cjupl")]
+[node name="PPGun1" parent="Head/Camera3D" unique_id=1114376243 instance=ExtResource("4_cjupl")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.328, -0.2, -0.516)
 visible = false
 
-[node name="AimRay" type="RayCast3D" parent="Head/Camera3D"]
+[node name="AimRay" type="RayCast3D" parent="Head/Camera3D" unique_id=526645148]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.637985)
 target_position = Vector3(0, 0, -20)
 collision_mask = 2
 collide_with_areas = true
 
-[node name="AimRayEnd" type="Node3D" parent="Head/Camera3D"]
+[node name="AimRayEnd" type="Node3D" parent="Head/Camera3D" unique_id=1566858664]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100)
 
-[node name="weaponSwitch" type="AnimationPlayer" parent="Head/Camera3D"]
-libraries = {
-&"": SubResource("AnimationLibrary_rlh2g")
-}
+[node name="weaponSwitch" type="AnimationPlayer" parent="Head/Camera3D" unique_id=2034377246]
+libraries/ = SubResource("AnimationLibrary_rlh2g")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1116923079]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4924315, 0)
 stream = ExtResource("6_cklkl")
 volume_db = 3.0

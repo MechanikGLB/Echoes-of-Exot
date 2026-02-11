@@ -4,8 +4,8 @@ extends CharacterBody3D
 const SENS = 0.002
 
 # Head bobbing
-const BOB_FREQ = 2.0
-const BOB_AMP = 0.08
+const BOB_FREQ = 1.5
+const BOB_AMP = 0.04
 var t_bob = 0.0
 
 # FOV 
@@ -100,6 +100,7 @@ var last_sync_time: float = 0.0
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera3D
 @onready var body_shape: CollisionShape3D = $BodyShape
+@onready var body_node: Node3D  = $blockbench_export
 
 # Визуальные эффекты
 @onready var damage_flash: ColorRect = get_node_or_null("%UI/DamageFlash")
@@ -146,6 +147,18 @@ func _ready() -> void:
 	
 	if is_network_ready:
 		_setup_network()
+		
+	#_setup_abilities()
+	#health_bar.value = health
+	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	#
+	# Настройка видимости для сетевой игры
+	#for child in $BodyShape.find_children("*", "VisualInstance3D"):
+		#child.set_layer_mask_value(1, false)
+		#child.set_layer_mask_value(2, true)
+	#
+	#clock.start()
+	
 	_custom_ready()
 
 ## Для добавления чего либо в ready в дочерних классах
@@ -168,6 +181,30 @@ func _custom_physics_process(_delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if current_state == CharacterState.DEAD or current_state == CharacterState.DISABLED:
 		return
+	
+	# Обработка UI и меню
+	if Input.is_action_just_pressed("ui_cancel"):
+		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE or ingame_menu.visible:
+			ingame_menu.visible = false
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			return
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		ingame_menu.visible = true
+	
+	# Обработка курсора
+	if Input.is_action_pressed("cursor"):
+		_unlock_cursor(true)
+	if Input.is_action_just_released("cursor"):
+		_unlock_cursor(false)
+	
+	# Качание головы и FOV
+	if is_character_alive() and current_state != CharacterState.RESPAWNING:
+		t_bob += delta * velocity.length() * float(is_on_floor())
+		camera.transform.origin = _headbob(t_bob)
+		
+		var velocity_clamped = clamp(velocity.length(), 0.5, sprint_speed * 2)
+		var target_fov = BASE_FOV + FOV_CHANGE * velocity_clamped
+		camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 	
 	_update_timers(delta)
 	_update_ability_cooldowns(delta)
@@ -204,6 +241,14 @@ func _update_ability_cooldowns(delta: float) -> void:
 func _apply_gravity(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		head.rotate_y(-event.relative.x * SENS)
+		camera.rotate_x(-event.relative.y * SENS)
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(70))
+		$BodyShape.rotate_y(-event.relative.x * SENS)
+		body_node.rotate_y(-event.relative.x * SENS) #очень нехорошо, лучше поправить в будущем
 
 func _handle_movement(_delta: float) -> void:
 	# Базовое движение - переопределяется в дочерних классах
@@ -386,6 +431,19 @@ func _interpolate_position(current: Vector3, target: Vector3) -> Vector3:
 func _get_current_animation() -> String:
 	# Переопределяется в дочерних классах
 	return ""
+
+# ========== ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ ==========
+
+func _headbob(time) -> Vector3:
+	var pos = Vector3.ZERO
+	pos.y = sin(time * BOB_FREQ) * BOB_AMP
+	pos.x = cos(time * BOB_FREQ / 2) * BOB_AMP
+	return pos
+
+
+func _on_enemy_kill():
+	add_score(1)
+	score_changed.emit(score)
 
 # ========== СИСТЕМА ЗДОРОВЬЯ И УРОНА ==========
 

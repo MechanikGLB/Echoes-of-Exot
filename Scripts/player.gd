@@ -28,14 +28,14 @@ var can_shoot = true
 @onready var weapon_switching = $Head/Camera3D/weaponSwitch
 
 # Переменные для совместимости
-var respawn_position = Vector3.ZERO
+#var respawn_position = Vector3.ZERO
 
 
 
 func _custom_ready() -> void:
 
 	_setup_abilities()
-	respawn_position = global_position
+	#respawn_position = global_position
 	health_bar.value = health
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
@@ -47,29 +47,7 @@ func _custom_ready() -> void:
 	clock.start()
 
 func _custom_physics_process(delta: float) -> void:
-	# Обработка UI и меню
-	if Input.is_action_just_pressed("ui_cancel"):
-		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE or ingame_menu.visible:
-			ingame_menu.visible = false
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-			return
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		ingame_menu.visible = true
-	
-	# Обработка курсора
-	if Input.is_action_pressed("cursor"):
-		_unlock_cursor(true)
-	if Input.is_action_just_released("cursor"):
-		_unlock_cursor(false)
-	
-	# Качание головы и FOV
-	if is_character_alive() and current_state != CharacterState.RESPAWNING:
-		t_bob += delta * velocity.length() * float(is_on_floor())
-		camera.transform.origin = _headbob(t_bob)
-		
-		var velocity_clamped = clamp(velocity.length(), 0.5, sprint_speed * 2)
-		var target_fov = BASE_FOV + FOV_CHANGE * velocity_clamped
-		camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
+	pass
 
 func _handle_movement(delta: float) -> void:
 	if not is_character_alive() or current_state == CharacterState.RESPAWNING:
@@ -103,13 +81,6 @@ func _handle_movement(delta: float) -> void:
 		velocity.x = lerp(velocity.x, direction.x * speed, delta * 2.0)
 		velocity.z = lerp(velocity.z, direction.z * speed, delta * 2.0)
 		steps.stream_paused = true
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		head.rotate_y(-event.relative.x * SENS)
-		camera.rotate_x(-event.relative.y * SENS)
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(70))
-		$BodyShape.rotate_y(-event.relative.x * SENS)
 
 # ========== СПОСОБНОСТИ ==========
 
@@ -193,19 +164,6 @@ func _raise_weapon(new_weapon):
 			weapon_switching.play_backwards("pp_lower")
 	current_weapon = new_weapon
 	can_shoot = true
-
-# ========== ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ ==========
-
-func _headbob(time) -> Vector3:
-	var pos = Vector3.ZERO
-	pos.y = sin(time * BOB_FREQ) * BOB_AMP
-	pos.x = cos(time * BOB_FREQ / 2) * BOB_AMP
-	return pos
-
-
-func _on_enemy_kill():
-	add_score(1)
-	score_changed.emit(score)
 
 # ========== МЕТОДЫ ДЛЯ СОВМЕСТИМОСТИ ==========
 
