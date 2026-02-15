@@ -61,6 +61,7 @@ var abilities: Dictionary = {}
 @onready var body_node: Node3D = $blockbench_export
 
 # UI ноды
+@onready var UI = $"%UI"
 @onready var health_bar = $"%UI/Stat_base/Health"
 @onready var death_screen = $"%UI/Dethscreen"
 @onready var death_bg = $"%UI/okak"
@@ -68,7 +69,7 @@ var abilities: Dictionary = {}
 @onready var clock = $"%UI/sessionTimer/clock"
 @onready var score_label = $"%UI/Stat_base/HBoxContainer2/Score"
 @onready var damage_flash = $"%UI/DamageFlash"
-@onready var invulnerability_effect: GPUParticles3D = $InvulnerabilityEffect
+@onready var invulnerability_effect = get_node_or_null("InvulnerabilityEffect")
 
 # ========== НАСТРОЙКИ КАМЕРЫ ==========
 const SENS = 0.002
@@ -376,6 +377,12 @@ func _update_invulnerability_effect() -> void:
 	if invulnerability_effect:
 		invulnerability_effect.emitting = (invulnerability_timer > 0)
 
+func _stop_all_sounds():
+	"""Останавливает все звуки на персонаже"""
+	for child in get_children(true):
+		if child is AudioStreamPlayer or child is AudioStreamPlayer2D or child is AudioStreamPlayer3D:
+			child.stop()
+
 # ========== МЕТОДЫ СОСТОЯНИЙ ==========
 func is_character_alive() -> bool:
 	return current_state == CharacterState.ALIVE
@@ -393,6 +400,19 @@ func disable() -> void:
 func enable() -> void:
 	current_state = CharacterState.ALIVE
 	set_physics_process(true)
+
+func menu_state():
+	"""Отключает управление и интерфейс для режима меню/выбора персонажа"""
+	disable()  # Отключает physics process
+	set_process_unhandled_input(false)  # Отключает ввод
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)  # Показываем курсор
+	
+	# Прячем UI
+	if UI:
+		UI.visible = false
+	
+	# Останавливаем все звуки
+	_stop_all_sounds()
 
 # ========== ВИРТУАЛЬНЫЕ МЕТОДЫ ==========
 func _custom_ready() -> void:

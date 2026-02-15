@@ -1,6 +1,6 @@
-extends CharacterBase
+extends CharacterBase3D
 
-# ========== ОРУЖИЕ ==========
+# Weapons
 enum Weapons {
 	PRIMARY,
 	SECONDARY,
@@ -8,49 +8,47 @@ enum Weapons {
 var current_weapon = Weapons.PRIMARY
 var can_shoot = true
 
-# Инстансы пуль - ПРАВИЛЬНЫЕ ПУТИ
+# Weapon instances
 @onready var bullet = load("res://scenes/parts/bullet.tscn")
 @onready var bullet_trail = load("res://Scenes/parts/bullet_trail.tscn")
 
-# Компоненты
+# Components
 @onready var aim_ray = $Head/Camera3D/AimRay
 @onready var aim_ray_end = $Head/Camera3D/AimRayEnd
 
-# Звуки
+# Sounds
 @onready var steps = $AudioStreamPlayer3D
 @onready var pistl = $Head/Camera3D/PPGun1/AudioStreamPlayer3D
 
-# Пушки
+# Guns
 @onready var gun_anim = $Head/Camera3D/PlasmaGun1/AnimationPlayer
 @onready var pp_anim = $Head/Camera3D/PPGun1/AnimationPlayer
 @onready var gun_barrel = $Head/Camera3D/PlasmaGun1/RayCast3D
 @onready var pp_barrel = $Head/Camera3D/PPGun1/Meshes/Barrel
 @onready var weapon_switching = $Head/Camera3D/weaponSwitch
 
-# ========== ИНИЦИАЛИЗАЦИЯ ==========
-func _custom_ready():
-	# ВАЖНО: Эти настройки нужны для правильной работы!
+# Переменные для совместимости
+#var respawn_position = Vector3.ZERO
+
+
+
+func _custom_ready() -> void:
+
 	_setup_abilities()
+	#respawn_position = global_position
 	health_bar.value = health
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
-	# Настройка видимости для камеры (чтобы не видеть себя)
+	# Настройка видимости для сетевой игры
 	for child in $BodyShape.find_children("*", "VisualInstance3D"):
 		child.set_layer_mask_value(1, false)
 		child.set_layer_mask_value(2, true)
 	
 	clock.start()
-	
-	# Устанавливаем начальное оружие
-	current_weapon = Weapons.PRIMARY
 
-func _setup_abilities():
-	# Регистрируем способности
-	add_ability("primary_fire", "primary_fire", 0.1, true)   # Основной огонь
-	add_ability("secondary_fire", "secondary_fire", 0.5, true) # Вторичный огонь
-	add_ability("ability_1", "ability_1", 0.4, false)       # Переключение оружия
+func _custom_physics_process(_delta: float) -> void:
+	pass
 
-# ========== ДВИЖЕНИЕ ==========
 func _handle_movement(delta: float) -> void:
 	if not is_character_alive() or current_state == CharacterState.RESPAWNING:
 		return
@@ -85,7 +83,9 @@ func _handle_movement(delta: float) -> void:
 		steps.stream_paused = true
 
 # ========== СПОСОБНОСТИ ==========
-func _ability_primary():
+
+func _ability_primary() -> void:
+	# Основная атака - плазменная пушка
 	if can_shoot:
 		match current_weapon:
 			Weapons.PRIMARY:
@@ -93,23 +93,32 @@ func _ability_primary():
 			Weapons.SECONDARY:
 				_shoot_auto()
 
-func _ability_secondary(_target_position: Vector3):
-	pass
+func _ability_secondary(_target_position: Vector3) -> void:
+		pass
 
-func _ability_1(_target_position: Vector3):
+func _ability_1(_target_position: Vector3) -> void:
+	# Q - переключение оружия
 	_switch_weapon()
 
+func _ability_2(_target_position: Vector3) -> void:
+	# E - дополнительная способность (заглушка)
+	pass
+
+func _ability_ultimate(_target_position: Vector3) -> void:
+	# Ультимативная способность (заглушка)
+	pass
+
 # ========== СИСТЕМА ОРУЖИЯ ==========
+
 func _shoot_gun():
 	if not gun_anim.is_playing():
 		gun_anim.play("shoot")
 		var instance = bullet.instantiate()
 		instance.position = gun_barrel.global_position
-		get_parent().add_child(instance)
-		
+		get_parent().add_child(instance) 
 		if aim_ray.is_colliding():
 			instance.set_velocity(aim_ray.get_collision_point())
-		else:
+		else: 
 			instance.set_velocity(aim_ray_end.global_position)
 
 func _shoot_auto():
@@ -117,18 +126,16 @@ func _shoot_auto():
 		pp_anim.play("shoot")
 		pistl.play()
 		var instance = bullet_trail.instantiate()
-		
 		if aim_ray.is_colliding():
-			var collision_point = aim_ray.get_collision_point()
-			instance.init(pp_barrel.global_position, collision_point)
+			instance.init(pp_barrel.global_position, aim_ray.get_collision_point())
 			get_parent().add_child(instance)
-			
-			var collider = aim_ray.get_collider()
-			if collider and collider.is_in_group("enemy"):
-				collider.hit(15)
-				instance.trigger_particles(collision_point, pp_barrel.global_position, true)
+			if aim_ray.get_collider().is_in_group("enemy"):
+				aim_ray.get_collider().hit(15)
+				instance.trigger_particles(aim_ray.get_collision_point(),
+											pp_barrel.global_position, true)
 			else:
-				instance.trigger_particles(collision_point, pp_barrel.global_position, false)
+				instance.trigger_particles(aim_ray.get_collision_point(),
+											pp_barrel.global_position, false)
 		else:
 			instance.init(pp_barrel.global_position, aim_ray_end.global_position)
 			get_parent().add_child(instance)
@@ -150,17 +157,16 @@ func _raise_weapon(new_weapon):
 	can_shoot = false
 	_lower_weapon()
 	await get_tree().create_timer(0.4).timeout
-	
 	match new_weapon:
 		Weapons.PRIMARY:
 			weapon_switching.play_backwards("plasma_lower")
 		Weapons.SECONDARY:
 			weapon_switching.play_backwards("pp_lower")
-	
 	current_weapon = new_weapon
 	can_shoot = true
 
-# ========== ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ ==========
+# ========== МЕТОДЫ ДЛЯ СОВМЕСТИМОСТИ ==========
+
 func get_is_alive() -> bool:
 	return is_character_alive()
 

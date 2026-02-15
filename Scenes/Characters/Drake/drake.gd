@@ -1,45 +1,23 @@
-extends CharacterBase3D
+extends CharacterBase
 
-func _custom_ready() -> void:
-	health_bar.value = health
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
-	# Настройка видимости для сетевой игры
-	for child in $BodyShape.find_children("*", "VisualInstance3D"):
-		child.set_layer_mask_value(1, false)
-		child.set_layer_mask_value(2, true)
-	
-	clock.start()
+func _setup_abilities():
+	# Добавляем способности Дрейка
+	add_ability("primary_fire", "primary_fire", 0.5, true)  # Огненное дыхание
+	add_ability("ability_1", "ability_1", 3.0, false)      # Рывок крыльями
+	# и т.д.
 
-func _custom_physics_process(_delta: float) -> void:
+func _ability_primary():
+	# Реализация огненного дыхания
 	pass
 
-func _handle_movement(delta: float) -> void:
-	if not is_character_alive() or current_state == CharacterState.RESPAWNING:
-		return
-	
-	# Прыжок
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = jump_velocity
-	
-	# Спринт
-	if Input.is_action_pressed("sprint"):
-		speed = sprint_speed
-	else:
-		speed = walk_speed
-	
-	# Получение направления движения
-	var input_dir := Input.get_vector("left", "right", "up", "down")
-	var direction := (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	
-	# Применение движения
-	if is_on_floor():
-		if direction:
-			velocity.x = direction.x * speed
-			velocity.z = direction.z * speed
-		else:
-			velocity.x = lerp(velocity.x, direction.x * speed, delta * 10.0)
-			velocity.z = lerp(velocity.z, direction.z * speed, delta * 10.0)
-	else:
-		velocity.x = lerp(velocity.x, direction.x * speed, delta * 2.0)
-		velocity.z = lerp(velocity.z, direction.z * speed, delta * 2.0)
+func _ability_1(_target_position: Vector3):
+	# Реализация рывка
+	pass
+
+func _custom_physics_process(_delta: float):
+	pass
+	# Уникальная логика Дрейка (например, планирование)
+	#if not is_on_floor() and Input.is_action_pressed("glide"):
+		#gravity = 2.0  # Замедленное падение
+	#else:
+		#gravity = 9.8
