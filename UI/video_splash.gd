@@ -63,7 +63,7 @@ func skip_to_next():
 func transition_to_main_menu():
 	set_process_input(false)
 	
-	var error = get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+	var error = get_tree().change_scene_to_file("res://Scenes/parts/main_menu.tscn")
 	if error != OK:
 		push_error("VideoSplash: Failed to transition to main menu. Error code: " + str(error))
 		get_tree().reload_current_scene()

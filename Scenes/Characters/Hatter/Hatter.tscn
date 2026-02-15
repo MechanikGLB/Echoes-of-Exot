@@ -7,9 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://f04k1ry20ek7" path="res://Scenes/parts/pp_gun_1.tscn" id="4_cjupl"]
 [ext_resource type="AudioStream" uid="uid://coykspqbk12ex" path="res://sound/steps.mp3" id="6_cklkl"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fttxr"]
-height = 1.95224
-
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_mk1qe"]
 radius = 0.25
 height = 1.85
@@ -108,6 +105,9 @@ _data = {
 &"pp_lower": SubResource("Animation_nogni")
 }
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fttxr"]
+height = 1.95224
+
 [node name="Player" type="CharacterBody3D" unique_id=1012639352]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 script = ExtResource("1_g73o5")
@@ -143,22 +143,22 @@ abilities_config = {
 }
 }
 
-[node name="UI" parent="." unique_id=1037297660 instance=ExtResource("2_necg7")]
-unique_name_in_owner = true
+[node name="blockbench_export" type="Node3D" parent="." unique_id=1311982206]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 
-[node name="BodyShape" type="CollisionShape3D" parent="." unique_id=1563619270]
-transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0.9877665, 0)
-shape = SubResource("CapsuleShape3D_fttxr")
-
-[node name="Hat" type="MeshInstance3D" parent="BodyShape" unique_id=919719679]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.566882, 0)
+[node name="Hat" type="MeshInstance3D" parent="blockbench_export" unique_id=919719679]
+transform = Transform3D(0.9999997, 0, -5.960459e-08, 0, 0.9999997, 0, 5.960459e-08, 0, 0.9999997, 0, 1.5546483, 0)
 layers = 2
 mesh = ExtResource("2_p3d5a")
 skeleton = NodePath("../../..")
 
-[node name="BeanBody" type="MeshInstance3D" parent="BodyShape" unique_id=350277771]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0316856, 0)
+[node name="BeanBody" type="MeshInstance3D" parent="blockbench_export" unique_id=350277771]
+transform = Transform3D(0.9999997, 0, -5.960459e-08, 0, 0.9999997, 0, 5.960459e-08, 0, 0.9999997, 0, 0.9560808, 0)
 mesh = SubResource("CapsuleMesh_mk1qe")
+skeleton = NodePath("../../BodyShape")
+
+[node name="UI" parent="." unique_id=1037297660 instance=ExtResource("2_necg7")]
+unique_name_in_owner = true
 
 [node name="Head" type="Node3D" parent="." unique_id=1331521909]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7907026, 0)
@@ -193,3 +193,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4924315, 0)
 stream = ExtResource("6_cklkl")
 volume_db = 3.0
 autoplay = true
+
+[node name="BodyShape" type="CollisionShape3D" parent="." unique_id=1563619270]
+transform = Transform3D(0.99999964, 0, -5.9604588e-08, 0, 0.99999964, 0, 5.9604588e-08, 0, 0.99999964, 0, 0.9877664, 0)
+shape = SubResource("CapsuleShape3D_fttxr")

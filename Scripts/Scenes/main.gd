@@ -20,7 +20,7 @@ extends Node3D
 var hit_rect: ColorRect
 var hitmarker: Control
 var player: Node3D
-var zombie = load("res://Scenes/buddy_zomb.tscn")
+var zombie = load("res://Scenes/NPCs/buddy_zomb.tscn")
 var instance
 
 const MAXENEMIES = 20;
@@ -52,7 +52,7 @@ func _ready() -> void:
 
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func  _get_random_child(parent_node):

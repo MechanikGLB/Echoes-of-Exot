@@ -9,8 +9,8 @@ var current_weapon = Weapons.PRIMARY
 var can_shoot = true
 
 # Weapon instances
-@onready var bullet = load("res://scenes/bullet.tscn")
-@onready var bullet_trail = load("res://scenes/bullet_trail.tscn")
+@onready var bullet = load("res://scenes/parts/bullet.tscn")
+@onready var bullet_trail = load("res://Scenes/parts/bullet_trail.tscn")
 
 # Components
 @onready var aim_ray = $Head/Camera3D/AimRay
@@ -46,7 +46,7 @@ func _custom_ready() -> void:
 	
 	clock.start()
 
-func _custom_physics_process(delta: float) -> void:
+func _custom_physics_process(_delta: float) -> void:
 	pass
 
 func _handle_movement(delta: float) -> void:
