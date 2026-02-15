@@ -1,7 +1,6 @@
 extends CharacterBase3D
 
 func _custom_ready() -> void:
-	_setup_abilities()
 	health_bar.value = health
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
