@@ -1,6 +1,6 @@
-[gd_scene load_steps=16 format=4 uid="uid://crhle2nyf6s8i"]
+[gd_scene format=4 uid="uid://crhle2nyf6s8i"]
 
-[ext_resource type="Script" uid="uid://pko082jyns3o" path="res://Scenes/glaz.gd" id="1_638ru"]
+[ext_resource type="Script" uid="uid://pko082jyns3o" path="res://Scripts/Scenes/glaz.gd" id="1_638ru"]
 [ext_resource type="Texture2D" uid="uid://clixl38l7l8if" path="res://Assets/models/Tests/Глаза рофлы_0.png" id="1_uqjba"]
 [ext_resource type="Texture2D" uid="uid://ccgv54gv2a86y" path="res://Assets/models/Tests/Глаза рофлы_1.png" id="2_638ru"]
 

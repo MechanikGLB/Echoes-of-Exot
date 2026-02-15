@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://b2e42cbekf8yk"]
+[gd_scene format=3 uid="uid://b2e42cbekf8yk"]
 
-[ext_resource type="Script" uid="uid://b7n4q8eykumyd" path="res://Scripts/bullet.gd" id="1_ycag2"]
+[ext_resource type="Script" uid="uid://b7n4q8eykumyd" path="res://Scripts/Characters/bullet.gd" id="1_ycag2"]
 [ext_resource type="Texture2D" uid="uid://b2upyl0sl62" path="res://Assets/textures/lava2.jpg" id="2_6afsh"]
 [ext_resource type="Texture2D" uid="uid://bus5ld3vdj36s" path="res://Assets/textures/lava1.png" id="3_odot3"]
 [ext_resource type="AudioStream" uid="uid://busjn7c87noe3" path="res://sound/laser-blast-descend_gy7c5deo.mp3" id="4_6afsh"]

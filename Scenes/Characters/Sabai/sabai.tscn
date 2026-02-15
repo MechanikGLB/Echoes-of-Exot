@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://tyyhrfh8h1wq"]
+[gd_scene format=3 uid="uid://tyyhrfh8h1wq"]
 
-[ext_resource type="Script" uid="uid://tscuniofk775" path="res://Scripts/Character.gd" id="1_8tikf"]
+[ext_resource type="Script" uid="uid://tscuniofk775" path="res://Scripts/Characters/Character.gd" id="1_8tikf"]
 [ext_resource type="PackedScene" uid="uid://hb8g6lb1x41f" path="res://Scenes/Characters/Sabai/Sabai_model.tscn" id="1_xkbdc"]
 [ext_resource type="PackedScene" uid="uid://br8krfognc3t1" path="res://UI/ui.tscn" id="3_afai3"]
 

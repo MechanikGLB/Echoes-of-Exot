@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://qk7ax3erblf2"]
 
 [ext_resource type="PackedScene" uid="uid://stm08yiay5pi" path="res://Scenes/Characters/test/Тестовый болван1.glb" id="1_rs8x3"]
-[ext_resource type="Script" uid="uid://tscuniofk775" path="res://Scripts/Character.gd" id="1_yxyix"]
+[ext_resource type="Script" uid="uid://tscuniofk775" path="res://Scripts/Characters/Character.gd" id="1_yxyix"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yxyix"]
 radius = 0.15

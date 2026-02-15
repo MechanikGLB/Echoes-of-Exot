@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://jxxgd5gb4i6a"]
-
-[ext_resource type="PackedScene" uid="uid://xvvuko5l0etm" path="res://Assets/models/Tests/Яйцелёт1.gltf" id="1_kiaif"]
-
-[node name="blockbench_export" instance=ExtResource("1_kiaif")]

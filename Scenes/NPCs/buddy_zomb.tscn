@@ -1,9 +1,9 @@
-[gd_scene load_steps=41 format=3 uid="uid://dkc74i68bbk1b"]
+[gd_scene format=3 uid="uid://dkc74i68bbk1b"]
 
-[ext_resource type="Script" uid="uid://doel512yax30h" path="res://Scripts/enemy_tests.gd" id="1_tg7l2"]
+[ext_resource type="Script" uid="uid://doel512yax30h" path="res://Scripts/NPCs/enemy_tests.gd" id="1_tg7l2"]
 [ext_resource type="Texture2D" uid="uid://bus5ld3vdj36s" path="res://Assets/textures/lava1.png" id="2_d7bed"]
 [ext_resource type="ArrayMesh" uid="uid://bkfc413ngi33g" path="res://Assets/textures/IMGs/Zombie_Mesh.tres" id="2_vnpx3"]
-[ext_resource type="Script" uid="uid://dhckurrw8y7r5" path="res://Scripts/Body_part.gd" id="5_a7cg5"]
+[ext_resource type="Script" uid="uid://dhckurrw8y7r5" path="res://Scripts/Characters/Body_part.gd" id="5_a7cg5"]
 [ext_resource type="Animation" uid="uid://c02fshv30hq68" path="res://Assets/models/Characters/zombie/Death.res" id="6_jhm5s"]
 
 [sub_resource type="Skin" id="Skin_dni36"]

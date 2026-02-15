@@ -1,6 +1,6 @@
-[gd_scene load_steps=34 format=3 uid="uid://cbryl8yqf6ajk"]
+[gd_scene format=3 uid="uid://cbryl8yqf6ajk"]
 
-[ext_resource type="Script" uid="uid://batfytkk7javo" path="res://Scripts/main.gd" id="1_ce7po"]
+[ext_resource type="Script" uid="uid://batfytkk7javo" path="res://Scripts/Scenes/main.gd" id="1_ce7po"]
 [ext_resource type="ArrayMesh" uid="uid://bn3v8bx2tpq8v" path="res://Assets/models/Assets/graveyard/debris.obj" id="2_grcic"]
 [ext_resource type="ArrayMesh" uid="uid://cvs82eu5vcbfi" path="res://Assets/models/Assets/graveyard/debris-wood.obj" id="3_rgijb"]
 [ext_resource type="Material" uid="uid://bj7mml788rvjc" path="res://Assets/styles/OldBrick.tres" id="4_jjlfi"]
@@ -18,10 +18,10 @@
 [ext_resource type="Texture2D" uid="uid://c488tcnjekkf" path="res://Assets/textures/Grids/Purple/texture_01.png" id="13_rhiq3"]
 [ext_resource type="PackedScene" uid="uid://bt2oixifa5wvs" path="res://Assets/models/Assets/gravestone1.tscn" id="14_4l2i1"]
 [ext_resource type="Texture2D" uid="uid://bdmksf5hkuv6o" path="res://Assets/textures/Grids/Red/texture_01.png" id="14_c53gc"]
-[ext_resource type="PackedScene" uid="uid://crhle2nyf6s8i" path="res://Scenes/glaz.tscn" id="16_ce7po"]
-[ext_resource type="PackedScene" uid="uid://bhagaklftk4y6" path="res://Scenes/MOLODOY.tscn" id="19_jjlfi"]
+[ext_resource type="PackedScene" uid="uid://crhle2nyf6s8i" path="res://Scenes/parts/glaz.tscn" id="16_ce7po"]
+[ext_resource type="PackedScene" uid="uid://bhagaklftk4y6" path="res://Scenes/parts/MOLODOY.tscn" id="19_jjlfi"]
 [ext_resource type="PackedScene" uid="uid://delu2qjrw6teu" path="res://addons/Mirror3D/Mirror3D.tscn" id="19_uwrmv"]
-[ext_resource type="Script" uid="uid://cuvybb2jyjlo7" path="res://Scripts/respawn_point.gd" id="19_xd4pn"]
+[ext_resource type="Script" uid="uid://cuvybb2jyjlo7" path="res://Scripts/Scenes/respawn_point.gd" id="19_xd4pn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6fa6q"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)

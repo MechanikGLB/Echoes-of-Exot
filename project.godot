@@ -22,7 +22,7 @@ config/windows_native_icon="res://crow.ico"
 
 [autoload]
 
-GlobalThings="*res://Scripts/global_things.gd"
+GlobalThings="*res://Scripts/Utils/global_things.gd"
 
 [display]
 

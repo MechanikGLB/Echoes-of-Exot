@@ -1,6 +1,6 @@
-[gd_scene load_steps=26 format=3 uid="uid://dbfixcfet8jdj"]
+[gd_scene format=3 uid="uid://dbfixcfet8jdj"]
 
-[ext_resource type="Script" uid="uid://biv0ny6wm7a0b" path="res://Scripts/main_menu.gd" id="1_j7ex8"]
+[ext_resource type="Script" uid="uid://biv0ny6wm7a0b" path="res://Scripts/Scenes/main_menu.gd" id="1_j7ex8"]
 [ext_resource type="ArrayMesh" uid="uid://bn3v8bx2tpq8v" path="res://Assets/models/Assets/graveyard/debris.obj" id="2_e5qqf"]
 [ext_resource type="ArrayMesh" uid="uid://cvs82eu5vcbfi" path="res://Assets/models/Assets/graveyard/debris-wood.obj" id="3_7bbuq"]
 [ext_resource type="Material" uid="uid://bj7mml788rvjc" path="res://Assets/styles/OldBrick.tres" id="4_saq78"]
