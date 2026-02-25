@@ -27,38 +27,19 @@ var invulnerability_timer: float = 0.0
 var respawn_timer: float = 0.0
 
 # ========== СИСТЕМА СПОСОБНОСТЕЙ ==========
-class Ability:
-	var name: String
-	var input_action: String
-	var cooldown: float
-	var current_cooldown: float
-	var holdable: bool
-	
-	func _init(p_name: String, p_action: String, p_cooldown: float, p_holdable: bool = false):
-		name = p_name
-		input_action = p_action
-		cooldown = p_cooldown
-		current_cooldown = 0.0
-		holdable = p_holdable
-	
-	func can_use() -> bool:
-		return current_cooldown <= 0.0
-	
-	func use():
-		if not holdable:
-			current_cooldown = cooldown
-	
-	func update(delta: float):
-		if current_cooldown > 0:
-			current_cooldown = max(0, current_cooldown - delta)
+# ИЗМЕНЕНО: теперь массив ресурсов
+@export var abilities: Array[AbilityResource] = []
+var current_ability: AbilityResource  # Текущая используемая способность
 
-var abilities: Dictionary = {}
+# Для отслеживания активной способности
+var is_ability_active: bool = false
 
 # ========== НОДЫ ==========
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera3D
 @onready var body_shape: CollisionShape3D = $BodyShape
 @onready var body_node: Node3D = $blockbench_export
+@onready var animation_player: AnimationPlayer = $AnimationPlayer  # НОВОЕ: для анимаций
 
 # UI ноды
 @onready var UI = $"%UI"
@@ -79,11 +60,19 @@ var t_bob = 0.0
 const BASE_FOV = 90
 const FOV_CHANGE = 1.5
 
+# ========== СИГНАЛЫ ==========
+@warning_ignore("unused_signal")
+signal hit_frame_reached  # Используется в AbilityResource для синхронизации анимации
+
 # ========== ИНИЦИАЛИЗАЦИЯ ==========
 func _ready() -> void:
 	health = max_health
 	speed = walk_speed
-	_setup_abilities()
+	
+	# ИНИЦИАЛИЗАЦИЯ СПОСОБНОСТЕЙ
+	for ability in abilities:
+		ability.owner = self
+	
 	_update_ui()
 	
 	# Настройка видимости (чтобы не видеть себя)
@@ -94,12 +83,6 @@ func _ready() -> void:
 	clock.start()
 	_custom_ready()
 
-func _setup_abilities():
-	"""Переопределяется в наследниках для добавления способностей"""
-	pass
-
-func add_ability(name: String, input_action: String, cooldown: float, holdable: bool = false):
-	abilities[name] = Ability.new(name, input_action, cooldown, holdable)
 
 # ========== ОСНОВНОЙ ЦИКЛ ==========
 func _physics_process(delta: float) -> void:
@@ -122,8 +105,8 @@ func _physics_process(delta: float) -> void:
 	# Обновление таймеров
 	_update_timers(delta)
 	
-	# Обновление кулдаунов способностей
-	for ability in abilities.values():
+	# Обновление способностей
+	for ability in abilities:
 		ability.update(delta)
 	
 	# Физика
@@ -143,12 +126,11 @@ func _input(event: InputEvent) -> void:
 		head.rotate_y(-event.relative.x * SENS)
 		camera.rotate_x(-event.relative.y * SENS)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(70))
-		# Вращение модели персонажа
 		$BodyShape.rotate_y(-event.relative.x * SENS)
 		body_node.rotate_y(-event.relative.x * SENS)
 
 # ========== ДВИЖЕНИЕ ==========
-func _handle_movement(delta: float) -> void:
+func _handle_movement(_delta: float) -> void:
 	"""Переопределяется в наследниках"""
 	pass
 
@@ -158,11 +140,9 @@ func _apply_gravity(delta: float) -> void:
 
 func _update_camera_effects(delta: float) -> void:
 	if is_character_alive() and current_state != CharacterState.RESPAWNING:
-		# Качание головы
 		t_bob += delta * velocity.length() * float(is_on_floor())
 		camera.transform.origin = _headbob(t_bob)
 		
-		# Динамическое FOV
 		var velocity_clamped = clamp(velocity.length(), 0.5, sprint_speed * 2)
 		var target_fov = BASE_FOV + FOV_CHANGE * velocity_clamped
 		camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
@@ -175,7 +155,6 @@ func _headbob(time: float) -> Vector3:
 
 # ========== ТАЙМЕРЫ ==========
 func _update_timers(delta: float) -> void:
-	# Таймер респауна
 	if current_state == CharacterState.RESPAWNING:
 		respawn_timer -= delta
 		update_respawn_timer(respawn_timer)
@@ -183,7 +162,6 @@ func _update_timers(delta: float) -> void:
 		if respawn_timer <= 0:
 			respawn()
 	
-	# Таймер неуязвимости
 	if invulnerability_timer > 0:
 		invulnerability_timer -= delta
 
@@ -192,58 +170,42 @@ func _handle_abilities_input() -> void:
 	if current_state != CharacterState.ALIVE:
 		return
 	
-	for ability in abilities.values():
+	for ability in abilities:
 		if not ability.can_use():
 			continue
 		
 		if ability.holdable and Input.is_action_pressed(ability.input_action):
-			_use_ability(ability.name)
+			ability.on_press()
 		elif not ability.holdable and Input.is_action_just_pressed(ability.input_action):
-			_use_ability(ability.name)
+			ability.on_press()
 
-func _use_ability(ability_name: String) -> void:
-	var ability = abilities.get(ability_name)
-	if not ability:
+func play_ability_animation(anim_name: String, anim_speed: float = 1.0) -> void:
+	if not animation_player or not anim_name:
 		return
-	
-	ability.use()
-	
-	match ability_name:
-		"primary_fire":
-			_ability_primary()
-		"secondary_fire":
-			_ability_secondary(get_aim_position())
-		"ability_1":
-			_ability_1(get_aim_position())
-		"ability_2":
-			_ability_2(get_aim_position())
-		"ultimate":
-			_ability_ultimate(get_aim_position())
+	animation_player.play(anim_name)
+	animation_player.speed_scale = anim_speed
 
-# Виртуальные методы для способностей
-func _ability_primary() -> void:
-	pass
+func stop_ability_animation() -> void:
+	if animation_player:
+		animation_player.stop()
 
-func _ability_secondary(_target_position: Vector3) -> void:
-	pass
+func get_projectile_spawn_position() -> Vector3:
+	"""Позиция для спавна снарядов (можно переопределить)"""
+	return camera.global_position
 
-func _ability_1(_target_position: Vector3) -> void:
-	pass
-
-func _ability_2(_target_position: Vector3) -> void:
-	pass
-
-func _ability_ultimate(_target_position: Vector3) -> void:
-	pass
+func set_ability_active(active: bool, ability: AbilityResource) -> void:
+	is_ability_active = active
+	if active:
+		current_ability = ability
+	elif current_ability == ability:
+		current_ability = null
 
 # ========== ЗДОРОВЬЕ ==========
 func take_damage(amount: int) -> void:
 	if current_state != CharacterState.ALIVE or invulnerability_timer > 0:
 		return
 	
-	var old_health = health
 	health = max(0, health - amount)
-	
 	_update_health_ui()
 	_show_damage_effect()
 	
@@ -265,53 +227,40 @@ func respawn() -> void:
 	
 	current_state = CharacterState.ALIVE
 	invulnerability_timer = invulnerability_time
-	
-	# Возрождение в точке респауна или на месте
 	global_position = _get_respawn_point()
-	
 	velocity = Vector3.ZERO
 	health = max_health
 	
 	_update_ui()
 	character_respawned()
 	
-	# Визуальные эффекты
 	if invulnerability_effect:
 		invulnerability_effect.emitting = true
 	
 	if body_shape:
 		body_shape.disabled = false
 	
-	# Скрываем экран смерти
 	death_bg.visible = false
 	death_screen.visible = false
-	
 	set_process_unhandled_input(true)
 	set_physics_process(true)
 
 func _on_death() -> void:
-	# Звук смерти (если есть)
 	var okak = $"%UI/Dethscreen/AudioStreamPlayer"
 	if okak:
 		okak.play()
 	
-	# Отключаем коллизии
 	if body_shape:
 		body_shape.disabled = true
 	
-	# Показываем экран смерти
 	death_bg.visible = true
 	death_screen.visible = true
-	
-	# Отключаем ввод
 	set_process_unhandled_input(false)
 	
-	# Запускаем таймер респауна
 	current_state = CharacterState.RESPAWNING
 	respawn_timer = respawn_delay
 
 func character_respawned():
-	"""Сигнал/событие респауна - можно переопределить в наследниках"""
 	pass
 
 # ========== ОЧКИ ==========
@@ -320,17 +269,14 @@ func add_score(points: int) -> void:
 
 # ========== ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ ==========
 func _get_respawn_point() -> Vector3:
-	# Поиск точек респауна
 	var spawn_points = get_tree().get_nodes_in_group("respawn_points")
 	if spawn_points.size() > 0:
 		return spawn_points[randi() % spawn_points.size()].global_position
 	
-	# Если точек нет - текущая позиция
 	print("No respawn points found, using current position")
 	return global_position
 
 func get_aim_position() -> Vector3:
-	"""Возвращает позицию, куда смотрит камера"""
 	var space_state = get_world_3d().direct_space_state
 	var mouse_pos = get_viewport().get_mouse_position()
 	var origin = camera.project_ray_origin(mouse_pos)
@@ -378,7 +324,6 @@ func _update_invulnerability_effect() -> void:
 		invulnerability_effect.emitting = (invulnerability_timer > 0)
 
 func _stop_all_sounds():
-	"""Останавливает все звуки на персонаже"""
 	for child in get_children(true):
 		if child is AudioStreamPlayer or child is AudioStreamPlayer2D or child is AudioStreamPlayer3D:
 			child.stop()
@@ -402,23 +347,18 @@ func enable() -> void:
 	set_physics_process(true)
 
 func menu_state():
-	"""Отключает управление и интерфейс для режима меню/выбора персонажа"""
-	disable()  # Отключает physics process
-	set_process_unhandled_input(false)  # Отключает ввод
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)  # Показываем курсор
+	disable()
+	set_process_unhandled_input(false)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
-	# Прячем UI
 	if UI:
 		UI.visible = false
 	
-	# Останавливаем все звуки
 	_stop_all_sounds()
 
 # ========== ВИРТУАЛЬНЫЕ МЕТОДЫ ==========
 func _custom_ready() -> void:
-	"""Переопределяется в наследниках"""
 	pass
 
 func _custom_physics_process(_delta: float) -> void:
-	"""Переопределяется в наследниках"""
 	pass
