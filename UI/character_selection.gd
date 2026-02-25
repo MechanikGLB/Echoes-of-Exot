@@ -122,6 +122,8 @@ func _show_character_model(scene_path: String, character_name: String):
 		show_plate.add_child(current_character_instance)
 		current_character_instance.position = Vector3.ZERO
 		
+		await get_tree().process_frame
+		
 		if current_character_instance.has_method("menu_state"):
 			current_character_instance.menu_state()
 		

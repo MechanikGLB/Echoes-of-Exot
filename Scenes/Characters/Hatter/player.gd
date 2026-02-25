@@ -17,7 +17,6 @@ var can_shoot = true
 @onready var aim_ray_end = $Head/Camera3D/AimRayEnd
 
 # Звуки
-@onready var steps = $AudioStreamPlayer3D
 @onready var pistl = $Head/Camera3D/PPGun1/AudioStreamPlayer3D
 
 # Пушки
@@ -30,7 +29,7 @@ var can_shoot = true
 # ========== ИНИЦИАЛИЗАЦИЯ ==========
 func _custom_ready():
 	# ВАЖНО: Эти настройки нужны для правильной работы!
-	_setup_abilities()
+	#_setup_abilities()
 	health_bar.value = health
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
@@ -44,45 +43,15 @@ func _custom_ready():
 	# Устанавливаем начальное оружие
 	current_weapon = Weapons.PRIMARY
 
-func _setup_abilities():
-	# Регистрируем способности
-	add_ability("primary_fire", "primary_fire", 0.1, true)   # Основной огонь
-	add_ability("secondary_fire", "secondary_fire", 0.5, true) # Вторичный огонь
-	add_ability("ability_1", "ability_1", 0.4, false)       # Переключение оружия
+#func _setup_abilities():
+	## Регистрируем способности
+	#add_ability("primary_fire", "primary_fire", 0.1, true)   # Основной огонь
+	#add_ability("secondary_fire", "secondary_fire", 0.5, true) # Вторичный огонь
+	#add_ability("ability_1", "ability_1", 0.4, false)       # Переключение оружия
 
 # ========== ДВИЖЕНИЕ ==========
 func _handle_movement(delta: float) -> void:
-	if not is_character_alive() or current_state == CharacterState.RESPAWNING:
-		return
-	
-	# Прыжок
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = jump_velocity
-	
-	# Спринт
-	if Input.is_action_pressed("sprint"):
-		speed = sprint_speed
-	else:
-		speed = walk_speed
-	
-	# Получение направления движения
-	var input_dir := Input.get_vector("left", "right", "up", "down")
-	var direction := (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	
-	# Применение движения
-	if is_on_floor():
-		if direction:
-			velocity.x = direction.x * speed
-			velocity.z = direction.z * speed
-			steps.stream_paused = false
-		else:
-			velocity.x = lerp(velocity.x, direction.x * speed, delta * 10.0)
-			velocity.z = lerp(velocity.z, direction.z * speed, delta * 10.0)
-			steps.stream_paused = true
-	else:
-		velocity.x = lerp(velocity.x, direction.x * speed, delta * 2.0)
-		velocity.z = lerp(velocity.z, direction.z * speed, delta * 2.0)
-		steps.stream_paused = true
+	super(delta)
 
 # ========== СПОСОБНОСТИ ==========
 func _ability_primary():

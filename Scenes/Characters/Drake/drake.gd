@@ -1,96 +1,123 @@
 extends CharacterBase
 
-# Для серии ударов ЛКМ
-var combo_step: int = 0
-var combo_timer: float = 0.0
-var combo_reset_time: float = 2.0  # Время до сброса комбо
+# ========== КОМБО СИСТЕМА ==========
+var combo_step: int = 0              # 0-первый удар, 1-второй, 2-третий
+var combo_timer: float = 0.0         # таймер до сброса комбо
+var combo_reset_time: float = 1.2    # время ожидания следующего удара (сек)
+var can_attack: bool = true          # можно ли начать новую атаку
 
-# Для заряженной атаки
-var is_charging: bool = false
-var charge_time: float = 0.0
-var max_charge_time: float = 1.5
+# ========== НОДЫ ==========
+@onready var anim_tree = $AnimationTree           # управляет переходами между анимациями
+var _state_machine = null                          # lazy initialization
 
-func _ready():
-	# Важно! Вызываем родительский _ready
-	super()
-	
-	# Здесь можно добавить инициализацию, специфичную для Дрейка
+@onready var hitbox_anim = $HitboxAnimPlayer      # анимации-пустышки с ключами урона
+@onready var sword_hitbox = $blockbench_export/Sword/SwordHitBox  # Area3D на мече
+
+# ========== ПОЛУЧЕНИЕ STATE_MACHINE ==========
+func get_state_machine():
+	if _state_machine == null and anim_tree != null:
+		_state_machine = anim_tree.get("parameters/playback")
+	return _state_machine
+
+# ========== ИНИЦИАЛИЗАЦИЯ ==========
+func _custom_ready():
 	combo_step = 0
+	team = 1  # команда игрока
+	
+	if anim_tree:
+		anim_tree.active = true
+		anim_tree.animation_finished.connect(_on_animation_finished)
+		get_state_machine()  # инициализируем state_machine
+	
+	# захватываем мышь только если это не сцена выбора персонажа
+	if not Engine.is_editor_hint() and get_tree().current_scene.name != "character_selection":
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _custom_physics_process(delta: float):
-	
-	# Таймер сброса комбо
+	# сброс комбо если долго не атаковать
 	if combo_step > 0:
 		combo_timer -= delta
 		if combo_timer <= 0:
-			combo_step = 0
-	
-	# Обработка заряженной атаки
-	if is_charging:
-		charge_time += delta
-		if charge_time >= max_charge_time:
-			_trigger_charged_attack()
+			reset_combo()
 
-# Переопределяем метод получения позиции для снарядов
-func get_projectile_spawn_position() -> Vector3:
-	# Для Дрейка можно использовать позицию меча
-	if has_node("SwordTip"):
-		return $SwordTip.global_position
-	return camera.global_position
+# ========== УПРАВЛЕНИЕ ==========
+func _input(event):
+	# игнорируем ввод в меню
+	if not anim_tree or not anim_tree.active:
+		return
+		
+	if event.is_action_pressed("primary_fire"):
+		advance_combo()
 
-# Вспомогательные методы для комбо
+# ========== СИСТЕМА КОМБО ==========
 func advance_combo() -> void:
+	var sm = get_state_machine()
+	if sm == null:
+		return
+		
+	if not can_attack:
+		if combo_timer > 0:
+			combo_timer = combo_reset_time
+		return
+		
+	can_attack = false
 	combo_step = (combo_step + 1) % 3
 	combo_timer = combo_reset_time
 	
-	# Запускаем соответствующую анимацию
-	match combo_step:
-		0:
-			animation_player.play("attack1")
-		1:
-			animation_player.play("attack2")
-		2:
-			animation_player.play("attack3")
+	var anim_names = ["attack1", "attack2", "attack3"]
+	var hitbox_names = ["attack1_hitbox", "attack2_hitbox", "attack3_hitbox"]
+	
+	sm.travel(anim_names[combo_step])
+	if hitbox_anim:
+		hitbox_anim.play(hitbox_names[combo_step])
 
-func reset_combo() -> void:
+# вызывается из ключей в hitbox_anim (включение урона)
+func _enable_sword_attack():
+	if sword_hitbox:
+		var damage = [64, 399, 72][combo_step]
+		var should_knockup = (combo_step == 2)  # только третий удар подбрасывает
+		sword_hitbox.start_attack(damage, should_knockup)
+
+# вызывается из ключей в hitbox_anim (выключение урона)
+func _disable_sword_attack():
+	if sword_hitbox:
+		sword_hitbox.stop_attack()
+
+# вызывается когда GLB анимация закончилась
+func _on_animation_finished(anim_name: String):
+	var sm = get_state_machine()
+	if sm == null:
+		return
+		
+	if anim_name in ["attack1", "attack2", "attack3"]:
+		can_attack = true
+		
+		if combo_timer <= 0:
+			reset_combo()
+			sm.travel("static")
+		else:
+			sm.travel("static")
+
+# сброс комбо в начальное состояние
+func reset_combo():
 	combo_step = 0
 	combo_timer = 0.0
 
-func _trigger_charged_attack():
-	# Срабатывает когда зарядка достигла максимума
-	is_charging = false
-	charge_time = 0.0
-	# Здесь логика заряженной атаки
-	animation_player.play("sword_charged")
-	# Наносим урон и т.д.
-
-# Методы для способностей (будут вызываться из ресурсов)
-func apply_damage_in_cone(damage: int, angle: float, max_distance: float) -> void:
-	# Поиск целей в конусе перед персонажем
-	var direction = -camera.global_transform.basis.z
-	var targets = get_targets_in_cone(direction, angle, max_distance)
+# ========== МЕТОДЫ ДЛЯ МЕНЮ ==========
+func _custom_menu_state():
+	# отключаем AnimationTree
+	if anim_tree:
+		anim_tree.active = false
 	
-	for target in targets:
-		if target.has_method("take_damage"):
-			target.take_damage(damage)
-
-func get_targets_in_cone(direction: Vector3, angle: float, max_distance: float) -> Array:
-	# Возвращает массив целей в конусе
-	var result = []
-	var space_state = get_world_3d().direct_space_state
-	var query = PhysicsShapeQueryParameters3D.new()
-	var sphere = SphereShape3D.new()
-	sphere.radius = max_distance
-	query.shape = sphere
-	query.transform = Transform3D(Basis(), global_position)
-	query.exclude = [self]
+	# останавливаем все анимации
+	if animation_player:
+		animation_player.stop()
+	if hitbox_anim:
+		hitbox_anim.stop()
 	
-	var targets = space_state.intersect_shape(query)
-	for target in targets:
-		var collider = target.collider
-		if collider is CharacterBase:
-			var to_target = (collider.global_position - global_position).normalized()
-			if direction.dot(to_target) > cos(deg_to_rad(angle / 2)):
-				result.append(collider)
+	# проигрываем анимацию покоя для меню
+	if animation_player and animation_player.has_animation("pose2"):
+		animation_player.play("pose2")
 	
-	return result
+	# фиксируем позу
+	set_physics_process(false)

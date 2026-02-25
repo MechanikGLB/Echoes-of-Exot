@@ -1,10 +1,13 @@
 extends CharacterBody3D
 
+@export var hit_stagger = 1.0
+
 var state_machine
 var health = 100
 var alive = true
 
 var player_target: Node3D
+var team: int = 0
 
 const SEE_RANGE = 90.0
 const SPEED = 4.0
@@ -17,9 +20,11 @@ signal enemy_dead
 @onready var nav_agent = $NavigationAgent3D
 @onready var anim_tree = $AnimationTree
 
+
 func _ready() -> void:
 	state_machine = anim_tree.get("parameters/playback")
 	_find_and_set_target()
+	add_to_group("enemy")
 
 func _process(delta: float) -> void:
 	# Если state_machine не инициализирован, выходим
@@ -74,7 +79,7 @@ func _is_target_valid() -> bool:
 func _hit_finished():
 	if _is_target_valid() and global_position.distance_to(player_target.global_position) < ATTACK_RANGE + 1.0:
 		var dir = global_position.direction_to(player_target.global_position)
-		player_target.take_damage(ZOMBIE_DMG, dir, player_target.HIT_STAGGER)
+		player_target.take_damage(ZOMBIE_DMG, dir)
 
 func _find_nearest_player(players: Array) -> Node3D:
 	var nearest_player = null
@@ -94,6 +99,8 @@ func _on_area_3d_body_part_hit(dmg: Variant) -> void:
 		return
 	health -= dmg
 	emit_signal("zombie_hit")
+	velocity.z ++ hit_stagger
+	
 	if health <= 0:
 		collision_layer = 0
 		collision_mask = 0

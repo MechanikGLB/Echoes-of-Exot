@@ -12,6 +12,10 @@ extends CharacterBody3D
 @export var invulnerability_time: float = 2.0
 @export var hit_stagger:float = 2.0
 
+@export_category("Team Settings")
+@export var team: int = 1  # 0 - команды врагов, 1+ - игрок
+
+
 # ========== СОСТОЯНИЯ ==========
 enum CharacterState { 
 	ALIVE, 
@@ -59,6 +63,8 @@ func knockup(_duration: float):
 @onready var score_label = $"%UI/Stat_base/HBoxContainer2/Score"
 @onready var damage_flash = $"%UI/DamageFlash"
 @onready var invulnerability_effect = get_node_or_null("InvulnerabilityEffect")
+
+@onready var steps = get_node_or_null("AudioStreamPlayer3D")
 
 # ========== НАСТРОЙКИ КАМЕРЫ ==========
 const SENS = 0.002
@@ -138,9 +144,41 @@ func _input(event: InputEvent) -> void:
 		body_node.rotate_y(-event.relative.x * SENS)
 
 # ========== ДВИЖЕНИЕ ==========
-func _handle_movement(_delta: float) -> void:
-	"""Переопределяется в наследниках"""
-	pass
+func _handle_movement(delta: float) -> void:
+	if not is_character_alive() or current_state == CharacterState.RESPAWNING:
+		return
+	
+	# Прыжок
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		velocity.y = jump_velocity
+	
+	# Спринт
+	if Input.is_action_pressed("sprint"):
+		speed = sprint_speed
+	else:
+		speed = walk_speed
+	
+	# Получение направления движения
+	var input_dir := Input.get_vector("left", "right", "up", "down")
+	var direction := (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
+	# Применение движения
+	if is_on_floor():
+		if direction:
+			velocity.x = direction.x * speed
+			velocity.z = direction.z * speed
+			if steps:
+				steps.stream_paused = false
+		else:
+			velocity.x = lerp(velocity.x, direction.x * speed, delta * 10.0)
+			velocity.z = lerp(velocity.z, direction.z * speed, delta * 10.0)
+			if steps:
+				steps.stream_paused = true
+	else:
+		velocity.x = lerp(velocity.x, direction.x * speed, delta * 2.0)
+		velocity.z = lerp(velocity.z, direction.z * speed, delta * 2.0)
+		if steps:
+			steps.stream_paused = true
 
 func _apply_gravity(delta: float) -> void:
 	if not is_on_floor():
@@ -207,6 +245,23 @@ func set_ability_active(active: bool, ability: AbilityResource) -> void:
 		current_ability = ability
 	elif current_ability == ability:
 		current_ability = null
+
+# ======== Командные функции ==============
+
+func is_enemy(other: CharacterBase) -> bool:
+	"""Проверка, является ли другой персонаж врагом"""
+	if not other:
+		return false
+	
+	# Команда 0 - общие враги (враждебны всем)
+	if team == 0:
+		return other.team != 0  # Враги всем, кроме себя
+	
+	if other.team == 0:
+		return true  # Другие враждебны команде 0
+	
+	# Игроки (команды 1, 2, 3...) враждебны друг другу
+	return team != other.team
 
 # ========== ЗДОРОВЬЕ ==========
 func take_damage(amount: int, direction: Vector3 = Vector3.ZERO) -> void:
@@ -367,10 +422,14 @@ func menu_state():
 		UI.visible = false
 	
 	_stop_all_sounds()
+	_custom_menu_state() 
 
 # ========== ВИРТУАЛЬНЫЕ МЕТОДЫ ==========
 func _custom_ready() -> void:
 	pass
 
 func _custom_physics_process(_delta: float) -> void:
+	pass
+
+func _custom_menu_state() -> void:
 	pass
