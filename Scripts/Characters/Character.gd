@@ -10,6 +10,7 @@ extends CharacterBody3D
 @export var gravity: float = 9.8
 @export var respawn_delay: float = 5.0 
 @export var invulnerability_time: float = 2.0
+@export var hit_stagger:float = 2.0
 
 # ========== СОСТОЯНИЯ ==========
 enum CharacterState { 
@@ -27,19 +28,26 @@ var invulnerability_timer: float = 0.0
 var respawn_timer: float = 0.0
 
 # ========== СИСТЕМА СПОСОБНОСТЕЙ ==========
-# ИЗМЕНЕНО: теперь массив ресурсов
+
 @export var abilities: Array[AbilityResource] = []
 var current_ability: AbilityResource  # Текущая используемая способность
 
 # Для отслеживания активной способности
 var is_ability_active: bool = false
 
+# Для подброса
+func knockup(_duration: float):
+	
+	var tween = create_tween()
+	tween.tween_property(self, "velocity:y", 10.0, 0.1)
+	# Здесь можно добавить эффект оглушения
+
 # ========== НОДЫ ==========
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera3D
 @onready var body_shape: CollisionShape3D = $BodyShape
 @onready var body_node: Node3D = $blockbench_export
-@onready var animation_player: AnimationPlayer = $AnimationPlayer  # НОВОЕ: для анимаций
+@onready var animation_player: AnimationPlayer = $blockbench_export/AnimationPlayer  
 
 # UI ноды
 @onready var UI = $"%UI"
@@ -201,13 +209,17 @@ func set_ability_active(active: bool, ability: AbilityResource) -> void:
 		current_ability = null
 
 # ========== ЗДОРОВЬЕ ==========
-func take_damage(amount: int) -> void:
+func take_damage(amount: int, direction: Vector3 = Vector3.ZERO) -> void:
 	if current_state != CharacterState.ALIVE or invulnerability_timer > 0:
 		return
 	
 	health = max(0, health - amount)
 	_update_health_ui()
 	_show_damage_effect()
+	
+	# Отбрасывание, если передано направление
+	if direction != Vector3.ZERO:
+		velocity += direction * hit_stagger
 	
 	if health <= 0:
 		die()

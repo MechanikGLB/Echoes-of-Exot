@@ -1,6 +1,3 @@
-# AbilityResource.gd
-# Ресурс способности для Godot 4 (3D версия)
-
 class_name AbilityResource
 extends Resource
 
@@ -37,6 +34,8 @@ enum ActivationType {
 @export_group("Основные параметры")
 @export var ability_name: String = "Способность"
 @export_multiline var description: String = ""
+@export var input_action: String = "" 
+@export var holdable: bool = false
 @export var icon: Texture2D
 @export var activation_type: ActivationType = ActivationType.SINGLE
 
@@ -315,7 +314,7 @@ func can_use() -> bool:
 	if is_on_cooldown:
 		return false
 	
-	if owner.has_method("is_ability_active") and owner.is_ability_active() and not can_interrupt:
+	if owner.is_ability_active and not can_interrupt:
 		return false
 	
 	return true

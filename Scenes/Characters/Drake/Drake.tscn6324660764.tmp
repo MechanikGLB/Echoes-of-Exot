@@ -3,8 +3,6 @@
 [ext_resource type="Script" uid="uid://cbdn1af4jy6uf" path="res://Scenes/Characters/Drake/drake.gd" id="1_08hit"]
 [ext_resource type="PackedScene" uid="uid://cnh63ik6xgpmq" path="res://Scenes/Characters/Drake/Drake.glb" id="1_ngerc"]
 [ext_resource type="PackedScene" uid="uid://br8krfognc3t1" path="res://UI/ui.tscn" id="2_7u38y"]
-[ext_resource type="Script" uid="uid://bqpnw5t4c0xjc" path="res://Resources/Base/Ability_resource.gd" id="2_bfrwn"]
-[ext_resource type="Resource" uid="uid://hg4vtrom345m" path="res://Resources/Abilities/Drake/dragon_slayer.tres" id="3_3dle1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7u38y"]
 radius = 0.05
@@ -54,7 +52,6 @@ height = 1.199707
 
 [node name="Drake" type="CharacterBody3D" unique_id=800964428]
 script = ExtResource("1_08hit")
-abilities = Array[ExtResource("2_bfrwn")]([ExtResource("3_3dle1")])
 
 [node name="UI" parent="." unique_id=175982930 instance=ExtResource("2_7u38y")]
 unique_name_in_owner = true
@@ -145,7 +142,7 @@ layers = 2
 layers = 2
 
 [node name="odol1" parent="blockbench_export/Drake/jopa" index="3" unique_id=368963816]
-transform = Transform3D(0.99976206, -0.021731872, -0.0019012924, 0.021531213, 0.9970161, -0.07412896, 0.0035065806, 0.07407038, 0.99724686, 0, 0.0171875, -0.0765625)
+transform = Transform3D(0.99976206, -0.021731872, -0.0019012924, 0.021531213, 0.99701613, -0.07412896, 0.0035065806, 0.07407038, 0.99724686, 0, 0.0171875, -0.0765625)
 
 [node name="cuboid6" parent="blockbench_export/Drake/jopa/odol1" index="0" unique_id=1153054567]
 layers = 2
@@ -190,7 +187,7 @@ layers = 2
 layers = 2
 
 [node name="head2" parent="blockbench_export/Drake/grudverx" index="2" unique_id=1208137154]
-transform = Transform3D(0.83388567, 0, 0.5519369, 0, 1, 0, -0.5519369, 0, 0.83388567, 0, 0.0703125, 0.00625)
+transform = Transform3D(0.8338857, 0, 0.5519369, 0, 1, 0, -0.5519369, 0, 0.8338857, 0, 0.0703125, 0.00625)
 
 [node name="plane" parent="blockbench_export/Drake/grudverx/head2/ZRACJP" parent_id_path=PackedInt32Array(535971260, 1141700349) index="0" unique_id=2028376148]
 layers = 2
@@ -282,7 +279,7 @@ shape = SubResource("CapsuleShape3D_dylup")
 layers = 2
 
 [node name="armos" parent="blockbench_export/Drake/grudverx" index="3" unique_id=1728735357]
-transform = Transform3D(0.9848076, 0, 0.17364818, 0, 1, 0, -0.17364818, 0, 0.9848076, 0, -0.034375, 0)
+transform = Transform3D(0.98480767, 0, 0.17364818, 0, 1, 0, -0.17364818, 0, 0.98480767, 0, -0.034375, 0)
 
 [node name="leftarm" parent="blockbench_export/Drake/grudverx/armos" index="0" unique_id=1295155560]
 transform = Transform3D(0.90197986, -0.18645912, -0.3894423, -0.18187274, 0.65396297, -0.73433965, 0.39160514, 0.7331885, 0.5559496, -0.1359375, 0, 0)
@@ -312,7 +309,7 @@ transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0.0625, 0.03221625, -0.121834
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, -0.0609375, 0.02298625, -0.11830313)
 
 [node name="cepka2" parent="blockbench_export/Drake/grudverx/armos/leftarm/leftarmniz/sword" index="4" unique_id=1068839425]
-transform = Transform3D(0.8660254, -0.48861542, 0.106088825, 0.49999997, 0.84630686, -0.18375124, 0, 0.21217762, 0.97723114, 0, -0.13465813, -0.00311625)
+transform = Transform3D(0.8660254, -0.48861545, 0.106088825, 0.49999997, 0.8463069, -0.18375124, 0, 0.21217763, 0.97723114, 0, -0.13465813, -0.00311625)
 
 [node name="effects" parent="blockbench_export/Drake/grudverx/armos/leftarm/leftarmniz/sword" index="6" unique_id=1679992490]
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.75, 0.4375)
@@ -321,13 +318,13 @@ transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.75, 0.4375)
 transform = Transform3D(-1.4901161e-07, 0.99756414, -0.06975647, -0.29654154, 0.066618785, 0.9526936, 0.95501995, 0.020685809, 0.2958192, -0.0125, -0.16076376, -0.001583125)
 
 [node name="big" parent="blockbench_export/Drake/grudverx/armos/leftarm/leftarmniz/lefthand" index="0" unique_id=193131325]
-transform = Transform3D(0.9660858, -0.097908884, -0.23893881, 0.0044777724, 0.93154085, -0.3636087, 0.2581818, 0.35020733, 0.9003869, -0.028125, 0.001428125, -0.01875)
+transform = Transform3D(0.96608585, -0.09790889, -0.23893882, 0.0044777724, 0.9315409, -0.3636087, 0.2581818, 0.35020733, 0.900387, -0.028125, 0.001428125, -0.01875)
 
 [node name="ukazatel" parent="blockbench_export/Drake/grudverx/armos/leftarm/leftarmniz/lefthand" index="1" unique_id=1422939927]
 transform = Transform3D(1, 0, 0, 0, 0.97437006, -0.22495106, 0, 0.22495106, 0.97437006, -0.0171875, 0, -0.0421875)
 
 [node name="5" parent="blockbench_export/Drake/grudverx/armos/leftarm/leftarmniz/lefthand/fucker1" parent_id_path=PackedInt32Array(535971260, 529214650) index="0" unique_id=1092999375]
-transform = Transform3D(1, 0, 0, 0, 0.9624551, -0.27144045, 0, 0.27144045, 0.9624551, 0.0009725, -0.00339375, -0.02657)
+transform = Transform3D(1, 0, 0, 0, 0.96245515, -0.27144045, 0, 0.27144045, 0.96245515, 0.0009725, -0.00339375, -0.02657)
 
 [node name="smol" parent="blockbench_export/Drake/grudverx/armos/leftarm/leftarmniz/lefthand" index="4" unique_id=459476729]
 transform = Transform3D(1, 0, 0, 0, 0.89879405, 0.43837115, 0, -0.43837115, 0.89879405, 0.025, 0, -0.0359375)
@@ -379,7 +376,7 @@ transform = Transform3D(1, 0, 0, 0, 0.98768836, -0.15643449, 0, 0.15643449, 0.98
 transform = Transform3D(1, 0, 0, 0, 0.9135455, -0.40673658, 0, 0.40673658, 0.9135455, 0, 0, -0.015625)
 
 [node name="fucker2" parent="blockbench_export/Drake/grudverx/armos/rightarm/rightarmniz/righthand" index="2" unique_id=1813673430]
-transform = Transform3D(0.9995334, -3.7252899e-09, 0.03053851, 0.014101116, 0.8870107, -0.46153325, -0.027087983, 0.4617485, 0.8865971, 0.003125, 0.000874375, -0.041625626)
+transform = Transform3D(0.9995335, -3.72529e-09, 0.03053851, 0.014101117, 0.88701075, -0.46153325, -0.027087985, 0.46174854, 0.8865971, 0.003125, 0.000874375, -0.041625626)
 
 [node name="13" parent="blockbench_export/Drake/grudverx/armos/rightarm/rightarmniz/righthand/fucker2/10" parent_id_path=PackedInt32Array(535971260, 1550301309) index="0" unique_id=1574122705]
 transform = Transform3D(1, 0, 0, 0, 0.42261824, -0.9063078, 0, 0.9063078, 0.42261824, -0.00059, 0.000956875, -0.017741876)
@@ -388,7 +385,7 @@ transform = Transform3D(1, 0, 0, 0, 0.42261824, -0.9063078, 0, 0.9063078, 0.4226
 transform = Transform3D(1, 0, 0, 0, 0.8314696, -0.55557024, 0, 0.55557024, 0.8314696, 0, -0.0015625, -0.0015625)
 
 [node name="smol2" parent="blockbench_export/Drake/grudverx/armos/rightarm/rightarmniz/righthand" index="4" unique_id=2061271444]
-transform = Transform3D(0.98404056, 0.08626873, 0.15563293, 3.7252899e-09, 0.8746197, -0.4848096, -0.17794353, 0.4770724, 0.8606614, -0.025, 0, -0.0359375)
+transform = Transform3D(0.9840406, 0.08626873, 0.15563293, 3.72529e-09, 0.8746197, -0.4848096, -0.17794353, 0.4770724, 0.8606614, -0.025, 0, -0.0359375)
 
 [node name="rightarm_2_to_3_HitBox" type="Area3D" parent="blockbench_export/Drake/grudverx/armos/rightarm/rightarmniz/rightarm_2" parent_id_path=PackedInt32Array(535971260, 295726299) index="0" unique_id=1007364579]
 transform = Transform3D(0.4472135, -0.06876146, -0.8917803, 0, 0.99704057, -0.07687765, 0.8944273, 0.03438072, 0.44589, 0.006249994, -0.09062499, -0.0031249989)

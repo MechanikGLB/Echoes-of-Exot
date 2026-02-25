@@ -1,0 +1,10 @@
+[gd_resource type="Resource" format=3 uid="uid://hg4vtrom345m"]
+
+[ext_resource type="Script" uid="uid://bjjd7tpdp7vih" path="res://Resources/Abilities/Drake/dragon_slayer.gd" id="1_k7j0e"]
+
+[resource]
+script = ExtResource("1_k7j0e")
+ability_name = "Погибель Драконов"
+input_action = "primary_fire"
+cooldown_time = 0.0
+metadata/_custom_type_script = "uid://bqpnw5t4c0xjc"
