@@ -69,49 +69,65 @@ animation = &"attack3"
 animation = &"static"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tc5p8"]
+xfade_time = 0.1
 advance_mode = 2
+advance_condition = &"attack_request"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oe7b8"]
+xfade_time = 0.1
+switch_mode = 2
 advance_mode = 2
+advance_expression = "attack_request == true and combo_step == 1"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t7dqg"]
+xfade_time = 0.1
+switch_mode = 2
 advance_mode = 2
+advance_expression = "attack_request == true and combo_step == 2"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r8xig"]
+xfade_time = 0.1
 switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bk2qd"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xihd8"]
-advance_mode = 2
+advance_mode = 0
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d44ub"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3dle1"]
+xfade_time = 0.1
+switch_mode = 2
 advance_mode = 2
+advance_expression = "not attack_request or combo_timer <= 0"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j3arf"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dylup"]
+xfade_time = 0.1
+switch_mode = 2
 advance_mode = 2
+advance_expression = "not attack_request or combo_timer <= 0"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_t2h6x"]
+allow_transition_to_self = true
 states/End/position = Vector2(784, 203)
 states/Start/position = Vector2(285, 203)
 states/attack1/node = SubResource("AnimationNodeAnimation_3dle1")
-states/attack1/position = Vector2(393, 91)
+states/attack1/position = Vector2(385, 91)
 states/attack2/node = SubResource("AnimationNodeAnimation_dylup")
 states/attack2/position = Vector2(521, 78)
 states/attack3/node = SubResource("AnimationNodeAnimation_u4wka")
-states/attack3/position = Vector2(676, 91)
+states/attack3/position = Vector2(678, 91)
 states/static/node = SubResource("AnimationNodeAnimation_q3ajk")
 states/static/position = Vector2(521, 203)
-transitions = ["static", "attack1", SubResource("AnimationNodeStateMachineTransition_tc5p8"), "attack1", "attack2", SubResource("AnimationNodeStateMachineTransition_oe7b8"), "attack2", "attack3", SubResource("AnimationNodeStateMachineTransition_t7dqg"), "attack3", "static", SubResource("AnimationNodeStateMachineTransition_r8xig"), "Start", "static", SubResource("AnimationNodeStateMachineTransition_bk2qd"), "static", "End", SubResource("AnimationNodeStateMachineTransition_xihd8"), "attack2", "static", SubResource("AnimationNodeStateMachineTransition_d44ub"), "attack1", "static", SubResource("AnimationNodeStateMachineTransition_j3arf")]
+transitions = ["static", "attack1", SubResource("AnimationNodeStateMachineTransition_tc5p8"), "attack1", "attack2", SubResource("AnimationNodeStateMachineTransition_oe7b8"), "attack2", "attack3", SubResource("AnimationNodeStateMachineTransition_t7dqg"), "attack3", "static", SubResource("AnimationNodeStateMachineTransition_r8xig"), "Start", "static", SubResource("AnimationNodeStateMachineTransition_bk2qd"), "static", "End", SubResource("AnimationNodeStateMachineTransition_xihd8"), "attack1", "static", SubResource("AnimationNodeStateMachineTransition_3dle1"), "attack2", "static", SubResource("AnimationNodeStateMachineTransition_dylup")]
 graph_offset = Vector2(68, -32)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ms3kw"]
-graph_offset = Vector2(-167.2237, -29.421478)
-nodes/output/position = Vector2(660, 120)
+resource_local_to_scene = true
+graph_offset = Vector2(-109.154755, -62.497375)
+nodes/output/position = Vector2(680, 140)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_t2h6x")
-nodes/StateMachine/position = Vector2(240, 100)
+nodes/StateMachine/position = Vector2(300, 120)
 node_connections = [&"output", 0, &"StateMachine"]
 
 [sub_resource type="Animation" id="Animation_3dle1"]
@@ -465,7 +481,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="cepka2" parent="blockbench_export/Drake/grudverx/armos/leftarm/leftarmniz/sword" index="4" unique_id=1068839425]
-transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.99999976, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="razyebalovo3" parent="blockbench_export/Drake/grudverx/armos/leftarm/leftarmniz/sword/seredina2" parent_id_path=PackedInt32Array(535971260, 1174749722) index="0" unique_id=1021145892]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -492,10 +508,10 @@ shape = SubResource("BoxShape3D_bfrwn")
 transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1, -0.0125, -0.16076376, -0.001583125)
 
 [node name="big" parent="blockbench_export/Drake/grudverx/armos/leftarm/leftarmniz/lefthand" index="0" unique_id=193131325]
-transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, -0.028125, 0.001428125, -0.01875)
+transform = Transform3D(0.99999976, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, -0.028125, 0.001428125, -0.01875)
 
 [node name="ukazatel" parent="blockbench_export/Drake/grudverx/armos/leftarm/leftarmniz/lefthand" index="1" unique_id=1422939927]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -0.0171875, 0, -0.0421875)
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, -0.0171875, 0, -0.0421875)
 
 [node name="5" parent="blockbench_export/Drake/grudverx/armos/leftarm/leftarmniz/lefthand/fucker1" parent_id_path=PackedInt32Array(535971260, 529214650) index="0" unique_id=1092999375]
 transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0.0009725, -0.00339375, -0.02657)
@@ -533,7 +549,7 @@ transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1, 0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="fucker2" parent="blockbench_export/Drake/grudverx/armos/rightarm/rightarmniz/righthand" index="2" unique_id=1813673430]
-transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(0.99999976, 0, 0, 0, 0.99999976, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="10" parent="blockbench_export/Drake/grudverx/armos/rightarm/rightarmniz/righthand/fucker2" index="0" unique_id=1550301309]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -545,7 +561,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="smol2" parent="blockbench_export/Drake/grudverx/armos/rightarm/rightarmniz/righthand" index="4" unique_id=2061271444]
-transform = Transform3D(0.9999998, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
+transform = Transform3D(0.99999976, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0, 0, 0)
 
 [node name="rightarm_2_to_3_HitBox" type="Area3D" parent="blockbench_export/Drake/grudverx/armos/rightarm/rightarmniz/rightarm_2" parent_id_path=PackedInt32Array(535971260, 295726299) index="0" unique_id=1007364579 groups=["body_part"]]
 transform = Transform3D(0.4472135, -0.06876146, -0.8917803, 0, 0.99704057, -0.07687765, 0.8944273, 0.03438072, 0.44589, 0.006249994, -0.09062499, -0.0031249989)
@@ -614,7 +630,9 @@ fov = 90.0
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1013540638]
 root_node = NodePath("../blockbench_export")
 tree_root = SubResource("AnimationNodeBlendTree_ms3kw")
+advance_expression_base_node = NodePath("../blockbench_export")
 anim_player = NodePath("../blockbench_export/AnimationPlayer")
+parameters/StateMachine/conditions/attack_request = false
 
 [node name="HitboxAnimPlayer" type="AnimationPlayer" parent="." unique_id=1293239553]
 libraries/ = SubResource("AnimationLibrary_dylup")

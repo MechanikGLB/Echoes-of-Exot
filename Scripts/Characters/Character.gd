@@ -412,6 +412,7 @@ func disable() -> void:
 func enable() -> void:
 	current_state = CharacterState.ALIVE
 	set_physics_process(true)
+	
 
 func menu_state():
 	disable()
@@ -424,6 +425,18 @@ func menu_state():
 	_stop_all_sounds()
 	_custom_menu_state() 
 
+func game_start():
+	current_state = CharacterState.ALIVE
+	set_physics_process(true)
+	set_process_unhandled_input(true)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	# Показываем UI
+	if UI:
+		UI.visible = true
+	
+	_custom_game_start()
+
 # ========== ВИРТУАЛЬНЫЕ МЕТОДЫ ==========
 func _custom_ready() -> void:
 	pass
@@ -432,4 +445,7 @@ func _custom_physics_process(_delta: float) -> void:
 	pass
 
 func _custom_menu_state() -> void:
+	pass
+
+func _custom_game_start():
 	pass

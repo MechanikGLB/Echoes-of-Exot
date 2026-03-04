@@ -22,7 +22,7 @@ signal enemy_dead
 
 
 func _ready() -> void:
-	state_machine = anim_tree.get("parameters/playback")
+	state_machine = anim_tree.get("parameters/State Machine/playback")
 	_find_and_set_target()
 	add_to_group("enemy")
 

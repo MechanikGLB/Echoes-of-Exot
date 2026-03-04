@@ -37,7 +37,8 @@ func _ready() -> void:
 	if character:
 		var spawn_points_node = get_node_or_null(player_spawn_points)
 		if spawn_points_node:
-			if spawn_player(character, spawn_points_node):
+			var result = await spawn_player(character, spawn_points_node)
+			if result:
 				print("Игрок успешно заспавнен")
 				_initialize_player_ui()
 				_validate_setup()
@@ -49,7 +50,7 @@ func _ready() -> void:
 			push_error("Точки спавна игрока не найдены")
 	else:
 		push_error("Персонаж не выбран в GlobalThings.selected_character")
-
+	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -120,7 +121,6 @@ func spawn_player(player_scene: PackedScene, spawn_points_node: Node3D) -> bool:
 		push_error("Player scene or spawn points node is null")
 		return false
 	
-	# Фильтруем только Node3D точки спавна
 	var spawn_points: Array[Node3D] = []
 	for child in spawn_points_node.get_children():
 		if child is Node3D:
@@ -135,11 +135,21 @@ func spawn_player(player_scene: PackedScene, spawn_points_node: Node3D) -> bool:
 	
 	player_instance.global_transform = random_spawn_point.global_transform
 	get_tree().current_scene.add_child(player_instance)
-	
-	# Обновляем ссылку на игрока
 	player = player_instance
 	
 	if player_instance:
-		player_instance.add_to_group("players") 
+		player_instance.add_to_group("players")
+		
+		# Включаем AnimationTree
+		if player_instance.has_node("AnimationTree"):
+			player_instance.get_node("AnimationTree").active = true
+		
+		await get_tree().process_frame
+		if player_instance.has_method("game_start"):
+			player_instance.game_start()
+		
+		# Захватываем мышь
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		
 		return true
 	return false
