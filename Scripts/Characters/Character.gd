@@ -249,19 +249,26 @@ func set_ability_active(active: bool, ability: AbilityResource) -> void:
 # ======== Командные функции ==============
 
 func is_enemy(other: CharacterBase) -> bool:
-	"""Проверка, является ли другой персонаж врагом"""
+	print(">>> is_enemy()")
+	print("   this.team = ", team, " (", name, ")")
+	print("   other.team = ", other.team, " (", other.name, ")")
+	
 	if not other:
+		print("   → other null, false")
 		return false
 	
-	# Команда 0 - общие враги (враждебны всем)
 	if team == 0:
-		return other.team != 0  # Враги всем, кроме себя
+		var result = other.team != 0
+		print("   → я команда 0, результат = ", result)
+		return result
 	
 	if other.team == 0:
-		return true  # Другие враждебны команде 0
+		print("   → враг команда 0, true")
+		return true
 	
-	# Игроки (команды 1, 2, 3...) враждебны друг другу
-	return team != other.team
+	var result2 = team != other.team
+	print("   → сравниваем команды, результат = ", result2)
+	return result2
 
 # ========== ЗДОРОВЬЕ ==========
 func take_damage(amount: int, direction: Vector3 = Vector3.ZERO) -> void:
