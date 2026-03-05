@@ -6,6 +6,11 @@ var combo_timer: float = 0.0
 var combo_reset_time: float = 1.2
 var can_attack: bool = true
 
+# Для раннего выхода
+var early_exit_timer: float = 0.0
+var early_exit_time: float = 0.15
+var current_anim_name: String = ""
+
 # ========== НОДЫ ==========
 @onready var anim_tree = $AnimationTree
 var _state_machine = null
@@ -38,6 +43,13 @@ func _custom_physics_process(delta: float):
 		combo_timer -= delta
 		if combo_timer <= 0:
 			reset_combo()
+			return_to_static()
+	
+	# Ранний выход из анимации - просто по таймеру
+	if early_exit_timer > 0:
+		early_exit_timer -= delta
+		if early_exit_timer <= 0 and not can_attack:
+			check_early_exit()
 
 # ========== УПРАВЛЕНИЕ ==========
 func _input(event):
@@ -51,7 +63,6 @@ func _input(event):
 		advance_combo()
 
 # ========== СИСТЕМА КОМБО ==========
-var debug_call_count = 0 #удалить позже, только для дебага
 func advance_combo() -> void:
 	print("=== advance_combo() ===")
 	print("   can_attack = ", can_attack)
@@ -64,18 +75,26 @@ func advance_combo() -> void:
 			anim_tree.set("parameters/combo_timer", combo_timer)
 		return
 	
-	# ВАЖНО: сначала проигрываем анимацию текущего шага
 	var anim_names = ["attack1", "attack2", "attack3"]
 	var hitbox_names = ["attack1_hitbox", "attack2_hitbox", "attack3_hitbox"]
 	
 	print("   Атака: ", anim_names[combo_step])
 	
-	# Устанавливаем параметры
+	# Запоминаем текущую анимацию
+	current_anim_name = anim_names[combo_step]
+	
+	# Получаем длину анимации для раннего выхода
+	var anim_length = get_animation_length(current_anim_name)
+	if anim_length > 0:
+		# Ставим ранний выход на 80-90% анимации
+		early_exit_timer = anim_length * 0.85  # 85% анимации
+	else:
+		early_exit_timer = 0
+	
 	anim_tree.set("parameters/attack_request", true)
 	anim_tree.set("parameters/combo_step", combo_step)
 	anim_tree.set("parameters/combo_timer", combo_reset_time)
 	
-	# Запускаем анимации
 	var sm = get_state_machine()
 	if sm:
 		sm.travel(anim_names[combo_step])
@@ -83,16 +102,33 @@ func advance_combo() -> void:
 	if hitbox_anim:
 		hitbox_anim.play(hitbox_names[combo_step])
 	
-	# ПОСЛЕ запуска анимации увеличиваем шаг для следующего раза
 	combo_step = (combo_step + 1) % 3
 	combo_timer = combo_reset_time
 	can_attack = false
 	
 	print("   combo_step ПОСЛЕ = ", combo_step)
 	
-	# Сбрасываем request через кадр
 	await get_tree().process_frame
 	anim_tree.set("parameters/attack_request", false)
+
+func check_early_exit():
+	print("=== check_early_exit() ===")
+	print("   current_anim = ", current_anim_name)
+	print("   combo_timer = ", combo_timer)
+	
+	# Переходим в static только если таймер истек
+	if combo_timer <= 0:
+		print("   → ранний выход в static")
+		reset_combo()
+		return_to_static()
+
+func get_animation_length(anim_name: String) -> float:
+	# Безопасное получение длины анимации
+	if anim_tree and anim_tree.has_method("get_animation"):
+		var anim = anim_tree.get_animation(anim_name)
+		if anim:
+			return anim.length
+	return 0.0
 
 func _on_animation_finished(anim_name: String):
 	print("=== _on_animation_finished() ===")
@@ -102,17 +138,28 @@ func _on_animation_finished(anim_name: String):
 	if anim_name in ["attack1", "attack2", "attack3"]:
 		can_attack = true
 		print("   → can_attack = true")
+		early_exit_timer = 0.0
+		current_anim_name = ""
 		
 		if combo_timer <= 0:
-			print("   → таймер истек, сброс комбо")
+			print("   → таймер истек, возврат в static")
 			reset_combo()
-			anim_tree.set("parameters/combo_step", 0)
-			anim_tree.set("parameters/combo_timer", 0)
+			return_to_static()
+
+func return_to_static():
+	print("=== return_to_static() ===")
+	var sm = get_state_machine()
+	if sm:
+		var current_anim = sm.get_current_node()
+		if current_anim != "static":
+			sm.travel("static")
+			print("   → переход в static из ", current_state)
 
 func _enable_sword_attack():
 	if sword_hitbox:
-		var damage = [64, 399, 72][combo_step]
-		var should_knockup = (combo_step == 2)
+		var current_combo = (combo_step - 1) if combo_step > 0 else 2
+		var damage = [64, 399, 72][current_combo]
+		var should_knockup = (current_combo == 2)
 		sword_hitbox.start_attack(damage, should_knockup)
 
 func _disable_sword_attack():
@@ -122,6 +169,10 @@ func _disable_sword_attack():
 func reset_combo():
 	combo_step = 0
 	combo_timer = 0.0
+	early_exit_timer = 0.0
+	current_anim_name = ""
+	anim_tree.set("parameters/combo_step", 0)
+	anim_tree.set("parameters/combo_timer", 0)
 
 # ========== МЕТОДЫ ДЛЯ МЕНЮ ==========
 func _custom_menu_state():
@@ -131,55 +182,37 @@ func _custom_menu_state():
 		anim_tree.active = false
 		print("AnimationTree деактивирован")
 	
-	# Останавливаем всё
 	if animation_player:
 		animation_player.stop()
-		print("AnimationPlayer остановлен")
 	if hitbox_anim:
 		hitbox_anim.stop()
-		print("HitboxAnimPlayer остановлен")
 	
-	# Проигрываем pose2 и НЕ останавливаем
 	if animation_player and animation_player.has_animation("pose2"):
-		print("Проигрываем pose2")
 		animation_player.play("pose2")
-	else:
-		print("pose2 не найдена!")
 
 # ========== МЕТОДЫ ДЛЯ ИГРЫ ==========
 func _custom_game_start():
 	print("=== _custom_game_start() ===")
 	
-	# Явно сбрасываем всё
 	can_attack = true
 	combo_step = 0
 	combo_timer = 0.0
-	debug_call_count = 0
+	early_exit_timer = 0.0
+	current_anim_name = ""
 	
-	print("   combo_step сброшен в 0")
-	
-	# СНАЧАЛА устанавливаем позу через обычный AnimationPlayer
 	if animation_player and animation_player.has_animation("static"):
 		animation_player.play("static")
 		await get_tree().process_frame
 		animation_player.stop()
-		print("static проигран через AnimationPlayer")
 	
-	# ПОТОМ включаем AnimationTree
 	if anim_tree:
 		anim_tree.active = true
 		print("AnimationTree активен")
 		
 		var sm = get_state_machine()
 		if sm:
-			print("StateMachine получена")
 			sm.travel("static")
-			print("travel to static выполнен")
 			await get_tree().process_frame
-			print("Текущее состояние: ", sm.get_current_node())
-			print("can_attack после всего: ", can_attack)
-		else:
-			print("StateMachine не получена!")
 	
 	if animation_player and animation_player.is_playing():
 		animation_player.stop()
