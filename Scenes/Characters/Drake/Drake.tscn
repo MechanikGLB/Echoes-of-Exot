@@ -92,9 +92,6 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bk2qd"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xihd8"]
-advance_mode = 0
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3dle1"]
 xfade_time = 0.1
 switch_mode = 2
@@ -119,12 +116,12 @@ states/attack3/node = SubResource("AnimationNodeAnimation_u4wka")
 states/attack3/position = Vector2(678, 91)
 states/static/node = SubResource("AnimationNodeAnimation_q3ajk")
 states/static/position = Vector2(521, 203)
-transitions = ["static", "attack1", SubResource("AnimationNodeStateMachineTransition_tc5p8"), "attack1", "attack2", SubResource("AnimationNodeStateMachineTransition_oe7b8"), "attack2", "attack3", SubResource("AnimationNodeStateMachineTransition_t7dqg"), "attack3", "static", SubResource("AnimationNodeStateMachineTransition_r8xig"), "Start", "static", SubResource("AnimationNodeStateMachineTransition_bk2qd"), "static", "End", SubResource("AnimationNodeStateMachineTransition_xihd8"), "attack1", "static", SubResource("AnimationNodeStateMachineTransition_3dle1"), "attack2", "static", SubResource("AnimationNodeStateMachineTransition_dylup")]
+transitions = ["static", "attack1", SubResource("AnimationNodeStateMachineTransition_tc5p8"), "attack1", "attack2", SubResource("AnimationNodeStateMachineTransition_oe7b8"), "attack2", "attack3", SubResource("AnimationNodeStateMachineTransition_t7dqg"), "attack3", "static", SubResource("AnimationNodeStateMachineTransition_r8xig"), "Start", "static", SubResource("AnimationNodeStateMachineTransition_bk2qd"), "attack1", "static", SubResource("AnimationNodeStateMachineTransition_3dle1"), "attack2", "static", SubResource("AnimationNodeStateMachineTransition_dylup")]
 graph_offset = Vector2(68, -32)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ms3kw"]
 resource_local_to_scene = true
-graph_offset = Vector2(-109.154755, -62.497375)
+graph_offset = Vector2(-103.70175, -68.63713)
 nodes/output/position = Vector2(680, 140)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_t2h6x")
 nodes/StateMachine/position = Vector2(300, 120)

@@ -91,71 +91,71 @@ height_falloff = 0.77935904
 edge_fade = 0.19999975
 density_texture = SubResource("NoiseTexture3D_rhiq3")
 
-[node name="World" type="Node3D" node_paths=PackedStringArray("spawner_handler")]
+[node name="World" type="Node3D" unique_id=785404787 node_paths=PackedStringArray("spawner_handler")]
 script = ExtResource("1_ce7po")
 spawner_handler = NodePath("Map/RespawnPoints")
 player_spawn_points = NodePath("Map/RespawnPoints")
 
-[node name="Map" type="Node3D" parent="."]
+[node name="Map" type="Node3D" parent="." unique_id=583297599]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map" unique_id=1848644952]
 transform = Transform3D(-0.988756, -0.134968, 0.0643766, 0, 0.430511, 0.902585, -0.149535, 0.892437, -0.425671, 0, 0, 0)
 light_color = Color(1, 0.65, 0.65, 1)
 light_energy = 0.677
 shadow_enabled = true
 directional_shadow_max_distance = 90.0
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Map"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Map" unique_id=168404393]
 environment = SubResource("Environment_irh21")
 
-[node name="DebrisHolder" type="Node3D" parent="Map"]
+[node name="DebrisHolder" type="Node3D" parent="Map" unique_id=1554323631]
 
-[node name="Debris" type="MeshInstance3D" parent="Map/DebrisHolder"]
+[node name="Debris" type="MeshInstance3D" parent="Map/DebrisHolder" unique_id=452838581]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 15)
 mesh = ExtResource("2_grcic")
 skeleton = NodePath("../../..")
 
-[node name="Debris2" type="MeshInstance3D" parent="Map/DebrisHolder"]
+[node name="Debris2" type="MeshInstance3D" parent="Map/DebrisHolder" unique_id=1294325407]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 13)
 mesh = ExtResource("2_grcic")
 skeleton = NodePath("../../..")
 
-[node name="Debris3" type="MeshInstance3D" parent="Map/DebrisHolder"]
+[node name="Debris3" type="MeshInstance3D" parent="Map/DebrisHolder" unique_id=951720166]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -21)
 mesh = ExtResource("2_grcic")
 skeleton = NodePath("../../..")
 
-[node name="Debris4" type="MeshInstance3D" parent="Map/DebrisHolder"]
+[node name="Debris4" type="MeshInstance3D" parent="Map/DebrisHolder" unique_id=1082869175]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -12)
 mesh = ExtResource("2_grcic")
 skeleton = NodePath("../../..")
 
-[node name="Debris-wood" type="MeshInstance3D" parent="Map/DebrisHolder"]
+[node name="Debris-wood" type="MeshInstance3D" parent="Map/DebrisHolder" unique_id=1344160047]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.1, -25)
 mesh = ExtResource("3_rgijb")
 skeleton = NodePath("../../..")
 
-[node name="Debris-wood2" type="MeshInstance3D" parent="Map/DebrisHolder"]
+[node name="Debris-wood2" type="MeshInstance3D" parent="Map/DebrisHolder" unique_id=1323131901]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -1, 0.1, -24)
 mesh = ExtResource("3_rgijb")
 skeleton = NodePath("../../..")
 
-[node name="Debris5" type="MeshInstance3D" parent="Map/DebrisHolder"]
+[node name="Debris5" type="MeshInstance3D" parent="Map/DebrisHolder" unique_id=2019361136]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0.1, 38)
 mesh = ExtResource("2_grcic")
 skeleton = NodePath("../../..")
 
-[node name="Debris6" type="MeshInstance3D" parent="Map/DebrisHolder"]
+[node name="Debris6" type="MeshInstance3D" parent="Map/DebrisHolder" unique_id=443298484]
 transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, -12, 0.1, 31)
 mesh = ExtResource("2_grcic")
 skeleton = NodePath("../../..")
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Map"]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Map" unique_id=2072161697]
 navigation_mesh = SubResource("NavigationMesh_kqytm")
 
-[node name="mapbox" type="Node3D" parent="Map/NavigationRegion3D"]
+[node name="mapbox" type="Node3D" parent="Map/NavigationRegion3D" unique_id=1599422099]
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="Map/NavigationRegion3D/mapbox"]
+[node name="CSGBox3D5" type="CSGBox3D" parent="Map/NavigationRegion3D/mapbox" unique_id=783561597]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.419, -115.85684)
 material_override = ExtResource("4_jjlfi")
 use_collision = true
@@ -163,7 +163,7 @@ collision_layer = 3
 collision_mask = 3
 size = Vector3(1, 4, 100)
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="Map/NavigationRegion3D/mapbox"]
+[node name="CSGBox3D4" type="CSGBox3D" parent="Map/NavigationRegion3D/mapbox" unique_id=1054208936]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.419, 91.52245)
 material_override = ExtResource("4_jjlfi")
 use_collision = true
@@ -171,7 +171,7 @@ collision_layer = 3
 collision_mask = 3
 size = Vector3(1, 4, 100)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="Map/NavigationRegion3D/mapbox"]
+[node name="CSGBox3D3" type="CSGBox3D" parent="Map/NavigationRegion3D/mapbox" unique_id=280190650]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 1.419, -12.093994)
 material_override = ExtResource("4_jjlfi")
 use_collision = true
@@ -179,7 +179,7 @@ collision_layer = 3
 collision_mask = 3
 size = Vector3(1, 4, 208.38428)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Map/NavigationRegion3D/mapbox"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="Map/NavigationRegion3D/mapbox" unique_id=436891569]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 1.419, -12.238678)
 material_override = ExtResource("4_jjlfi")
 use_collision = true
@@ -187,7 +187,7 @@ collision_layer = 3
 collision_mask = 3
 size = Vector3(1, 4, 208.7569)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Map/NavigationRegion3D/mapbox"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Map/NavigationRegion3D/mapbox" unique_id=723233033]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.391034, -12.107849)
 material_override = SubResource("StandardMaterial3D_4x8dc")
 use_collision = true
@@ -195,53 +195,53 @@ collision_layer = 3
 collision_mask = 3
 size = Vector3(100, 1, 208.13293)
 
-[node name="Rocks" type="MeshInstance3D" parent="Map/NavigationRegion3D/mapbox"]
+[node name="Rocks" type="MeshInstance3D" parent="Map/NavigationRegion3D/mapbox" unique_id=276250263]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 20)
 mesh = ExtResource("6_xd4pn")
 
-[node name="Shovel-dirt" type="MeshInstance3D" parent="Map/NavigationRegion3D/mapbox"]
+[node name="Shovel-dirt" type="MeshInstance3D" parent="Map/NavigationRegion3D/mapbox" unique_id=1564221304]
 transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -35, 0, 29)
 mesh = ExtResource("7_lxgdj")
 
-[node name="Shovel-dirt2" type="MeshInstance3D" parent="Map/NavigationRegion3D/mapbox"]
+[node name="Shovel-dirt2" type="MeshInstance3D" parent="Map/NavigationRegion3D/mapbox" unique_id=1140773803]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 30, 0, -11)
 mesh = ExtResource("7_lxgdj")
 
-[node name="Crypt_large" parent="Map/NavigationRegion3D/mapbox" instance=ExtResource("8_rhiq3")]
+[node name="Crypt_large" parent="Map/NavigationRegion3D/mapbox" unique_id=877133861 instance=ExtResource("8_rhiq3")]
 transform = Transform3D(2.49824, 0, 1.66096, 0, 3, 0, -1.66096, 0, 2.49824, -4.39735, 0.108966, -32.7573)
 
-[node name="Bench" type="MeshInstance3D" parent="Map/NavigationRegion3D/mapbox"]
+[node name="Bench" type="MeshInstance3D" parent="Map/NavigationRegion3D/mapbox" unique_id=1353952670]
 transform = Transform3D(1.41421, 0, -1.41421, 0, 2, 0, 1.41421, 0, 1.41421, -6.3, 0, -31.3)
 mesh = ExtResource("9_c53gc")
 skeleton = NodePath("../../../..")
 
-[node name="Rocks2" type="MeshInstance3D" parent="Map/NavigationRegion3D/mapbox"]
+[node name="Rocks2" type="MeshInstance3D" parent="Map/NavigationRegion3D/mapbox" unique_id=1303670103]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -32)
 mesh = ExtResource("6_xd4pn")
 skeleton = NodePath("../../../..")
 
-[node name="GLAZ" parent="Map/NavigationRegion3D/mapbox" instance=ExtResource("16_ce7po")]
+[node name="GLAZ" parent="Map/NavigationRegion3D/mapbox" unique_id=1486871771 instance=ExtResource("16_ce7po")]
 transform = Transform3D(-0.8885453, 0, 0.45878875, 0, 1, 0, -0.45878875, 0, -0.8885453, 28.620329, 6.0317364, -57.582207)
 
-[node name="GLAZ2" parent="Map/NavigationRegion3D/mapbox" instance=ExtResource("16_ce7po")]
+[node name="GLAZ2" parent="Map/NavigationRegion3D/mapbox" unique_id=685558987 instance=ExtResource("16_ce7po")]
 transform = Transform3D(0.33946583, 0, -7.9927945, 0, 8, 0, 7.9927945, 0, 0.33946583, -43.67641, 11.891052, 1.1846867)
 
-[node name="blockbench_export" parent="Map/NavigationRegion3D/mapbox" instance=ExtResource("11_rgijb")]
+[node name="blockbench_export" parent="Map/NavigationRegion3D/mapbox" unique_id=863653629 instance=ExtResource("11_rgijb")]
 transform = Transform3D(0.771225, 0, 0.636563, 0, 1, 0, -0.636563, 0, 0.771225, -22.3919, 0.108967, -34.66104)
 
-[node name="blockbench_export2" parent="Map/NavigationRegion3D/mapbox" instance=ExtResource("11_rgijb")]
+[node name="blockbench_export2" parent="Map/NavigationRegion3D/mapbox" unique_id=637540861 instance=ExtResource("11_rgijb")]
 transform = Transform3D(0.630798, 0, 0.775947, 0, 1, 0, -0.775947, 0, 0.630798, -32.7142, 0.108967, -0.684978)
 
-[node name="blockbench_export3" parent="Map/NavigationRegion3D/mapbox" instance=ExtResource("12_jjlfi")]
+[node name="blockbench_export3" parent="Map/NavigationRegion3D/mapbox" unique_id=197060318 instance=ExtResource("12_jjlfi")]
 transform = Transform3D(0.843551, 0, 0.537049, 0, 1, 0, -0.537049, 0, 0.843551, -34.9683, 0.108968, -15.5198)
 
-[node name="blockbench_export4" parent="Map/NavigationRegion3D/mapbox" instance=ExtResource("12_jjlfi")]
+[node name="blockbench_export4" parent="Map/NavigationRegion3D/mapbox" unique_id=1260304787 instance=ExtResource("12_jjlfi")]
 transform = Transform3D(0.82597, 0, 0.563713, 0, 1, 0, -0.563713, 0, 0.82597, 25.4429, 0.108966, 19.7723)
 
-[node name="blockbench_export5" parent="Map/NavigationRegion3D/mapbox" instance=ExtResource("12_jjlfi")]
+[node name="blockbench_export5" parent="Map/NavigationRegion3D/mapbox" unique_id=1776747663 instance=ExtResource("12_jjlfi")]
 transform = Transform3D(0.55557, 0, 0.83147, 0, 1, 0, -0.83147, 0, 0.55557, 14.4336, 0.108965, 27.8138)
 
-[node name="teamA" type="CSGBox3D" parent="Map/NavigationRegion3D/mapbox"]
+[node name="teamA" type="CSGBox3D" parent="Map/NavigationRegion3D/mapbox" unique_id=1369026283]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.118774414, 0.5048704, -92.99302)
 use_collision = true
 collision_layer = 3
@@ -249,7 +249,7 @@ collision_mask = 3
 size = Vector3(29.505371, 1.3065186, 26.728516)
 material = SubResource("StandardMaterial3D_vgt5b")
 
-[node name="teamB" type="CSGBox3D" parent="Map/NavigationRegion3D/mapbox"]
+[node name="teamB" type="CSGBox3D" parent="Map/NavigationRegion3D/mapbox" unique_id=357907070]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.51005745, 0.5453634, 66.38202)
 use_collision = true
 collision_layer = 3
@@ -257,252 +257,252 @@ collision_mask = 3
 size = Vector3(29.505371, 1.4510498, 26.728516)
 material = SubResource("StandardMaterial3D_yjjqv")
 
-[node name="grave" type="Node3D" parent="Map/NavigationRegion3D"]
+[node name="grave" type="Node3D" parent="Map/NavigationRegion3D" unique_id=78883057]
 transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -16, 0, 30)
 
-[node name="Fence" parent="Map/NavigationRegion3D/grave" instance=ExtResource("10_vgt5b")]
+[node name="Fence" parent="Map/NavigationRegion3D/grave" unique_id=1094445143 instance=ExtResource("10_vgt5b")]
 transform = Transform3D(1, 0, -1.49012e-08, 0, 1, 0, 1.49012e-08, 0, 1, 0.0527954, 0, 5.69125)
 
-[node name="gravestone-flat" parent="Map/NavigationRegion3D/grave" instance=ExtResource("11_yjjqv")]
+[node name="gravestone-flat" parent="Map/NavigationRegion3D/grave" unique_id=2020363476 instance=ExtResource("11_yjjqv")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.8, 0, 6.9)
 
-[node name="gravestone-flat2" parent="Map/NavigationRegion3D/grave" instance=ExtResource("11_yjjqv")]
+[node name="gravestone-flat2" parent="Map/NavigationRegion3D/grave" unique_id=115463463 instance=ExtResource("11_yjjqv")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.3, 0, 7)
 
-[node name="grave3" parent="Map/NavigationRegion3D/grave" instance=ExtResource("12_7uit8")]
+[node name="grave3" parent="Map/NavigationRegion3D/grave" unique_id=2122704073 instance=ExtResource("12_7uit8")]
 transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 4, 0, 11)
 
-[node name="grave4" parent="Map/NavigationRegion3D/grave" instance=ExtResource("12_7uit8")]
+[node name="grave4" parent="Map/NavigationRegion3D/grave" unique_id=978975537 instance=ExtResource("12_7uit8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 11)
 
-[node name="grave5" parent="Map/NavigationRegion3D/grave" instance=ExtResource("12_7uit8")]
+[node name="grave5" parent="Map/NavigationRegion3D/grave" unique_id=203072089 instance=ExtResource("12_7uit8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 11)
 
-[node name="grave6" parent="Map/NavigationRegion3D/grave" instance=ExtResource("12_7uit8")]
+[node name="grave6" parent="Map/NavigationRegion3D/grave" unique_id=697962079 instance=ExtResource("12_7uit8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 11)
 
-[node name="grave7" parent="Map/NavigationRegion3D/grave" instance=ExtResource("12_7uit8")]
+[node name="grave7" parent="Map/NavigationRegion3D/grave" unique_id=645551359 instance=ExtResource("12_7uit8")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3, 0, 3)
 
-[node name="grave8" parent="Map/NavigationRegion3D/grave" instance=ExtResource("12_7uit8")]
+[node name="grave8" parent="Map/NavigationRegion3D/grave" unique_id=800912210 instance=ExtResource("12_7uit8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
 
-[node name="grave9" parent="Map/NavigationRegion3D/grave" instance=ExtResource("12_7uit8")]
+[node name="grave9" parent="Map/NavigationRegion3D/grave" unique_id=407905127 instance=ExtResource("12_7uit8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
 
-[node name="grave2" parent="Map/NavigationRegion3D/grave" instance=ExtResource("12_7uit8")]
+[node name="grave2" parent="Map/NavigationRegion3D/grave" unique_id=767814913 instance=ExtResource("12_7uit8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 11)
 
-[node name="grave10" parent="Map/NavigationRegion3D/grave" instance=ExtResource("12_7uit8")]
+[node name="grave10" parent="Map/NavigationRegion3D/grave" unique_id=138583341 instance=ExtResource("12_7uit8")]
 transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 3, 0, 4)
 
-[node name="grave11" parent="Map/NavigationRegion3D/grave" instance=ExtResource("12_7uit8")]
+[node name="grave11" parent="Map/NavigationRegion3D/grave" unique_id=573417935 instance=ExtResource("12_7uit8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3)
 
-[node name="gravestone-broken" parent="Map/NavigationRegion3D/grave" instance=ExtResource("13_kxmcp")]
+[node name="gravestone-broken" parent="Map/NavigationRegion3D/grave" unique_id=1738921588 instance=ExtResource("13_kxmcp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
 
-[node name="Node3D" parent="Map/NavigationRegion3D/grave" instance=ExtResource("14_4l2i1")]
+[node name="Node3D" parent="Map/NavigationRegion3D/grave" unique_id=1620988276 instance=ExtResource("14_4l2i1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
 
-[node name="Node3D2" parent="Map/NavigationRegion3D/grave" instance=ExtResource("14_4l2i1")]
+[node name="Node3D2" parent="Map/NavigationRegion3D/grave" unique_id=992842628 instance=ExtResource("14_4l2i1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
 
-[node name="Node3D3" parent="Map/NavigationRegion3D/grave" instance=ExtResource("14_4l2i1")]
+[node name="Node3D3" parent="Map/NavigationRegion3D/grave" unique_id=1564783825 instance=ExtResource("14_4l2i1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 1)
 
-[node name="Node3D4" parent="Map/NavigationRegion3D/grave" instance=ExtResource("14_4l2i1")]
+[node name="Node3D4" parent="Map/NavigationRegion3D/grave" unique_id=545406541 instance=ExtResource("14_4l2i1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
 
-[node name="Node3D5" parent="Map/NavigationRegion3D/grave" instance=ExtResource("14_4l2i1")]
+[node name="Node3D5" parent="Map/NavigationRegion3D/grave" unique_id=1569588745 instance=ExtResource("14_4l2i1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 13)
 
-[node name="Node3D6" parent="Map/NavigationRegion3D/grave" instance=ExtResource("14_4l2i1")]
+[node name="Node3D6" parent="Map/NavigationRegion3D/grave" unique_id=366048146 instance=ExtResource("14_4l2i1")]
 transform = Transform3D(0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, 0.939693, 3.5, 0, 12.6)
 
-[node name="gravestone-broken2" parent="Map/NavigationRegion3D/grave" instance=ExtResource("13_kxmcp")]
+[node name="gravestone-broken2" parent="Map/NavigationRegion3D/grave" unique_id=592564159 instance=ExtResource("13_kxmcp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 13)
 
-[node name="gravestone-broken" parent="Map/NavigationRegion3D/grave/gravestone-broken2" instance=ExtResource("13_kxmcp")]
+[node name="gravestone-broken" parent="Map/NavigationRegion3D/grave/gravestone-broken2" unique_id=1224033489 instance=ExtResource("13_kxmcp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0.1, -0.5)
 
-[node name="Node3D" parent="Map/NavigationRegion3D/grave/gravestone-broken2" instance=ExtResource("14_4l2i1")]
+[node name="Node3D" parent="Map/NavigationRegion3D/grave/gravestone-broken2" unique_id=698511128 instance=ExtResource("14_4l2i1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -0.400002)
 
-[node name="grave2" type="Node3D" parent="Map/NavigationRegion3D"]
+[node name="grave2" type="Node3D" parent="Map/NavigationRegion3D" unique_id=1057781660]
 transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 34.2, 0, -25)
 
-[node name="Fence" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("10_vgt5b")]
+[node name="Fence" parent="Map/NavigationRegion3D/grave2" unique_id=1125729682 instance=ExtResource("10_vgt5b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.669667, 0, 5.65911)
 
-[node name="gravestone-flat" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("11_yjjqv")]
+[node name="gravestone-flat" parent="Map/NavigationRegion3D/grave2" unique_id=841079369 instance=ExtResource("11_yjjqv")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.8, 0, 6.9)
 
-[node name="gravestone-flat2" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("11_yjjqv")]
+[node name="gravestone-flat2" parent="Map/NavigationRegion3D/grave2" unique_id=1835878521 instance=ExtResource("11_yjjqv")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.3, 0, 7)
 
-[node name="grave3" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("12_7uit8")]
+[node name="grave3" parent="Map/NavigationRegion3D/grave2" unique_id=766251417 instance=ExtResource("12_7uit8")]
 transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 4, 0, 11)
 
-[node name="grave4" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("12_7uit8")]
+[node name="grave4" parent="Map/NavigationRegion3D/grave2" unique_id=943799460 instance=ExtResource("12_7uit8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 11)
 
-[node name="grave5" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("12_7uit8")]
+[node name="grave5" parent="Map/NavigationRegion3D/grave2" unique_id=998663128 instance=ExtResource("12_7uit8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 11)
 
-[node name="grave6" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("12_7uit8")]
+[node name="grave6" parent="Map/NavigationRegion3D/grave2" unique_id=1975610452 instance=ExtResource("12_7uit8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 11)
 
-[node name="grave7" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("12_7uit8")]
+[node name="grave7" parent="Map/NavigationRegion3D/grave2" unique_id=268594879 instance=ExtResource("12_7uit8")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3, 0, 3)
 
-[node name="grave8" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("12_7uit8")]
+[node name="grave8" parent="Map/NavigationRegion3D/grave2" unique_id=168891724 instance=ExtResource("12_7uit8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
 
-[node name="grave9" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("12_7uit8")]
+[node name="grave9" parent="Map/NavigationRegion3D/grave2" unique_id=407620201 instance=ExtResource("12_7uit8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
 
-[node name="grave2" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("12_7uit8")]
+[node name="grave2" parent="Map/NavigationRegion3D/grave2" unique_id=1538293236 instance=ExtResource("12_7uit8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 11)
 
-[node name="grave10" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("12_7uit8")]
+[node name="grave10" parent="Map/NavigationRegion3D/grave2" unique_id=947731688 instance=ExtResource("12_7uit8")]
 transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 3, 0, 4)
 
-[node name="grave11" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("12_7uit8")]
+[node name="grave11" parent="Map/NavigationRegion3D/grave2" unique_id=1745983162 instance=ExtResource("12_7uit8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3)
 
-[node name="gravestone-broken" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("13_kxmcp")]
+[node name="gravestone-broken" parent="Map/NavigationRegion3D/grave2" unique_id=58098722 instance=ExtResource("13_kxmcp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
 
-[node name="Node3D" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("14_4l2i1")]
+[node name="Node3D" parent="Map/NavigationRegion3D/grave2" unique_id=1337651268 instance=ExtResource("14_4l2i1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
 
-[node name="Node3D2" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("14_4l2i1")]
+[node name="Node3D2" parent="Map/NavigationRegion3D/grave2" unique_id=50707829 instance=ExtResource("14_4l2i1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
 
-[node name="Node3D3" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("14_4l2i1")]
+[node name="Node3D3" parent="Map/NavigationRegion3D/grave2" unique_id=1814640965 instance=ExtResource("14_4l2i1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 1)
 
-[node name="Node3D4" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("14_4l2i1")]
+[node name="Node3D4" parent="Map/NavigationRegion3D/grave2" unique_id=1083216125 instance=ExtResource("14_4l2i1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
 
-[node name="Node3D5" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("14_4l2i1")]
+[node name="Node3D5" parent="Map/NavigationRegion3D/grave2" unique_id=1930944391 instance=ExtResource("14_4l2i1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 13)
 
-[node name="Node3D6" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("14_4l2i1")]
+[node name="Node3D6" parent="Map/NavigationRegion3D/grave2" unique_id=1356335486 instance=ExtResource("14_4l2i1")]
 transform = Transform3D(0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, 0.939693, 3.5, 0, 12.6)
 
-[node name="gravestone-broken2" parent="Map/NavigationRegion3D/grave2" instance=ExtResource("13_kxmcp")]
+[node name="gravestone-broken2" parent="Map/NavigationRegion3D/grave2" unique_id=525832586 instance=ExtResource("13_kxmcp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 13)
 
-[node name="gravestone-broken" parent="Map/NavigationRegion3D/grave2/gravestone-broken2" instance=ExtResource("13_kxmcp")]
+[node name="gravestone-broken" parent="Map/NavigationRegion3D/grave2/gravestone-broken2" unique_id=123193517 instance=ExtResource("13_kxmcp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0.1, -0.5)
 
-[node name="Node3D" parent="Map/NavigationRegion3D/grave2/gravestone-broken2" instance=ExtResource("14_4l2i1")]
+[node name="Node3D" parent="Map/NavigationRegion3D/grave2/gravestone-broken2" unique_id=603894200 instance=ExtResource("14_4l2i1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -0.400002)
 
-[node name="EnemySpawns" type="Node3D" parent="Map"]
+[node name="EnemySpawns" type="Node3D" parent="Map" unique_id=2022180041]
 
-[node name="Spawn1" type="Node3D" parent="Map/EnemySpawns"]
+[node name="Spawn1" type="Node3D" parent="Map/EnemySpawns" unique_id=1759071474]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.33868, 0, -40.7989)
 
-[node name="Spawn2" type="Node3D" parent="Map/EnemySpawns"]
+[node name="Spawn2" type="Node3D" parent="Map/EnemySpawns" unique_id=1913129677]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.33868, 0, -6.97242)
 
-[node name="Spawn3" type="Node3D" parent="Map/EnemySpawns"]
+[node name="Spawn3" type="Node3D" parent="Map/EnemySpawns" unique_id=1600895092]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.1324, 0, 3.96938)
 
-[node name="Spawn4" type="Node3D" parent="Map/EnemySpawns"]
+[node name="Spawn4" type="Node3D" parent="Map/EnemySpawns" unique_id=2113601176]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.0951, 0, 12.8788)
 
-[node name="Spawn5" type="Node3D" parent="Map/EnemySpawns"]
+[node name="Spawn5" type="Node3D" parent="Map/EnemySpawns" unique_id=1003193333]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.1055, 0, 1.05332)
 
-[node name="Spawn6" type="Node3D" parent="Map/EnemySpawns"]
+[node name="Spawn6" type="Node3D" parent="Map/EnemySpawns" unique_id=1546443828]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.3153, 0, -30.9813)
 
-[node name="Spawn7" type="Node3D" parent="Map/EnemySpawns"]
+[node name="Spawn7" type="Node3D" parent="Map/EnemySpawns" unique_id=128589670]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8247, 0, -8.74508)
 
-[node name="Spawn8" type="Node3D" parent="Map/EnemySpawns"]
+[node name="Spawn8" type="Node3D" parent="Map/EnemySpawns" unique_id=1079090948]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.5538, 0, -8.74508)
 
-[node name="Spawn9" type="Node3D" parent="Map/EnemySpawns"]
+[node name="Spawn9" type="Node3D" parent="Map/EnemySpawns" unique_id=669135778]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.743, 0, -3.98234)
 
-[node name="Spawn10" type="Node3D" parent="Map/EnemySpawns"]
+[node name="Spawn10" type="Node3D" parent="Map/EnemySpawns" unique_id=1087377652]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.743, 0, -40.2975)
 
-[node name="Spawn11" type="Node3D" parent="Map/EnemySpawns"]
+[node name="Spawn11" type="Node3D" parent="Map/EnemySpawns" unique_id=1660889611]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.743, 0, 37.4549)
 
-[node name="Spawn12" type="Node3D" parent="Map/EnemySpawns"]
+[node name="Spawn12" type="Node3D" parent="Map/EnemySpawns" unique_id=467975569]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.8675, 0, -10.0257)
 
-[node name="Spawn13" type="Node3D" parent="Map/EnemySpawns"]
+[node name="Spawn13" type="Node3D" parent="Map/EnemySpawns" unique_id=1127051673]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.2956, 0, 0.75218)
 
-[node name="Spawn14" type="Node3D" parent="Map/EnemySpawns"]
+[node name="Spawn14" type="Node3D" parent="Map/EnemySpawns" unique_id=1725414009]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.868, 0, 0.752)
 
-[node name="Spawn15" type="Node3D" parent="Map/EnemySpawns"]
+[node name="Spawn15" type="Node3D" parent="Map/EnemySpawns" unique_id=764236566]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.868, 0, -13.295)
 
-[node name="Spawn16" type="Node3D" parent="Map/EnemySpawns"]
+[node name="Spawn16" type="Node3D" parent="Map/EnemySpawns" unique_id=908870610]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.926, 0, -13.295)
 
-[node name="Spawn17" type="Node3D" parent="Map/EnemySpawns"]
+[node name="Spawn17" type="Node3D" parent="Map/EnemySpawns" unique_id=599034300]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.926, 0, 20.843)
 
-[node name="Spawn18" type="Node3D" parent="Map/EnemySpawns"]
+[node name="Spawn18" type="Node3D" parent="Map/EnemySpawns" unique_id=1903309277]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.114, 0, 20.843)
 
-[node name="Spawn19" type="Node3D" parent="Map/EnemySpawns"]
+[node name="Spawn19" type="Node3D" parent="Map/EnemySpawns" unique_id=1789976541]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.114, 0, -18.157)
 
-[node name="Spawn20" type="Node3D" parent="Map/EnemySpawns"]
+[node name="Spawn20" type="Node3D" parent="Map/EnemySpawns" unique_id=1046917464]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.867, 0, -5.114)
 
-[node name="Spawn21" type="Node3D" parent="Map/EnemySpawns"]
+[node name="Spawn21" type="Node3D" parent="Map/EnemySpawns" unique_id=1196747694]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.867, 0, 7.337)
 
-[node name="Spawn22" type="Node3D" parent="Map/EnemySpawns"]
+[node name="Spawn22" type="Node3D" parent="Map/EnemySpawns" unique_id=1143501715]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.79, 0, 7.337)
 
-[node name="RespawnPoints" type="Node3D" parent="Map"]
+[node name="RespawnPoints" type="Node3D" parent="Map" unique_id=270297937]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6635582, -3.4214783)
 
-[node name="PSpawn" type="Node3D" parent="Map/RespawnPoints"]
+[node name="PSpawn" type="Node3D" parent="Map/RespawnPoints" unique_id=616321735 groups=["respawn_points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.268867, 0)
 script = ExtResource("19_xd4pn")
 point_name = "1"
 
-[node name="PSpawn2" type="Node3D" parent="Map/RespawnPoints"]
+[node name="PSpawn2" type="Node3D" parent="Map/RespawnPoints" unique_id=963467515 groups=["respawn_points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.68968105, 27.425)
 script = ExtResource("19_xd4pn")
 point_name = "2"
 
-[node name="PSpawn3" type="Node3D" parent="Map/RespawnPoints"]
+[node name="PSpawn3" type="Node3D" parent="Map/RespawnPoints" unique_id=1583598417 groups=["respawn_points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.2501, 0.268867, -23.0588)
 script = ExtResource("19_xd4pn")
 point_name = "3"
 
-[node name="Mirror3D" parent="Map" instance=ExtResource("19_uwrmv")]
+[node name="Mirror3D" parent="Map" unique_id=452179872 instance=ExtResource("19_uwrmv")]
 transform = Transform3D(0.37310117, 0, 0.92779064, 0, 1, 0, -0.92779064, 0, 0.37310117, -11.559079, 1.6212925, 0)
 size = Vector2(5, 3)
 distortion = 4.76
 cull_far = 150.0
 
-[node name="FogVolume" type="FogVolume" parent="Map"]
+[node name="FogVolume" type="FogVolume" parent="Map" unique_id=1126661233]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.404362, 3.9588804, 23.714272)
 size = Vector3(43.845436, 13.01149, 38.563126)
 material = SubResource("FogMaterial_c53gc")
 
-[node name="ZombieSpawnTimer" type="Timer" parent="."]
+[node name="ZombieSpawnTimer" type="Timer" parent="." unique_id=581151477]
 wait_time = 2.0
 autostart = true
 
-[node name="blockbench_export" parent="." instance=ExtResource("19_jjlfi")]
+[node name="blockbench_export" parent="." unique_id=922702364 instance=ExtResource("19_jjlfi")]
 transform = Transform3D(-0.455504, 0, 24.9958, 0, 25, 0, -24.9958, 0, -0.455504, 60.7652, -5.70291, -18.4074)
 
 [connection signal="timeout" from="ZombieSpawnTimer" to="." method="_on_zombie_spawn_timer_timeout"]

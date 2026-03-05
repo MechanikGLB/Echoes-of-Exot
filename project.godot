@@ -43,6 +43,7 @@ import/blender/enabled=false
 [global_group]
 
 body_part="Universal group for player/entity body collisions"
+respawn_points=""
 
 [importer_defaults]
 
