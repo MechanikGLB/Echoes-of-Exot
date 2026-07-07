@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://hb8g6lb1x41f"]
-
-[ext_resource type="PackedScene" uid="uid://do4l28rl8nyqy" path="res://Scenes/Characters/Sabai/Sabai.glb" id="1_kechh"]
-
-[node name="blockbench_export" instance=ExtResource("1_kechh")]

@@ -16,25 +16,23 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="Echoes_of_Exot"
 run/main_scene="uid://d2yftybjwa5xl"
-config/features=PackedStringArray("4.6", "GL Compatibility")
+config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 config/windows_native_icon="res://crow.ico"
 
 [autoload]
 
-GlobalThings="*res://Scripts/Utils/global_things.gd"
+GameManager="*uid://hgu3bi2doiao"
+GlobalThings="*uid://dei0t4dbr6klm"
 
 [display]
 
-window/size/viewport_width=1440
-window/size/viewport_height=1080
 window/size/mode=2
-window/stretch/aspect="expand"
 window/per_pixel_transparency/allowed=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/hitbox_creator/plugin.cfg")
+enabled=PackedStringArray()
 
 [filesystem]
 
@@ -137,7 +135,7 @@ ability_2={
 
 [rendering]
 
-textures/canvas_textures/default_texture_filter=0
+textures/default_filters/anisotropic_filtering_level=3
 
 [steam]
 
