@@ -24,6 +24,7 @@ config/windows_native_icon="res://crow.ico"
 
 GameManager="*uid://hgu3bi2doiao"
 GlobalThings="*uid://dei0t4dbr6klm"
+NetworkManager="*uid://duxotdkl3lcdm"
 
 [display]
 

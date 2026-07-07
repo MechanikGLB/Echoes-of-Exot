@@ -2,8 +2,8 @@ extends CanvasLayer
 # VideoSplash.gd
 
 @export var video_files: Array[String] = [
-	"res://Assets/intros/8c5efb7b-5385-46e5-ae39-1f412a8fa41d.ogv",
-	"res://Assets/intros/Эхо1.ogv"
+	"res://assets/textures/intros/8c5efb7b-5385-46e5-ae39-1f412a8fa41d.ogv",
+	"res://assets/textures/intros/Эхо1.ogv"
 ]
 
 var current_video_index = 0
@@ -63,7 +63,7 @@ func skip_to_next():
 func transition_to_main_menu():
 	set_process_input(false)
 	
-	var error = get_tree().change_scene_to_file("res://Scenes/parts/main_menu.tscn")
+	var error = get_tree().change_scene_to_file("res://core/ui/main_menu.tscn")
 	if error != OK:
 		push_error("VideoSplash: Failed to transition to main menu. Error code: " + str(error))
 		get_tree().reload_current_scene()
