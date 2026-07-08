@@ -7,6 +7,7 @@ extends Node3D
 @onready var mselection = $Menu/Mapselection
 @onready var mapGrid = $Menu/Mapselection/MapChoose/ScrollContainer/GridContainer
 @onready var settings =$Menu/Control
+@onready var servers = $Menu/VBoxContainer
 # const world = preload("res://Scenes/Maps/main.tscn")
 
 var current_map = null
@@ -123,3 +124,22 @@ func _on_refresh_pressed() -> void:
 
 func _on_settings_pressed() -> void:
 	settings.visible= true
+
+
+func _on_servers_pressed() -> void:
+	servers.visible = true
+
+
+func _on_close_pressed() -> void:
+	servers.visible = false
+
+
+func _on_host_pressed() -> void:
+	NetworkManager.host_game()
+	GameManager.change_state(GameManager.GameState.LOBBY)
+
+
+func _on_connect_pressed() -> void:
+	var ip = $Menu/VBoxContainer/ip.text
+	NetworkManager.join_game(ip)
+	GameManager.change_state(GameManager.GameState.LOBBY)

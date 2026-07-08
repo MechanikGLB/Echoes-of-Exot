@@ -1,6 +1,6 @@
 [gd_resource type="Theme" format=3 uid="uid://sg5jbmg5jpaq"]
 
-[ext_resource type="FontFile" uid="uid://crwdrjrenmo6o" path="res://Assets/styles/fonts/DAmiens.otf" id="1_xj800"]
+[ext_resource type="FontFile" uid="uid://crwdrjrenmo6o" path="res://assets/styles/fonts/DAmiens.otf" id="1_xj800"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xj800"]
 bg_color = Color(0.36259, 0.344963, 0.366116, 0.392157)
