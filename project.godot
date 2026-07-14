@@ -20,6 +20,10 @@ config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 config/windows_native_icon="res://crow.ico"
 
+[audio]
+
+buses/default_bus_layout="uid://bqv2frwyxghr5"
+
 [autoload]
 
 GameManager="*uid://hgu3bi2doiao"

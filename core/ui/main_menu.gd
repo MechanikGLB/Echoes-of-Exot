@@ -7,7 +7,7 @@ extends Node3D
 @onready var mselection = $Menu/Mapselection
 @onready var mapGrid = $Menu/Mapselection/MapChoose/ScrollContainer/GridContainer
 @onready var settings =$Menu/Control
-@onready var servers = $Menu/VBoxContainer
+@onready var net_menu = load("res://core/ui/network_menu.tscn")
 # const world = preload("res://Scenes/Maps/main.tscn")
 
 var current_map = null
@@ -107,9 +107,11 @@ func show_settings():
 
 
 func _on_play_pressed() -> void:
-	map_refresh()
-	menu.visible = false
-	mselection.visible = true
+	#map_refresh()
+	#menu.visible = false
+	#mselection.visible = true
+	$Menu/MainMenu/HBoxContainer/VBoxContainer/Play.disabled = true
+	pass
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
@@ -127,19 +129,4 @@ func _on_settings_pressed() -> void:
 
 
 func _on_servers_pressed() -> void:
-	servers.visible = true
-
-
-func _on_close_pressed() -> void:
-	servers.visible = false
-
-
-func _on_host_pressed() -> void:
-	NetworkManager.host_game()
-	GameManager.change_state(GameManager.GameState.LOBBY)
-
-
-func _on_connect_pressed() -> void:
-	var ip = $Menu/VBoxContainer/ip.text
-	NetworkManager.join_game(ip)
 	GameManager.change_state(GameManager.GameState.LOBBY)

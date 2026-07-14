@@ -543,53 +543,9 @@ grow_vertical = 2
 texture = ExtResource("19_mkpwh")
 expand_mode = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu" unique_id=1801111464]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -202.0
-offset_top = -30.0
-offset_right = 202.0
-offset_bottom = 30.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ip" type="LineEdit" parent="Menu/VBoxContainer" unique_id=137592716]
-layout_mode = 2
-placeholder_text = "enter IP"
-
-[node name="ServerPanel" type="HBoxContainer" parent="Menu/VBoxContainer" unique_id=99913164]
-layout_mode = 2
-
-[node name="Host" type="Button" parent="Menu/VBoxContainer/ServerPanel" unique_id=769896785]
-custom_minimum_size = Vector2(200, 60)
-layout_mode = 2
-text = "Host
-"
-
-[node name="Connect" type="Button" parent="Menu/VBoxContainer/ServerPanel" unique_id=260134528]
-custom_minimum_size = Vector2(200, 60)
-layout_mode = 2
-text = "Connect
-"
-
-[node name="Close" type="Button" parent="Menu/VBoxContainer" unique_id=493851336]
-custom_minimum_size = Vector2(200, 60)
-custom_maximum_size = Vector2(250, -1)
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Close"
-
 [connection signal="pressed" from="Menu/MainMenu/HBoxContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Menu/MainMenu/HBoxContainer/VBoxContainer/Servers" to="." method="_on_servers_pressed"]
 [connection signal="pressed" from="Menu/MainMenu/HBoxContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Menu/MainMenu/HBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="Menu/Mapselection/MapChoose/Return" to="." method="_on_return_pressed"]
 [connection signal="pressed" from="Menu/Mapselection/Refresh" to="." method="_on_refresh_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/ServerPanel/Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/ServerPanel/Connect" to="." method="_on_connect_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/Close" to="." method="_on_close_pressed"]

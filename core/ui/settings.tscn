@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0ob1iixpmbc3"]
+[gd_scene format=3 uid="uid://c0ob1iixpmbc3"]
 
-[ext_resource type="Script" uid="uid://utkfn1yxvk3c" path="res://UI/settings.gd" id="1_7iqql"]
+[ext_resource type="Script" uid="uid://utkfn1yxvk3c" path="res://core/ui/settings.gd" id="1_7iqql"]
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" unique_id=168283295]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,7 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7iqql")
 
-[node name="PanelContainer2" type="PanelContainer" parent="."]
+[node name="PanelContainer2" type="PanelContainer" parent="." unique_id=1791805997]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -29,25 +29,23 @@ offset_bottom = 450.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="MarginContainer" parent="PanelContainer2"]
+[node name="PanelContainer" type="MarginContainer" parent="PanelContainer2" unique_id=2061611115]
 custom_minimum_size = Vector2(800, 800)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer2/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer2/PanelContainer" unique_id=915292711]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer2/PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer2/PanelContainer/VBoxContainer" unique_id=804603021]
 layout_mode = 2
 text = "звук"
 
-[node name="HSlider" type="HSlider" parent="PanelContainer2/PanelContainer/VBoxContainer"]
+[node name="HSlider" type="HSlider" parent="PanelContainer2/PanelContainer/VBoxContainer" unique_id=957386658]
 layout_mode = 2
-min_value = -50.0
-max_value = 50.0
 
-[node name="1" type="Button" parent="PanelContainer2/PanelContainer"]
+[node name="1" type="Button" parent="PanelContainer2/PanelContainer" unique_id=992302686]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8

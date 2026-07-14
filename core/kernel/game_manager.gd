@@ -12,16 +12,17 @@ func change_state(new_state: GameState):
 	# Здесь позже будем переключать сцены
 	_apply_state(new_state)
 
+
 func _apply_state(state: GameState):
 	match state:
-		GameState.INTRO:
-			get_tree().change_scene_to_file("res://ui/intro.tscn")
+		#GameState.INTRO:
+			#get_tree().change_scene_to_file("res://core/ui/intro.tscn")
 		GameState.MENU:
-			get_tree().change_scene_to_file("res://ui/main_menu.tscn")
+			get_tree().change_scene_to_file("res://core/ui/main_menu.tscn")
 		GameState.LOBBY:
-			get_tree().change_scene_to_file("res://ui/lobby.tscn")
+			get_tree().change_scene_to_file("res://core/ui/server_list.tscn")
 		GameState.PLAYING:
 			# Сцена будет загружаться динамически, пока заглушка
 			pass
 		GameState.GAME_OVER:
-			get_tree().change_scene_to_file("res://ui/game_over.tscn")
+			get_tree().change_scene_to_file("res://core/ui/game_over.tscn")
