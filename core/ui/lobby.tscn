@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b6put7fg3joyh"]
 
-[ext_resource type="Theme" uid="uid://sg5jbmg5jpaq" path="res://assets/styles/def_blue.tres" id="1_8sf7c"]
 [ext_resource type="Texture2D" uid="uid://bry38y8q6iumi" path="res://assets/textures/black-glitch.jpg" id="1_f13xr"]
+[ext_resource type="Script" uid="uid://ogmbtdhwuof1" path="res://core/ui/lobby.gd" id="1_m04h5"]
 
 [node name="Lobby" type="Control" unique_id=1748581087]
 layout_mode = 3
@@ -10,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_m04h5")
 
 [node name="TextureRect2" type="TextureRect" parent="." unique_id=1735043424]
 layout_mode = 1
@@ -22,6 +23,7 @@ texture = ExtResource("1_f13xr")
 expand_mode = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1686620837]
+custom_minimum_size = Vector2(500, 500)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -35,7 +37,33 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="PanelContainer" unique_id=1957965939]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1500285396]
 layout_mode = 2
-theme = ExtResource("1_8sf7c")
-text = "ожидание подключения..."
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=432527731]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Лобби"
+
+[node name="StatusLabel" type="Label" parent="PanelContainer/VBoxContainer" unique_id=55881480]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "..."
+
+[node name="ItemList" type="ItemList" parent="PanelContainer/VBoxContainer" unique_id=151530335]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=1267861173]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="ReadyButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=898271217]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Готов"
+
+[node name="StartButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=684405055]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Начать"

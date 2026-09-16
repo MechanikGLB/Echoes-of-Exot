@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c8gt70qcak0ai"
-path="res://.godot/imported/Drake.glb-11dc8eaa5aff12c66544b0e2c23e2ac3.scn"
+uid="uid://byuyo0i0dpblo"
+path="res://.godot/imported/САБААААААААЙ.glb-1cec68447d4aa24b4c685d0213418840.scn"
 
 [deps]
 
-source_file="res://core/actors/characters/Drake/Drake.glb"
-dest_files=["res://.godot/imported/Drake.glb-11dc8eaa5aff12c66544b0e2c23e2ac3.scn"]
+source_file="res://core/actors/characters/Новая папка/САБААААААААЙ.glb"
+dest_files=["res://.godot/imported/САБААААААААЙ.glb-1cec68447d4aa24b4c685d0213418840.scn"]
 
 [params]
 

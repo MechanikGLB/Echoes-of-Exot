@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://baogufoo1cvug"
-path.s3tc="res://.godot/imported/Drake_0.png-98e49bee73bfe755360d5b40f4cd3741.s3tc.ctex"
+uid="uid://bhx7qblm2mu8v"
+path.s3tc="res://.godot/imported/Лана1_0.png-2005febe95fc7646be29586c92ad716e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "4fe279b01288e0db140736693fd0672a"
+"md5": "783756b9a400a3eb735fdd4acfa66bea"
 }
 
 [deps]
 
-source_file="res://core/actors/characters/Drake/Drake_0.png"
-dest_files=["res://.godot/imported/Drake_0.png-98e49bee73bfe755360d5b40f4cd3741.s3tc.ctex"]
+source_file="res://core/actors/characters/Новая папка/Лана1_0.png"
+dest_files=["res://.godot/imported/Лана1_0.png-2005febe95fc7646be29586c92ad716e.s3tc.ctex"]
 
 [params]
 

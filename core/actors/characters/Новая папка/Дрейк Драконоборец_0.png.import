@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://baogufoo1cvug"
-path.s3tc="res://.godot/imported/Drake_0.png-98e49bee73bfe755360d5b40f4cd3741.s3tc.ctex"
+uid="uid://cimoxdcmm8l4h"
+path.s3tc="res://.godot/imported/Дрейк Драконоборец_0.png-1edb365c26e12c4a49f32e6bf2ef2d66.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "4fe279b01288e0db140736693fd0672a"
+"md5": "43cbf7438ab70834a7fae54a35776169"
 }
 
 [deps]
 
-source_file="res://core/actors/characters/Drake/Drake_0.png"
-dest_files=["res://.godot/imported/Drake_0.png-98e49bee73bfe755360d5b40f4cd3741.s3tc.ctex"]
+source_file="res://core/actors/characters/Новая папка/Дрейк Драконоборец_0.png"
+dest_files=["res://.godot/imported/Дрейк Драконоборец_0.png-1edb365c26e12c4a49f32e6bf2ef2d66.s3tc.ctex"]
 
 [params]
 

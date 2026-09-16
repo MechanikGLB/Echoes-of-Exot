@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c8gt70qcak0ai"
-path="res://.godot/imported/Drake.glb-11dc8eaa5aff12c66544b0e2c23e2ac3.scn"
+uid="uid://clr4kn6w3un2e"
+path="res://.godot/imported/sabaiBlend.glb-9688a76eaf3c3d3e844e5bb6e0c7d19d.scn"
 
 [deps]
 
-source_file="res://core/actors/characters/Drake/Drake.glb"
-dest_files=["res://.godot/imported/Drake.glb-11dc8eaa5aff12c66544b0e2c23e2ac3.scn"]
+source_file="res://core/actors/characters/Новая папка/sabaiBlend.glb"
+dest_files=["res://.godot/imported/sabaiBlend.glb-9688a76eaf3c3d3e844e5bb6e0c7d19d.scn"]
 
 [params]
 
@@ -34,7 +34,7 @@ animation/import=true
 animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
-animation/import_rest_as_RESET=true
+animation/import_rest_as_RESET=false
 import_script/path=""
 materials/extract=0
 materials/extract_format=0

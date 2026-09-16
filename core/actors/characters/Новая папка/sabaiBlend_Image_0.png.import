@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://baogufoo1cvug"
-path.s3tc="res://.godot/imported/Drake_0.png-98e49bee73bfe755360d5b40f4cd3741.s3tc.ctex"
+uid="uid://ufapekv6nb6p"
+path.s3tc="res://.godot/imported/sabaiBlend_Image_0.png-04a92d0f04f20cc78ff55cfab51bfde5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "4fe279b01288e0db140736693fd0672a"
+"md5": "999c7154b0e454da770e8e63b86ff892"
 }
 
 [deps]
 
-source_file="res://core/actors/characters/Drake/Drake_0.png"
-dest_files=["res://.godot/imported/Drake_0.png-98e49bee73bfe755360d5b40f4cd3741.s3tc.ctex"]
+source_file="res://core/actors/characters/Новая папка/sabaiBlend_Image_0.png"
+dest_files=["res://.godot/imported/sabaiBlend_Image_0.png-04a92d0f04f20cc78ff55cfab51bfde5.s3tc.ctex"]
 
 [params]
 

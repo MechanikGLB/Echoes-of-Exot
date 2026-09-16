@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://baogufoo1cvug"
-path.s3tc="res://.godot/imported/Drake_0.png-98e49bee73bfe755360d5b40f4cd3741.s3tc.ctex"
+uid="uid://dulkfkeefsdcy"
+path.s3tc="res://.godot/imported/Бенд Вандерфолт_0.png-a49ce5b97a6d196e75649db13c7b4565.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "4fe279b01288e0db140736693fd0672a"
+"md5": "4b58b80301d17f0e2d7836348d91aa10"
 }
 
 [deps]
 
-source_file="res://core/actors/characters/Drake/Drake_0.png"
-dest_files=["res://.godot/imported/Drake_0.png-98e49bee73bfe755360d5b40f4cd3741.s3tc.ctex"]
+source_file="res://core/actors/characters/Новая папка/Бенд Вандерфолт_0.png"
+dest_files=["res://.godot/imported/Бенд Вандерфолт_0.png-a49ce5b97a6d196e75649db13c7b4565.s3tc.ctex"]
 
 [params]
 

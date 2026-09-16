@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c8gt70qcak0ai"
-path="res://.godot/imported/Drake.glb-11dc8eaa5aff12c66544b0e2c23e2ac3.scn"
+uid="uid://df3vp7su3iow5"
+path="res://.godot/imported/Шартон Фарш Темен-Лун.glb-cadd39c3af369d968c00961f65392138.scn"
 
 [deps]
 
-source_file="res://core/actors/characters/Drake/Drake.glb"
-dest_files=["res://.godot/imported/Drake.glb-11dc8eaa5aff12c66544b0e2c23e2ac3.scn"]
+source_file="res://core/actors/characters/Новая папка/Шартон Фарш Темен-Лун.glb"
+dest_files=["res://.godot/imported/Шартон Фарш Темен-Лун.glb-cadd39c3af369d968c00961f65392138.scn"]
 
 [params]
 
@@ -34,7 +34,7 @@ animation/import=true
 animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
-animation/import_rest_as_RESET=true
+animation/import_rest_as_RESET=false
 import_script/path=""
 materials/extract=0
 materials/extract_format=0

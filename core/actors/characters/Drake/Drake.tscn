@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://c8jrrfhbkgdgo"]
 
-[ext_resource type="Script" uid="uid://cbdn1af4jy6uf" path="res://Scenes/Characters/Drake/drake.gd" id="1_08hit"]
-[ext_resource type="PackedScene" uid="uid://docifp1p00alx" path="res://Scenes/Characters/Drake/Drake.glb" id="1_ngerc"]
-[ext_resource type="PackedScene" uid="uid://br8krfognc3t1" path="res://UI/ui.tscn" id="2_7u38y"]
-[ext_resource type="Script" uid="uid://bqpnw5t4c0xjc" path="res://Resources/Base/Ability_resource.gd" id="2_bfrwn"]
-[ext_resource type="Resource" uid="uid://hg4vtrom345m" path="res://Resources/Abilities/Drake/dragon_slayer.tres" id="3_3dle1"]
+[ext_resource type="Script" uid="uid://c6eeo4dff2thb" path="res://core/actors/characters/Drake/drake.gd" id="1_08hit"]
+[ext_resource type="PackedScene" uid="uid://c8gt70qcak0ai" path="res://core/actors/characters/Drake/Drake.glb" id="1_ngerc"]
+[ext_resource type="PackedScene" uid="uid://br8krfognc3t1" path="res://core/ui/ui.tscn" id="2_7u38y"]
+[ext_resource type="Script" uid="uid://bqpnw5t4c0xjc" path="res://core/kernel/resources/Base/Ability_resource.gd" id="2_bfrwn"]
+[ext_resource type="Resource" uid="uid://hg4vtrom345m" path="res://core/kernel/resources/Abilities/Drake/dragon_slayer.tres" id="3_3dle1"]
+[ext_resource type="Script" uid="uid://bc8sh7r4o1ds3" path="res://core/components/health_component.gd" id="6_y1117"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bfrwn"]
 radius = 0.05
@@ -311,6 +312,8 @@ _data = {
 &"attack3_hitbox": SubResource("Animation_u4wka")
 }
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_c71ht"]
+
 [node name="Drake" type="CharacterBody3D" unique_id=800964428]
 script = ExtResource("1_08hit")
 abilities = Array[ExtResource("2_bfrwn")]([ExtResource("3_3dle1")])
@@ -320,43 +323,31 @@ unique_name_in_owner = true
 
 [node name="blockbench_export" parent="." unique_id=535971260 instance=ExtResource("1_ngerc")]
 
-[node name="jopa" parent="blockbench_export/Drake" parent_id_path=PackedInt32Array(535971260, 410141258) index="0" unique_id=1035273183]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="cuboid" parent="blockbench_export/Drake/jopa" index="0" unique_id=93213171]
+[node name="cuboid" parent="blockbench_export/Drake/jopa" parent_id_path=PackedInt32Array(535971260, 700458155) index="0" unique_id=2135183660]
 layers = 2
 
-[node name="cuboid2" parent="blockbench_export/Drake/jopa" index="1" unique_id=1875373490]
+[node name="cuboid2" parent="blockbench_export/Drake/jopa" parent_id_path=PackedInt32Array(535971260, 700458155) index="1" unique_id=576036852]
 layers = 2
 
-[node name="cuboid3" parent="blockbench_export/Drake/jopa/Meshok" parent_id_path=PackedInt32Array(535971260, 1383661106) index="0" unique_id=49541841]
+[node name="cuboid3" parent="blockbench_export/Drake/jopa/Meshok" parent_id_path=PackedInt32Array(535971260, 1706410106) index="0" unique_id=988896449]
 layers = 2
 
-[node name="leftleg" parent="blockbench_export/Drake/jopa" index="3" unique_id=1708744071]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="leftlegup" parent="blockbench_export/Drake/jopa/leftleg" index="0" unique_id=712252395]
+[node name="leftlegup" parent="blockbench_export/Drake/jopa/leftleg" parent_id_path=PackedInt32Array(535971260, 1792060782) index="0" unique_id=988752767]
 layers = 2
 
-[node name="cuboid4" parent="blockbench_export/Drake/jopa/leftleg" index="1" unique_id=1582368041]
+[node name="cuboid4" parent="blockbench_export/Drake/jopa/leftleg" parent_id_path=PackedInt32Array(535971260, 1792060782) index="1" unique_id=909197513]
 layers = 2
 
-[node name="cuboid5" parent="blockbench_export/Drake/jopa/leftleg" index="2" unique_id=1333065919]
+[node name="cuboid5" parent="blockbench_export/Drake/jopa/leftleg" parent_id_path=PackedInt32Array(535971260, 1792060782) index="2" unique_id=1786618558]
 layers = 2
 
-[node name="leftlegniz" parent="blockbench_export/Drake/jopa/leftleg" index="3" unique_id=711925539]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="leftlegmid" parent="blockbench_export/Drake/jopa/leftleg/leftlegniz" index="0" unique_id=974390496]
+[node name="leftlegmid" parent="blockbench_export/Drake/jopa/leftleg/leftlegniz" parent_id_path=PackedInt32Array(535971260, 1032775599) index="0" unique_id=1873751451]
 layers = 2
 
-[node name="stupna" parent="blockbench_export/Drake/jopa/leftleg/leftlegniz" index="1" unique_id=735033687]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="leftstup" parent="blockbench_export/Drake/jopa/leftleg/leftlegniz/stupna" index="0" unique_id=1575293549]
+[node name="leftstup" parent="blockbench_export/Drake/jopa/leftleg/leftlegniz/stupna" parent_id_path=PackedInt32Array(535971260, 2018729760) index="0" unique_id=42932179]
 layers = 2
 
-[node name="leftleg_2_to_3_HitBox" type="Area3D" parent="blockbench_export/Drake/jopa/leftleg/leftlegniz/leftleg_2" parent_id_path=PackedInt32Array(535971260, 972279462) index="0" unique_id=293697823]
+[node name="leftleg_2_to_3_HitBox" type="Area3D" parent="blockbench_export/Drake/jopa/leftleg/leftlegniz/leftleg_2" parent_id_path=PackedInt32Array(535971260, 559011731) index="0" unique_id=293697823]
 transform = Transform3D(0.4472137, 0.033310235, 0.8938067, 0, 0.9993063, -0.03724198, -0.8944271, 0.016655123, 0.4469035, -0.006249994, -0.18750001, -0.0031249952)
 collision_layer = 4
 collision_mask = 0
@@ -364,7 +355,7 @@ collision_mask = 0
 [node name="CollisionShape" type="CollisionShape3D" parent="blockbench_export/Drake/jopa/leftleg/leftlegniz/leftleg_2/leftleg_2_to_3_HitBox" unique_id=992213925]
 shape = SubResource("CapsuleShape3D_bfrwn")
 
-[node name="leftleg_1_to_2_HitBox" type="Area3D" parent="blockbench_export/Drake/jopa/leftleg/leftleg_1" parent_id_path=PackedInt32Array(535971260, 701158829) index="0" unique_id=1985713744]
+[node name="leftleg_1_to_2_HitBox" type="Area3D" parent="blockbench_export/Drake/jopa/leftleg/leftleg_1" parent_id_path=PackedInt32Array(535971260, 836710260) index="0" unique_id=1985713744]
 transform = Transform3D(-1, 0, 0, 0, 0.9996877, -0.024992215, 0, -0.024992215, -0.9996877, 0, -0.12500006, 0.003124997)
 collision_layer = 4
 collision_mask = 0
@@ -372,31 +363,22 @@ collision_mask = 0
 [node name="CollisionShape" type="CollisionShape3D" parent="blockbench_export/Drake/jopa/leftleg/leftleg_1/leftleg_1_to_2_HitBox" unique_id=1321459077]
 shape = SubResource("CapsuleShape3D_3dle1")
 
-[node name="rightleg" parent="blockbench_export/Drake/jopa" index="4" unique_id=430013514]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="rightlegup" parent="blockbench_export/Drake/jopa/rightleg" index="0" unique_id=735227483]
+[node name="rightlegup" parent="blockbench_export/Drake/jopa/rightleg" parent_id_path=PackedInt32Array(535971260, 1292123511) index="0" unique_id=2012485477]
 layers = 2
 
-[node name="cuboid6" parent="blockbench_export/Drake/jopa/rightleg" index="1" unique_id=40558109]
+[node name="cuboid6" parent="blockbench_export/Drake/jopa/rightleg" parent_id_path=PackedInt32Array(535971260, 1292123511) index="1" unique_id=2028483051]
 layers = 2
 
-[node name="cuboid7" parent="blockbench_export/Drake/jopa/rightleg" index="2" unique_id=1520738282]
+[node name="cuboid7" parent="blockbench_export/Drake/jopa/rightleg" parent_id_path=PackedInt32Array(535971260, 1292123511) index="2" unique_id=1261563245]
 layers = 2
 
-[node name="rightlegniz" parent="blockbench_export/Drake/jopa/rightleg" index="3" unique_id=1615000765]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="rightlegmid" parent="blockbench_export/Drake/jopa/rightleg/rightlegniz" index="0" unique_id=167370661]
+[node name="rightlegmid" parent="blockbench_export/Drake/jopa/rightleg/rightlegniz" parent_id_path=PackedInt32Array(535971260, 2128271257) index="0" unique_id=765066620]
 layers = 2
 
-[node name="stupna2" parent="blockbench_export/Drake/jopa/rightleg/rightlegniz" index="1" unique_id=993261750]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="rightstup" parent="blockbench_export/Drake/jopa/rightleg/rightlegniz/stupna2" index="0" unique_id=1601084971]
+[node name="rightstup" parent="blockbench_export/Drake/jopa/rightleg/rightlegniz/stupna2" parent_id_path=PackedInt32Array(535971260, 1756200662) index="0" unique_id=181992803]
 layers = 2
 
-[node name="rightleg_2_to_3_HitBox" type="Area3D" parent="blockbench_export/Drake/jopa/rightleg/rightlegniz/rightleg_2" parent_id_path=PackedInt32Array(535971260, 528877758) index="0" unique_id=356798775]
+[node name="rightleg_2_to_3_HitBox" type="Area3D" parent="blockbench_export/Drake/jopa/rightleg/rightlegniz/rightleg_2" parent_id_path=PackedInt32Array(535971260, 1363226941) index="0" unique_id=356798775]
 transform = Transform3D(0.4472136, -0.033310235, -0.89380676, 0, 0.9993063, -0.037241977, 0.8944272, 0.016655117, 0.44690338, 0.0062500015, -0.18750001, -0.003124997)
 collision_layer = 4
 collision_mask = 0
@@ -404,19 +386,19 @@ collision_mask = 0
 [node name="CollisionShape" type="CollisionShape3D" parent="blockbench_export/Drake/jopa/rightleg/rightlegniz/rightleg_2/rightleg_2_to_3_HitBox" unique_id=528377750]
 shape = SubResource("CapsuleShape3D_dylup")
 
-[node name="tube" parent="blockbench_export/Drake/jopa/rightleg/pizdulina1" parent_id_path=PackedInt32Array(535971260, 708087014) index="0" unique_id=1997417812]
+[node name="tube" parent="blockbench_export/Drake/jopa/rightleg/pizdulina1" parent_id_path=PackedInt32Array(535971260, 1614720510) index="0" unique_id=1102306212]
 layers = 2
 
-[node name="tube2" parent="blockbench_export/Drake/jopa/rightleg/pizdulina1" parent_id_path=PackedInt32Array(535971260, 708087014) index="1" unique_id=1772009503]
+[node name="tube2" parent="blockbench_export/Drake/jopa/rightleg/pizdulina1" parent_id_path=PackedInt32Array(535971260, 1614720510) index="1" unique_id=2029406184]
 layers = 2
 
-[node name="pizdulina" parent="blockbench_export/Drake/jopa/rightleg" index="5" unique_id=386880769]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+[node name="pizdulina" parent="blockbench_export/Drake/jopa/rightleg" parent_id_path=PackedInt32Array(535971260, 1292123511) index="5" unique_id=1383314277]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0.05625, -0.05, 0.0875)
 
-[node name="tube3" parent="blockbench_export/Drake/jopa/rightleg/pizdulina" index="0" unique_id=2145872888]
+[node name="tube3" parent="blockbench_export/Drake/jopa/rightleg/pizdulina" index="0" unique_id=274663306]
 layers = 2
 
-[node name="rightleg_1_to_2_HitBox" type="Area3D" parent="blockbench_export/Drake/jopa/rightleg/rightleg_1" parent_id_path=PackedInt32Array(535971260, 967908536) index="0" unique_id=1963658128]
+[node name="rightleg_1_to_2_HitBox" type="Area3D" parent="blockbench_export/Drake/jopa/rightleg/rightleg_1" parent_id_path=PackedInt32Array(535971260, 1177637365) index="0" unique_id=1963658128]
 transform = Transform3D(-1, 0, 0, 0, 0.9996877, -0.024992226, 0, -0.024992226, -0.9996877, 0, -0.12500006, 0.0031250007)
 collision_layer = 4
 collision_mask = 0
@@ -424,157 +406,133 @@ collision_mask = 0
 [node name="CollisionShape" type="CollisionShape3D" parent="blockbench_export/Drake/jopa/rightleg/rightleg_1/rightleg_1_to_2_HitBox" unique_id=1317072511]
 shape = SubResource("CapsuleShape3D_u4wka")
 
-[node name="odol1" parent="blockbench_export/Drake/jopa" index="5" unique_id=543791130]
-transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 0, 0, 0)
+[node name="odol1" parent="blockbench_export/Drake/jopa" parent_id_path=PackedInt32Array(535971260, 700458155) index="5" unique_id=524891323]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 0, 0.0171875, -0.0765625)
 
-[node name="cuboid8" parent="blockbench_export/Drake/jopa/odol1" index="0" unique_id=1373893021]
+[node name="cuboid8" parent="blockbench_export/Drake/jopa/odol1" index="0" unique_id=1605891324]
 layers = 2
 
-[node name="torso" parent="blockbench_export/Drake" parent_id_path=PackedInt32Array(535971260, 410141258) index="1" unique_id=1389249291]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="body_1" parent="blockbench_export/Drake/torso" index="0" unique_id=1355585259]
+[node name="body_1" parent="blockbench_export/Drake/torso" parent_id_path=PackedInt32Array(535971260, 2113491525) index="0" unique_id=1060171772]
 layers = 2
 
-[node name="cuboid9" parent="blockbench_export/Drake/torso" index="2" unique_id=108430533]
+[node name="cuboid9" parent="blockbench_export/Drake/torso" parent_id_path=PackedInt32Array(535971260, 2113491525) index="2" unique_id=2644953]
 layers = 2
 
-[node name="cuboid10" parent="blockbench_export/Drake/torso" index="3" unique_id=2126931688]
+[node name="cuboid10" parent="blockbench_export/Drake/torso" parent_id_path=PackedInt32Array(535971260, 2113491525) index="3" unique_id=994519762]
 layers = 2
 
-[node name="Cherepnie" parent="blockbench_export/Drake/torso" index="5" unique_id=1831393739]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="brons" parent="blockbench_export/Drake/torso" index="6" unique_id=1510721570]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="cuboid11" parent="blockbench_export/Drake/torso/brons" index="0" unique_id=1691590667]
+[node name="cuboid11" parent="blockbench_export/Drake/torso/brons" parent_id_path=PackedInt32Array(535971260, 1581261142) index="0" unique_id=1354841924]
 layers = 2
 
-[node name="cuboid12" parent="blockbench_export/Drake/torso/brons" index="1" unique_id=947671897]
+[node name="cuboid12" parent="blockbench_export/Drake/torso/brons" parent_id_path=PackedInt32Array(535971260, 1581261142) index="1" unique_id=946092605]
 layers = 2
 
-[node name="cuboid13" parent="blockbench_export/Drake/torso/brons" index="2" unique_id=133164201]
+[node name="cuboid13" parent="blockbench_export/Drake/torso/brons" parent_id_path=PackedInt32Array(535971260, 1581261142) index="2" unique_id=439703104]
 layers = 2
 
-[node name="cuboid14" parent="blockbench_export/Drake/torso/brons" index="3" unique_id=457413569]
+[node name="cuboid14" parent="blockbench_export/Drake/torso/brons" parent_id_path=PackedInt32Array(535971260, 1581261142) index="3" unique_id=848467803]
 layers = 2
 
-[node name="cuboid15" parent="blockbench_export/Drake/torso/brons" index="4" unique_id=1166515708]
+[node name="cuboid15" parent="blockbench_export/Drake/torso/brons" parent_id_path=PackedInt32Array(535971260, 1581261142) index="4" unique_id=1128267050]
 layers = 2
 
-[node name="cuboid16" parent="blockbench_export/Drake/torso/brons" index="5" unique_id=1900221581]
+[node name="cuboid16" parent="blockbench_export/Drake/torso/brons" parent_id_path=PackedInt32Array(535971260, 1581261142) index="5" unique_id=1692038535]
 layers = 2
 
-[node name="cuboid17" parent="blockbench_export/Drake/torso/brons" index="6" unique_id=1292784645]
+[node name="cuboid17" parent="blockbench_export/Drake/torso/brons" parent_id_path=PackedInt32Array(535971260, 1581261142) index="6" unique_id=1573551328]
 layers = 2
 
-[node name="cuboid18" parent="blockbench_export/Drake/torso/brons" index="7" unique_id=1677686316]
+[node name="cuboid18" parent="blockbench_export/Drake/torso/brons" parent_id_path=PackedInt32Array(535971260, 1581261142) index="7" unique_id=471196964]
 layers = 2
 
-[node name="cuboid19" parent="blockbench_export/Drake/torso/brons" index="8" unique_id=1530973495]
+[node name="cuboid19" parent="blockbench_export/Drake/torso/brons" parent_id_path=PackedInt32Array(535971260, 1581261142) index="8" unique_id=1025758733]
 layers = 2
 
-[node name="cuboid20" parent="blockbench_export/Drake/torso/brons" index="9" unique_id=793957236]
+[node name="cuboid20" parent="blockbench_export/Drake/torso/brons" parent_id_path=PackedInt32Array(535971260, 1581261142) index="9" unique_id=780048380]
 layers = 2
 
-[node name="cuboid21" parent="blockbench_export/Drake/torso/brons" index="10" unique_id=972417838]
+[node name="cuboid21" parent="blockbench_export/Drake/torso/brons" parent_id_path=PackedInt32Array(535971260, 1581261142) index="10" unique_id=230109456]
 layers = 2
 
-[node name="head2" parent="blockbench_export/Drake/torso" index="7" unique_id=46071108]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="head" parent="blockbench_export/Drake/torso/head2" index="0" unique_id=1596221426]
+[node name="head" parent="blockbench_export/Drake/torso/head2" parent_id_path=PackedInt32Array(535971260, 799655904) index="0" unique_id=12902135]
 layers = 2
 
-[node name="plane" parent="blockbench_export/Drake/torso/head2/ZRACJP" parent_id_path=PackedInt32Array(535971260, 1088100460) index="0" unique_id=792816349]
+[node name="plane" parent="blockbench_export/Drake/torso/head2/ZRACJP" parent_id_path=PackedInt32Array(535971260, 1353891616) index="0" unique_id=1036963879]
 layers = 2
 
-[node name="cuboid22" parent="blockbench_export/Drake/torso/head2/glaznoe/EYE" parent_id_path=PackedInt32Array(535971260, 374704532) index="0" unique_id=1880099237]
+[node name="cuboid22" parent="blockbench_export/Drake/torso/head2/glaznoe/EYE" parent_id_path=PackedInt32Array(535971260, 162631653) index="0" unique_id=1182710192]
 layers = 2
 
-[node name="cuboid23" parent="blockbench_export/Drake/torso/head2/glaznoe/EYE/tocha" parent_id_path=PackedInt32Array(535971260, 1384092122) index="0" unique_id=1380887048]
+[node name="cuboid23" parent="blockbench_export/Drake/torso/head2/glaznoe/EYE/tocha" parent_id_path=PackedInt32Array(535971260, 999749720) index="0" unique_id=28722057]
 layers = 2
 
-[node name="resni" parent="blockbench_export/Drake/torso/head2/glaznoe" parent_id_path=PackedInt32Array(535971260, 547860185) index="1" unique_id=667026790]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="cuboid24" parent="blockbench_export/Drake/torso/head2/glaznoe/resni" index="0" unique_id=407469057]
+[node name="cuboid24" parent="blockbench_export/Drake/torso/head2/glaznoe/resni" parent_id_path=PackedInt32Array(535971260, 1599112037) index="0" unique_id=1589940551]
 layers = 2
 
-[node name="brov" parent="blockbench_export/Drake/torso/head2" index="3" unique_id=1566639818]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="cuboid25" parent="blockbench_export/Drake/torso/head2/brov" index="0" unique_id=419997425]
+[node name="cuboid25" parent="blockbench_export/Drake/torso/head2/brov" parent_id_path=PackedInt32Array(535971260, 258391542) index="0" unique_id=1718181054]
 layers = 2
 
-[node name="bakenbards" parent="blockbench_export/Drake/torso/head2" index="4" unique_id=1888881731]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="cuboid26" parent="blockbench_export/Drake/torso/head2/bakenbards" index="0" unique_id=1571881654]
+[node name="cuboid26" parent="blockbench_export/Drake/torso/head2/bakenbards" parent_id_path=PackedInt32Array(535971260, 1214838316) index="0" unique_id=460611621]
 layers = 2
 
-[node name="pyramid" parent="blockbench_export/Drake/torso/head2/bakenbards" index="1" unique_id=867209341]
+[node name="pyramid" parent="blockbench_export/Drake/torso/head2/bakenbards" parent_id_path=PackedInt32Array(535971260, 1214838316) index="1" unique_id=1273503676]
 layers = 2
 
-[node name="pyramid2" parent="blockbench_export/Drake/torso/head2/bakenbards" index="2" unique_id=646722893]
+[node name="pyramid2" parent="blockbench_export/Drake/torso/head2/bakenbards" parent_id_path=PackedInt32Array(535971260, 1214838316) index="2" unique_id=1271639372]
 layers = 2
 
-[node name="pyramid3" parent="blockbench_export/Drake/torso/head2/bakenbards" index="3" unique_id=1634061142]
+[node name="pyramid3" parent="blockbench_export/Drake/torso/head2/bakenbards" parent_id_path=PackedInt32Array(535971260, 1214838316) index="3" unique_id=335909142]
 layers = 2
 
-[node name="pyramid4" parent="blockbench_export/Drake/torso/head2/bakenbards" index="4" unique_id=1667387678]
+[node name="pyramid4" parent="blockbench_export/Drake/torso/head2/bakenbards" parent_id_path=PackedInt32Array(535971260, 1214838316) index="4" unique_id=734821187]
 layers = 2
 
-[node name="pyramid5" parent="blockbench_export/Drake/torso/head2/bakenbards" index="5" unique_id=234445695]
+[node name="pyramid5" parent="blockbench_export/Drake/torso/head2/bakenbards" parent_id_path=PackedInt32Array(535971260, 1214838316) index="5" unique_id=1846788826]
 layers = 2
 
-[node name="pyramid6" parent="blockbench_export/Drake/torso/head2/bakenbards" index="6" unique_id=843723639]
+[node name="pyramid6" parent="blockbench_export/Drake/torso/head2/bakenbards" parent_id_path=PackedInt32Array(535971260, 1214838316) index="6" unique_id=1577235939]
 layers = 2
 
-[node name="cuboid27" parent="blockbench_export/Drake/torso/head2/bakenbards" index="7" unique_id=1613102101]
+[node name="cuboid27" parent="blockbench_export/Drake/torso/head2/bakenbards" parent_id_path=PackedInt32Array(535971260, 1214838316) index="7" unique_id=1892962509]
 layers = 2
 
-[node name="cuboid28" parent="blockbench_export/Drake/torso/head2/bakenbards" index="8" unique_id=516976578]
+[node name="cuboid28" parent="blockbench_export/Drake/torso/head2/bakenbards" parent_id_path=PackedInt32Array(535971260, 1214838316) index="8" unique_id=441386523]
 layers = 2
 
-[node name="cuboid29" parent="blockbench_export/Drake/torso/head2/bakenbards" index="9" unique_id=600975908]
+[node name="cuboid29" parent="blockbench_export/Drake/torso/head2/bakenbards" parent_id_path=PackedInt32Array(535971260, 1214838316) index="9" unique_id=1581999168]
 layers = 2
 
-[node name="prisheska" parent="blockbench_export/Drake/torso/head2" index="5" unique_id=6740895]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="cuboid30" parent="blockbench_export/Drake/torso/head2/prisheska" index="0" unique_id=1852997563]
+[node name="cuboid30" parent="blockbench_export/Drake/torso/head2/prisheska" parent_id_path=PackedInt32Array(535971260, 1356664591) index="0" unique_id=248884101]
 layers = 2
 
-[node name="cuboid31" parent="blockbench_export/Drake/torso/head2/prisheska" index="1" unique_id=652026339]
+[node name="cuboid31" parent="blockbench_export/Drake/torso/head2/prisheska" parent_id_path=PackedInt32Array(535971260, 1356664591) index="1" unique_id=1614334158]
 layers = 2
 
-[node name="cuboid32" parent="blockbench_export/Drake/torso/head2/prisheska" index="2" unique_id=501296573]
+[node name="cuboid32" parent="blockbench_export/Drake/torso/head2/prisheska" parent_id_path=PackedInt32Array(535971260, 1356664591) index="2" unique_id=1475351346]
 layers = 2
 
-[node name="cuboid33" parent="blockbench_export/Drake/torso/head2/prisheska" index="3" unique_id=535258321]
+[node name="cuboid33" parent="blockbench_export/Drake/torso/head2/prisheska" parent_id_path=PackedInt32Array(535971260, 1356664591) index="3" unique_id=1801373119]
 layers = 2
 
-[node name="cuboid34" parent="blockbench_export/Drake/torso/head2/prisheska" index="4" unique_id=1164916436]
+[node name="cuboid34" parent="blockbench_export/Drake/torso/head2/prisheska" parent_id_path=PackedInt32Array(535971260, 1356664591) index="4" unique_id=1227223419]
 layers = 2
 
-[node name="cuboid35" parent="blockbench_export/Drake/torso/head2/prisheska" index="5" unique_id=1902632521]
+[node name="cuboid35" parent="blockbench_export/Drake/torso/head2/prisheska" parent_id_path=PackedInt32Array(535971260, 1356664591) index="5" unique_id=1616531445]
 layers = 2
 
-[node name="cuboid36" parent="blockbench_export/Drake/torso/head2/prisheska" index="6" unique_id=966933384]
+[node name="cuboid36" parent="blockbench_export/Drake/torso/head2/prisheska" parent_id_path=PackedInt32Array(535971260, 1356664591) index="6" unique_id=1736291947]
 layers = 2
 
-[node name="cuboid37" parent="blockbench_export/Drake/torso/head2/prisheska" index="7" unique_id=1229650442]
+[node name="cuboid37" parent="blockbench_export/Drake/torso/head2/prisheska" parent_id_path=PackedInt32Array(535971260, 1356664591) index="7" unique_id=2122632712]
 layers = 2
 
-[node name="cuboid38" parent="blockbench_export/Drake/torso/head2/prisheska" index="8" unique_id=677632793]
+[node name="cuboid38" parent="blockbench_export/Drake/torso/head2/prisheska" parent_id_path=PackedInt32Array(535971260, 1356664591) index="8" unique_id=1774739780]
 layers = 2
 
-[node name="cuboid39" parent="blockbench_export/Drake/torso/head2/prisheska" index="9" unique_id=461377628]
+[node name="cuboid39" parent="blockbench_export/Drake/torso/head2/prisheska" parent_id_path=PackedInt32Array(535971260, 1356664591) index="9" unique_id=1857957633]
 layers = 2
 
-[node name="head_1_to_2_HitBox" type="Area3D" parent="blockbench_export/Drake/torso/head2/head_1" parent_id_path=PackedInt32Array(535971260, 1611187383) index="0" unique_id=919920178]
+[node name="head_1_to_2_HitBox" type="Area3D" parent="blockbench_export/Drake/torso/head2/head_1" parent_id_path=PackedInt32Array(535971260, 1692489432) index="0" unique_id=919920178]
 transform = Transform3D(0, 1.1780305e-08, 1, 0, 1, -1.1780305e-08, -1, -1.1353274e-07, 4.9626737e-15, 0, -0.06562495, 2.2351742e-08)
 collision_layer = 4
 collision_mask = 0
@@ -582,68 +540,14 @@ collision_mask = 0
 [node name="CollisionShape" type="CollisionShape3D" parent="blockbench_export/Drake/torso/head2/head_1/head_1_to_2_HitBox" unique_id=212991935]
 shape = SubResource("CapsuleShape3D_q3ajk")
 
-[node name="Camera3D" type="Camera3D" parent="blockbench_export/Drake/torso/head2/head_2" parent_id_path=PackedInt32Array(535971260, 129120219) index="0" unique_id=1177105255]
+[node name="Camera3D" type="Camera3D" parent="blockbench_export/Drake/torso/head2/head_2" parent_id_path=PackedInt32Array(535971260, 1271731283) index="0" unique_id=1177105255]
 transform = Transform3D(1.0000001, -1.792796e-08, -2.0954758e-08, 1.7229468e-08, 1, -2.2351742e-08, -3.4924597e-09, 4.4703484e-08, 1, -0.0037344317, 0.0981487, -0.06314007)
 cull_mask = 1048545
 
-[node name="leftarm" parent="blockbench_export/Drake/torso/armos" parent_id_path=PackedInt32Array(535971260, 1777085343) index="0" unique_id=1971056985]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+[node name="big" parent="blockbench_export/Drake/torso/armos/leftarm/leftarmniz/lefthand" parent_id_path=PackedInt32Array(535971260, 976318521) index="1" unique_id=1029818901]
+transform = Transform3D(0.9945219, -0.10442901, 0.004559469, 0.10452849, 0.99357533, -0.04338044, 0, 0.043619394, 0.9990481, -0.028125, 0.001428125, -0.01875)
 
-[node name="Glaz2l" parent="blockbench_export/Drake/torso/armos/leftarm" index="1" unique_id=1076967200]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="glaz1l" parent="blockbench_export/Drake/torso/armos/leftarm" index="2" unique_id=1495909099]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="leftarmniz" parent="blockbench_export/Drake/torso/armos/leftarm" index="3" unique_id=1930081163]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="sword" parent="blockbench_export/Drake/torso/armos/leftarm/leftarmniz" index="1" unique_id=1039955766]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="zepzd2" parent="blockbench_export/Drake/torso/armos/leftarm/leftarmniz/sword" index="3" unique_id=1794786878]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="pechati3" parent="blockbench_export/Drake/torso/armos/leftarm/leftarmniz/sword" index="4" unique_id=739597964]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="pechati4" parent="blockbench_export/Drake/torso/armos/leftarm/leftarmniz/sword" index="5" unique_id=1221518499]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="skull dragon1" parent="blockbench_export/Drake/torso/armos/leftarm/leftarmniz/sword" index="6" unique_id=714974916]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6109375, 0.11875)
-
-[node name="glaz3" parent="blockbench_export/Drake/torso/armos/leftarm/leftarmniz/sword/skull dragon1" index="7" unique_id=1671810569]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="glaz4" parent="blockbench_export/Drake/torso/armos/leftarm/leftarmniz/sword/skull dragon1" index="8" unique_id=195410652]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="cepka2" parent="blockbench_export/Drake/torso/armos/leftarm/leftarmniz/sword" index="7" unique_id=1077329123]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="razyebalovo3" parent="blockbench_export/Drake/torso/armos/leftarm/leftarmniz/sword/seredina2" parent_id_path=PackedInt32Array(535971260, 1430599712) index="0" unique_id=1149543312]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="razyebalovo4" parent="blockbench_export/Drake/torso/armos/leftarm/leftarmniz/sword/seredina2" parent_id_path=PackedInt32Array(535971260, 1430599712) index="1" unique_id=298448119]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="klyap2" parent="blockbench_export/Drake/torso/armos/leftarm/leftarmniz/sword/seredina2" parent_id_path=PackedInt32Array(535971260, 1430599712) index="3" unique_id=701808880]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="effects" parent="blockbench_export/Drake/torso/armos/leftarm/leftarmniz/sword" index="9" unique_id=1628527731]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="lefthand" parent="blockbench_export/Drake/torso/armos/leftarm/leftarmniz" index="2" unique_id=148197656]
-transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1, -0.0125, -0.16076376, -0.001583125)
-
-[node name="big" parent="blockbench_export/Drake/torso/armos/leftarm/leftarmniz/lefthand" index="1" unique_id=545231667]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.028125, 0.001428125, -0.01875)
-
-[node name="9" parent="blockbench_export/Drake/torso/armos/leftarm/leftarmniz/lefthand/nonamed1/8" parent_id_path=PackedInt32Array(535971260, 2040071035) index="1" unique_id=2114958121]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="leftarm_2_to_3_HitBox" type="Area3D" parent="blockbench_export/Drake/torso/armos/leftarm/leftarmniz/leftarm_2" parent_id_path=PackedInt32Array(535971260, 1858800425) index="0" unique_id=748561582]
+[node name="leftarm_2_to_3_HitBox" type="Area3D" parent="blockbench_export/Drake/torso/armos/leftarm/leftarmniz/leftarm_2" parent_id_path=PackedInt32Array(535971260, 865040880) index="0" unique_id=748561582]
 transform = Transform3D(0.44721445, 0.022724655, 0.89413804, 0, 0.9996772, -0.025406947, -0.89442676, 0.011362354, 0.4470701, -0.006249994, -0.27494377, -0.003125012)
 collision_layer = 4
 collision_mask = 0
@@ -652,7 +556,7 @@ collision_mask = 0
 transform = Transform3D(1, 2.9802322e-08, 1.6391277e-07, 1.1175871e-07, 1, 1.7881393e-07, 2.9802322e-08, 0, 1, 8.940697e-08, 0.16257735, -1.1920929e-07)
 shape = SubResource("CapsuleShape3D_tc5p8")
 
-[node name="leftarm_1_to_2_HitBox" type="Area3D" parent="blockbench_export/Drake/torso/armos/leftarm/leftarm_1" parent_id_path=PackedInt32Array(535971260, 1790162844) index="0" unique_id=554164565]
+[node name="leftarm_1_to_2_HitBox" type="Area3D" parent="blockbench_export/Drake/torso/armos/leftarm/leftarm_1" parent_id_path=PackedInt32Array(535971260, 1653023837) index="0" unique_id=554164565]
 transform = Transform3D(-0.33310857, 0.119313516, 0.93530905, 0, 0.9919615, -0.12654044, -0.9428885, -0.042151704, -0.33043087, -0.0134058, -0.11145449, 0.004736066)
 collision_layer = 4
 collision_mask = 0
@@ -660,40 +564,7 @@ collision_mask = 0
 [node name="CollisionShape" type="CollisionShape3D" parent="blockbench_export/Drake/torso/armos/leftarm/leftarm_1/leftarm_1_to_2_HitBox" unique_id=34555715]
 shape = SubResource("CapsuleShape3D_oe7b8")
 
-[node name="rightarm" parent="blockbench_export/Drake/torso/armos" parent_id_path=PackedInt32Array(535971260, 1777085343) index="1" unique_id=1688266355]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="Glaz1r" parent="blockbench_export/Drake/torso/armos/rightarm" index="1" unique_id=710827707]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="Glaz2r" parent="blockbench_export/Drake/torso/armos/rightarm" index="2" unique_id=1252037802]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="rightarmniz" parent="blockbench_export/Drake/torso/armos/rightarm" index="3" unique_id=1865246920]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="righthand" parent="blockbench_export/Drake/torso/armos/rightarm/rightarmniz" index="1" unique_id=594870267]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="big2" parent="blockbench_export/Drake/torso/armos/rightarm/rightarmniz/righthand" index="1" unique_id=431026171]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="fucker2" parent="blockbench_export/Drake/torso/armos/rightarm/rightarmniz/righthand" index="3" unique_id=78734097]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="10" parent="blockbench_export/Drake/torso/armos/rightarm/rightarmniz/righthand/fucker2" index="1" unique_id=29981974]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="14" parent="blockbench_export/Drake/torso/armos/rightarm/rightarmniz/righthand/nonamed2" parent_id_path=PackedInt32Array(535971260, 1507570090) index="0" unique_id=1579873968]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="15" parent="blockbench_export/Drake/torso/armos/rightarm/rightarmniz/righthand/nonamed2/14" index="1" unique_id=1612211189]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="smol2" parent="blockbench_export/Drake/torso/armos/rightarm/rightarmniz/righthand" index="5" unique_id=1134976850]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="rightarm_2_to_3_HitBox" type="Area3D" parent="blockbench_export/Drake/torso/armos/rightarm/rightarmniz/rightarm_2" parent_id_path=PackedInt32Array(535971260, 764532145) index="0" unique_id=596462125]
+[node name="rightarm_2_to_3_HitBox" type="Area3D" parent="blockbench_export/Drake/torso/armos/rightarm/rightarmniz/rightarm_2" parent_id_path=PackedInt32Array(535971260, 1312408180) index="0" unique_id=596462125]
 transform = Transform3D(0.44721276, -0.06876155, -0.8917807, 0, 0.99704057, -0.07687772, 0.89442766, 0.034380693, 0.44588926, 0.006250024, -0.09062499, -0.003125012)
 collision_layer = 4
 collision_mask = 0
@@ -701,7 +572,7 @@ collision_mask = 0
 [node name="CollisionShape" type="CollisionShape3D" parent="blockbench_export/Drake/torso/armos/rightarm/rightarmniz/rightarm_2/rightarm_2_to_3_HitBox" unique_id=277913043]
 shape = SubResource("CapsuleShape3D_t7dqg")
 
-[node name="rightarm_1_to_2_HitBox" type="Area3D" parent="blockbench_export/Drake/torso/armos/rightarm/rightarm_1" parent_id_path=PackedInt32Array(535971260, 1690974914) index="0" unique_id=2110962402]
+[node name="rightarm_1_to_2_HitBox" type="Area3D" parent="blockbench_export/Drake/torso/armos/rightarm/rightarm_1" parent_id_path=PackedInt32Array(535971260, 1488037717) index="0" unique_id=2110962402]
 transform = Transform3D(-0.31300607, -0.115675695, -0.9426804, 0, 0.9925552, -0.121795796, 0.94975114, -0.038122825, -0.3106758, 0.012813181, -0.10994327, 0.0042227805)
 collision_layer = 4
 collision_mask = 0
@@ -709,7 +580,7 @@ collision_mask = 0
 [node name="CollisionShape" type="CollisionShape3D" parent="blockbench_export/Drake/torso/armos/rightarm/rightarm_1/rightarm_1_to_2_HitBox" unique_id=1903970683]
 shape = SubResource("CapsuleShape3D_r8xig")
 
-[node name="body_1_HitBox" type="Area3D" parent="blockbench_export/Drake/torso" index="9" unique_id=1687198949]
+[node name="body_1_HitBox" type="Area3D" parent="blockbench_export/Drake/torso" parent_id_path=PackedInt32Array(535971260, 2113491525) index="9" unique_id=1687198949]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7202, 0)
 collision_layer = 4
 collision_mask = 0
@@ -717,7 +588,7 @@ collision_mask = 0
 [node name="CollisionShape" type="CollisionShape3D" parent="blockbench_export/Drake/torso/body_1_HitBox" unique_id=812297338]
 shape = SubResource("ConvexPolygonShape3D_bk2qd")
 
-[node name="body_2_v_HitBox" type="Area3D" parent="blockbench_export/Drake/torso" index="10" unique_id=1199512944]
+[node name="body_2_v_HitBox" type="Area3D" parent="blockbench_export/Drake/torso" parent_id_path=PackedInt32Array(535971260, 2113491525) index="10" unique_id=1199512944]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7202, 0)
 collision_layer = 4
 collision_mask = 0
@@ -725,13 +596,7 @@ collision_mask = 0
 [node name="CollisionShape" type="CollisionShape3D" parent="blockbench_export/Drake/torso/body_2_v_HitBox" unique_id=1533633117]
 shape = SubResource("ConvexPolygonShape3D_xihd8")
 
-[node name="effect" parent="blockbench_export/Drake" parent_id_path=PackedInt32Array(535971260, 410141258) index="2" unique_id=1861771282]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="shiftef" parent="blockbench_export/Drake" parent_id_path=PackedInt32Array(535971260, 410141258) index="3" unique_id=1666787362]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="plane2" parent="blockbench_export/Drake/shiftef" index="0" unique_id=739786526]
+[node name="plane2" parent="blockbench_export/Drake/shiftef" parent_id_path=PackedInt32Array(535971260, 1004448224) index="0" unique_id=1539950561]
 layers = 2
 
 [node name="BodyShape" type="CollisionShape3D" parent="." unique_id=624395485]
@@ -753,5 +618,11 @@ parameters/StateMachine/MovementSM/GroundSM/ctrlWalkBlend/blend_position = Vecto
 
 [node name="HitboxAnimPlayer" type="AnimationPlayer" parent="." unique_id=1293239553]
 libraries/ = SubResource("AnimationLibrary_dylup")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1189104191]
+replication_config = SubResource("SceneReplicationConfig_c71ht")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=734007565]
+script = ExtResource("6_y1117")
 
 [editable path="blockbench_export"]

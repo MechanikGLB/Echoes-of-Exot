@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://baogufoo1cvug"
-path.s3tc="res://.godot/imported/Drake_0.png-98e49bee73bfe755360d5b40f4cd3741.s3tc.ctex"
+uid="uid://dglcwdyaat6pa"
+path.s3tc="res://.godot/imported/scull_eye_0.png-f78b7aa445be53f55b6b19299214b5a7.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "4fe279b01288e0db140736693fd0672a"
+"md5": "5f1f5a760d1fb7c6fab5f8b99b083dff"
 }
 
 [deps]
 
-source_file="res://core/actors/characters/Drake/Drake_0.png"
-dest_files=["res://.godot/imported/Drake_0.png-98e49bee73bfe755360d5b40f4cd3741.s3tc.ctex"]
+source_file="res://core/actors/characters/Drake/scull_eye_0.png"
+dest_files=["res://.godot/imported/scull_eye_0.png-f78b7aa445be53f55b6b19299214b5a7.s3tc.ctex"]
 
 [params]
 

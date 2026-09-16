@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://baogufoo1cvug"
-path.s3tc="res://.godot/imported/Drake_0.png-98e49bee73bfe755360d5b40f4cd3741.s3tc.ctex"
+uid="uid://b1gagtmpmgquj"
+path.s3tc="res://.godot/imported/Индикатор подброса1_0.png-12ce50c1b6e5f22e647f880934bcae9c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "4fe279b01288e0db140736693fd0672a"
+"md5": "338f11784fdd7b4d9597d672cf8e6f04"
 }
 
 [deps]
 
-source_file="res://core/actors/characters/Drake/Drake_0.png"
-dest_files=["res://.godot/imported/Drake_0.png-98e49bee73bfe755360d5b40f4cd3741.s3tc.ctex"]
+source_file="res://core/actors/characters/Drake/Индикатор подброса1_0.png"
+dest_files=["res://.godot/imported/Индикатор подброса1_0.png-12ce50c1b6e5f22e647f880934bcae9c.s3tc.ctex"]
 
 [params]
 
