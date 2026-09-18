@@ -61,6 +61,11 @@ func _input(event):
 	if event.is_action_pressed("primary_fire"):
 		print(">>> НАЖАТИЕ primary_fire от игрока")
 		advance_combo()
+		
+	if event.is_action_pressed("ui_end"):
+		movement_component.add_speed_modifier("test_slow", 0.3)
+		await get_tree().create_timer(2.0).timeout
+		movement_component.remove_speed_modifier("test_slow")
 
 # ========== СИСТЕМА КОМБО ==========
 func advance_combo() -> void:

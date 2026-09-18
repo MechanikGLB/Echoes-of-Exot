@@ -46,9 +46,12 @@ func knockup(_duration: float):
 	tween.tween_property(self, "velocity:y", 10.0, 0.1)
 	# Здесь можно добавить эффект оглушения
 
-# ========== НОДЫ ==========
+#Компоненты 
 
 @onready var health_component: HealthComponent = $HealthComponent
+@onready var movement_component: MovementComponent = $MovementComponent
+
+# ========== НОДЫ ==========
 
 @onready var head: Node3D = $blockbench_export/Drake/torso/head2/head_2
 @onready var camera: Camera3D = $blockbench_export/Drake/torso/head2/head_2/Camera3D
@@ -133,16 +136,18 @@ func _physics_process(delta: float) -> void:
 		ability.update(delta)
 	
 	# Физика
-	_apply_gravity(delta)
+	#_apply_gravity(delta)
 	_handle_movement(delta)
 	_handle_abilities_input()
+	
+
 	
 	# Визуальные эффекты
 	_update_camera_effects(delta)
 	_update_invulnerability_effect()
 	
 	_custom_physics_process(delta)
-	move_and_slide()
+	#move_and_slide()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
@@ -157,38 +162,23 @@ func _input(event: InputEvent) -> void:
 func _handle_movement(delta: float) -> void:
 	if not is_character_alive() or current_state == CharacterState.RESPAWNING:
 		return
-	
+
 	# Прыжок
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = jump_velocity
-	
+		movement_component.jump()
+
 	# Спринт
-	if Input.is_action_pressed("sprint"):
-		speed = sprint_speed
-	else:
-		speed = walk_speed
-	
-	# Получение направления движения
+	var sprint = Input.is_action_pressed("sprint")
+
+	# Направление движения
 	var input_dir := Input.get_vector("left", "right", "up", "down")
 	var direction := (body_shape.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	
-	# Применение движения
-	if is_on_floor():
-		if direction:
-			velocity.x = direction.x * speed
-			velocity.z = direction.z * speed
-			if steps:
-				steps.stream_paused = false
-		else:
-			velocity.x = lerp(velocity.x, direction.x * speed, delta * 10.0)
-			velocity.z = lerp(velocity.z, direction.z * speed, delta * 10.0)
-			if steps:
-				steps.stream_paused = true
-	else:
-		velocity.x = lerp(velocity.x, direction.x * speed, delta * 2.0)
-		velocity.z = lerp(velocity.z, direction.z * speed, delta * 2.0)
-		if steps:
-			steps.stream_paused = true
+
+	movement_component.set_move_input(direction, sprint)
+
+	# Звук шагов
+	if steps:
+		steps.stream_paused = direction == Vector3.ZERO
 
 func _apply_gravity(delta: float) -> void:
 	if not is_on_floor():
