@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bqpnw5t4c0xjc" path="res://core/kernel/resources/Base/Ability_resource.gd" id="2_bfrwn"]
 [ext_resource type="Resource" uid="uid://hg4vtrom345m" path="res://core/kernel/resources/Abilities/Drake/dragon_slayer.tres" id="3_3dle1"]
 [ext_resource type="Script" uid="uid://bc8sh7r4o1ds3" path="res://core/components/health_component.gd" id="6_y1117"]
+[ext_resource type="Script" uid="uid://rjktqancf117" path="res://core/components/control_component.gd" id="7_8xrc4"]
 [ext_resource type="Script" uid="uid://bqiqadt8pe4th" path="res://core/components/movement_component.gd" id="7_aou1x"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bfrwn"]
@@ -546,7 +547,7 @@ transform = Transform3D(1, -1.7229466e-08, 3.49246e-09, 1.7229466e-08, 1, -4.470
 cull_mask = 1048545
 
 [node name="big" parent="blockbench_export/Drake/torso/armos/leftarm/leftarmniz/lefthand" parent_id_path=PackedInt32Array(535971260, 1002699541) index="1" unique_id=367748983]
-transform = Transform3D(0.9945219, -0.10442901, 0.0045594685, 0.10452849, 0.99357533, -0.043380436, 0, 0.043619394, 0.999048, -0.028125, 0.001428125, -0.01875)
+transform = Transform3D(0.9945219, -0.10442901, 0.0045594685, 0.10452849, 0.99357533, -0.04338043, 0, 0.043619394, 0.99904794, -0.028125, 0.001428125, -0.01875)
 
 [node name="leftarm_2_to_3_HitBox" type="Area3D" parent="blockbench_export/Drake/torso/armos/leftarm/leftarmniz/leftarm_2" parent_id_path=PackedInt32Array(535971260, 663437995) index="0" unique_id=748561582]
 transform = Transform3D(0.44721445, 0.022724655, 0.89413804, 0, 0.9996772, -0.025406947, -0.89442676, 0.011362354, 0.4470701, -0.006249994, -0.27494377, -0.003125012)
@@ -566,7 +567,7 @@ collision_mask = 0
 shape = SubResource("CapsuleShape3D_oe7b8")
 
 [node name="big2" parent="blockbench_export/Drake/torso/armos/rightarm/rightarmniz/righthand" parent_id_path=PackedInt32Array(535971260, 508635555) index="1" unique_id=2002176557]
-transform = Transform3D(0.9945219, 0.10442901, -0.004559469, -0.10452849, 0.99357533, -0.043380443, -4.656613e-10, 0.043619398, 0.99904805, 0.028125, 0.001428125, -0.01875)
+transform = Transform3D(0.9945219, 0.10442901, -0.0045594685, -0.10452849, 0.99357533, -0.04338044, -4.656613e-10, 0.043619398, 0.999048, 0.028125, 0.001428125, -0.01875)
 
 [node name="rightarm_2_to_3_HitBox" type="Area3D" parent="blockbench_export/Drake/torso/armos/rightarm/rightarmniz/rightarm_2" parent_id_path=PackedInt32Array(535971260, 779373113) index="0" unique_id=596462125]
 transform = Transform3D(0.44721276, -0.06876155, -0.8917807, 0, 0.99704057, -0.07687772, 0.89442766, 0.034380693, 0.44588926, 0.006250024, -0.09062499, -0.003125012)
@@ -628,6 +629,9 @@ replication_config = SubResource("SceneReplicationConfig_c71ht")
 
 [node name="HealthComponent" type="Node" parent="." unique_id=734007565]
 script = ExtResource("6_y1117")
+
+[node name="ControlComponent" type="Node" parent="." unique_id=47013824]
+script = ExtResource("7_8xrc4")
 
 [node name="MovementComponent" type="Node" parent="." unique_id=1349327742]
 script = ExtResource("7_aou1x")

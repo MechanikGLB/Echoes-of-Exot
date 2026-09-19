@@ -50,6 +50,7 @@ func knockup(_duration: float):
 
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var movement_component: MovementComponent = $MovementComponent
+@onready var control_component: ControlComponent = $ControlComponent
 
 # ========== НОДЫ ==========
 
@@ -85,7 +86,29 @@ const FOV_CHANGE = 1.5
 signal hit_frame_reached  # Используется в AbilityResource для синхронизации анимации
 
 # ========== ИНИЦИАЛИЗАЦИЯ ==========
+
+func _on_move_input(input_vector: Vector2, sprint: bool) -> void:
+	if not is_character_alive() or current_state == CharacterState.RESPAWNING:
+		movement_component.set_move_input(Vector3.ZERO, false)
+		if steps:
+			steps.stream_paused = true
+		return
+
+	var direction := (body_shape.transform.basis * Vector3(input_vector.x, 0, input_vector.y)).normalized()
+	movement_component.set_move_input(direction, sprint)
+
+	if steps:
+		steps.stream_paused = direction == Vector3.ZERO
+
+func _on_jump_requested() -> void:
+	if not is_character_alive() or current_state == CharacterState.RESPAWNING:
+		return
+	movement_component.jump()
+
 func _ready() -> void:
+	
+	control_component.move_input.connect(_on_move_input)
+	control_component.jump_requested.connect(_on_jump_requested)
 
 	speed = walk_speed
 	
@@ -159,26 +182,12 @@ func _input(event: InputEvent) -> void:
 		
 
 # ========== ДВИЖЕНИЕ ==========
-func _handle_movement(delta: float) -> void:
+func _handle_movement(_delta: float) -> void:
+	# Ввод приходит через ControlComponent
+	# Движение применяет MovementComponent
+	# Здесь только проверка состояния
 	if not is_character_alive() or current_state == CharacterState.RESPAWNING:
 		return
-
-	# Прыжок
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		movement_component.jump()
-
-	# Спринт
-	var sprint = Input.is_action_pressed("sprint")
-
-	# Направление движения
-	var input_dir := Input.get_vector("left", "right", "up", "down")
-	var direction := (body_shape.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-
-	movement_component.set_move_input(direction, sprint)
-
-	# Звук шагов
-	if steps:
-		steps.stream_paused = direction == Vector3.ZERO
 
 func _apply_gravity(delta: float) -> void:
 	if not is_on_floor():
@@ -198,6 +207,8 @@ func _headbob(time: float) -> Vector3:
 	pos.y = sin(time * BOB_FREQ) * BOB_AMP
 	pos.x = cos(time * BOB_FREQ / 2) * BOB_AMP
 	return pos
+
+
 
 # ========== ТАЙМЕРЫ ==========
 func _update_timers(delta: float) -> void:
