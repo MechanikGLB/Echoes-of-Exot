@@ -1,4 +1,5 @@
-extends CharacterBase
+@tool
+extends CharacterActor
 
 # ========== КОМБО СИСТЕМА ==========
 var combo_step: int = 0
@@ -53,10 +54,30 @@ func _custom_physics_process(delta: float):
 
 # ========== УПРАВЛЕНИЕ ==========
 func _input(event):
+	if Engine.is_editor_hint():
+		return
 	super._input(event)
+	
 	
 	if not anim_tree or not anim_tree.active:
 		return
+		
+	#if event.is_action_pressed("ui_end"):
+		#var packet := DamagePacket.new()
+		#packet.add(DamageType.Kind.PHYSICAL, 30)
+		#packet.add(DamageType.Kind.POISON, 20)
+		#health_component.take_damage_packet(packet, null, "body")
+		
+	if event.is_action_pressed("ui_home"):
+		var hurtbox = $HurtboxComponent
+		print("Найдено hurtbox'ов: ", hurtbox.get_hurtbox_count())
+		var packet := DamagePacket.new()
+		packet.add(DamageType.Kind.PHYSICAL, 10)
+		# находим hurtbox головы для теста
+		for area in hurtbox._hurtboxes:
+			if "head" in area.name.to_lower():
+				hurtbox.receive_hit(packet, null, area)
+				break
 		
 	if event.is_action_pressed("primary_fire"):
 		print(">>> НАЖАТИЕ primary_fire от игрока")

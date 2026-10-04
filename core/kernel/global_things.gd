@@ -1,6 +1,6 @@
 extends Node
 
-var selected_character: PackedScene = load("res://Scenes/Characters/Drake/Drake.tscn")
+var selected_character: PackedScene = load("res://core/actors/characters/Drake/Drake.tscn")
 var packed_map: PackedScene
 var selected_map: String = ""
 

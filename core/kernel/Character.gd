@@ -135,6 +135,9 @@ func _ready() -> void:
 
 # ========== ОСНОВНОЙ ЦИКЛ ==========
 func _physics_process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
+
 	if current_state == CharacterState.DEAD or current_state == CharacterState.DISABLED:
 		return
 	
@@ -173,6 +176,8 @@ func _physics_process(delta: float) -> void:
 	#move_and_slide()
 
 func _input(event: InputEvent) -> void:
+	if Engine.is_editor_hint():
+		return
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		#head.rotate_y(-event.relative.x * SENS)
 		camera.rotate_x(-event.relative.y * SENS)
@@ -279,17 +284,17 @@ func is_enemy(other: CharacterBase) -> bool:
 func character_respawned() -> void:
 	pass
 
-func take_damage(amount: int, direction: Vector3 = Vector3.ZERO) -> void:
-	if not health_component.can_take_damage():
-		return
-	
-	# Отбрасывание остаётся здесь, потому что это движение
-	if direction != Vector3.ZERO:
-		velocity += direction * hit_stagger
-	
-	health_component.take_damage(amount, null, "body")
+#func take_damage(amount: int, direction: Vector3 = Vector3.ZERO) -> void:
+	#if not health_component.can_take_damage():
+		#return
+	#
+	## Отбрасывание остаётся здесь, потому что это движение
+	#if direction != Vector3.ZERO:
+		#velocity += direction * hit_stagger
+	#
+	#health_component.take_damage(amount, null, "body")
 
-func _on_health_damaged(_amount: int, _source: Node, _zone: String) -> void:
+func _on_health_damaged(_packet: DamagePacket, _source: Node, _zone: String) -> void:
 	_show_damage_effect()
 
 func _on_health_changed(_current: int, _max: int) -> void:
@@ -402,8 +407,8 @@ func is_character_alive() -> bool:
 func can_take_damage() -> bool:
 	return current_state == CharacterState.ALIVE and health_component.can_take_damage()
 
-func get_health_percentage() -> float:
-	return health_component.get_health_percent()
+#func get_health_percentage() -> float:
+	#return health_component.get_health_percent()
 
 func disable() -> void:
 	current_state = CharacterState.DISABLED
